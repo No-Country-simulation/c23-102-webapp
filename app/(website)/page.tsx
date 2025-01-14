@@ -1,16 +1,24 @@
-import { Button } from "@/components/ui/button";
 import React from "react";
+import Link from "next/link";
+
+import { Topbar } from "./_components/Topbar";
+import Container from "../../components/global/Container";
 
 const Homepage = () => {
 	return (
-		<div className="h-full flex items-center justify-around flex-col">
-			<div className="flex items-center justify-around flex-col">
-				<h1 className="text-3xl">TakeAway</h1>
-				<Button variant={"outline"} size={"lg"} className="capitalize m-8">
-					Click!
-				</Button>
+		<>
+			<Topbar></Topbar>
+			<div className="h-full bg-black pt-28">
+				<Container className="text-white">
+					<h2>Filtro de Categorias</h2>
+					<h2>Restaurantes</h2>
+					<h2>Recomendados para ti</h2>
+					<h2>Etc...</h2>
+					<hr className="py-5" />
+					<Link href="/register">Registro</Link>
+				</Container>
 			</div>
-		</div>
+		</>
 	);
 };
 
