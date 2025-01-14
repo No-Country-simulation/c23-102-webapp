@@ -13,7 +13,6 @@ import Image from "next/image";
 
 
 
-
 const RegisterPage = () => {
 
     const [isPending, startTransition] = useTransition();
@@ -89,7 +88,7 @@ const RegisterPage = () => {
 		</Form>
 			</div>
 		</div>
-  )
+	);
 };
 
 export default RegisterPage;
