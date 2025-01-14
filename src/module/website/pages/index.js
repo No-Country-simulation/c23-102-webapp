@@ -1,2 +1,7 @@
 import { Homepage } from "./homepage";
-export { Homepage };
+import { RegisterPage } from "./registerpage";
+
+export { Homepage, RegisterPage };
+
+
+
