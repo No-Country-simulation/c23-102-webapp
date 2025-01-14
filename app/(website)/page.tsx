@@ -1,15 +1,10 @@
-import { Button } from "@/components/ui/button";
 import React from "react";
+import { Topbar } from "./_components/Topbar";
 
 const Homepage = () => {
 	return (
-		<div className="h-full flex items-center justify-around flex-col">
-			<div className="flex items-center justify-around flex-col">
-				<h1 className="text-3xl">TakeAway</h1>
-				<Button variant={"outline"} size={"lg"} className="capitalize m-8">
-					Click!
-				</Button>
-			</div>
+		<div className="h-full bg-black flex items-center justify-around flex-col">
+			<Topbar></Topbar>
 		</div>
 	);
 };
