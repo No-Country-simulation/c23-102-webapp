@@ -1,41 +1,33 @@
 {
-	"name": "c23-102-webapp",
-	"version": "1.0.0",
-	"description": "Aplicación web de Food Delivery",
-	"main": "index.js",
-	"scripts": {
-		"start": "webpack serve --open",
-		"build": "webpack --mode production",
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"axios": "^1.7.9",
-		"class-variance-authority": "^0.7.1",
-		"clsx": "^2.1.1",
-		"lucide-react": "^0.471.1",
-		"postcss-loader": "^8.1.1",
-		"react": "^19.0.0",
-		"react-dom": "^19.0.0",
-		"react-router-dom": "^7.1.1",
-		"tailwind-merge": "^2.6.0",
-		"tailwindcss-animate": "^1.0.7"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.26.0",
-		"@babel/preset-env": "^7.26.0",
-		"@babel/preset-react": "^7.26.3",
-		"autoprefixer": "^10.4.20",
-		"babel-loader": "^9.2.1",
-		"css-loader": "^7.1.2",
-		"html-webpack-plugin": "^5.6.3",
-		"postcss": "^8.4.49",
-		"style-loader": "^4.0.0",
-		"tailwindcss": "^3.4.17",
-		"webpack": "^5.97.1",
-		"webpack-cli": "^6.0.1",
-		"webpack-dev-server": "^5.2.0"
-	}
+  "name": "c23-102-webapp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.1.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.471.1",
+    "next": "15.1.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.1.4",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
 }
