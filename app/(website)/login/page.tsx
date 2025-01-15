@@ -2,6 +2,7 @@ import React from "react";
 import LoginForm from "../_components/forms/LoginForm";
 import { Logo } from "@/components/global/Logo";
 import Link from "next/link";
+import { WEBSITE_ROUTES } from "@/constants/routes";
 
 const LoginPage = () => {
 	return (
@@ -10,8 +11,8 @@ const LoginPage = () => {
 				<Logo width={130}></Logo>
 				<LoginForm></LoginForm>
 				<div className="mt-5 flex flex-col items-center">
-					<Link href="/">Olvidaste tu contraseña?</Link>
-					<Link href="/register" className="mt-3">
+					<Link href={WEBSITE_ROUTES.HOME}>Olvidaste tu contraseña?</Link>
+					<Link href={WEBSITE_ROUTES.REGISTER} className="mt-3">
 						No tienes cuenta? Registrate
 					</Link>
 				</div>
