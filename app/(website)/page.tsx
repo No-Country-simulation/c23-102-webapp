@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Topbar } from "./_components/Topbar";
 import Container from "../../components/global/Container";
 import { Navbar } from "./_components/Navbar";
+import { WEBSITE_ROUTES } from "@/constants/routes";
 
 const Homepage = () => {
 	return (
@@ -18,7 +19,7 @@ const Homepage = () => {
 					<br />
 					<hr />
 					<br />
-					<Link href="/register">Registro</Link>
+					<Link href={WEBSITE_ROUTES.REGISTER}>Registro</Link>
 				</Container>
 			</div>
 			<Navbar></Navbar>
