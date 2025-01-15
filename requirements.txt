@@ -1,3 +1,4 @@
 # Se requiere python_version mayor o igual a versión 3.12.7
 Flask
 autopep8
+pylint
