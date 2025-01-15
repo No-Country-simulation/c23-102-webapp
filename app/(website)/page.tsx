@@ -13,7 +13,7 @@ const Homepage = () => {
 			<Topbar></Topbar>
 			<div className=" bg-black pt-24 pb-40">
 				<Container className="text-white">
-					<article className="pt-9 flex overflow-hidden items-center">
+					<article className="pt-4 flex overflow-hidden items-center">
 						<Dropdown></Dropdown>
 						<LabelCarousel></LabelCarousel>
 					</article>

@@ -90,7 +90,7 @@
 */
 
 .home-section {
-  @apply flex flex-col gap-5 mt-12 !important
+  @apply flex flex-col gap-4 mt-12 !important
 }
 .home-section .title{
   @apply text-xl font-bold !important
