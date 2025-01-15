@@ -16,11 +16,13 @@ export function Dropdown({ className }: { className?: string }) {
 				<DropdownMenuTrigger className="border rounded-md mt-1">
 					<ListFilter className="p-1" size={"30px"}></ListFilter>
 				</DropdownMenuTrigger>
-				<DropdownMenuContent>
-					<DropdownMenuLabel>Categorias</DropdownMenuLabel>
+				<DropdownMenuContent className="bg-black text-white ml-4">
+					<DropdownMenuLabel className="font-medium">Categorias</DropdownMenuLabel>
 					<DropdownMenuSeparator />
 					{mocked_categories.map((category) => (
-						<DropdownMenuItem key={category.id}>{category.name}</DropdownMenuItem>
+						<DropdownMenuItem key={category.id} className="font-thin">
+							{category.name}
+						</DropdownMenuItem>
 					))}
 				</DropdownMenuContent>
 			</DropdownMenu>
