@@ -68,6 +68,11 @@
 }
 
 @layer components {
+/* 
+ * ================================= 
+ * Forms
+ * ================================= 
+*/
   .form-input-text {
     @apply rounded-full p-5 border-none bg-[#1a1a1a] placeholder:text-white !important
   }
@@ -78,6 +83,18 @@
     @apply rounded-full p-5 bg-transparent border-white border-[1px] text-white w-full !important
   }
 
-  /* ... */
+/* 
+ * ================================= 
+ * Homepage
+ * ================================= 
+*/
+
+.home-section {
+  @apply flex flex-col gap-5 mt-12 !important
+}
+.home-section .title{
+  @apply text-xl font-bold !important
+}
+  
 }
 
