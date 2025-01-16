@@ -7,16 +7,16 @@ import Image from "next/image";
 
 export function ImageCarousel() {
 	return (
-		<Carousel className="w-full" opts={{ loop: true }}>
-			<CarouselContent>
+		<Carousel className="w-full" opts={{ loop: true, align: "center", skipSnaps: true, dragFree: true }}>
+			<CarouselContent className="flex gap-1 w-[90%]">
 				{mocked_restaurants.map((restaurant) => (
 					<CarouselItem key={restaurant.id} className="h-[25rem]">
-						<div className="p-1 w-full h-full relative">
-							<Card className="w-full h-full rounded-xl">
+						<div className="h-full relative">
+							<Card className="h-full rounded-xl">
 								<Image
 									src={restaurant.image_url}
 									alt={restaurant.name}
-									className="w-full h-full rounded-xl"
+									className="h-full rounded-xl"
 									layout="fill"
 									objectFit="cover"
 								/>
