@@ -15,7 +15,7 @@ export function ImageCarousel() {
 							<Card className="w-full h-full rounded-xl">
 								<Image
 									src={restaurant.image_url}
-									alt="asd"
+									alt={restaurant.name}
 									className="w-full h-full rounded-xl"
 									layout="fill"
 									objectFit="cover"
