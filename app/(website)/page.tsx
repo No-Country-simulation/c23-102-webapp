@@ -2,7 +2,6 @@ import React from "react";
 
 import { Topbar } from "./_components/Topbar";
 import Container from "../../components/global/Container";
-import { Navbar } from "./_components/Navbar";
 import { ImageCarousel } from "../../components/global/ImageCarousel";
 import { LabelCarousel } from "../../components/global/LabelCarousel";
 import { Dropdown } from "../../components/global/Dropdown";
