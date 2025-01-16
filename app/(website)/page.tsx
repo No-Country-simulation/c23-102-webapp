@@ -27,7 +27,6 @@ const Homepage = () => {
 					</article>
 				</Container>
 			</div>
-			<Navbar></Navbar>
 		</>
 	);
 };
