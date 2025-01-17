@@ -1,7 +1,8 @@
 "Crea y configura base de datos"
-from sqlite3 import connect, PARSE_DECLTYPES, Row
+from sqlite3 import connect, PARSE_DECLTYPES, Row, register_converter
 
 from flask import current_app, g
+from datetime import datetime
 
 
 def get_db():
@@ -28,3 +29,8 @@ def init_db():
 
     with current_app.open_resource('schema.sql') as schema:
         db.executescript(schema.read().decode('utf8'))
+
+
+# Crea función que convierte tipo timestamp a datetime
+register_converter(
+    "timestamp", lambda type: datetime.fromisoformat(type.decode()))
