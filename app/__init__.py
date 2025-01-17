@@ -1,8 +1,13 @@
+"Módulo principal"
+from os import makedirs
 from flask import Flask
 
-app = Flask(__name__)
 
+def create_app():
+    "Crea y configura aplicación"
 
-@app.route('/')
-def hello():
-    return 'Hello, World!'
+    app = Flask(__name__, instance_relative_config=True)
+
+    @app.route('/')
+    def hello():
+        return 'Hello, World!'
