@@ -73,6 +73,7 @@
  * Forms
  * ================================= 
 */
+
   .form-input-text {
     @apply rounded-full p-5 border-none bg-[#1a1a1a] placeholder:text-white !important
   }
@@ -82,6 +83,20 @@
   .button-outline {
     @apply rounded-full p-5 bg-transparent border-white border-[1px] text-white w-full !important
   }
+
+  /* 
+ * ================================= 
+ * Cards
+ * ================================= 
+*/
+
+.cardContainerStyles{
+  @apply w-[100%]    border-none overflow-hidden bg-black rounded-xl !important
+}
+
+.cardStyles {
+  @apply p-10 text-center bg-gray-900 text-white flex flex-col rounded-2xl items-center border-none !important
+}
 
 /* 
  * ================================= 
