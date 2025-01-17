@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Restaurante</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Editar Restaurante</h1>
+        <form action="{{ url_for('editar_restaurante', id=restaurant[0]) }}" method="POST">
+            <div class="mb-3">
+                <label for="nombre_restaurant" class="form-label">Nombre</label>
+                <input type="text" name="nombre_restaurant" id="nombre_restaurant" class="form-control" value="{{ restaurant[1] }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="descripcion_restau" class="form-label">Descripción</label>
+                <textarea name="descripcion_restau" id="descripcion_restau" class="form-control">{{ restaurant[2] }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="direccion" class="form-label">Dirección</label>
+                <input type="text" name="direccion" id="direccion" class="form-control" value="{{ restaurant[3] }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input type="text" name="telefono" id="telefono" class="form-control" value="{{ restaurant[4] }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="correo" class="form-label">Correo Electrónico</label>
+                <input type="email" name="correo" id="correo" class="form-control" value="{{ restaurant[5] }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="estado" class="form-label">Estado</label>
+                <select name="estado" id="estado" class="form-control">
+                    <option value="Abierto" {% if restaurant[6] == "Abierto" %}selected{% endif %}>Abierto</option>
+                    <option value="Cerrado" {% if restaurant[6] == "Cerrado" %}selected{% endif %}>Cerrado</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>
