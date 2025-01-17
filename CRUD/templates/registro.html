@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+</head>
+<body>
+    <h1>Registro de Usuario</h1>
+    <form method="post">
+        <label for="email">Correo electrónico:</label>
+        <input type="email" name="email" required>
+        
+        <label for="password">Contraseña:</label>
+        <input type="password" name="password" required>
+        
+        <label for="confirm_password">Repetir contraseña:</label>
+        <input type="password" name="confirm_password" required>
+        
+        <label for="establishment_address">Dirección del establecimiento:</label>
+        <input type="text" name="establishment_address" required>
+        
+        <label for="establishment_name">Nombre del establecimiento:</label>
+        <input type="text" name="establishment_name" required>
+        
+        <label for="brand_name">Nombre de marca:</label>
+        <input type="text" name="brand_name" required>
+        
+        <label for="business_type">Tipo de negocio:</label>
+        <select name="business_type" required>
+            <option value="Restaurante">Restaurante</option>
+            <option value="Cafetería">Cafetería</option>
+            <option value="Bar">Bar</option>
+        </select>
+        
+        <label for="first_name">Nombre:</label>
+        <input type="text" name="first_name" required>
+        
+        <label for="last_name">Apellido:</label>
+        <input type="text" name="last_name" required>
+        
+        <label for="description">Descripción:</label>
+        <textarea name="description" required></textarea>
+        
+        <label for="schedule">Horarios del restaurante:</label>
+        <input type="text" name="schedule" required>
+
+        <button type="submit">Registrarse</button>
+    </form>
+</body>
+</html>

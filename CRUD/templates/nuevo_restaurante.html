@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Restaurante</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Agregar Nuevo Restaurante</h1>
+        <form action="{{ url_for('nuevo_restaurante') }}" method="POST">
+            <div class="mb-3">
+                <label for="nombre_restaurant" class="form-label">Nombre</label>
+                <input type="text" name="nombre_restaurant" id="nombre_restaurant" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="descripcion_restau" class="form-label">Descripción</label>
+                <textarea name="descripcion_restau" id="descripcion_restau" class="form-control"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="direccion" class="form-label">Dirección</label>
+                <input type="text" name="direccion" id="direccion" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input type="text" name="telefono" id="telefono" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="correo" class="form-label">Correo Electrónico</label>
+                <input type="email" name="correo" id="correo" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>
