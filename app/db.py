@@ -15,7 +15,7 @@ def get_db():
     return g.db
 
 
-def close_db():
+def close_db(exc: BaseException | None):  # pylint: disable=unused-argument
     "Cierra conexión a base de datos"
     db = g.pop('db', None)
 
