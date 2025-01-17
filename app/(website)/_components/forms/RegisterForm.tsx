@@ -15,18 +15,31 @@ import {
 	SelectTrigger,
 	SelectValue,
   } from "@/components/ui/select"
-  import { businessTypes, countriesWithPhoneCodes } from "@/constants";
+  
+  import { mocked_business_types } from "@/constants/mock/businessTypes";
+import { mocked_countries_with_phone_codes } from "@/constants/mock/countriesPhoneCodes";
+
 
 const RegisterForm = () => {
 	const form = useForm<z.infer<typeof registerSchema>>({
 		resolver: zodResolver(registerSchema),
+		defaultValues: { 
+			location: "",
+			establishmentName: "",
+			brandName: "",
+			businessType: "",
+			firstName: "",
+			lastName: "",
+			email: "",
+			password: "",
+			confirmPassword: "",
+			phone: ""
+		}
 	});
-
 	return (
 		<Form {...form}>
-			<form className="text-white mt-8">
+			<form className="w-full mt-8">
                 <h4 className="form-title mb-5">Registra tu restaurante</h4>
-
                 {/* Direccion del establecimiento */}
 				<FormField
 					name="location"
@@ -41,7 +54,6 @@ const RegisterForm = () => {
 						</FormItem>
 					)}
 				/>
-
                 {/* Nombre del establecimiento */}
 				<FormField
 					name="establishmentName"
@@ -56,7 +68,6 @@ const RegisterForm = () => {
 						</FormItem>
 					)}
 				/>
-
                 {/* Nombre de marca */}
 				<FormField
 					name="brandName"
@@ -71,33 +82,28 @@ const RegisterForm = () => {
 						</FormItem>
 					)}
 				/>
-
-
                 {/* Tipo de negocio */}
 				<FormField
 					name="businessType"
 					control={form.control}
 					render={({ field }) => (
-						
-						<Select >
+						<Select {...field} >
 								<label className="text-sm">Tipo de negocio</label>
 								<SelectTrigger className="w-[100%] form-input-text ">
 									<SelectValue placeholder="Tipo de negocio" />
 								</SelectTrigger>
 								<SelectContent>
 									{
-										businessTypes.map((business) => (
+										mocked_business_types.map((business) => (
 											<SelectItem key={business} value={business}>
 												{business}
 											</SelectItem>
 										))
 									}
-									
 								</SelectContent>
 								</Select>
 					)}
 				/>
-
 				{/* Nombre y apellido */}
 				<div className="flex gap-3">
 						<FormField
@@ -113,7 +119,6 @@ const RegisterForm = () => {
 								</FormItem>
 							)}
 						/>
-
 						{/* Apellido */}
 						<FormField
 							name="lastName"
@@ -129,7 +134,6 @@ const RegisterForm = () => {
 							)}
 						/>
 				</div>
-
 				{/* Email */}
 				<FormField
 							name="email"
@@ -144,7 +148,6 @@ const RegisterForm = () => {
 								</FormItem>
 							)}
 						/>
-
 				{/* Contraseña */}
 				<FormField
 							name="password"
@@ -159,9 +162,7 @@ const RegisterForm = () => {
 								</FormItem>
 							)}
 						/>
-
 				{/* Confirmar contraseña */}
-
 				<FormField
 							name="confirmPassword"
 							control={form.control}
@@ -175,12 +176,9 @@ const RegisterForm = () => {
 								</FormItem>
 							)}
 						/>
-
 					{/* Numero de telefono movil */}
-
 					<div className="flex flex-col pt-5">
 						<FormLabel>Numero de telefono movil</FormLabel>
-						
 						<div className="flex gap-3  items-end">
 							{/* Codigo del pais */}
 						<div className="w-[25%]">
@@ -190,21 +188,18 @@ const RegisterForm = () => {
 								</SelectTrigger>
 								<SelectContent>
 									{
-										countriesWithPhoneCodes.map((country) => (
+										mocked_countries_with_phone_codes.map((country) => (
 											<SelectItem key={country.code} value={country.code}>
 												{country.name}
 											</SelectItem>
 										))
 									}
-									
 								</SelectContent>
 								</Select>
 						</div>
-
 						{/* Numero de telefono */}
 						<div className="flex-1">
 								<FormField
-								
 								name="phone"
 								control={form.control}
 								render={({ field }) => (
@@ -218,9 +213,7 @@ const RegisterForm = () => {
 							/>
 					</div>
 						</div>
-
 					</div>
-				
 					<Button type="submit" className="w-[100%] bg-gray-500 text-white py-5 rounded-xl mt-5">Continuar</Button>
 			</form>
 		</Form>
