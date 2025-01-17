@@ -3,6 +3,7 @@ from os import makedirs
 from os.path import join
 from flask import Flask
 
+from app.commands import init_db_command
 from app.db import close_db
 
 
@@ -13,6 +14,7 @@ def create_app():
 
     app.config['DATABASE'] = join(app.instance_path, 'db.sqlite')
     app.teardown_appcontext(close_db)
+    app.cli.add_command(init_db_command)
 
     try:
         makedirs(app.instance_path)
