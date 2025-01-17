@@ -14,8 +14,7 @@ import {
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-  } from "@/components/ui/select"
-  
+  } from "@/components/ui/select";
   import { mocked_business_types } from "@/constants/mock/businessTypes";
 import { mocked_countries_with_phone_codes } from "@/constants/mock/countriesPhoneCodes";
 
