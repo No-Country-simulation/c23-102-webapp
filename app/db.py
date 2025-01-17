@@ -5,7 +5,7 @@ from flask import current_app, g
 
 
 def get_db():
-    "Crea conexión, almacena en g.db y retorna"
+    "Crea conexión, almacena en g.db y la retorna"
     if 'db' not in g:
         g.db = connect(
             current_app.config['DATABASE'], detect_types=PARSE_DECLTYPES)
@@ -20,3 +20,11 @@ def close_db():
 
     if db is not None:
         db.close()
+
+
+def init_db():
+    "Ejecuta código SQL para crear base de datos"
+    db = get_db()
+
+    with current_app.open_resource('schema.sql') as schema:
+        db.executescript(schema.read().decode('utf8'))
