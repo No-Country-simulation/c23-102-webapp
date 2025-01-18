@@ -1,187 +1,308 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
+from flask import Flask, request, jsonify
 import sqlite3
-import re  # Para validaciones
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
 DATABASE = 'app.db'
 
-# Crear una conexión a la base de datos
-
+# Conexión a la base de datos
 def get_db_connection():
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
     return conn
 
-# Crear tablas si no existen
+# Crear tablas
 def create_tables():
     conn = get_db_connection()
     cursor = conn.cursor()
+
+    # Crear tablas si no existen
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY,
-            email TEXT UNIQUE,
-            password TEXT
-        )
+        CREATE TABLE IF NOT EXISTS Client (
+            Client_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            FirstName TEXT NOT NULL,
+            LastName TEXT NOT NULL,
+            Email TEXT,
+            Password TEXT,
+            Phone TEXT,
+            Address TEXT,
+            Status BOOLEAN
+        );
     ''')
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS restaurants (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nombre_restaurant TEXT UNIQUE NOT NULL,
-            descripcion_restau TEXT,
-            direccion TEXT NOT NULL,
-            telefono TEXT NOT NULL,
-            correo TEXT UNIQUE NOT NULL,
-            estado TEXT DEFAULT 'Abierto'
-        )
+        CREATE TABLE IF NOT EXISTS Restaurant_Category (
+            Category_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            Name TEXT NOT NULL
+        );
+    ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Menu (
+            Menu_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            Name TEXT NOT NULL,
+            Price DECIMAL(4, 1),
+            Description TEXT,
+            Availability BOOLEAN
+        );
+    ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Order_Detail (
+            Order_Detail_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            Menu_ID INTEGER NOT NULL,
+            Quantity INTEGER,
+            Subtotal DECIMAL(5, 1),
+            FOREIGN KEY(Menu_ID) REFERENCES Menu(Menu_ID)
+        );
+    ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Order_Status (
+            Order_Status_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            Name TEXT NOT NULL,
+            Description TEXT
+        );
+    ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Delivery_Person (
+            Delivery_Person_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            FirstName TEXT NOT NULL,
+            LastName TEXT,
+            Email TEXT,
+            Password TEXT,
+            Phone TEXT,
+            Address TEXT,
+            Status BOOLEAN,
+            Vehicle TEXT
+        );
+    ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Payment_Type (
+            Payment_Type_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            Name TEXT NOT NULL,
+            Description TEXT
+        );
+    ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Payment_Status (
+            Payment_Status_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            Name TEXT NOT NULL,
+            Description TEXT
+        );
+    ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Payment (
+            Payment_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            Payment_Type_ID INTEGER NOT NULL,
+            Payment_Status_ID INTEGER NOT NULL,
+            Date DATE,
+            Time DATETIME,
+            Reference TEXT,
+            FOREIGN KEY(Payment_Type_ID) REFERENCES Payment_Type(Payment_Type_ID),
+            FOREIGN KEY(Payment_Status_ID) REFERENCES Payment_Status(Payment_Status_ID)
+        );
+    ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS "Order" (
+            Order_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            Client_ID INTEGER NOT NULL,
+            Restaurant_ID INTEGER NOT NULL,
+            Order_Detail_ID INTEGER NOT NULL,
+            Order_Status_ID INTEGER NOT NULL,
+            Delivery_Person_ID INTEGER,
+            Payment_ID INTEGER,
+            Date DATE,
+            Time DATETIME,
+            Total DECIMAL(5, 1),
+            Delivery_Address TEXT,
+            FOREIGN KEY(Client_ID) REFERENCES Client(Client_ID),
+            FOREIGN KEY(Restaurant_ID) REFERENCES Restaurant(Restaurant_ID),
+            FOREIGN KEY(Order_Detail_ID) REFERENCES Order_Detail(Order_Detail_ID),
+            FOREIGN KEY(Order_Status_ID) REFERENCES Order_Status(Order_Status_ID),
+            FOREIGN KEY(Delivery_Person_ID) REFERENCES Delivery_Person(Delivery_Person_ID),
+            FOREIGN KEY(Payment_ID) REFERENCES Payment(Payment_ID)
+        );
+    ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Restaurant (
+            Restaurant_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            Category_ID INTEGER NOT NULL,
+            Menu_ID INTEGER NOT NULL,
+            Name TEXT NOT NULL,
+            Address TEXT,
+            Description TEXT,
+            Email TEXT,
+            Password TEXT,
+            Phone TEXT,
+            Opening_Hour INTEGER,
+            Closing_Hour INTEGER,
+            FOREIGN KEY(Category_ID) REFERENCES Restaurant_Category(Category_ID),
+            FOREIGN KEY(Menu_ID) REFERENCES Menu(Menu_ID)
+        );
     ''')
     conn.commit()
     conn.close()
 
-# Decorador para proteger rutas
-def login_required(f):
-    def wrapper(*args, **kwargs):
-        if 'email' not in session:
-            flash('Debes iniciar sesión para acceder a esta página.', 'danger')
-            return redirect(url_for('inicio_sesion'))
-        return f(*args, **kwargs)
-    wrapper.__name__ = f.__name__
-    return wrapper
-
-@app.route('/')
-def index():
-    return redirect(url_for('inicio_sesion'))
-
-@app.route('/registro', methods=['GET', 'POST'])
-def registro():
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-        confirm_password = request.form['confirm_password']
-
-        # Validaciones
-        if password != confirm_password:
-            flash('Las contraseñas no coinciden.', 'danger')
-            return redirect(url_for('registro'))
-        if not re.match(r'^[^@]+@[^@]+\.[^@]+$', email):
-            flash('Formato de correo inválido.', 'danger')
-            return redirect(url_for('registro'))
-
-        # Guardar en la base de datos
-        try:
-            conn = get_db_connection()
-            cursor = conn.cursor()
-            cursor.execute('INSERT INTO users (email, password) VALUES (?, ?)', (email, password))
-            conn.commit()
-            conn.close()
-            flash('¡Registro exitoso! Ahora puedes iniciar sesión.', 'success')
-            return redirect(url_for('inicio_sesion'))
-        except sqlite3.IntegrityError:
-            flash('El correo ya está registrado. Por favor, utiliza otro.', 'danger')
-    return render_template('registro.html')
-
-@app.route('/inicio-sesion', methods=['GET', 'POST'])
-def inicio_sesion():
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute('SELECT * FROM users WHERE email = ?', (email,))
-        user = cursor.fetchone()
-        conn.close()
-
-        if user and user['password'] == password:
-            session['email'] = user['email']
-            flash('¡Inicio de sesión exitoso!', 'success')
-            return redirect(url_for('listar_restaurantes'))
-        else:
-            flash('Correo o contraseña incorrectos.', 'danger')
-    return render_template('inicio_sesion.html')
-
-@app.route('/cerrar-sesion')
-def cerrar_sesion():
-    session.pop('email', None)
-    flash('Sesión cerrada correctamente.', 'success')
-    return redirect(url_for('inicio_sesion'))
-
-# Rutas CRUD para restaurantes
-@app.route('/restaurantes')
-@login_required
-def listar_restaurantes():
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute('SELECT * FROM restaurants')
-    restaurants = cursor.fetchall()
-    conn.close()
-    return render_template('index.html', restaurants=restaurants)
-
-@app.route('/restaurantes/nuevo', methods=['GET', 'POST'])
-@login_required
-def nuevo_restaurante():
-    if request.method == 'POST':
-        nombre_restaurant = request.form['nombre_restaurant']
-        descripcion_restau = request.form['descripcion_restau']
-        direccion = request.form['direccion']
-        telefono = request.form['telefono']
-        correo = request.form['correo']
-
-        try:
-            conn = get_db_connection()
-            cursor = conn.cursor()
-            cursor.execute('''
-                INSERT INTO restaurants (nombre_restaurant, descripcion_restau, direccion, telefono, correo)
-                VALUES (?, ?, ?, ?, ?)
-            ''', (nombre_restaurant, descripcion_restau, direccion, telefono, correo))
-            conn.commit()
-            conn.close()
-            flash('Restaurante agregado con éxito.', 'success')
-            return redirect(url_for('listar_restaurantes'))
-        except sqlite3.Error as e:
-            flash(f'Error al agregar restaurante: {e}', 'danger')
-    return render_template('nuevo_restaurante.html')
-
-@app.route('/restaurantes/editar/<int:id>', methods=['GET', 'POST'])
-@login_required
-def editar_restaurante(id):
+# Insertar datos de ejemplo
+def insert_sample_data():
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    if request.method == 'POST':
-        nombre_restaurant = request.form['nombre_restaurant']
-        descripcion_restau = request.form['descripcion_restau']
-        direccion = request.form['direccion']
-        telefono = request.form['telefono']
-        correo = request.form['correo']
-        estado = request.form['estado']
+    # Insertar Clientes
+    cursor.execute('''
+        INSERT INTO Client (FirstName, LastName, Email, Password, Phone, Address, Status)
+        VALUES ('John', 'Doe', 'johndoe@example.com', 'password123', '1234567890', '123 Main St', 1),
+               ('Jane', 'Smith', 'janesmith@example.com', 'password456', '0987654321', '456 Elm St', 1);
+    ''')
 
-        cursor.execute('''
-            UPDATE restaurants
-            SET nombre_restaurant = ?, descripcion_restau = ?, direccion = ?, telefono = ?, correo = ?, estado = ?
-            WHERE id = ?
-        ''', (nombre_restaurant, descripcion_restau, direccion, telefono, correo, estado, id))
-        conn.commit()
-        conn.close()
-        flash('Restaurante actualizado con éxito.', 'success')
-        return redirect(url_for('listar_restaurantes'))
+    # Insertar Categorías de Restaurante
+    cursor.execute('''
+        INSERT INTO Restaurant_Category (Name)
+        VALUES ('Fast Food'), ('Italian'), ('Chinese');
+    ''')
 
-    cursor.execute('SELECT * FROM restaurants WHERE id = ?', (id,))
-    restaurant = cursor.fetchone()
-    conn.close()
-    return render_template('editar_restaurante.html', restaurant=restaurant)
+    # Insertar Menú
+    cursor.execute('''
+        INSERT INTO Menu (Name, Price, Description, Availability)
+        VALUES ('Burger', 5.99, 'Delicious beef burger', 1),
+               ('Pizza', 8.99, 'Classic Italian pizza', 1),
+               ('Noodles', 6.49, 'Chinese noodles', 1);
+    ''')
 
-@app.route('/restaurantes/eliminar/<int:id>', methods=['POST'])
-@login_required
-def eliminar_restaurante(id):
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute('DELETE FROM restaurants WHERE id = ?', (id,))
+    # Insertar Detalles de Pedido
+    cursor.execute('''
+        INSERT INTO Order_Detail (Menu_ID, Quantity, Subtotal)
+        VALUES (1, 2, 11.98), (2, 1, 8.99), (3, 3, 19.47);
+    ''')
+
+    # Insertar Estados de Pedido
+    cursor.execute('''
+        INSERT INTO Order_Status (Name, Description)
+        VALUES ('Pending', 'Order is pending'),
+               ('Completed', 'Order is completed'),
+               ('Cancelled', 'Order was cancelled');
+    ''')
+
+    # Insertar Personas de Entrega
+    cursor.execute('''
+        INSERT INTO Delivery_Person (FirstName, LastName, Email, Password, Phone, Address, Status, Vehicle)
+        VALUES ('Alice', 'Johnson', 'alice@example.com', 'password789', '1112223333', '789 Oak St', 1, 'Bike'),
+               ('Bob', 'Brown', 'bob@example.com', 'password101', '4445556666', '101 Pine St', 1, 'Car');
+    ''')
+
+    # Insertar Tipos de Pago
+    cursor.execute('''
+        INSERT INTO Payment_Type (Name, Description)
+        VALUES ('Credit Card', 'Payment made with credit card'),
+               ('Cash', 'Payment made with cash');
+    ''')
+
+    # Insertar Estados de Pago
+    cursor.execute('''
+        INSERT INTO Payment_Status (Name, Description)
+        VALUES ('Pending', 'Payment is being processed'),
+               ('Completed', 'Payment has been completed');
+    ''')
+
+    # Insertar Pagos
+    cursor.execute('''
+        INSERT INTO Payment (Payment_Type_ID, Payment_Status_ID, Date, Time, Reference)
+        VALUES (1, 2, '2025-01-18', '15:00:00', 'ABC123'),
+               (2, 1, '2025-01-18', '16:00:00', 'DEF456');
+    ''')
+
+    # Insertar Pedidos
+    cursor.execute('''
+        INSERT INTO "Order" (Client_ID, Restaurant_ID, Order_Detail_ID, Order_Status_ID, Delivery_Person_ID, Payment_ID, Date, Time, Total, Delivery_Address)
+        VALUES (1, 1, 1, 1, 1, 1, '2025-01-18', '14:00:00', 20.97, '123 Main St'),
+               (2, 2, 2, 2, 2, 2, '2025-01-18', '17:00:00', 30.46, '456 Elm St');
+    ''')
+
+    # Insertar Restaurantes
+    cursor.execute('''
+        INSERT INTO Restaurant (Category_ID, Menu_ID, Name, Address, Description, Email, Password, Phone, Opening_Hour, Closing_Hour)
+        VALUES (1, 1, 'Burger Place', '123 Fast Food St', 'Delicious burgers', 'burgerplace@example.com', 'password123', '1234567890', 9, 22),
+               (2, 2, 'Italiano', '456 Italian St', 'Classic Italian meals', 'italiano@example.com', 'password456', '0987654321', 10, 23);
+    ''')
+
     conn.commit()
     conn.close()
-    flash('Restaurante eliminado con éxito.', 'success')
-    return redirect(url_for('listar_restaurantes'))
+
+# Rutas CRUD para todas las tablas
+@app.route('/client', methods=['GET'])
+def get_all_clients():
+    conn = get_db_connection()
+    clients = conn.execute('SELECT * FROM Client').fetchall()
+    conn.close()
+    return jsonify([dict(client) for client in clients])
+
+@app.route('/restaurant_category', methods=['GET'])
+def get_all_restaurant_categories():
+    conn = get_db_connection()
+    categories = conn.execute('SELECT * FROM Restaurant_Category').fetchall()
+    conn.close()
+    return jsonify([dict(category) for category in categories])
+
+@app.route('/menu', methods=['GET'])
+def get_all_menus():
+    conn = get_db_connection()
+    menus = conn.execute('SELECT * FROM Menu').fetchall()
+    conn.close()
+    return jsonify([dict(menu) for menu in menus])
+
+@app.route('/order_detail', methods=['GET'])
+def get_all_order_details():
+    conn = get_db_connection()
+    order_details = conn.execute('SELECT * FROM Order_Detail').fetchall()
+    conn.close()
+    return jsonify([dict(order_detail) for order_detail in order_details])
+
+@app.route('/order_status', methods=['GET'])
+def get_all_order_statuses():
+    conn = get_db_connection()
+    order_statuses = conn.execute('SELECT * FROM Order_Status').fetchall()
+    conn.close()
+    return jsonify([dict(order_status) for order_status in order_statuses])
+
+@app.route('/delivery_person', methods=['GET'])
+def get_all_delivery_persons():
+    conn = get_db_connection()
+    delivery_persons = conn.execute('SELECT * FROM Delivery_Person').fetchall()
+    conn.close()
+    return jsonify([dict(delivery_person) for delivery_person in delivery_persons])
+
+@app.route('/payment_type', methods=['GET'])
+def get_all_payment_types():
+    conn = get_db_connection()
+    payment_types = conn.execute('SELECT * FROM Payment_Type').fetchall()
+    conn.close()
+    return jsonify([dict(payment_type) for payment_type in payment_types])
+
+@app.route('/payment_status', methods=['GET'])
+def get_all_payment_statuses():
+    conn = get_db_connection()
+    payment_statuses = conn.execute('SELECT * FROM Payment_Status').fetchall()
+    conn.close()
+    return jsonify([dict(payment_status) for payment_status in payment_statuses])
+
+@app.route('/payment', methods=['GET'])
+def get_all_payments():
+    conn = get_db_connection()
+    payments = conn.execute('SELECT * FROM Payment').fetchall()
+    conn.close()
+    return jsonify([dict(payment) for payment in payments])
+
+@app.route('/order', methods=['GET'])
+def get_all_orders():
+    conn = get_db_connection()
+    orders = conn.execute('SELECT * FROM "Order"').fetchall()
+    conn.close()
+    return jsonify([dict(order) for order in orders])
+
+@app.route('/restaurant', methods=['GET'])
+def get_all_restaurants():
+    conn = get_db_connection()
+    restaurants = conn.execute('SELECT * FROM Restaurant').fetchall()
+    conn.close()
+    return jsonify([dict(restaurant) for restaurant in restaurants])
 
 if __name__ == '__main__':
     create_tables()
+    insert_sample_data()  # Insertar datos de ejemplo
     app.run(debug=True)
