@@ -1,0 +1,17 @@
+[project]
+name = "takeaway"
+version = "0.0.1"
+description = "Aplicación de delivery de comidas"
+authors = [ # Agregar nombres y correos, si quieren
+    { name = "Victor", email = "victordanielayalasantacruz@gmail.com" }
+]
+dependencies = [
+    "Flask",
+    "pylint",
+    "autopep8"
+]
+requires-python = ">=3.12"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
