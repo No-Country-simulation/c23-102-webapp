@@ -1,5 +1,5 @@
 """Crea vista login"""
-from flask import session, request, redirect, url_for
+from flask import session, request, redirect, url_for, abort
 from werkzeug.security import check_password_hash
 from app.db import get_db
 from . import auth
@@ -14,17 +14,18 @@ def login():
         db = get_db()
         error = None
         user = db.execute(
-            'SELECT * FROM Client, Restaurant WHERE Email = ?', (email)
+            'SELECT * FROM User WHERE Email = ?', (email)
         ).fetchone()
 
-        if user is None:
-            error = 'Incorrect username.'
+        if email is None or user['Email']:
+            error = 'Email incorrecto.'
+        # Está función convierte el segundo parámetro en hash y lo compara con el primero
         elif not check_password_hash(user['password'], password):
-            error = 'Incorrect password.'
+            error = 'Contraseña incorrecta.'
 
-        if error is None:
-            session.clear()
-            session['user_id'] = user['id']
-            return redirect(url_for('index'))
+        if error is not None:
+            abort(401, error)
 
-    return "Usuario creado."
+        session.clear()
+        session['user_id'] = user['User_ID']
+        return redirect(url_for('index'))
