@@ -74,13 +74,16 @@
  * ================================= 
 */
   .form-input-text {
-    @apply rounded-full p-5 border-none bg-[#1a1a1a] placeholder:text-white !important
+    @apply rounded-full p-5 border-none bg-[#1a1a1a] placeholder:text-gray-400 !important
   }
   .button-fill {
     @apply rounded-full p-5 border-none bg-white text-black w-full !important
   }
   .button-outline {
     @apply rounded-full p-5 bg-transparent border-white border-[1px] text-white w-full !important
+  }
+  .form-title{
+    @apply text-xl font-bold text-center whitespace-nowrap text-white !important
   }
 
 /* 
