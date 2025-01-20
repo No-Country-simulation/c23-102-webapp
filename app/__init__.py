@@ -2,6 +2,7 @@
 from os import makedirs
 from os.path import join
 from flask import Flask
+from .auth import auth
 
 from app.commands import init_db_command
 from app.db import close_db
@@ -16,13 +17,12 @@ def create_app():
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
 
+    # Blueprints
+    app.register_blueprint(auth)
+
     try:
         makedirs(app.instance_path)
     except OSError:
         print("Directory already exists")
-
-    @app.route('/')
-    def hello():
-        return 'Hello, World!'
 
     return app
