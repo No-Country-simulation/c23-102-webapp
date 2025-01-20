@@ -28,7 +28,10 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem
+    --radius: 0.5rem;
+
+    /* Custom Variables */
+    --primary-color: #ECB500;
   }
   
   .dark {
@@ -68,51 +71,95 @@
 }
 
 @layer components {
+
 /* 
  * ================================= 
- * Forms
+ * Navbar, Topbar, Footer
  * ================================= 
 */
 
-  .form-input-text {
-    @apply rounded-full p-5 border-none bg-[#1a1a1a] placeholder:text-gray-400 !important
+  .base-top-styles {
+    @apply w-full flex items-center justify-center !important;
   }
-  .button-fill {
-    @apply rounded-full p-5 border-none bg-white text-black w-full !important
+
+  .base-top-styles-lg{
+    @apply lg:h-[6.4rem] lg:py-0 lg:pt-0 !important;
   }
-  .button-outline {
-    @apply rounded-full p-5 bg-transparent border-white border-[1px] text-white w-full !important
+
+  .escape-navbar {
+    @apply pt-24 !important;
   }
-  .form-title{
-    @apply text-xl font-bold text-center whitespace-nowrap text-white !important
+
+  .escape-navbar-lg {
+    @apply lg:pt-32 !important;
+  }
+
+  .escape-footer {
+    @apply pb-40 !important;
+  }
+
+  .escape-footer-lg {
+    @apply pb-48 !important;
   }
 
   /* 
- * ================================= 
- * Cards
- * ================================= 
-*/
+  * ================================= 
+  * Homepage
+  * ================================= 
+  */
 
-.cardContainerStyles{
-  @apply w-[100%] border-none overflow-hidden bg-black rounded-xl !important
-}
+  .home-section {
+    @apply flex flex-col gap-4 mt-12 !important;
+  }
 
-.cardStyles {
-  @apply p-10 text-center bg-gray-900 text-white flex flex-col rounded-2xl items-center border-none !important
-}
+  .home-section .title{
+    @apply text-xl font-bold !important;
+  }
 
-/* 
- * ================================= 
- * Homepage
- * ================================= 
-*/
+   /* 
+  * ================================= 
+  * Buttons
+  * ================================= 
+  */
 
-.home-section {
-  @apply flex flex-col gap-4 mt-12 !important
-}
-.home-section .title{
-  @apply text-xl font-bold !important
-}
-  
+  .button-fill {
+    @apply rounded-full p-5 border-none bg-white text-black w-full !important;
+  }
+
+  .button-outline {
+    @apply rounded-full p-5 bg-transparent border-white border-[1px] text-white w-full !important;
+  }
+
+  .button-fill-primary {
+    @apply bg-[color:--primary-color] font-thin !important
+  }
+
+  /* 
+  * ================================= 
+  * Forms
+  * ================================= 
+  */
+
+    .form-input-text {
+      @apply rounded-full p-5 border-none bg-[#1a1a1a] placeholder:text-gray-400 !important;
+    }
+
+    .form-title{
+      @apply text-xl font-bold text-center whitespace-nowrap text-white !important;
+    }
+
+  /* 
+  * ================================= 
+  * Cards
+  * ================================= 
+  */
+
+  .cardContainerStyles{
+    @apply w-[100%] border-none overflow-hidden bg-black rounded-xl !important;
+  }
+
+  .cardStyles {
+    @apply p-10 text-center bg-gray-900 text-white flex flex-col rounded-2xl items-center border-none !important;
+  }    
 }
 
