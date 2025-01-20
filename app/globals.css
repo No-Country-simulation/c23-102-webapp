@@ -73,7 +73,7 @@
 @layer components {
 
   .center-90 {
-    @apply w-[90%] m-auto !important;
+    @apply w-[87%] m-auto lg:w-[92%] !important;
   }
 
 /* 
