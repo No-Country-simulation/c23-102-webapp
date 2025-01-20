@@ -1,7 +1,5 @@
 "Crea y configura view register."
-from flask import (
-    flash, redirect, render_template, request, url_for
-)
+from flask import redirect, request, url_for
 from werkzeug.security import generate_password_hash
 from app.db import get_db
 from . import auth
@@ -17,9 +15,9 @@ def register():
         error = None
 
         if not username:
-            error = 'Username is required.'
+            error = 'Nombre de usuario inválido.'
         elif not password:
-            error = 'Password is required.'
+            error = 'Contraseña inválida.'
 
         if error is None:
             try:
@@ -29,10 +27,8 @@ def register():
                 )
                 db.commit()
             except db.IntegrityError:
-                error = f"User {username} is already registered."
+                error = f"Usuario {username} ya existe."
             else:
                 return redirect(url_for("auth.login"))
 
-        flash(error)
-
-    return render_template('auth/register.html')
+    return "Usuario registrado."
