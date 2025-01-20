@@ -72,6 +72,10 @@
 
 @layer components {
 
+  .center-90 {
+    @apply w-[90%] m-auto !important;
+  }
+
 /* 
  * ================================= 
  * Navbar, Topbar, Footer
