@@ -49,7 +49,7 @@ Sigue estos pasos para configurar el proyecto en tu entorno local:
 4. Crea la base de datos:
 
     ```bash
-    flask --app take_away init-db
+    flask --app app init-db
     ```
 
 5. Ejecuta la aplicación:
