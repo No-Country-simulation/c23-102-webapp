@@ -1,3 +1,4 @@
 __pycache__/
 .venv/
 takeaway.egg-info/
+instance/
