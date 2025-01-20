@@ -2,13 +2,12 @@ BEGIN TRANSACTION;
 DROP TABLE IF EXISTS "Client";
 CREATE TABLE IF NOT EXISTS "Client" (
 	"Client_ID"	INTEGER,
-	"FirstName"	VARCHAR(30) NOT NULL,
-	"LastName"	VARCHAR(30) NOT NULL,
+	"Firstname"	VARCHAR(30) NOT NULL,
+	"Lastname"	VARCHAR(30) NOT NULL,
 	"Email"	VARCHAR(30),
 	"Password"	VARCHAR(30),
 	"Phone"	VARCHAR(30),
 	"Address"	VARCHAR(50),
-	"Status"	BOOLEAN,
 	PRIMARY KEY("Client_ID")
 );
 DROP TABLE IF EXISTS "Restaurant_Category";
