@@ -1,9 +1,33 @@
 BEGIN TRANSACTION;
-DROP TABLE IF EXISTS "Restaurant_Category";
-CREATE TABLE IF NOT EXISTS "Restaurant_Category" (
-	"Category_ID"	INTEGER NOT NULL,
-	"Name"	VARCHAR(30) NOT NULL,
-	PRIMARY KEY("Category_ID" AUTOINCREMENT)
+DROP TABLE IF EXISTS "User";
+CREATE TABLE IF NOT EXISTS "User" (
+    "User_ID" INTEGER NOT NULL,
+    "Firstname" VARCHAR(30) NOT NULL,
+    "Lastname" VARCHAR(30) NOT NULL,
+    "Email" VARCHAR(50) NOT NULL,
+    "Password" VARCHAR(50) NOT NULL,
+    "Phone" VARCHAR(20),
+    PRIMARY KEY("User_ID" AUTOINCREMENT)
+);
+
+DROP TABLE IF EXISTS "Category";
+CREATE TABLE IF NOT EXISTS "Category" (
+    "Category_ID" INTEGER NOT NULL,
+    "Description" VARCHAR(50) NOT NULL,
+    PRIMARY KEY("Category_ID" AUTOINCREMENT)
+);
+
+DROP TABLE IF EXISTS "Restaurant";
+CREATE TABLE IF NOT EXISTS "Restaurant" (
+    "Restaurant_ID" INTEGER NOT NULL,
+    "User_ID" INTEGER NOT NULL,
+    "Category_ID" INTEGER NOT NULL,
+    "Opening_Hour" TIME,
+    "Closing_Hour" TIME,
+    "Description" VARCHAR(100),
+    PRIMARY KEY("Restaurant_ID" AUTOINCREMENT),
+    FOREIGN KEY("User_ID") REFERENCES "User"("User_ID"),
+    FOREIGN KEY("Category_ID") REFERENCES "Category"("Category_ID")
 );
 DROP TABLE IF EXISTS "Menu";
 CREATE TABLE IF NOT EXISTS "Menu" (
@@ -89,33 +113,5 @@ CREATE TABLE IF NOT EXISTS "Order" (
 	FOREIGN KEY("Restaurant_ID") REFERENCES "Restaurant"("Restaurant_ID"),
 	FOREIGN KEY("Delivery_Person_ID") REFERENCES "Delivery_Person"("Delivery_Person_ID"),
 	FOREIGN KEY("Client_ID") REFERENCES "Client"("Client_ID")
-);
-DROP TABLE IF EXISTS "Client";
-CREATE TABLE IF NOT EXISTS "Client" (
-	"Client_ID"	INTEGER NOT NULL,
-	"Firstname"	VARCHAR(30) NOT NULL,
-	"Lastname"	VARCHAR(30) NOT NULL,
-	"Email"	VARCHAR(30) NOT NULL,
-	"Password"	VARCHAR(30) NOT NULL,
-	"Phone"	VARCHAR(30),
-	"Address"	VARCHAR(50),
-	PRIMARY KEY("Client_ID" AUTOINCREMENT)
-);
-DROP TABLE IF EXISTS "Restaurant";
-CREATE TABLE IF NOT EXISTS "Restaurant" (
-	"Restaurant_ID"	INTEGER NOT NULL,
-	"Category_ID"	INTEGER NOT NULL,
-	"Menu_ID"	INTEGER NOT NULL,
-	"Name"	VARCHAR(30) NOT NULL,
-	"Address"	VARCHAR(50),
-	"Description"	VARCHAR(50),
-	"Email"	VARCHAR(30) NOT NULL,
-	"Password"	VARCHAR(30) NOT NULL,
-	"Phone"	VARCHAR(30),
-	"Opening_Hour"	INTEGER,
-	"Closing_Hour"	INTEGER,
-	PRIMARY KEY("Restaurant_ID" AUTOINCREMENT),
-	FOREIGN KEY("Menu_ID") REFERENCES "Menu"("Menu_ID"),
-	FOREIGN KEY("Category_ID") REFERENCES "Restaurant_Category"("Category_ID")
 );
 COMMIT;
