@@ -1,8 +1,8 @@
 """Crea vista login"""
 from flask import session, request, redirect, url_for
 from werkzeug.security import check_password_hash
-from app import auth
 from app.db import get_db
+from . import auth
 
 
 @auth.route('/login', methods=('GET', 'POST'))
