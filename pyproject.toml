@@ -1,5 +1,5 @@
 [project]
-name = "takeaway"
+name = "app"
 version = "0.0.1"
 description = "Aplicación de delivery de comidas"
 authors = [ # Agregar nombres y correos, si quieren
