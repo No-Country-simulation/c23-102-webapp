@@ -2,6 +2,7 @@
 from flask import session, request, redirect, url_for
 from app import auth
 from app.db import get_db
+from werkzeug.security import check_password_hash
 
 
 @auth.route('/login', methods=('GET', 'POST'))
@@ -25,6 +26,4 @@ def login():
             session['user_id'] = user['id']
             return redirect(url_for('index'))
 
-        flash(error)
-
-    return render_template('auth/login.html')
+    return "Usuario creado."
