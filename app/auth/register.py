@@ -1,8 +1,15 @@
+"Crea y configura view register."
+from flask import (
+    flash, redirect, render_template, request, url_for
+)
+from werkzeug.security import generate_password_hash
+from app.db import get_db
 from . import auth
 
 
 @auth.route('/register', methods=('GET', 'POST'))
 def register():
+    "Crea ruta /register."
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
