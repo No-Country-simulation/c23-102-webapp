@@ -46,10 +46,10 @@ Sigue estos pasos para configurar el proyecto en tu entorno local:
     pip install -e .
     ```
 
-4. Crea la base de datos:
+4. Crear o actualizar la base de datos:
 
     ```bash
-    flask --app take_away init-db
+    flask --app app init-db
     ```
 
 5. Ejecuta la aplicación:
