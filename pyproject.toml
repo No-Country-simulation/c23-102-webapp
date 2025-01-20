@@ -13,5 +13,5 @@ dependencies = [
 requires-python = ">=3.12"
 
 [build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"
