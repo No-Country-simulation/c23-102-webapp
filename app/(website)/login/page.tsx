@@ -12,7 +12,7 @@ const LoginPage = () => {
 				<LoginForm></LoginForm>
 				<div className="mt-5 flex flex-col items-center">
 					<Link href={WEBSITE_ROUTES.HOME}>Olvidaste tu contraseña?</Link>
-					<Link href={WEBSITE_ROUTES.REGISTER} className="mt-3">
+					<Link href={WEBSITE_ROUTES.ONBOARDING} className="mt-3">
 						No tienes cuenta? Registrate
 					</Link>
 				</div>
