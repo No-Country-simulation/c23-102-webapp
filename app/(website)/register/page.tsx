@@ -1,10 +1,13 @@
 import React from "react";
+import { Logo } from "@/components/global/Logo";
+import RegisterForm from "../_components/forms/RegisterForm";
 
 const RegisterPage = () => {
-  return (
-		<div className="h-full flex items-center justify-around flex-col">
-			<div className="flex items-center justify-around flex-col">
-				<h1 className="text-3xl">Register page</h1>
+	return (
+		<div className=" flex flex-col items-center justify-around bg-black text-white pt-24 pb-40">
+			<div className="flex flex-col items-center  w-4/6 ">
+				<Logo width={130}></Logo>
+				<RegisterForm />
 			</div>
 		</div>
 	);
