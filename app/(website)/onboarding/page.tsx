@@ -1,6 +1,7 @@
 import React from 'react'
 import { Logo } from '@/components/global/Logo'
 import CardWithIcon from '@/components/global/CardWithIcon'
+import { mocked_user_types } from '@/constants/mock/onboarding'
 
 const Onboarding = () => {
   return (
@@ -14,27 +15,20 @@ const Onboarding = () => {
             <h2 className=' text-xl font-semibold'>Bienvenido!</h2>
             <p className='text-sm text-gray-100'>Antes de continuar, elige como que tipo de usuario deseas registrarte</p>
         </div>
-        {/* Card 1 */}
-        <CardWithIcon
-            title="Cliente"
-            subtitle="Quiero ordernar comida/bebida"
-            icon="utensils.svg"
-            route='/register'
-        />
-        {/* Card 1 */}
-        <CardWithIcon
-            title="Restaurante"
-            subtitle="Quiero ofrecer mis productos"
-            icon="cooker-hat.svg"
-            route="#"
-        />
-        {/* Card 1 */}
-        <CardWithIcon
-            title="Repartidor"
-            subtitle="Quiero trabajar como delivery"
-            icon="scooter.svg"
-            route="#"
-        />
+
+      <div className="flex flex-col items-center gap-5">
+        { mocked_user_types.map( ( {id, title, subtitle, route, icon} )=>{
+          return (
+             <CardWithIcon
+                key={id}
+                title=  {title}
+                subtitle = {subtitle}
+                icon={React.createElement(icon)}
+                route={route}
+             />
+          )
+        })}
+      </div>
 			</div>
 		</div>
   )

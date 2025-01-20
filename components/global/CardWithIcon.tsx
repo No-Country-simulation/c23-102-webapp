@@ -1,33 +1,26 @@
-import React from 'react'
-import Link from 'next/link'
+import React from "react";
+import Link from "next/link";
+import { cardWithIconProps } from "@/types/websiteProps";
 
 import {
-    Card,
-    CardHeader,
-    CardDescription,
-    CardTitle,
-  } from "@/components/ui/card"
-import Image from 'next/image'
+  Card,
+  CardHeader,
+  CardDescription,
+  CardTitle,
+} from "@/components/ui/card";
 
-type cardProps = {
-    icon: string
-    title: string
-    subtitle: string
-    route: string
-  }
-
-const CardWithIcon = ({ route, icon, title, subtitle }: cardProps) => {
+const CardWithIcon = ({ route, icon, title, subtitle }: cardWithIconProps) => {
   return (
-    <Link href={route}>
-        <Card className="cardContainerStyles">
-            <CardHeader className='cardStyles'>
-                <Image src={icon} alt="Logo" height={30} width={30} />
-                <CardTitle>{title}</CardTitle>
-                <CardDescription>{subtitle}</CardDescription>
-            </CardHeader>
-    </Card>
-</Link>
-  )
-}
+    <Link href={route} className=" w-full">
+      <Card className="cardContainerStyles">
+        <CardHeader className="cardStyles">
+          {icon}
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{subtitle}</CardDescription>
+        </CardHeader>
+      </Card>
+    </Link>
+  );
+};
 
-export default CardWithIcon
+export default CardWithIcon;

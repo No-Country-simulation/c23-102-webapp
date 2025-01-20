@@ -91,7 +91,7 @@
 */
 
 .cardContainerStyles{
-  @apply w-[100%]    border-none overflow-hidden bg-black rounded-xl !important
+  @apply w-[100%] border-none overflow-hidden bg-black rounded-xl !important
 }
 
 .cardStyles {

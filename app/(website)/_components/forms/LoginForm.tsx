@@ -20,7 +20,7 @@ const LoginForm = () => {
 
 	return (
 		<Form {...form}>
-			<form className="text-white mt-8 w-full lg:w-1/3">
+			<form className="text-white mt-8 w-full">
 				<FormField
 					name="username"
 					control={form.control}
