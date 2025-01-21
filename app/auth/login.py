@@ -27,4 +27,4 @@ def login():
 
     session.clear()
     session['user_id'] = user['User_ID']
-    return redirect(url_for('index'))
+    return redirect(url_for('index'))  # Cambia redirección
