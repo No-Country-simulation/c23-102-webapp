@@ -19,7 +19,7 @@ def register():
                 VALUES (?, ?, ?, ?, ?)
                 """,
                 (form.email, generate_password_hash(form.password),
-                 form.lastname, form.firstname, form.phone),
+                 form.lastname, form.name, form.phone),
             )
             db.commit()
         except db.IntegrityError:
