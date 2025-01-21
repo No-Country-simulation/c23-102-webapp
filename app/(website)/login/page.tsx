@@ -3,11 +3,21 @@ import LoginForm from "../_components/forms/LoginForm";
 import { Logo } from "@/components/global/Logo";
 import Link from "next/link";
 import { WEBSITE_ROUTES } from "@/constants/routes";
+import BG from "@/public/images/LoginBG.png";
 
 const LoginPage = () => {
 	return (
-		<div className="min-h-dvh flex flex-col items-center justify-around bg-black text-white">
-			<div className="flex flex-col items-center w-[80%]">
+		<div
+			className="min-h-dvh flex flex-col items-center justify-around text-white"
+			style={{
+				backgroundColor: "max-md:bg-black",
+				backgroundImage: `url(${BG.src})`,
+				objectFit: "cover",
+				backgroundRepeat: "no-repeat",
+				backgroundSize: "cover",
+			}}
+		>
+			<div className="flex flex-col items-center w-[80%] center-forms-lg">
 				<Logo width={130}></Logo>
 				<LoginForm></LoginForm>
 				<div className="mt-5 flex flex-col items-center">
