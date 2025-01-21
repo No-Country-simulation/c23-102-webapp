@@ -1,6 +1,6 @@
 """Crea validador para formulario de registro."""
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField
+from wtforms import StringField
 from wtforms.fields import EmailField
 from wtforms.validators import DataRequired, Email
 
@@ -16,6 +16,6 @@ class RegisterForm(FlaskForm):
         Email(message="Debe ingresar un correo válido.")
     ])
     phone = StringField('phone')
-    password = PasswordField('password', validators=[
+    password = StringField('password', validators=[
         DataRequired(message="La contraseña es obligatoria."),
     ])
