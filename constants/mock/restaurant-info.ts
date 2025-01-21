@@ -2,8 +2,8 @@ export const mocked_restaurants = [
 	{
 		id: 1,
 		image_url: "https://upload.wikimedia.org/wikipedia/commons/6/62/Barbieri_-_ViaSophia25668.jpg",
-		name: "Restaurante 1",
-		distance: "5 min.",
+		name: "Kampai",
+		distance: "Gastronomia Nikkei",
 		categories: [
 			{
 				id: 1,
@@ -11,48 +11,47 @@ export const mocked_restaurants = [
 			},
 			{
 				id: 2,
-				name: "Italiano",
+				name: "Peruano",
 			},
 		],
 	},
 	{
 		id: 2,
-		image_url: "https://www.geneve.com/fileadmin/_processed_/7/1/csm_starred_restaurants_2_header_05562c509f.webp",
-		name: "Restaurante 2",
-		distance: "12 min.",
+		image_url: "https://images.pexels.com/photos/29913261/pexels-photo-29913261.jpeg",
+		name: "Fast Food",
+		distance: "Hamburguesa y papitas",
 		categories: [
 			{
 				id: 2,
-				name: "Italiano",
+				name: "American Burguer",
 			},
 		],
 	},
 	{
 		id: 3,
-		image_url:
-			"https://images.ctfassets.net/trvmqu12jq2l/6FV4Opt7wUyR91t2FXyOIr/f32972fce10fc87585e831b334ea17ef/header.jpg?q=70&w=1208&h=1080&f=faces&fit=fill",
-		name: "Restaurante 3",
-		distance: "1 min.",
+		image_url: "https://images.pexels.com/photos/30302240/pexels-photo-30302240/free-photo-of-pizza-nina.jpeg",
+		name: "La Rotonde",
+		distance: "Vera cucina italiana",
 		categories: [
 			{
 				id: 1,
-				name: "Mexicano",
+				name: "Italian",
 			},
 		],
 	},
 	{
 		id: 4,
-		image_url: "https://cdn.vox-cdn.com/uploads/chorus_image/image/73039680/IMG_0725_EDIT.0.jpg",
-		name: "Restaurante 4",
-		distance: "25 min.",
+		image_url: "https://images.pexels.com/photos/30238701/pexels-photo-30238701/free-photo-of-plano.jpeg",
+		name: "Oh la la!",
+		distance: "Comida francesa",
 		categories: [
 			{
 				id: 1,
-				name: "Thai",
+				name: "Frances",
 			},
 			{
 				id: 2,
-				name: "Vietnam",
+				name: "Europea",
 			},
 		],
 	},
