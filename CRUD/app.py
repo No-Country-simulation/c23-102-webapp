@@ -1,16 +1,21 @@
-from flask import Flask, request, jsonify
+from flask import jsonify, Blueprint
 import sqlite3
 
-app = Flask(__name__)
-DATABASE = 'app.db'
+from app.db import get_db
+
+app = Blueprint('restaurant', __name__, url_prefix='/restaurant')
 
 # Conexión a la base de datos
+
+
 def get_db_connection():
-    conn = sqlite3.connect(DATABASE)
+    conn = get_db()
     conn.row_factory = sqlite3.Row
     return conn
 
 # Crear tablas
+
+
 def create_tables():
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -140,6 +145,8 @@ def create_tables():
     conn.close()
 
 # Insertar datos de ejemplo
+
+
 def insert_sample_data():
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -225,12 +232,15 @@ def insert_sample_data():
     conn.close()
 
 # Rutas CRUD para todas las tablas
+
+
 @app.route('/client', methods=['GET'])
 def get_all_clients():
     conn = get_db_connection()
     clients = conn.execute('SELECT * FROM Client').fetchall()
     conn.close()
     return jsonify([dict(client) for client in clients])
+
 
 @app.route('/restaurant_category', methods=['GET'])
 def get_all_restaurant_categories():
@@ -239,12 +249,14 @@ def get_all_restaurant_categories():
     conn.close()
     return jsonify([dict(category) for category in categories])
 
+
 @app.route('/menu', methods=['GET'])
 def get_all_menus():
     conn = get_db_connection()
     menus = conn.execute('SELECT * FROM Menu').fetchall()
     conn.close()
     return jsonify([dict(menu) for menu in menus])
+
 
 @app.route('/order_detail', methods=['GET'])
 def get_all_order_details():
@@ -253,12 +265,14 @@ def get_all_order_details():
     conn.close()
     return jsonify([dict(order_detail) for order_detail in order_details])
 
+
 @app.route('/order_status', methods=['GET'])
 def get_all_order_statuses():
     conn = get_db_connection()
     order_statuses = conn.execute('SELECT * FROM Order_Status').fetchall()
     conn.close()
     return jsonify([dict(order_status) for order_status in order_statuses])
+
 
 @app.route('/delivery_person', methods=['GET'])
 def get_all_delivery_persons():
@@ -267,12 +281,14 @@ def get_all_delivery_persons():
     conn.close()
     return jsonify([dict(delivery_person) for delivery_person in delivery_persons])
 
+
 @app.route('/payment_type', methods=['GET'])
 def get_all_payment_types():
     conn = get_db_connection()
     payment_types = conn.execute('SELECT * FROM Payment_Type').fetchall()
     conn.close()
     return jsonify([dict(payment_type) for payment_type in payment_types])
+
 
 @app.route('/payment_status', methods=['GET'])
 def get_all_payment_statuses():
@@ -281,12 +297,14 @@ def get_all_payment_statuses():
     conn.close()
     return jsonify([dict(payment_status) for payment_status in payment_statuses])
 
+
 @app.route('/payment', methods=['GET'])
 def get_all_payments():
     conn = get_db_connection()
     payments = conn.execute('SELECT * FROM Payment').fetchall()
     conn.close()
     return jsonify([dict(payment) for payment in payments])
+
 
 @app.route('/order', methods=['GET'])
 def get_all_orders():
@@ -295,12 +313,14 @@ def get_all_orders():
     conn.close()
     return jsonify([dict(order) for order in orders])
 
+
 @app.route('/restaurant', methods=['GET'])
 def get_all_restaurants():
     conn = get_db_connection()
     restaurants = conn.execute('SELECT * FROM Restaurant').fetchall()
     conn.close()
     return jsonify([dict(restaurant) for restaurant in restaurants])
+
 
 if __name__ == '__main__':
     create_tables()
