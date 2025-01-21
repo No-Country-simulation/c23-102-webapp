@@ -7,7 +7,7 @@ import { WEBSITE_ROUTES } from "@/constants/routes";
 const LoginPage = () => {
 	return (
 		<div className="min-h-dvh flex flex-col items-center justify-around bg-black text-white">
-			<div className="flex flex-col items-center w-4/6">
+			<div className="flex flex-col items-center w-[80%]">
 				<Logo width={130}></Logo>
 				<LoginForm></LoginForm>
 				<div className="mt-5 flex flex-col items-center">

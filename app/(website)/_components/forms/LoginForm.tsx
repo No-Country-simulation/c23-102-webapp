@@ -27,7 +27,13 @@ const LoginForm = () => {
 					render={({ field }) => (
 						<FormItem>
 							<FormControl>
-								<Input {...field} placeholder={"Email"} type="email" className="form-input-text"></Input>
+								<Input
+									{...field}
+									placeholder={"Email"}
+									type="email"
+									className="form-input-text"
+									autoComplete="off"
+								></Input>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -39,7 +45,13 @@ const LoginForm = () => {
 					render={({ field }) => (
 						<FormItem className="mt-5">
 							<FormControl>
-								<Input {...field} placeholder={"Password"} type="password" className="form-input-text"></Input>
+								<Input
+									{...field}
+									placeholder={"Password"}
+									type="password"
+									className="form-input-text"
+									autoComplete="off"
+								></Input>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
