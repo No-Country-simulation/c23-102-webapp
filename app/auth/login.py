@@ -9,14 +9,14 @@ from . import auth
 def login():
     """Verifica datos enviados y redirije, si todo está bien."""
     email = request.form['email']
-    password = request.form['password']
+    password: str = request.form['password']
     db = get_db()
     error = None
     user = db.execute(
         'SELECT * FROM User WHERE Email = ?', (email,)
     ).fetchone()
 
-    if email is None or user['Email']:
+    if user is None:
         error = 'Email incorrecto.'
     # Está función convierte el segundo parámetro en hash y lo compara con el primero
     elif not check_password_hash(user['password'], password):
