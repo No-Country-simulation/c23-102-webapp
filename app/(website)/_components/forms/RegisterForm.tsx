@@ -146,7 +146,7 @@ const RegisterForm = () => {
 						<FormItem className="mt-5">
 							<FormLabel>Contraseña</FormLabel>
 							<FormControl>
-								<Input {...field} placeholder={"******"} type="password" className="form-input-text"></Input>
+								<Input {...field} placeholder={"******"} type="password" className="form-input-text" autoComplete="off"></Input>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -160,7 +160,7 @@ const RegisterForm = () => {
 						<FormItem className="mt-5">
 							<FormLabel>Confirmar contraseña</FormLabel>
 							<FormControl>
-								<Input {...field} placeholder={"******"} type="password" className="form-input-text"></Input>
+								<Input {...field} placeholder={"******"} type="password" className="form-input-text" autoComplete="off"></Input>
 							</FormControl>
 							<FormMessage />
 						</FormItem>

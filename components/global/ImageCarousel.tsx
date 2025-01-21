@@ -11,14 +11,16 @@ export function ImageCarousel() {
 			<CarouselContent className="flex gap-1 w-[90%]">
 				{mocked_restaurants.map((restaurant) => (
 					<CarouselItem key={restaurant.id} className="h-[25rem]">
-						<div className="h-full relative">
-							<Card className="h-full rounded-xl">
+						<div className="h-full rounded-xl ">
+							<Card className="h-full relative border-none">
 								<Image
 									src={restaurant.image_url}
 									alt={restaurant.name}
 									className="h-full rounded-xl"
-									layout="fill"
-									objectFit="cover"
+									fill
+									style={{
+										objectFit: "cover",
+									}}
 								/>
 								{/* Overlay */}
 								<div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-75 h-[28%] flex items-center">
