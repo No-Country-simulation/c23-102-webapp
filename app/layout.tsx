@@ -5,6 +5,9 @@ import "./globals.css";
 export const metadata: Metadata = {
 	title: "Take Away",
 	description: "Delicous food at your doorstep",
+	openGraph: {
+		images: "https://imgur.com/eFuA5de",
+	},
 };
 
 const plusJakartaSans = Plus_Jakarta_Sans({
