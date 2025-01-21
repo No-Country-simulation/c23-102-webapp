@@ -90,6 +90,10 @@
     @apply lg:h-[6.4rem] lg:py-0 lg:pt-0 !important;
   }
 
+  .base-footer-styles-xl {
+    @apply xl:flex-row  xl:justify-center !important;
+  }
+
   .escape-navbar {
     @apply pt-24 !important;
   }

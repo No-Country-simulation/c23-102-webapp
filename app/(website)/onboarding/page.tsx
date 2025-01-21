@@ -7,7 +7,6 @@ const Onboarding = () => {
   return (
 		<div className="min-h-dvh h-full flex flex-col items-center justify-around bg-black text-white py-20">
 			<div className="flex flex-col gap-5 items-center w-4/6 ">
-				{/* Logo */}
 				<Logo width={130}></Logo>
 
 				<div className="text-center py-5   lg:w-1/3">
