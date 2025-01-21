@@ -36,5 +36,5 @@ def register():
         except db.IntegrityError:
             error = "Usuario ya registrado."
         else:
-            return redirect(url_for("auth.login"))
+            return redirect(url_for(""))  # Agregar redirección a home
     abort(401, error)
