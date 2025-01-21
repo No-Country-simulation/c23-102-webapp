@@ -1,3 +1,4 @@
+"""Crea vista register"""
 from flask import abort, request, url_for, redirect
 from werkzeug.security import generate_password_hash
 from app.db import get_db
@@ -6,6 +7,7 @@ from . import auth
 
 @auth.post('/register')
 def register():
+    """Valida datos del usuario y los guarda en basa de datos."""
     email = request.form['email']
     password = request.form['password']
     firstname = request.form['name']
