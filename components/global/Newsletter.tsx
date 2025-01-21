@@ -17,11 +17,13 @@ function NewsletterBanner({ className }: { className?: string }) {
 	});
 
 	return (
-		<article className={cn("flex flex-col gap-4", className)}>
-			<h2 className="font-bold">Quieres enterarte de ofertas y descuentos?</h2>
-			<p>Únete a nuestra mail-list para recibir actualizaciones de nuestras últimas novedades!</p>
+		<article className={cn("flex flex-col gap-4 center-forms-lg", className)}>
+			<div className="flex flex-col w-full">
+				<h2 className="font-bold">Quieres enterarte de ofertas y descuentos?</h2>
+				<p>Únete a nuestra mail-list para recibir actualizaciones de nuestras últimas novedades!</p>
+			</div>
 			<Form {...form}>
-				<form className="text-white flex flex-col gap-3">
+				<form className="text-white w-full flex flex-col gap-3 xl:flex-row xl:justify-between">
 					<FormField
 						name="email"
 						control={form.control}
@@ -32,7 +34,7 @@ function NewsletterBanner({ className }: { className?: string }) {
 										{...field}
 										placeholder={"Email"}
 										type="email"
-										className="form-input-text"
+										className="form-input-text xl:w-[280px]"
 										autoComplete="off"
 									></Input>
 								</FormControl>
@@ -40,7 +42,7 @@ function NewsletterBanner({ className }: { className?: string }) {
 							</FormItem>
 						)}
 					/>
-					<Button type="submit" variant={"default"} className="w-[50%]">
+					<Button type="submit" variant={"default"} className="w-[50%] xl:w-full">
 						Suscríbete
 					</Button>
 				</form>
