@@ -1,13 +1,46 @@
+import React from "react";
 import { Logo } from "@/components/global/Logo";
+import { take_away_socials, take_away_footer_routes, take_away_footer_legal } from "@/constants/mock/takeAway-info";
+import LinkWithIcon from "@/components/global/LinkWithIcon";
+import Link from "next/link";
+import NewsletterBanner from "@/components/global/Newsletter";
 
 export const Footer = () => {
 	return (
-		<div className="absolute bottom-0 base-top-styles base-top-styles-lg bg-[#0D0402] text-white shadow-[0_0_0.6px_0.1px_rgba(255,255,255,0.5)] py-8">
-			<div className="flex justify-between items-center w-10/12 max-w-screen-2xl">
-				<Logo width={85} className={"lg:w-28"}></Logo>
-				<div className="flex text-white gap-3 self-end opacity-[0.9] lg:self-center lg:gap-5">
-					<h2>Footer</h2>
-				</div>
+		<div className="bottom-0 base-top-styles base-top-styles-lg bg-[#0D0402] text-white shadow-[0_0_0.6px_0.1px_rgba(255,255,255,0.5)] pt-12 pb-20">
+			<div className="flex flex-col gap-10 items-center w-[75%] max-w-screen-2xl">
+				{/* Logo & Socials */}
+				<article className="w-full flex flex-col items-start gap-2">
+					<Logo width={110}></Logo>
+					<div className="flex gap-3 items-center">
+						{take_away_socials.map(({ id, icon, url }) => {
+							return (
+								<LinkWithIcon key={id} route={url}>
+									{React.createElement(icon)}
+								</LinkWithIcon>
+							);
+						})}
+					</div>
+				</article>
+				<article className="w-full flex flex-col items-start gap-3">
+					{take_away_footer_routes.map(({ id, name, url }) => {
+						return (
+							<Link key={id} href={url} className="font-thin">
+								{name}
+							</Link>
+						);
+					})}
+				</article>
+				<article className="w-full flex flex-col items-start gap-3">
+					{take_away_footer_legal.map(({ id, name, url }) => {
+						return (
+							<Link key={id} href={url} className="font-thin">
+								{name}
+							</Link>
+						);
+					})}
+				</article>
+				<NewsletterBanner></NewsletterBanner>
 			</div>
 		</div>
 	);
