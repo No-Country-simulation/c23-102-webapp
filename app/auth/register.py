@@ -18,7 +18,7 @@ def register():
                 INSERT INTO User (Email, Password, Lastname, Firstname, Phone)
                 VALUES (?, ?, ?, ?, ?)
                 """,
-                (form.email, generate_password_hash(form.password),
+                (form.email, generate_password_hash(str(form.password)),
                  form.lastname, form.name, form.phone),
             )
             db.commit()
