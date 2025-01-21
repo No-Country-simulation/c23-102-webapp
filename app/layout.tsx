@@ -11,6 +11,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 	subsets: ["latin"],
 	weight: ["400", "700"], // 400 for regular, 700 for bold
 	display: "swap",
+	preload: false,
 });
 
 export default function RootLayout({
