@@ -13,8 +13,13 @@ def create_app():
 
     app = Flask(__name__, instance_relative_config=True)
 
-    app.config['DATABASE'] = join(app.instance_path, 'db.sqlite')
-    app.config['WTF_CSRF_ENABLED'] = False
+    # Carga configuraciones
+    app.config.from_mapping(
+        DATABASE=join(app.instance_path, 'db.sqlite'),
+        WTF_CSRF_ENABLED=False,
+        SECRET_KEY='posdfjasdhf'
+    )
+
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
 
