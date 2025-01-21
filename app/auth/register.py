@@ -6,25 +6,33 @@ from . import auth
 
 @auth.post('/register')
 def register():
-    username = request.form['username']
+    email = request.form['email']
     password = request.form['password']
+    firstname = request.form['name']
+    lastname = request.form['lastname']
+    phone = request.form['phone']
     db = get_db()
     error = None
 
-    if not username:
-        error = 'Username is required.'
+    if not email:
+        error = 'Email requerido.'
     elif not password:
-        error = 'Password is required.'
+        error = 'Contraseña requerida.'
+    elif not firstname:
+        error = 'Nombre requerido.'
 
     if error is None:
         try:
             db.execute(
-                "INSERT INTO user (username, password) VALUES (?, ?)",
-                (username, generate_password_hash(password)),
+                """
+                INSERT INTO User (Email, Password, Lastname, Firstname, Phone)
+                VALUES (?, ?, ?, ?, ?)
+                """,
+                (email, generate_password_hash(password), lastname, firstname, phone),
             )
             db.commit()
         except db.IntegrityError:
-            error = f"User {username} is already registered."
+            error = "Usuario ya registrado."
         else:
             return redirect(url_for("auth.login"))
     abort(401, error)
