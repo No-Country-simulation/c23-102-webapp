@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 	title: "Take Away",
 	description: "Delicous food at your doorstep",
 	openGraph: {
-		images: "https://imgur.com/eFuA5de",
+		images: "https://images.pexels.com/photos/6671778/pexels-photo-6671778.jpeg",
 	},
 };
 
