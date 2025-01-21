@@ -1,6 +1,7 @@
 """Crea vista register"""
-from flask import abort, request, url_for, redirect
+from flask import abort, url_for, redirect
 from werkzeug.security import generate_password_hash
+from app.auth.register_form import RegisterForm
 from app.db import get_db
 from . import auth
 
@@ -8,33 +9,21 @@ from . import auth
 @auth.post('/register')
 def register():
     """Valida datos del usuario y los guarda en basa de datos."""
-    email = request.form['email']
-    password = request.form['password']
-    firstname = request.form['name']
-    lastname = request.form['lastname']
-    phone = request.form['phone']
+    form = RegisterForm()
     db = get_db()
-    error = None
-
-    if not email:
-        error = 'Email requerido.'
-    elif not password:
-        error = 'Contraseña requerida.'
-    elif not firstname:
-        error = 'Nombre requerido.'
-
-    if error is None:
+    if form.validate_on_submit():
         try:
             db.execute(
                 """
                 INSERT INTO User (Email, Password, Lastname, Firstname, Phone)
                 VALUES (?, ?, ?, ?, ?)
                 """,
-                (email, generate_password_hash(password), lastname, firstname, phone),
+                (form.email, generate_password_hash(form.password),
+                 form.lastname, form.firstname, form.phone),
             )
             db.commit()
         except db.IntegrityError:
-            error = "Usuario ya registrado."
+            abort(401, f"Usuario ya registrado con {form.email}.")
         else:
             return redirect(url_for(""))  # Agregar redirección a home
-    abort(401, error)
+    abort(401, form.errors)
