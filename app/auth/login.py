@@ -1,5 +1,5 @@
 """Crea vista login"""
-from flask import session, request, redirect, url_for, abort
+from flask import session, request, abort
 from werkzeug.security import check_password_hash
 from app.db import get_db
 from . import auth
@@ -26,5 +26,5 @@ def login():
         abort(401, error)
 
     session.clear()
-    session['user_id'] = user['User_ID']
-    return redirect(url_for('index'))  # Cambia redirección
+    session['user_id'] = user['email']
+    return {'email': email}

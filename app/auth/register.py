@@ -23,4 +23,4 @@ def register():
     except db.IntegrityError:
         abort(401, f"Usuario ya registrado con {form['email']}.")
     else:
-        return redirect(url_for(""))  # Agregar redirección a home
+        return {'email': form['email']}  # Agregar redirección a home
