@@ -8,19 +8,30 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { loginSchema } from "@/schemas/authSchema";
-
 import GoogleIcon from "../../../../public/images/GoogleIcon.png";
 import Image from "next/image";
+import { loginUser } from "@/actions/authActions";
+import { useUser } from "@/context/UserContext";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+	const router = useRouter();
+	const { updateUser } = useUser();
+
 	const form = useForm<z.infer<typeof loginSchema>>({
 		resolver: zodResolver(loginSchema),
 		defaultValues: { username: "", password: "" },
 	});
 
+	const onSubmit = (values: z.infer<typeof loginSchema>) => {
+		const response = loginUser(values);
+		updateUser(response);
+		router.push("/dashboard");
+	};
+
 	return (
 		<Form {...form}>
-			<form className="text-white mt-8 w-full">
+			<form className="text-white mt-8 w-full" onSubmit={form.handleSubmit(onSubmit)}>
 				<FormField
 					name="username"
 					control={form.control}
