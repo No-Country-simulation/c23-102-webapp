@@ -13,7 +13,7 @@ def register_restaurant():
     try:
         db.execute(
             """
-            INSERT INTO User (Email, Password, Lastname, Firstname, Phone)
+            INSERT INTO Restaurant (Brand, Location, Location_Name, Category, Phone)
             VALUES (?, ?, ?, ?, ?)
             """,
             (form['email'], generate_password_hash(form['password']),
