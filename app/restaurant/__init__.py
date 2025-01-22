@@ -234,87 +234,77 @@ def insert_sample_data():
 # Rutas CRUD para todas las tablas
 
 
-@app.route('/client', methods=['GET'])
+@restaurant_bp.route('/client', methods=['GET'])
 def get_all_clients():
     conn = get_db_connection()
     clients = conn.execute('SELECT * FROM Client').fetchall()
     conn.close()
     return jsonify([dict(client) for client in clients])
 
-
-@app.route('/restaurant_category', methods=['GET'])
+@restaurant_bp.route('/restaurant_category', methods=['GET'])
 def get_all_restaurant_categories():
     conn = get_db_connection()
     categories = conn.execute('SELECT * FROM Restaurant_Category').fetchall()
     conn.close()
     return jsonify([dict(category) for category in categories])
 
-
-@app.route('/menu', methods=['GET'])
+@restaurant_bp.route('/menu', methods=['GET'])
 def get_all_menus():
     conn = get_db_connection()
     menus = conn.execute('SELECT * FROM Menu').fetchall()
     conn.close()
     return jsonify([dict(menu) for menu in menus])
 
-
-@app.route('/order_detail', methods=['GET'])
+@restaurant_bp.route('/order_detail', methods=['GET'])
 def get_all_order_details():
     conn = get_db_connection()
     order_details = conn.execute('SELECT * FROM Order_Detail').fetchall()
     conn.close()
     return jsonify([dict(order_detail) for order_detail in order_details])
 
-
-@app.route('/order_status', methods=['GET'])
+@restaurant_bp.route('/order_status', methods=['GET'])
 def get_all_order_statuses():
     conn = get_db_connection()
     order_statuses = conn.execute('SELECT * FROM Order_Status').fetchall()
     conn.close()
     return jsonify([dict(order_status) for order_status in order_statuses])
 
-
-@app.route('/delivery_person', methods=['GET'])
+@restaurant_bp.route('/delivery_person', methods=['GET'])
 def get_all_delivery_persons():
     conn = get_db_connection()
     delivery_persons = conn.execute('SELECT * FROM Delivery_Person').fetchall()
     conn.close()
     return jsonify([dict(delivery_person) for delivery_person in delivery_persons])
 
-
-@app.route('/payment_type', methods=['GET'])
+@restaurant_bp.route('/payment_type', methods=['GET'])
 def get_all_payment_types():
     conn = get_db_connection()
     payment_types = conn.execute('SELECT * FROM Payment_Type').fetchall()
     conn.close()
     return jsonify([dict(payment_type) for payment_type in payment_types])
 
-
-@app.route('/payment_status', methods=['GET'])
+@restaurant_bp.route('/payment_status', methods=['GET'])
 def get_all_payment_statuses():
     conn = get_db_connection()
     payment_statuses = conn.execute('SELECT * FROM Payment_Status').fetchall()
     conn.close()
     return jsonify([dict(payment_status) for payment_status in payment_statuses])
 
-
-@app.route('/payment', methods=['GET'])
+@restaurant_bp.route('/payment', methods=['GET'])
 def get_all_payments():
     conn = get_db_connection()
     payments = conn.execute('SELECT * FROM Payment').fetchall()
     conn.close()
     return jsonify([dict(payment) for payment in payments])
 
-
-@app.route('/order', methods=['GET'])
+@restaurant_bp.route('/order', methods=['GET'])
 def get_all_orders():
     conn = get_db_connection()
     orders = conn.execute('SELECT * FROM "Order"').fetchall()
     conn.close()
     return jsonify([dict(order) for order in orders])
 
-
-@app.route('/restaurant', methods=['GET'])
+@restaurant_bp.route('/restaurant', methods=['GET'])
 def get_all_restaurants():
     conn = get_db_connection()
     restaurants = conn.execute('SELECT * FROM Restaurant').fetchall()
