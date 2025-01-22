@@ -65,8 +65,8 @@ CREATE TABLE IF NOT EXISTS "Payment" (
 	"Date"	DATE,
 	"Time"	DATETIME,
 	"Reference"	VARCHAR(50),
-	PRIMARY KEY("Payment_ID" AUTOINCREMENT),
 	FOREIGN KEY("Payment_Status_ID") REFERENCES "Payment_Status"("Payment_Status_ID"),
+	PRIMARY KEY("Payment_ID" AUTOINCREMENT),
 	FOREIGN KEY("Payment_Type_ID") REFERENCES "Payment_Type"("Payment_Type_ID")
 );
 DROP TABLE IF EXISTS "Order";
@@ -82,13 +82,13 @@ CREATE TABLE IF NOT EXISTS "Order" (
 	"Time"	DATETIME,
 	"Total"	DECIMAL(5, 1),
 	"Delivery_Address"	VARCHAR(50),
+	FOREIGN KEY("Order_Detail_ID") REFERENCES "Order_Detail"("Order_Detail_ID"),
 	FOREIGN KEY("Client_ID") REFERENCES "Client"("Client_ID"),
-	FOREIGN KEY("Delivery_Person_ID") REFERENCES "Delivery_Person"("Delivery_Person_ID"),
+	FOREIGN KEY("Restaurant_ID") REFERENCES "Restaurant"("Restaurant_ID"),
 	FOREIGN KEY("Order_Status_ID") REFERENCES "Order_Status"("Order_Status_ID"),
 	PRIMARY KEY("Order_ID" AUTOINCREMENT),
-	FOREIGN KEY("Order_Detail_ID") REFERENCES "Order_Detail"("Order_Detail_ID"),
-	FOREIGN KEY("Payment_ID") REFERENCES "Payment"("Payment_ID"),
-	FOREIGN KEY("Restaurant_ID") REFERENCES "Restaurant"("Restaurant_ID")
+	FOREIGN KEY("Delivery_Person_ID") REFERENCES "Delivery_Person"("Delivery_Person_ID"),
+	FOREIGN KEY("Payment_ID") REFERENCES "Payment"("Payment_ID")
 );
 DROP TABLE IF EXISTS "User";
 CREATE TABLE IF NOT EXISTS "User" (
@@ -106,7 +106,9 @@ CREATE TABLE IF NOT EXISTS "Restaurant" (
 	"Closing_Hour"	TIME,
 	"Description"	VARCHAR(100),
 	"Email"	TEXT NOT NULL,
-	"Location"	TEXT,
+	"Location"	TEXT NOT NULL,
+	"Location_Name"	TEXT NOT NULL,
+	"Brand"	TEXT NOT NULL,
 	PRIMARY KEY("Email"),
 	FOREIGN KEY("Category_ID") REFERENCES "Category"("Category_ID")
 );
