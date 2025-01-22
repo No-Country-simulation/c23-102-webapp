@@ -9,7 +9,7 @@ register = Blueprint('register', __name__, url_prefix='/register')
 @register.post('/')
 def user_register():
     """Registra usuario en basa de datos."""
-    form = request.form
+    form = request.get_json()
     db = get_db()
     try:
         db.execute(

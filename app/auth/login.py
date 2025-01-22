@@ -8,8 +8,8 @@ from . import auth
 @auth.post('/login')
 def login():
     """Verifica datos enviados y redirije, si todo está bien."""
-    email = request.form['email']
-    password: str = request.form['password']
+    email = request.json['email']
+    password: str = request.json['password']
     db = get_db()
     error = None
     user = db.execute(
