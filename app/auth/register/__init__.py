@@ -6,7 +6,7 @@ from app.db import get_db
 register = Blueprint('register', __name__, url_prefix='/register')
 
 
-@register.post('/register')
+@register.post('/')
 def user_register():
     """Registra usuario en basa de datos."""
     form = request.form
@@ -25,3 +25,6 @@ def user_register():
         abort(401, f"Usuario ya registrado con {form['email']}.")
     else:
         return {'email': form['email']}
+
+
+from . import restaurant
