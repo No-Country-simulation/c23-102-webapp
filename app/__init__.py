@@ -5,7 +5,7 @@ from flask import Flask
 from app.commands import init_db_command
 from app.db import close_db
 from .auth import auth
-from .restaurant import app as restaurant
+from .restaurant import restaurant_bp
 
 
 def create_app():
@@ -25,7 +25,7 @@ def create_app():
 
     # Blueprints
     app.register_blueprint(auth)
-    app.register_blueprint(restaurant)
+    app.register_blueprint(restaurant_bp)
 
     try:
         makedirs(app.instance_path)
