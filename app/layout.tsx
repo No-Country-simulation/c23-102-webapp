@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import Providers from "./providers";
 
 export const metadata: Metadata = {
 	title: "Take Away",
@@ -24,7 +25,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<body className={plusJakartaSans.className}>{children}</body>
+			<body className={plusJakartaSans.className}>
+				<Providers>{children}</Providers>
+			</body>
 		</html>
 	);
 }
