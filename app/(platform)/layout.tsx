@@ -10,19 +10,20 @@ const PlatformContentLayout = ({ children }: { children: React.ReactNode }) => {
 
 	useEffect(() => {
 		if (!loading && user == null) {
-			router.push("/login");
+			router.replace("/login");
 		}
 	}, [loading, user, router]);
 
-	if (loading) {
+	if (loading || !user) {
 		return (
 			<div className="min-h-dvh h-full w-full bg-black text-white flex items-center justify-center">Loading...</div>
-		); // Indicador de carga
+		);
 	}
+
 	return (
-		<div className="h-dvh">
+		<div className="min-h-dvh">
 			{/* Dashboard Sidebar o Navbar iran aca, las paginas seran renderizadas dentro */}
-			<main className="h-full">{children}</main>
+			<main className="min-h-dvh">{user && children}</main>
 		</div>
 	);
 };
