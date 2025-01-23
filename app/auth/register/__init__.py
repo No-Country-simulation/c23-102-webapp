@@ -27,4 +27,4 @@ def user_register():
         return {'email': form['email']}
 
 
-from . import restaurant
+from . import restaurant, client
