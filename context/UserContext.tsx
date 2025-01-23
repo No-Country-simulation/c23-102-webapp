@@ -1,14 +1,14 @@
 "use client";
 
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { User, UserContextType } from "@/types/User";
+import { UserContextType, LoginResponse } from "@/types/authentication";
 import Cookies from "js-cookie";
 import { COOKIE_NAME } from "@/constants/app_constants";
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-	const [user, setUser] = useState<User | null>(null);
+	const [user, setUser] = useState<LoginResponse | null>(null);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
@@ -27,13 +27,12 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 	// =========================
 	//  Functions
 	// =========================
-	const updateUser = (newUser: User | null) => {
+	const updateUser = (newUser: LoginResponse | null) => {
 		setUser(newUser);
 		if (newUser) {
-			Cookies.set(COOKIE_NAME, encodeURIComponent(JSON.stringify(newUser)), {
+			Cookies.set(COOKIE_NAME, encodeURIComponent(JSON.stringify(newUser.email)), {
 				expires: 7,
-				secure: true,
-				sameSite: "Strict",
+				secure: false,
 			});
 		} else {
 			Cookies.remove(COOKIE_NAME);

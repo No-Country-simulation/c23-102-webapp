@@ -1,13 +1,12 @@
 "use client";
 
-import * as z from "zod";
-import React from "react";
+import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { loginSchema } from "@/schemas/authSchema";
+import { loginSchema, LoginFormData } from "@/schemas/authSchema";
 import GoogleIcon from "../../../../public/images/GoogleIcon.png";
 import Image from "next/image";
 import { loginUser } from "@/actions/authActions";
@@ -16,24 +15,30 @@ import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
 	const router = useRouter();
+	const formRef = useRef<HTMLFormElement>(null);
 	const { updateUser } = useUser();
 
-	const form = useForm<z.infer<typeof loginSchema>>({
+	const form = useForm<LoginFormData>({
 		resolver: zodResolver(loginSchema),
-		defaultValues: { username: "", password: "" },
+		defaultValues: { email: "", password: "" },
 	});
 
-	const onSubmit = (values: z.infer<typeof loginSchema>) => {
-		const response = loginUser(values);
-		updateUser(response);
-		router.push("/dashboard");
+	const onSubmit = async () => {
+		try {
+			const formData = new FormData(formRef.current!);
+			const response = await loginUser(formData);
+			updateUser(response);
+			router.push("/dashboard");
+		} catch (error) {
+			alert((error as Error).message);
+		}
 	};
 
 	return (
 		<Form {...form}>
-			<form className="text-white mt-8 w-full" onSubmit={form.handleSubmit(onSubmit)}>
+			<form className="text-white mt-8 w-full" ref={formRef} onSubmit={form.handleSubmit(onSubmit)}>
 				<FormField
-					name="username"
+					name="email"
 					control={form.control}
 					render={({ field }) => (
 						<FormItem>

@@ -1,0 +1,16 @@
+export interface LoginRequest {
+	email: string;
+	password: string;
+}
+
+export interface LoginResponse {
+	email: string;
+	token?: string; // Agrega el JWT si se devuelve en la respuesta
+}
+
+export interface UserContextType {
+	user: LoginResponse | null;
+	loading: boolean;
+	updateUser: (user: LoginResponse | null) => void;
+	logoutUser: () => void;
+}
