@@ -55,7 +55,7 @@ Sigue estos pasos para configurar el proyecto en tu entorno local:
 5. Ejecuta la aplicación:
 
     ```bash
-    flask --app take_away run --debug
+    flask --app app run --debug
     ```
 
     Abre la aplicación en tu navegador en [http://127.0.0.1:5000](http://127.0.0.1:5000).
