@@ -62,11 +62,9 @@ Sigue estos pasos para configurar el proyecto en tu entorno local:
 
 ## Uso
 
-Proporciona instrucciones sobre cómo usar tu aplicación, incluyendo ejemplos de las principales funcionalidades o rutas.
-
-**Ejemplo:**
-- Para acceder a la API de usuarios: `GET /api/users`
-- Para registrar un usuario: `POST /api/register`
+**Autenticación:**
+- Para logear un usuario: `POST /login`
+- Para registrar un usuario: `POST /register`
 
 ## Tecnologías Utilizadas
 

@@ -1,12 +1,13 @@
 """Crea vista register"""
-from flask import abort, request, url_for, redirect
+from flask import Blueprint, abort, request
 from werkzeug.security import generate_password_hash
 from app.db import get_db
-from . import auth
+
+register = Blueprint('register', __name__, url_prefix='/register')
 
 
-@auth.post('/register')
-def register():
+@register.post('/')
+def user_register():
     """Registra usuario en basa de datos."""
     form = request.form
     db = get_db()
@@ -23,4 +24,7 @@ def register():
     except db.IntegrityError:
         abort(401, f"Usuario ya registrado con {form['email']}.")
     else:
-        return {'email': form['email']}  # Agregar redirección a home
+        return {'email': form['email']}
+
+
+from . import restaurant

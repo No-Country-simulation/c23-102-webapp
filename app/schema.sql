@@ -1,10 +1,4 @@
 BEGIN TRANSACTION;
-DROP TABLE IF EXISTS "Category";
-CREATE TABLE IF NOT EXISTS "Category" (
-	"Category_ID"	INTEGER NOT NULL,
-	"Description"	VARCHAR(50) NOT NULL,
-	PRIMARY KEY("Category_ID" AUTOINCREMENT)
-);
 DROP TABLE IF EXISTS "Menu";
 CREATE TABLE IF NOT EXISTS "Menu" (
 	"Menu_ID"	INTEGER NOT NULL,
@@ -20,8 +14,8 @@ CREATE TABLE IF NOT EXISTS "Order_Detail" (
 	"Menu_ID"	INTEGER,
 	"Quantity"	INTEGER,
 	"Subtotal"	DECIMAL(5, 1),
-	PRIMARY KEY("Order_Detail_ID" AUTOINCREMENT),
-	FOREIGN KEY("Menu_ID") REFERENCES "Menu"("Menu_ID")
+	FOREIGN KEY("Menu_ID") REFERENCES "Menu"("Menu_ID"),
+	PRIMARY KEY("Order_Detail_ID" AUTOINCREMENT)
 );
 DROP TABLE IF EXISTS "Order_Status";
 CREATE TABLE IF NOT EXISTS "Order_Status" (
@@ -82,13 +76,13 @@ CREATE TABLE IF NOT EXISTS "Order" (
 	"Time"	DATETIME,
 	"Total"	DECIMAL(5, 1),
 	"Delivery_Address"	VARCHAR(50),
-	FOREIGN KEY("Client_ID") REFERENCES "Client"("Client_ID"),
 	FOREIGN KEY("Delivery_Person_ID") REFERENCES "Delivery_Person"("Delivery_Person_ID"),
-	FOREIGN KEY("Order_Status_ID") REFERENCES "Order_Status"("Order_Status_ID"),
+	FOREIGN KEY("Client_ID") REFERENCES "Client"("Client_ID"),
+	FOREIGN KEY("Restaurant_ID") REFERENCES "Restaurant"("Restaurant_ID"),
 	PRIMARY KEY("Order_ID" AUTOINCREMENT),
-	FOREIGN KEY("Order_Detail_ID") REFERENCES "Order_Detail"("Order_Detail_ID"),
 	FOREIGN KEY("Payment_ID") REFERENCES "Payment"("Payment_ID"),
-	FOREIGN KEY("Restaurant_ID") REFERENCES "Restaurant"("Restaurant_ID")
+	FOREIGN KEY("Order_Status_ID") REFERENCES "Order_Status"("Order_Status_ID"),
+	FOREIGN KEY("Order_Detail_ID") REFERENCES "Order_Detail"("Order_Detail_ID")
 );
 DROP TABLE IF EXISTS "User";
 CREATE TABLE IF NOT EXISTS "User" (
@@ -99,15 +93,24 @@ CREATE TABLE IF NOT EXISTS "User" (
 	"Phone"	VARCHAR(20),
 	PRIMARY KEY("Email")
 );
+DROP TABLE IF EXISTS "Category";
+CREATE TABLE IF NOT EXISTS "Category" (
+	"Name"	TEXT NOT NULL,
+	PRIMARY KEY("Name")
+);
 DROP TABLE IF EXISTS "Restaurant";
 CREATE TABLE IF NOT EXISTS "Restaurant" (
-	"Category_ID"	INTEGER NOT NULL,
 	"Opening_Hour"	TIME,
 	"Closing_Hour"	TIME,
 	"Description"	VARCHAR(100),
 	"Email"	TEXT NOT NULL,
-	"Location"	TEXT,
+	"Location"	TEXT NOT NULL,
+	"Location_Name"	TEXT NOT NULL,
+	"Brand"	TEXT NOT NULL,
+	"Category_Name"	TEXT NOT NULL,
 	PRIMARY KEY("Email"),
-	FOREIGN KEY("Category_ID") REFERENCES "Category"("Category_ID")
+	FOREIGN KEY("Category_Name") REFERENCES "Category"("Name")
 );
+INSERT INTO "Category" ("Name") VALUES ('Pizzería');
+INSERT INTO "Category" ("Name") VALUES ('Lomitería');
 COMMIT;
