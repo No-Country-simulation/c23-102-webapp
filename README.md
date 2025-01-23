@@ -65,6 +65,7 @@ Sigue estos pasos para configurar el proyecto en tu entorno local:
 **Autenticación:**
 - Para logear un usuario: `POST /login`
 - Para registrar un usuario: `POST /register`
+- Para registrar un restaurant: `POST /register/restaurant`
 
 ## Tecnologías Utilizadas
 
