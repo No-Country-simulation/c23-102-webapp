@@ -2,7 +2,6 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function LinkWithIcon({
 	children,
 	route,
