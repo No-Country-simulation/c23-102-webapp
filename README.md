@@ -55,18 +55,16 @@ Sigue estos pasos para configurar el proyecto en tu entorno local:
 5. Ejecuta la aplicación:
 
     ```bash
-    flask --app take_away run --debug
+    flask --app app run --debug
     ```
 
     Abre la aplicación en tu navegador en [http://127.0.0.1:5000](http://127.0.0.1:5000).
 
 ## Uso
 
-Proporciona instrucciones sobre cómo usar tu aplicación, incluyendo ejemplos de las principales funcionalidades o rutas.
-
-**Ejemplo:**
-- Para acceder a la API de usuarios: `GET /api/users`
-- Para registrar un usuario: `POST /api/register`
+**Autenticación:**
+- Para logear un usuario: `POST /login`
+- Para registrar un usuario: `POST /register`
 
 ## Tecnologías Utilizadas
 
