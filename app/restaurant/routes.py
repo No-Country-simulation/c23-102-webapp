@@ -1,6 +1,5 @@
 from flask import Blueprint, jsonify
-from app.models import *
-from app import db
+from app.models import Client, Restaurant_Category, Menu, Order_Detail, Order_Status, Delivery_Person, Payment_Type, Payment_Status, Payment, Order, Restaurant
 
 routes_bp = Blueprint('routes', __name__)
 
