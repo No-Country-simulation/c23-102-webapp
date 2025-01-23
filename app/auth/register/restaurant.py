@@ -10,17 +10,18 @@ def register_restaurant():
     """Registra nuevo restaurant en base de datos."""
     form = request.form
     db = get_db()
+    restaurant_data = None
     try:
-        db.execute(
+        restaurant_data = db.execute(
             """
-            INSERT INTO Restaurant (Brand, Location, Location_Name, Category, Phone)
+            INSERT INTO Restaurant (Brand, Location, Location_Name, Category_Name, Email)
             VALUES (?, ?, ?, ?, ?)
             """,
-            (form['email'], generate_password_hash(form['password']),
-                form['lastname'], form['name'], form['phone']),
-        )
+            (form['brand'], form['location'],
+             form['locationName'], form['category'], form['email'])
+        ).fetchone()
         db.commit()
     except db.IntegrityError:
-        abort(401, f"Usuario ya registrado con {form['email']}.")
+        abort(401, f"Restaurante ya registrado con {form['email']}.")
     else:
-        return {'email': form['email']}
+        return restaurant_data
