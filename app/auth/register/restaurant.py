@@ -8,7 +8,7 @@ from . import register
 @register.post('/restaurant')
 def register_restaurant():
     """Registra nuevo restaurant en base de datos."""
-    form = request.get_json()
+    form = request.form
     db = get_db()
     try:
         db.execute(
