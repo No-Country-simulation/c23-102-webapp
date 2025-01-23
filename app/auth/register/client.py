@@ -12,14 +12,14 @@ def register_client():
     try:
         db.execute(
             """
-            INSERT INTO Restaurant (Brand, Location, Location_Name, Category_Name, Email)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO Client (Email, Location, Complete_Name, City)
+            VALUES (?, ?, ?, ?)
             """,
-            (form['brand'], form['location'],
-             form['locationName'], form['category'], form['email'])
+            (form['email'], form['location'],
+             form['completeName'], form['city'])
         ).fetchone()
         db.commit()
     except db.IntegrityError:
-        abort(401, f"Restaurante ya registrado con {form['email']}.")
+        abort(401, f"Cliente ya registrado con {form['email']}.")
     else:
         return form
