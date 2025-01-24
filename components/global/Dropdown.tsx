@@ -36,7 +36,7 @@ export function Dropdown({
 							onClick={() => {
 								onSelectItem(item);
 							}}
-							className={cn("font-thin", selected?.id === item.id ? "bg-white text-black" : "bg-transparent")}
+							className={cn("font-thin", selected?.id === item.id ? "bg-white text-black" : "bg-black")}
 						>
 							{item.businessType}
 						</DropdownMenuItem>

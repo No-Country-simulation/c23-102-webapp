@@ -32,10 +32,10 @@ export const ScrollableCarousel = ({
 	}, [labels]);
 
 	return (
-		<div className="w-full overflow-hidden scrollbar-hide">
+		<div className="overflow-hidden scrollbar-hide">
 			<motion.div
 				ref={scrollContainerRef}
-				className="flex gap-4 cursor-grab mr-6"
+				className="flex items-center gap-3 cursor-grab mr-5"
 				drag="x"
 				dragConstraints={dragConstraints}
 				dragElastic={0.1}
@@ -46,7 +46,7 @@ export const ScrollableCarousel = ({
 						variant="outline"
 						onClick={() => onSelectItem(label)}
 						className={cn(
-							"border-1 rounded-md w-full",
+							"border-1 rounded-md",
 							selected?.id === label.id ? "bg-white text-black" : "bg-white bg-opacity-[0.1]"
 						)}
 					>
