@@ -39,8 +39,18 @@ const getRandomBusinessTypes = (types: Array<BusinessType>): Array<BusinessType>
 	return shuffled.slice(0, Math.floor(Math.random() * 2) + 1); // Tomar 1 o 2 elementos
 };
 
+
 // Asignar 1 o 2 businessTypes aleatorios a cada restaurante
-export const mocked_restaurants_short_info = mocked_restaurants.map((restaurant) => ({
-	...restaurant,
-	businessTypes: getRandomBusinessTypes(mocked_business_types),
-}));
+export const mocked_restaurants_short_info_1 = mocked_restaurants
+	.map((restaurant) => ({
+		...restaurant,
+		businessTypes: getRandomBusinessTypes(mocked_business_types),
+	}))
+	.sort(() => 0.5 - Math.random());
+
+export const mocked_restaurants_short_info_2 = mocked_restaurants
+	.map((restaurant) => ({
+		...restaurant,
+		businessTypes: getRandomBusinessTypes(mocked_business_types),
+	}))
+	.sort(() => 0.5 - Math.random());
