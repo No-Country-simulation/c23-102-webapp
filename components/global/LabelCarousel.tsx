@@ -1,16 +1,34 @@
-import * as React from "react";
-import { Carousel, CarouselContent } from "@/components/ui/carousel";
-import { mocked_categories } from "@/constants/mock/categories";
+import React from "react";
+import { cn } from "@/lib/utils";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Button } from "../ui/button";
+import { BusinessType } from "@/types/BusinessTypes";
 
-export function LabelCarousel() {
+export function LabelCarousel({
+	labels,
+	onSelectItem,
+	selected,
+}: {
+	labels: Array<BusinessType>;
+	onSelectItem: (item: BusinessType) => void;
+	selected: BusinessType | null;
+}) {
 	return (
-		<Carousel className="w-full">
-			<CarouselContent className="pl-8 flex w-full gap-3 pr-5">
-				{mocked_categories.map((category) => (
-					<Button key={category.id} variant={"outline"} className="border-1 bg-white bg-opacity-[0.1]">
-						{category.name}
-					</Button>
+		<Carousel>
+			<CarouselContent>
+				{labels.map((label) => (
+					<CarouselItem key={label.id}>
+						<Button
+							variant={"outline"}
+							onClick={() => onSelectItem(label)}
+							className={cn(
+								"border-1",
+								selected?.id === label.id ? "bg-white text-black" : "bg-white bg-opacity-[0.1]"
+							)}
+						>
+							{label.businessType}
+						</Button>
+					</CarouselItem>
 				))}
 			</CarouselContent>
 		</Carousel>

@@ -1,48 +1,65 @@
-import * as React from "react";
-import { Card, CardDescription, CardTitle } from "@/components/ui/card";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import { Badge } from "@/components/ui/badge";
-import { mocked_restaurants } from "@/constants/mock/restaurant-info";
-import Image from "next/image";
+"use client";
 
-export function ImageCarousel() {
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardTitle, CardDescription } from "@/components/ui/card";
+import { RestaurantShortInfoType } from "@/types/RestaurantShortInfoType";
+
+export function ImageCarousel({ slides }: { slides: Array<RestaurantShortInfoType> }) {
 	return (
-		<Carousel className="w-full" opts={{ loop: true, align: "center", skipSnaps: true, dragFree: true }}>
-			<CarouselContent className="flex gap-1 w-[90%]">
-				{mocked_restaurants.map((restaurant) => (
-					<CarouselItem key={restaurant.id} className="h-[25rem]">
-						<div className="h-full rounded-xl ">
-							<Card className="h-full relative border-none">
-								<Image
-									src={restaurant.image_url}
-									alt={restaurant.name}
-									className="h-full rounded-xl"
-									fill
-									style={{
-										objectFit: "cover",
-									}}
-								/>
-								{/* Overlay */}
-								<div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-75 h-[28%] flex items-center">
-									<div className="inline-block px-4 align-middle w-full">
-										<CardTitle className="text-white">{restaurant.name}</CardTitle>
-										<CardDescription className="text-gray-200">{restaurant.distance}</CardDescription>
-										<div className="flex mt-3 flex-wrap gap-2">
-											{restaurant.categories.map((cat) => {
-												return (
-													<Badge variant="secondary" className="bg-gray-500 text-gray-200 font-thin" key={cat.id}>
-														{cat.name}
-													</Badge>
-												);
-											})}
-										</div>
+		<div className="relative w-full overflow-hidden">
+			{/* Contenedor de Framer Motion para el carrusel */}
+			<motion.div
+				className="flex gap-4 lg:gap-5 cursor-grab"
+				initial={{ x: 0 }}
+				animate={{ x: 0 }}
+				drag="x"
+				dragConstraints={{ left: -300 * slides.length, right: 0 }}
+				dragElastic={0.1}
+			>
+				{slides.map((slide) => (
+					<motion.div
+						key={slide.id}
+						className="flex-none w-[90%] md:w-[60%] lg:w-[32%] h-[25rem] lg:h-[30rem]"
+						whileTap={{ cursor: "grabbing" }}
+					>
+						{/* La tarjeta completa es draggable */}
+						<Card className="h-full relative rounded-xl border-none overflow-hidden">
+							{/* Imagen de fondo */}
+							<Image
+								src={slide.image_url}
+								alt={slide.name}
+								className="h-full rounded-xl pointer-events-none"
+								fill
+								style={{
+									objectFit: "cover",
+								}}
+							/>
+							{/* Overlay */}
+							<div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-75 h-[28%] flex items-center pointer-events-none">
+								<div className="inline-block px-4 align-middle w-full">
+									<CardTitle className="text-white">{slide.name}</CardTitle>
+									<CardDescription className="text-gray-200">{slide.description}</CardDescription>
+									<div className="flex mt-3 flex-wrap gap-2">
+										{slide.businessTypes.map((businessType) => {
+											return (
+												<Badge
+													variant="secondary"
+													className="bg-gray-500 text-gray-200 font-thin px-3 py-1 text-xs opacity-[0.65]"
+													key={businessType.id}
+												>
+													{businessType.businessType}
+												</Badge>
+											);
+										})}
 									</div>
 								</div>
-							</Card>
-						</div>
-					</CarouselItem>
+							</div>
+						</Card>
+					</motion.div>
 				))}
-			</CarouselContent>
-		</Carousel>
+			</motion.div>
+		</div>
 	);
 }

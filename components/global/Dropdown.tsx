@@ -6,10 +6,21 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { mocked_categories } from "@/constants/mock/categories";
+import { cn } from "@/lib/utils";
+import { BusinessType } from "@/types/BusinessTypes";
 import { ListFilter } from "lucide-react";
 
-export function Dropdown({ className }: { className?: string }) {
+export function Dropdown({
+	className,
+	items,
+	onSelectItem,
+	selected,
+}: {
+	className?: string;
+	items: Array<BusinessType>;
+	onSelectItem: (item: BusinessType) => void;
+	selected: BusinessType | null;
+}) {
 	return (
 		<div className={className}>
 			<DropdownMenu>
@@ -17,11 +28,17 @@ export function Dropdown({ className }: { className?: string }) {
 					<ListFilter className="p-1" size={"30px"}></ListFilter>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent className="bg-black text-white ml-4">
-					<DropdownMenuLabel className="font-medium">Categorias</DropdownMenuLabel>
+					<DropdownMenuLabel className="font-medium">Tipo de Negocio</DropdownMenuLabel>
 					<DropdownMenuSeparator />
-					{mocked_categories.map((category) => (
-						<DropdownMenuItem key={category.id} className="font-thin">
-							{category.name}
+					{items.map((item) => (
+						<DropdownMenuItem
+							key={item.id}
+							onClick={() => {
+								onSelectItem(item);
+							}}
+							className={cn("font-thin", selected?.id === item.id ? "bg-white text-black" : "bg-black")}
+						>
+							{item.businessType}
 						</DropdownMenuItem>
 					))}
 				</DropdownMenuContent>
