@@ -9,12 +9,14 @@ import { Card, CardTitle, CardDescription } from "@/components/ui/card";
 import { RestaurantShortInfoType } from "@/types/RestaurantShortInfoType";
 
 export function ImageCarousel({ slides }: { slides: Array<RestaurantShortInfoType> }) {
-	const [ref, { width }] = useMeasure<HTMLDivElement>();
+	const [ref, { width: width }] = useMeasure<HTMLDivElement>();
+	const [ref2, { width: width2 }] = useMeasure<HTMLDivElement>();
 	const [constraints, setConstraints] = useState({ left: 0, right: 0 });
 
 	useEffect(() => {
-		setConstraints({ left: -(width * (slides.length - 0.76)), right: 0 });
-	}, [width, slides.length]);
+		const myleft = -(width2 * slides.length) + width * 0.71;
+		setConstraints({ left: myleft, right: 0 });
+	}, [width, slides.length, width2]);
 
 	return (
 		<div className="relative w-full overflow-hidden">
@@ -26,13 +28,14 @@ export function ImageCarousel({ slides }: { slides: Array<RestaurantShortInfoTyp
 				drag="x"
 				dragConstraints={constraints}
 				dragElastic={0.1}
+				ref={ref}
 			>
 				{slides.map((slide) => (
 					<motion.div
 						key={slide.id}
 						className="flex-none w-[90%] md:w-[60%] lg:w-[32%] h-[25rem] lg:h-[30rem]"
 						whileTap={{ cursor: "grabbing" }}
-						ref={ref}
+						ref={ref2}
 					>
 						{/* La tarjeta completa es draggable */}
 						<Card className="h-full relative rounded-xl border-none overflow-hidden">
