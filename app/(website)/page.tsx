@@ -9,11 +9,11 @@ import { Footer } from "./_components/Footer";
 
 const Homepage = () => {
 	return (
-		<div className="relative">
+		<>
 			<Topbar></Topbar>
-			<div className="h-full bg-black escape-navbar escape-navbar-lg escape-footer escape-footer-lg">
-				<Container className="text-white">
-					<article className="pt-4 flex overflow-hidden items-center">
+			<div className="escape-navbar escape-footer">
+				<Container className="flex flex-col gap-12">
+					<article className="flex overflow-hidden items-center">
 						<Dropdown></Dropdown>
 						<LabelCarousel></LabelCarousel>
 					</article>
@@ -36,7 +36,7 @@ const Homepage = () => {
 				</Container>
 			</div>
 			<Footer></Footer>
-		</div>
+		</>
 	);
 };
 

@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<body className={plusJakartaSans.className}>
+			<body className={`${plusJakartaSans.className} + bg-black text-white`}>
 				<Providers>{children}</Providers>
 			</body>
 		</html>
