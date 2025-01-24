@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Dropdown } from "@/components/global/Dropdown";
-import { LabelCarousel } from "@/components/global/LabelCarousel";
 import { BusinessType } from "@/types/BusinessTypes";
+import { ScrollableCarousel } from "@/components/global/ScrollableCarousel";
 
 const BusinessTypeFilter = ({
 	businessTypes,
@@ -20,16 +20,14 @@ const BusinessTypeFilter = ({
 	};
 
 	return (
-		<>
-			<article className={cn("flex items-center justify-between", className)}>
-				<Dropdown items={businessTypes} onSelectItem={handleSelectItem} selected={selectedBusinessType}></Dropdown>
-				<LabelCarousel
-					labels={businessTypes}
-					onSelectItem={handleSelectItem}
-					selected={selectedBusinessType}
-				></LabelCarousel>
-			</article>
-		</>
+		<article className={cn("items-center w-full", className)}>
+			<Dropdown items={businessTypes} onSelectItem={handleSelectItem} selected={selectedBusinessType}></Dropdown>
+			<ScrollableCarousel
+				labels={businessTypes}
+				onSelectItem={handleSelectItem}
+				selected={selectedBusinessType}
+			></ScrollableCarousel>
+		</article>
 	);
 };
 

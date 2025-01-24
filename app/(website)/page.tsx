@@ -12,8 +12,8 @@ const Homepage = () => {
 		<>
 			<Topbar></Topbar>
 			<div className="escape-navbar escape-footer">
-				<Container className="flex flex-col gap-12 overflow-hidden">
-					<BusinessTypeFilter businessTypes={mocked_business_types}></BusinessTypeFilter>
+				<Container className="w-full flex flex-col gap-12">
+					<BusinessTypeFilter className="home-section-row" businessTypes={mocked_business_types}></BusinessTypeFilter>
 					<article className="home-section">
 						<h1 className="title">Restaurantes</h1>
 						<ImageCarousel></ImageCarousel>
