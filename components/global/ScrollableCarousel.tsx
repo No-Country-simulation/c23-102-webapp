@@ -32,10 +32,10 @@ export const ScrollableCarousel = ({
 	}, [labels]);
 
 	return (
-		<div className="overflow-hidden scrollbar-hide">
+		<div className="w-full overflow-hidden scrollbar-hide">
 			<motion.div
 				ref={scrollContainerRef}
-				className="flex items-center gap-3 cursor-grab mr-5"
+				className="w-full flex items-center gap-3 cursor-grab mr-5"
 				drag="x"
 				dragConstraints={dragConstraints}
 				dragElastic={0.1}
