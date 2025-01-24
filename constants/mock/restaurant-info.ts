@@ -54,3 +54,10 @@ export const mocked_restaurants_short_info_2 = mocked_restaurants
 		businessTypes: getRandomBusinessTypes(mocked_business_types),
 	}))
 	.sort(() => 0.5 - Math.random());
+
+
+	export const findByBusinessType = (businessTypeId: number) => {
+		return mocked_restaurants.filter((restaurant) =>
+			restaurant.businessTypes.some((businessType) => businessType.id === businessTypeId)
+		);
+	};
