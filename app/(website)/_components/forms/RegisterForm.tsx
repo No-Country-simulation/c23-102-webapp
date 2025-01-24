@@ -86,8 +86,8 @@ const RegisterForm = () => {
 							</SelectTrigger>
 							<SelectContent>
 								{mocked_business_types.map((business) => (
-									<SelectItem key={business} value={business}>
-										{business}
+									<SelectItem key={business.id} value={business.businessType as string}>
+										{business.businessType}
 									</SelectItem>
 								))}
 							</SelectContent>
@@ -146,7 +146,13 @@ const RegisterForm = () => {
 						<FormItem className="mt-5">
 							<FormLabel>Contraseña</FormLabel>
 							<FormControl>
-								<Input {...field} placeholder={"******"} type="password" className="form-input-text" autoComplete="off"></Input>
+								<Input
+									{...field}
+									placeholder={"******"}
+									type="password"
+									className="form-input-text"
+									autoComplete="off"
+								></Input>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -160,7 +166,13 @@ const RegisterForm = () => {
 						<FormItem className="mt-5">
 							<FormLabel>Confirmar contraseña</FormLabel>
 							<FormControl>
-								<Input {...field} placeholder={"******"} type="password" className="form-input-text" autoComplete="off"></Input>
+								<Input
+									{...field}
+									placeholder={"******"}
+									type="password"
+									className="form-input-text"
+									autoComplete="off"
+								></Input>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
