@@ -3,20 +3,17 @@ import React from "react";
 import { Topbar } from "./_components/Topbar";
 import Container from "../../components/global/Container";
 import { ImageCarousel } from "../../components/global/ImageCarousel";
-import { LabelCarousel } from "../../components/global/LabelCarousel";
-import { Dropdown } from "../../components/global/Dropdown";
 import { Footer } from "./_components/Footer";
+import BusinessTypeFilter from "./_components/BusinessTypeFilter";
+import { mocked_business_types } from "@/constants/mock/businessTypes";
 
 const Homepage = () => {
 	return (
 		<>
 			<Topbar></Topbar>
 			<div className="escape-navbar escape-footer">
-				<Container className="flex flex-col gap-12">
-					<article className="flex overflow-hidden items-center">
-						<Dropdown></Dropdown>
-						<LabelCarousel></LabelCarousel>
-					</article>
+				<Container className="flex flex-col gap-12 overflow-hidden">
+					<BusinessTypeFilter businessTypes={mocked_business_types}></BusinessTypeFilter>
 					<article className="home-section">
 						<h1 className="title">Restaurantes</h1>
 						<ImageCarousel></ImageCarousel>

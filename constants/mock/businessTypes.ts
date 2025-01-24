@@ -1,33 +1,24 @@
-export const mocked_business_types: string[] = [
-    "Consultoría",
-    "Salón de belleza",
-    "Limpieza",
-    "Reparación de electrodomésticos",
-    "Asesoramiento legal",
-    "Tienda de ropa",
-    "Supermercado",
-    "Librería",
-    "Tienda de electrónicos",
-    "Ferretería",
-    "Fábrica de muebles",
-    "Automotriz",
-    "Producción de alimentos",
-    "Textil",
-    "Fabricación de productos químicos",
-    "Desarrollo de software",
-    "Desarrollo de aplicaciones móviles",
-    "Consultoría tecnológica",
-    "Venta de hardware",
-    "Ciberseguridad",
-    "Tienda en línea",
-    "Dropshipping",
-    "Marketplace",
-    "Venta de cursos en línea",
-    "Servicios de suscripción",
-    "Comida rápida",
-    "Cafeterías",
-    "Centros de fitness",
-    "Lavado de autos",
-    "Tiendas de conveniencia",
-  ];
-  
+import { BusinessType } from "@/types/BusinessTypes";
+
+export const mocked_business_types: Array<BusinessType> = [
+	{
+		id: 1,
+		businessType: "Restaurante",
+	},
+	{
+		id: 2,
+		businessType: "Cafeteria",
+	},
+	{
+		id: 3,
+		businessType: "Bar",
+	},
+	{
+		id: 4,
+		businessType: "Heladeria",
+	},
+	{
+		id: 5,
+		businessType: "Tienda",
+	},
+];
