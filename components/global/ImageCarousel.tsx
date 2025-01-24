@@ -1,5 +1,7 @@
 "use client";
 
+import React, { useRef, useState, useEffect } from "react";
+import { useMeasure } from "react-use";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
@@ -7,6 +9,13 @@ import { Card, CardTitle, CardDescription } from "@/components/ui/card";
 import { RestaurantShortInfoType } from "@/types/RestaurantShortInfoType";
 
 export function ImageCarousel({ slides }: { slides: Array<RestaurantShortInfoType> }) {
+	const [ref, { width }] = useMeasure<HTMLDivElement>();
+	const [constraints, setConstraints] = useState({ left: 0, right: 0 });
+
+	useEffect(() => {
+		setConstraints({ left: -(width * (slides.length - 0.76)), right: 0 });
+	}, [width, slides.length]);
+
 	return (
 		<div className="relative w-full overflow-hidden">
 			{/* Contenedor de Framer Motion para el carrusel */}
@@ -15,7 +24,7 @@ export function ImageCarousel({ slides }: { slides: Array<RestaurantShortInfoTyp
 				initial={{ x: 0 }}
 				animate={{ x: 0 }}
 				drag="x"
-				dragConstraints={{ left: -300 * slides.length, right: 0 }}
+				dragConstraints={constraints}
 				dragElastic={0.1}
 			>
 				{slides.map((slide) => (
@@ -23,6 +32,7 @@ export function ImageCarousel({ slides }: { slides: Array<RestaurantShortInfoTyp
 						key={slide.id}
 						className="flex-none w-[90%] md:w-[60%] lg:w-[32%] h-[25rem] lg:h-[30rem]"
 						whileTap={{ cursor: "grabbing" }}
+						ref={ref}
 					>
 						{/* La tarjeta completa es draggable */}
 						<Card className="h-full relative rounded-xl border-none overflow-hidden">
