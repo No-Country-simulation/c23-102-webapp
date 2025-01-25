@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,10 +9,15 @@ import { Button } from "@/components/ui/button";
 import { RegisterFormData, registerSchema } from "@/schemas/authSchema";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
 import { mocked_business_types } from "@/constants/mock/businessTypes";
-import { SelectGroup, SelectLabel, SelectValue } from "@radix-ui/react-select";
+import { SelectGroup, SelectValue } from "@radix-ui/react-select";
+import { useRouter } from "next/navigation";
+import { registerRestaurant, registerUser } from "@/actions/authActions";
+import { useUser } from "@/context/UserContext";
 
 const RegisterForm = () => {
-	const [formData, setFormData] = useState({});
+	const [isPending, startTransition] = useTransition();
+	const router = useRouter();
+	const { updateUser } = useUser();
 
 	const form = useForm<RegisterFormData>({
 		resolver: zodResolver(registerSchema),
@@ -30,8 +35,42 @@ const RegisterForm = () => {
 		},
 	});
 
-	const onSubmit = (values: RegisterFormData) => {
-		setFormData(values);
+	const onSubmit = async (values: RegisterFormData) => {
+		startTransition(async () => {
+			// User Data
+			const userFormData = new FormData();
+			userFormData.append("email", values.email);
+			userFormData.append("password", values.password);
+			userFormData.append("name", values.name);
+			userFormData.append("lastname", values.lastName);
+			userFormData.append("phone", values.phone);
+
+			// Restaurant Data
+			const restaurantFormData = new FormData();
+			restaurantFormData.append("location", values.location);
+			restaurantFormData.append("locationName", values.locationName);
+			restaurantFormData.append("brand", values.brand);
+			restaurantFormData.append("category", values.category);
+			restaurantFormData.append("email", values.email);
+
+			registerUser(userFormData)
+				.then((response) => {
+					console.log("Register User RESPONSE:");
+					console.log(response);
+					updateUser(response);
+				})
+				.then(() => {
+					registerRestaurant(restaurantFormData).then(() => {
+						router.push("/dashboard");
+					});
+				})
+				.catch((error) => {
+					form.setError("root", {
+						type: "manual",
+						message: (error as Error).message,
+					});
+				});
+		});
 	};
 
 	return (
@@ -46,7 +85,13 @@ const RegisterForm = () => {
 							<FormItem className="w-full">
 								<FormLabel>Direccion del establecimiento</FormLabel>
 								<FormControl>
-									<Input {...field} placeholder={"Ferniche 1985"} type="text" className="form-input-text"></Input>
+									<Input
+										{...field}
+										placeholder={"Ferniche 1985"}
+										type="text"
+										className="form-input-text"
+										disabled={isPending}
+									></Input>
 								</FormControl>
 							</FormItem>
 						)}
@@ -59,7 +104,13 @@ const RegisterForm = () => {
 							<FormItem className="w-full">
 								<FormLabel>Nombre del establecimiento</FormLabel>
 								<FormControl>
-									<Input {...field} placeholder={"Pizza Hub"} type="text" className="form-input-text"></Input>
+									<Input
+										{...field}
+										placeholder={"Pizza Hub"}
+										type="text"
+										className="form-input-text"
+										disabled={isPending}
+									></Input>
 								</FormControl>
 							</FormItem>
 						)}
@@ -72,7 +123,13 @@ const RegisterForm = () => {
 							<FormItem className="w-full">
 								<FormLabel>Nombre de marca</FormLabel>
 								<FormControl>
-									<Input {...field} placeholder={"Brews"} type="text" className="form-input-text"></Input>
+									<Input
+										{...field}
+										placeholder={"Brews"}
+										type="text"
+										className="form-input-text"
+										disabled={isPending}
+									></Input>
 								</FormControl>
 							</FormItem>
 						)}
@@ -88,6 +145,7 @@ const RegisterForm = () => {
 									{...field}
 									onValueChange={(value) => field.onChange(value)} // Conectar onValueChange
 									defaultValue={field.value} // Asegurarte de que el valor inicial sea respetado
+									disabled={isPending}
 								>
 									<SelectTrigger
 										className={`form-input-text ${
@@ -119,7 +177,13 @@ const RegisterForm = () => {
 								<FormItem className="w-full">
 									<FormLabel>Nombre</FormLabel>
 									<FormControl>
-										<Input {...field} placeholder={"John"} type="text" className="form-input-text"></Input>
+										<Input
+											{...field}
+											placeholder={"John"}
+											type="text"
+											className="form-input-text"
+											disabled={isPending}
+										></Input>
 									</FormControl>
 								</FormItem>
 							)}
@@ -132,7 +196,13 @@ const RegisterForm = () => {
 								<FormItem className="w-full">
 									<FormLabel>Apellido</FormLabel>
 									<FormControl>
-										<Input {...field} placeholder={"Doe"} type="text" className="form-input-text"></Input>
+										<Input
+											{...field}
+											placeholder={"Doe"}
+											type="text"
+											className="form-input-text"
+											disabled={isPending}
+										></Input>
 									</FormControl>
 								</FormItem>
 							)}
@@ -151,6 +221,7 @@ const RegisterForm = () => {
 										placeholder={"johndoe@gmail.com"}
 										type="email"
 										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+										disabled={isPending}
 									></Input>
 								</FormControl>
 								<FormMessage className="form-message-validation-error" />
@@ -171,6 +242,7 @@ const RegisterForm = () => {
 										type="password"
 										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
 										autoComplete="off"
+										disabled={isPending}
 									></Input>
 								</FormControl>
 								<FormMessage className="form-message-validation-error" />
@@ -191,6 +263,7 @@ const RegisterForm = () => {
 										type="password"
 										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
 										autoComplete="off"
+										disabled={isPending}
 									></Input>
 								</FormControl>
 								<FormMessage className="form-message-validation-error" />
@@ -210,13 +283,14 @@ const RegisterForm = () => {
 										placeholder={"+54110000000"}
 										type="text"
 										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+										disabled={isPending}
 									></Input>
 								</FormControl>
 								<FormMessage className="form-message-validation-error" />
 							</FormItem>
 						)}
 					/>
-					<Button type="submit" className="button-fill-primary mt-4">
+					<Button type="submit" className="button-fill-primary mt-4" disabled={isPending}>
 						Continuar
 					</Button>
 				</div>
@@ -226,3 +300,4 @@ const RegisterForm = () => {
 };
 
 export default RegisterForm;
+

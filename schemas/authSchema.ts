@@ -16,10 +16,7 @@ export const registerSchema = z
 		email: z.string().email({ message: "El email no es válido." }),
 		password: z.string().min(6, { message: "Mínimo 6 caracteres" }),
 		confirmPassword: z.string(),
-		phone: z
-			.string()
-			.regex(/^\d{10}$/, "El número de teléfono debe ser de 10 dígitos")
-			.optional(),
+		phone: z.string().min(6, { message: "Ingrese un numero de telefono valido." }),
 	})
 	.refine((data) => data.password === data.confirmPassword, {
 		message: "Las contraseñas no coinciden",
