@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { RegisterFormData, registerSchema } from "@/schemas/authSchema";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
 import { mocked_business_types } from "@/constants/mock/businessTypes";
-import { SelectGroup } from "@radix-ui/react-select";
+import { SelectGroup, SelectLabel, SelectValue } from "@radix-ui/react-select";
 
 const RegisterForm = () => {
 	const [formData, setFormData] = useState({});
@@ -32,7 +32,6 @@ const RegisterForm = () => {
 
 	const onSubmit = (values: RegisterFormData) => {
 		setFormData(values);
-		console.log(values);
 	};
 
 	return (
@@ -85,14 +84,22 @@ const RegisterForm = () => {
 						render={({ field }) => (
 							<FormItem className="w-full">
 								<FormLabel>Tipo de Negocio</FormLabel>
-								<Select {...field}>
-									<SelectTrigger className="form-input-text">
-										<h2>Tipo de Negocio</h2>
+								<Select
+									{...field}
+									onValueChange={(value) => field.onChange(value)} // Conectar onValueChange
+									defaultValue={field.value} // Asegurarte de que el valor inicial sea respetado
+								>
+									<SelectTrigger
+										className={`form-input-text ${
+											form.formState.errors.category && "form-input-text-validation-error"
+										}`}
+									>
+										<SelectValue placeholder="Tipo de Negocio" />
 									</SelectTrigger>
 									<SelectContent>
 										<SelectGroup>
 											{mocked_business_types.map((business) => (
-												<SelectItem key={business.id} value={business.businessType as string}>
+												<SelectItem key={business.id} value={String(business.businessType)}>
 													{business.businessType}
 												</SelectItem>
 											))}
@@ -139,7 +146,12 @@ const RegisterForm = () => {
 							<FormItem className="w-full">
 								<FormLabel>Email</FormLabel>
 								<FormControl>
-									<Input {...field} placeholder={"johndoe@gmail.com"} type="email" className="form-input-text"></Input>
+									<Input
+										{...field}
+										placeholder={"johndoe@gmail.com"}
+										type="email"
+										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+									></Input>
 								</FormControl>
 								<FormMessage className="form-message-validation-error" />
 							</FormItem>
@@ -157,7 +169,7 @@ const RegisterForm = () => {
 										{...field}
 										placeholder={"******"}
 										type="password"
-										className="form-input-text"
+										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
 										autoComplete="off"
 									></Input>
 								</FormControl>
@@ -177,7 +189,7 @@ const RegisterForm = () => {
 										{...field}
 										placeholder={"******"}
 										type="password"
-										className="form-input-text"
+										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
 										autoComplete="off"
 									></Input>
 								</FormControl>
@@ -193,7 +205,12 @@ const RegisterForm = () => {
 							<FormItem className="w-full">
 								<FormLabel>Teléfono</FormLabel>
 								<FormControl>
-									<Input {...field} placeholder={"+54110000000"} type="text" className="form-input-text"></Input>
+									<Input
+										{...field}
+										placeholder={"+54110000000"}
+										type="text"
+										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+									></Input>
 								</FormControl>
 								<FormMessage className="form-message-validation-error" />
 							</FormItem>

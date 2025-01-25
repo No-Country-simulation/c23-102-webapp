@@ -10,7 +10,7 @@ export const registerSchema = z
 		location: z.string(),
 		locationName: z.string(),
 		brand: z.string(),
-		category: z.string().min(1, { message: "Debes elegir un Tipo de Negocio." }),
+		category: z.string().min(2, { message: "Debes elegir un Tipo de Negocio" }),
 		name: z.string(),
 		lastName: z.string(),
 		email: z.string().email({ message: "El email no es válido." }),
