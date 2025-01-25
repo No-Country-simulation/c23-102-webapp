@@ -58,7 +58,7 @@ const LoginForm = () => {
 									disabled={isPending}
 								></Input>
 							</FormControl>
-							<FormMessage className="pl-3 mt-3 text-sm" />
+							<FormMessage className="form-message-validation-error" />
 						</FormItem>
 					)}
 				/>
@@ -79,7 +79,7 @@ const LoginForm = () => {
 									disabled={isPending}
 								></Input>
 							</FormControl>
-							<FormMessage className="pl-3 mt-3 text-sm" />
+							<FormMessage className="form-message-validation-error" />
 						</FormItem>
 					)}
 				/>
