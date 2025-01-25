@@ -5,6 +5,6 @@ export const WEBSITE_ROUTES = {
 	LOGIN: "/login",
 };
 
-export const APP_ROUTES = {
+export const PLATFORM_ROUTES = {
 	DASHBOARD: "/dashboard",
 };

@@ -13,6 +13,7 @@ import { SelectGroup, SelectValue } from "@radix-ui/react-select";
 import { useRouter } from "next/navigation";
 import { registerRestaurant, registerUser } from "@/actions/authActions";
 import { useUser } from "@/context/UserContext";
+import { PLATFORM_ROUTES } from "@/constants/routes";
 
 const RegisterForm = () => {
 	const [isPending, startTransition] = useTransition();
@@ -55,13 +56,11 @@ const RegisterForm = () => {
 
 			registerUser(userFormData)
 				.then((response) => {
-					console.log("Register User RESPONSE:");
-					console.log(response);
 					updateUser(response);
 				})
 				.then(() => {
 					registerRestaurant(restaurantFormData).then(() => {
-						router.push("/dashboard");
+						router.push(PLATFORM_ROUTES.DASHBOARD);
 					});
 				})
 				.catch((error) => {

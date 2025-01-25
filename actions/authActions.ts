@@ -31,7 +31,6 @@ export async function registerUser(body: FormData): Promise<LoginResponse> {
 			`${process.env.NEXT_PUBLIC_REMOTE_BASE_API_URL}${REGISTER_URL}`,
 			body
 		);
-		console.log(response.data);
 		return response.data;
 	} catch (error) {
 		if (axios.isAxiosError(error) && error.response && error.response.status !== 500) {

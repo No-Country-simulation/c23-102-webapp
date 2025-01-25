@@ -10,6 +10,7 @@ import { loginSchema, LoginFormData } from "@/schemas/authSchema";
 import { loginUser } from "@/actions/authActions";
 import { useUser } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
+import { PLATFORM_ROUTES } from "@/constants/routes";
 
 const LoginForm = () => {
 	const [isPending, startTransition] = useTransition();
@@ -26,11 +27,11 @@ const LoginForm = () => {
 			try {
 				const formData = new FormData();
 				Object.entries(values).forEach(([key, value]) => {
-					formData.append(key, value as string);
+					formData.append(key, value);
 				});
 				const response = await loginUser(formData);
 				updateUser(response);
-				router.push("/dashboard");
+				router.push(PLATFORM_ROUTES.DASHBOARD);
 			} catch (error) {
 				form.setError("root", {
 					type: "manual",

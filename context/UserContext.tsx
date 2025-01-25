@@ -30,7 +30,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 	const updateUser = (newUser: LoginResponse | null) => {
 		setUser(newUser);
 		if (newUser) {
-			Cookies.set(COOKIE_NAME, encodeURIComponent(JSON.stringify(newUser.email)), {
+			Cookies.set(COOKIE_NAME, encodeURIComponent(JSON.stringify(newUser)), {
 				expires: 7,
 				secure: false,
 			});
