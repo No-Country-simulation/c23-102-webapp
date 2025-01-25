@@ -1,19 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { loginSchema, LoginFormData } from "@/schemas/authSchema";
-import GoogleIcon from "../../../../public/images/GoogleIcon.png";
-import Image from "next/image";
 import { loginUser } from "@/actions/authActions";
 import { useUser } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+	const [isPending, startTransition] = useTransition();
 	const router = useRouter();
 	const { updateUser } = useUser();
 
@@ -23,17 +22,22 @@ const LoginForm = () => {
 	});
 
 	const onSubmit = async (values: LoginFormData) => {
-		try {
-			const formData = new FormData();
-			Object.entries(values).forEach(([key, value]) => {
-				formData.append(key, value as string);
-			});
-			const response = await loginUser(formData);
-			updateUser(response);
-			router.push("/dashboard");
-		} catch (error) {
-			alert((error as Error).message);
-		}
+		startTransition(async () => {
+			try {
+				const formData = new FormData();
+				Object.entries(values).forEach(([key, value]) => {
+					formData.append(key, value as string);
+				});
+				const response = await loginUser(formData);
+				updateUser(response);
+				router.push("/dashboard");
+			} catch (error) {
+				form.setError("root", {
+					type: "manual",
+					message: (error as Error).message,
+				});
+			}
+		});
 	};
 
 	return (
@@ -49,11 +53,12 @@ const LoginForm = () => {
 									{...field}
 									placeholder={"Email"}
 									type="email"
-									className="form-input-text"
+									className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
 									autoComplete="off"
+									disabled={isPending}
 								></Input>
 							</FormControl>
-							<FormMessage />
+							<FormMessage className="form-message-validation-error" />
 						</FormItem>
 					)}
 				/>
@@ -67,21 +72,23 @@ const LoginForm = () => {
 									{...field}
 									placeholder={"Password"}
 									type="password"
-									className="form-input-text"
+									className={`form-input-text ${
+										form.formState.errors.password && "form-input-text-validation-error text-red-600"
+									}`}
 									autoComplete="off"
+									disabled={isPending}
 								></Input>
 							</FormControl>
-							<FormMessage />
+							<FormMessage className="form-message-validation-error" />
 						</FormItem>
 					)}
 				/>
-				<Button type="submit" className="button-fill mt-5">
+				<Button type="submit" className="button-fill mt-5" disabled={isPending}>
 					Iniciar Sesion
 				</Button>
-				<Button className="button-outline mt-5">
-					<Image src={GoogleIcon} alt="Google Icon" />
-					Iniciar con Google
-				</Button>
+				{form.formState.errors.root && (
+					<FormMessage className="form-response-error ">{form.formState.errors.root.message}</FormMessage>
+				)}
 			</form>
 		</Form>
 	);

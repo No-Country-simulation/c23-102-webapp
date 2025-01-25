@@ -3,180 +3,190 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+	:root {
+		--background: 0 0% 100%;
+		--foreground: 0 0% 3.9%;
+		--card: 0 0% 100%;
+		--card-foreground: 0 0% 3.9%;
+		--popover: 0 0% 100%;
+		--popover-foreground: 0 0% 3.9%;
+		--primary: 0 0% 9%;
+		--primary-foreground: 0 0% 98%;
+		--secondary: 0 0% 96.1%;
+		--secondary-foreground: 0 0% 9%;
+		--muted: 0 0% 96.1%;
+		--muted-foreground: 0 0% 45.1%;
+		--accent: 0 0% 96.1%;
+		--accent-foreground: 0 0% 9%;
+		--destructive: 0 84.2% 60.2%;
+		--destructive-foreground: 0 0% 98%;
+		--border: 0 0% 89.8%;
+		--input: 0 0% 89.8%;
+		--ring: 0 0% 3.9%;
+		--chart-1: 12 76% 61%;
+		--chart-2: 173 58% 39%;
+		--chart-3: 197 37% 24%;
+		--chart-4: 43 74% 66%;
+		--chart-5: 27 87% 67%;
+		--radius: 0.5rem;
 
-    /* Custom Variables */
-    --primary-color: #ECB500;
-  }
-  
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%
-  }
+		/* Custom Variables */
+		--primary-color: #ecb500;
+	}
+
+	.dark {
+		--background: 0 0% 3.9%;
+		--foreground: 0 0% 98%;
+		--card: 0 0% 3.9%;
+		--card-foreground: 0 0% 98%;
+		--popover: 0 0% 3.9%;
+		--popover-foreground: 0 0% 98%;
+		--primary: 0 0% 98%;
+		--primary-foreground: 0 0% 9%;
+		--secondary: 0 0% 14.9%;
+		--secondary-foreground: 0 0% 98%;
+		--muted: 0 0% 14.9%;
+		--muted-foreground: 0 0% 63.9%;
+		--accent: 0 0% 14.9%;
+		--accent-foreground: 0 0% 98%;
+		--destructive: 0 62.8% 30.6%;
+		--destructive-foreground: 0 0% 98%;
+		--border: 0 0% 14.9%;
+		--input: 0 0% 14.9%;
+		--ring: 0 0% 83.1%;
+		--chart-1: 220 70% 50%;
+		--chart-2: 160 60% 45%;
+		--chart-3: 30 80% 55%;
+		--chart-4: 280 65% 60%;
+		--chart-5: 340 75% 55%;
+	}
 }
 @layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+	* {
+		@apply border-border;
+	}
+	body {
+		@apply bg-background text-foreground;
+	}
 }
 
 @layer components {
+	.center-container {
+		@apply w-[90%] m-auto lg:w-[96%] !important;
+	}
 
-  .center-container {
-    @apply w-[90%] m-auto lg:w-[96%] !important;
-  }
-
-/* 
- * ================================= 
- * Navbar, Topbar, Footer
- * ================================= 
-*/
-
-  .base-top-styles {
-    @apply w-full flex items-center justify-center !important;
-  }
-
-  .base-top-styles-lg{
-    @apply lg:h-[6.4rem] lg:py-0 lg:pt-0 !important;
-  }
-
-  .base-footer-styles-xl {
-    @apply xl:flex-row  xl:justify-center !important;
-  }
-
-  .escape-navbar {
-    @apply pt-32 lg:pt-36 !important;
-  }
-
-  .escape-footer {
-    @apply pb-40 lg:pb-44 !important;
-  }
-
-  /* 
+	/* 
   * ================================= 
-  * Homepage
+  * Navbar, Topbar, Footer
   * ================================= 
   */
 
-  .home-section {
-    @apply flex flex-col gap-4 !important;
+	.base-top-styles {
+		@apply w-full flex items-center justify-center !important;
+	}
+
+	.base-top-styles-lg {
+		@apply lg:h-[6.4rem] lg:py-0 lg:pt-0 !important;
+	}
+
+	.base-footer-styles-xl {
+		@apply xl:flex-row  xl:justify-center !important;
+	}
+
+	.escape-navbar {
+		@apply pt-32 lg:pt-36 !important;
+	}
+
+	.escape-footer {
+		@apply pb-40 lg:pb-44 !important;
+	}
+
+	/* 
+    * ================================= 
+    * Homepage
+    * ================================= 
+    */
+
+	.home-section {
+		@apply flex flex-col gap-4 !important;
+	}
+
+	.home-section-row {
+		@apply flex flex-row gap-6 !important;
+	}
+
+	.home-section .title {
+		@apply text-xl font-bold !important;
+	}
+
+	.scrollbar-hide {
+		scrollbar-width: none; /* Firefox */
+		-ms-overflow-style: none; /* IE and Edge */
+	}
+
+	.scrollbar-hide::-webkit-scrollbar {
+		display: none; /* Chrome, Safari, Edge */
+	}
+
+	/* 
+    * ================================= 
+    * Buttons
+    * ================================= 
+    */
+
+	.button-fill {
+		@apply rounded-full p-5 border-none bg-white text-black w-full !important;
+	}
+
+	.button-outline {
+		@apply rounded-full p-5 bg-transparent border-white border-[1px] text-white w-full !important;
+	}
+
+	.button-fill-primary {
+		@apply w-full bg-[color:--primary-color] font-thin rounded-xl !important;
+	}
+
+	/* 
+    * ================================= 
+    * Forms
+    * ================================= 
+    */
+
+	.form-title {
+		@apply text-xl font-bold text-center whitespace-nowrap text-white !important;
+	}
+
+	.form-input-text {
+		@apply rounded-full p-5 border border-[#1a1a1a] bg-[#1a1a1a] placeholder:text-gray-400 !important;
+	}
+
+	.form-input-text-validation-error {
+		@apply border border-red-600 !important;
+	}
+
+  .form-message-validation-error {
+    @apply pl-3 mt-3 text-sm !important;
   }
 
-  .home-section-row {
-    @apply flex flex-row gap-6 !important;
-  }
+	.form-response-error {
+		@apply pl-3 mt-3 text-base text-center font-medium tracking-wide mb-4 !important;
+	}
 
-  .home-section .title{
-    @apply text-xl font-bold !important;
-  }
+	.center-forms-lg {
+		@apply max-w-[550px] !important;
+	}
 
-  .scrollbar-hide {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-  }
-  
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Edge */
-  }
+	/* 
+    * ================================= 
+    * Cards
+    * ================================= 
+    */
 
-   /* 
-  * ================================= 
-  * Buttons
-  * ================================= 
-  */
+	.cardContainerStyles {
+		@apply w-[100%] border-none overflow-hidden bg-black rounded-xl !important;
+	}
 
-  .button-fill {
-    @apply rounded-full p-5 border-none bg-white text-black w-full !important;
-  }
-
-  .button-outline {
-    @apply rounded-full p-5 bg-transparent border-white border-[1px] text-white w-full !important;
-  }
-
-  .button-fill-primary {
-    @apply bg-[color:--primary-color] font-thin !important
-  }
-
-  /* 
-  * ================================= 
-  * Forms
-  * ================================= 
-  */
-
-    .form-input-text {
-      @apply rounded-full p-5 border-none bg-[#1a1a1a] placeholder:text-gray-400 !important;
-    }
-
-    .form-title{
-      @apply text-xl font-bold text-center whitespace-nowrap text-white !important;
-    }
-
-    .center-forms-lg {
-      @apply max-w-[550px] !important;
-    }
-
-  /* 
-  * ================================= 
-  * Cards
-  * ================================= 
-  */
-
-  .cardContainerStyles{
-    @apply w-[100%] border-none overflow-hidden bg-black rounded-xl !important;
-  }
-
-  .cardStyles {
-    @apply p-10 text-center bg-gray-900 text-white flex flex-col rounded-2xl items-center border-none !important;
-  }    
+	.cardStyles {
+		@apply p-10 text-center bg-gray-900 text-white flex flex-col rounded-2xl items-center border-none !important;
+	}
 }
-

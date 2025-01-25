@@ -9,5 +9,6 @@ export const WIDTH_DESKTOP = 1450;
 // ==================================
 export const LOGIN_URL = "/login";
 export const REGISTER_URL = "/register";
+export const REGISTER_RESTAURANT_URL = "/register/restaurant";
 export const LOGIN_ERROR_MSG = "Error al iniciar sesión. Verifica tus credenciales.";
 
