@@ -2,36 +2,26 @@
 
 import React, { useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { loginSchema, LoginFormData } from "@/schemas/authSchema";
-import { loginUser } from "@/actions/authActions";
-import { useUser } from "@/context/UserContext";
-import { useRouter } from "next/navigation";
-import { PLATFORM_ROUTES } from "@/constants/routes";
+import { RegisterRestaurantProfileFormData, registerRestaurantProfileSchema } from "@/schemas/authSchema";
+import { Textarea } from "@/components/ui/textarea";
 
 const RegisterRestaurantProfileForm = () => {
 	const [isPending, startTransition] = useTransition();
-	const router = useRouter();
-	const { updateUser } = useUser();
 
-	const form = useForm<LoginFormData>({
-		resolver: zodResolver(loginSchema),
-		defaultValues: { email: "", password: "" },
+	const form = useForm<RegisterRestaurantProfileFormData>({
+		resolver: zodResolver(registerRestaurantProfileSchema),
+		defaultValues: { coverImage: null, description: "" },
 	});
 
-	const onSubmit = async (values: LoginFormData) => {
+	const onSubmit = async (values: RegisterRestaurantProfileFormData) => {
 		startTransition(async () => {
 			try {
 				const formData = new FormData();
-				Object.entries(values).forEach(([key, value]) => {
-					formData.append(key, value);
-				});
-				const response = await loginUser(formData);
-				updateUser(response);
-				router.push(PLATFORM_ROUTES.DASHBOARD);
+				console.log(formData);
 			} catch (error) {
 				form.setError("root", {
 					type: "manual",
@@ -44,52 +34,52 @@ const RegisterRestaurantProfileForm = () => {
 	return (
 		<Form {...form}>
 			<form className="w-full forms-max-width" onSubmit={form.handleSubmit(onSubmit)}>
-				<FormField
-					name="email"
-					control={form.control}
-					render={({ field }) => (
-						<FormItem>
-							<FormControl>
-								<Input
-									{...field}
-									placeholder={"Email"}
-									type="email"
-									className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
-									autoComplete="off"
-									disabled={isPending}
-								></Input>
-							</FormControl>
-							<FormMessage className="form-message-validation-error" />
-						</FormItem>
+				<div className="space-x-1 flex flex-col gap-3 items-center">
+					<FormField
+						name="coverImage"
+						control={form.control}
+						render={({ field }) => (
+							<FormItem>
+								<FormControl>
+									<Input {...field} placeholder="Picture" type="file" accept="image/*" />
+								</FormControl>
+								<FormMessage className="form-message-validation-error" />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						name="description"
+						control={form.control}
+						render={({ field }) => (
+							<FormItem className="w-full">
+								<FormLabel>Descripción</FormLabel>
+								<FormControl>
+									<Textarea
+										{...field}
+										placeholder={"Descripcion de tu emprendimiento..."}
+										className={`form-input-textarea ${
+											form.formState.errors.description && "form-input-text-validation-error text-red-600"
+										}`}
+										rows={6}
+										disabled={isPending}
+									></Textarea>
+								</FormControl>
+								<FormMessage className="form-message-validation-error" />
+							</FormItem>
+						)}
+					/>
+					<div className="flex flex-row gap-2 items-center justify-between w-full mt-5">
+						<Button type="submit" className="button-fill-primary" disabled={isPending}>
+							Finalizar
+						</Button>
+						<Button className="button-outline" disabled={isPending}>
+							Omitir
+						</Button>
+					</div>
+					{form.formState.errors.root && (
+						<FormMessage className="form-response-error ">{form.formState.errors.root.message}</FormMessage>
 					)}
-				/>
-				<FormField
-					name="password"
-					control={form.control}
-					render={({ field }) => (
-						<FormItem className="mt-5">
-							<FormControl>
-								<Input
-									{...field}
-									placeholder={"Password"}
-									type="password"
-									className={`form-input-text ${
-										form.formState.errors.password && "form-input-text-validation-error text-red-600"
-									}`}
-									autoComplete="off"
-									disabled={isPending}
-								></Input>
-							</FormControl>
-							<FormMessage className="form-message-validation-error" />
-						</FormItem>
-					)}
-				/>
-				<Button type="submit" className="button-fill mt-5" disabled={isPending}>
-					Iniciar Sesion
-				</Button>
-				{form.formState.errors.root && (
-					<FormMessage className="form-response-error ">{form.formState.errors.root.message}</FormMessage>
-				)}
+				</div>
 			</form>
 		</Form>
 	);

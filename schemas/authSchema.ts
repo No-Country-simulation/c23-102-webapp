@@ -23,5 +23,20 @@ export const registerSchema = z
 		path: ["confirmPassword"],
 	});
 
+
+export const registerRestaurantProfileSchema = z.object({
+	coverImage: z
+		.custom<FileList>()
+		.transform((file) => file.length > 0 && file.item(0))
+		.refine((file) => !file || (!!file && file.size <= 10 * 1024 * 1024), {
+			message: "Maximo 10MB por imagen. Intente nuevamente",
+		})
+		.refine((file) => !file || (!!file && file.type?.startsWith("image")), {
+			message: "Solo archivos de tipo 'image'. Intente nuevamente",
+		}),
+	description: z.string(),
+});
+
 export type LoginFormData = z.infer<typeof loginSchema>;
 export type RegisterFormData = z.infer<typeof registerSchema>;
+export type RegisterRestaurantProfileFormData = z.infer<typeof registerRestaurantProfileSchema>;
