@@ -1,4 +1,6 @@
 import * as z from "zod";
+const MAX_FILE_SIZE = 1024 * 1024 * 5;
+const ACCEPTED_IMAGE_MIME_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
 export const loginSchema = z.object({
 	email: z.string().email({ message: "El email no es válido." }),
@@ -23,5 +25,11 @@ export const registerSchema = z
 		path: ["confirmPassword"],
 	});
 
+export const registerRestaurantProfileSchema = z.object({
+	coverImage: z.any(),
+	description: z.string(),
+});
+
 export type LoginFormData = z.infer<typeof loginSchema>;
 export type RegisterFormData = z.infer<typeof registerSchema>;
+export type RegisterRestaurantProfileFormData = z.infer<typeof registerRestaurantProfileSchema>;

@@ -153,7 +153,11 @@
 	}
 
 	.button-fill-primary {
-		@apply w-full bg-[color:--primary-color] font-thin rounded-xl !important;
+		@apply w-full p-5 bg-[color:--primary-color] border-[color:--primary-color] font-semibold rounded-full !important;
+	}
+
+	.button-input {
+		@apply rounded-full p-5 border-[#353535] bg-[#353535] placeholder:text-gray-400 !important;
 	}
 
 	/* 
@@ -172,6 +176,10 @@
 
 	.form-input-text {
 		@apply rounded-full p-5 border border-[#1a1a1a] bg-[#1a1a1a] placeholder:text-gray-400 !important;
+	}
+	
+	.form-input-textarea {
+		@apply py-3 px-4 border border-[#1a1a1a] bg-[#1a1a1a] placeholder:text-gray-400 resize-none !important;
 	}
 
 	.form-input-text-validation-error {
