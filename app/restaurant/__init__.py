@@ -1,9 +1,17 @@
 from flask import jsonify, Blueprint
 import sqlite3
-
 from app.db import get_db
-
+from routes.routes import routes_bp
+from app.restaurant.routes import restaurant_bp
+ 
+from routes.routes import routes
 restaurant_bp = Blueprint('restaurant', __name__, url_prefix='/restaurant')
+ 
+ 
+# Registrar los Blueprints
+    app.register_blueprint(routes_bp)
+    app.register_blueprint(restaurant_bp)
+
 
 # Conexión a la base de datos
 
