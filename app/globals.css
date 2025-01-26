@@ -179,7 +179,7 @@
 	}
 
 	.form-message-validation-error {
-		@apply pl-3 mt-3 text-sm !important;
+		@apply pl-3 mt-1 text-xs !important;
 	}
 
 	.form-response-error {

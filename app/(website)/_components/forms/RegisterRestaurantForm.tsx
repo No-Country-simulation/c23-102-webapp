@@ -76,7 +76,7 @@ const RegisterForm = () => {
 		<Form {...form}>
 			<form className="w-full forms-max-width" onSubmit={form.handleSubmit(onSubmit)}>
 				{/* Direccion del establecimiento */}
-				<div className="space-x-1 flex flex-col gap-4 items-center">
+				<div className="space-x-1 flex flex-col gap-3 items-center">
 					<FormField
 						name="location"
 						control={form.control}
