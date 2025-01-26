@@ -13,7 +13,7 @@ import { SelectGroup, SelectValue } from "@radix-ui/react-select";
 import { useRouter } from "next/navigation";
 import { registerRestaurant, registerUser } from "@/actions/authActions";
 import { useUser } from "@/context/UserContext";
-import { PLATFORM_ROUTES, WEBSITE_ROUTES } from "@/constants/routes";
+import { WEBSITE_ROUTES } from "@/constants/routes";
 
 const RegisterForm = () => {
 	const [isPending, startTransition] = useTransition();

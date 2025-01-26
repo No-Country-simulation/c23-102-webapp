@@ -4,12 +4,9 @@ import React from "react";
 import { Logo } from "@/components/global/Logo";
 import Container from "@/components/global/Container";
 import Image from "next/image";
-import { useUser } from "@/context/UserContext";
 import RegisterRestaurantProfileForm from "@/app/(website)/_components/forms/RegisterRestaurantProfileForm";
 
 const RegisterRestaurantProfilePage = () => {
-	const { user } = useUser();
-
 	return (
 		<div className="min-h-dvh flex flex-col items-center justify-around xl:grid xl:grid-cols-2 xl:gap-2 xl:max-h-dvh">
 			{/* Imagen para pantallas grandes */}
