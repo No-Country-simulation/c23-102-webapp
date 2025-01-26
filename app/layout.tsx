@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const plusJakartaSans = Plus_Jakarta_Sans({
 	subsets: ["latin"],
-	weight: ["400", "700"], // 400 for regular, 700 for bold
+	weight: ["200", "300", "400", "500", "600", "700"], // 400 for regular, 700 for bold
 	display: "swap",
 	preload: false,
 });

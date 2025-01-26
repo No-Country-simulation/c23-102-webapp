@@ -1,7 +1,7 @@
 export const WEBSITE_ROUTES = {
 	HOME: "/",
 	ONBOARDING: "/onboarding",
-	REGISTER: "/register",
+	REGISTER_RESTAURANT: "/onboarding/register-restaurant",
 	LOGIN: "/login",
 };
 

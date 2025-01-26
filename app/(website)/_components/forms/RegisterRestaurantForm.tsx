@@ -74,9 +74,9 @@ const RegisterForm = () => {
 
 	return (
 		<Form {...form}>
-			<form className="w-full" onSubmit={form.handleSubmit(onSubmit)}>
+			<form className="w-full forms-max-width" onSubmit={form.handleSubmit(onSubmit)}>
 				{/* Direccion del establecimiento */}
-				<div className="space-x-1 flex flex-col gap-4 items-center">
+				<div className="space-x-1 flex flex-col gap-3 items-center">
 					<FormField
 						name="location"
 						control={form.control}
@@ -239,7 +239,9 @@ const RegisterForm = () => {
 										{...field}
 										placeholder={"******"}
 										type="password"
-										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+										className={`form-input-text ${
+											form.formState.errors.password && "form-input-text-validation-error"
+										}`}
 										autoComplete="off"
 										disabled={isPending}
 									></Input>
@@ -260,7 +262,9 @@ const RegisterForm = () => {
 										{...field}
 										placeholder={"******"}
 										type="password"
-										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+										className={`form-input-text ${
+											form.formState.errors.confirmPassword && "form-input-text-validation-error"
+										}`}
 										autoComplete="off"
 										disabled={isPending}
 									></Input>
@@ -281,7 +285,7 @@ const RegisterForm = () => {
 										{...field}
 										placeholder={"+54110000000"}
 										type="text"
-										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+										className={`form-input-text ${form.formState.errors.phone && "form-input-text-validation-error"}`}
 										disabled={isPending}
 									></Input>
 								</FormControl>
@@ -299,4 +303,3 @@ const RegisterForm = () => {
 };
 
 export default RegisterForm;
-

@@ -13,7 +13,7 @@ const Homepage = () => {
 		<>
 			<Topbar></Topbar>
 			<div className="escape-navbar escape-footer">
-				<Container className="w-full flex flex-col gap-20">
+				<Container size="center-container" className="w-full flex flex-col gap-20">
 					<BusinessTypeFilter className="home-section-row" businessTypes={mocked_business_types}></BusinessTypeFilter>
 					<article className="home-section">
 						<h1 className="title">Restaurantes</h1>
