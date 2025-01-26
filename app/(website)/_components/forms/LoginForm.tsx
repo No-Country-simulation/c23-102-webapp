@@ -43,7 +43,7 @@ const LoginForm = () => {
 
 	return (
 		<Form {...form}>
-			<form className="text-white mt-8 w-full" onSubmit={form.handleSubmit(onSubmit)}>
+			<form className="w-full forms-max-width" onSubmit={form.handleSubmit(onSubmit)}>
 				<FormField
 					name="email"
 					control={form.control}

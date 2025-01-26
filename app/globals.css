@@ -71,15 +71,25 @@
 }
 
 @layer components {
+	/* 
+		* ================================= 
+		* Container
+		* ================================= 
+		*/
+
 	.center-container {
 		@apply w-[90%] m-auto lg:w-[96%] !important;
 	}
 
+	.center-container-sm {
+		@apply w-[80%] m-auto lg:w-[87%] !important;
+	}
+
 	/* 
-  * ================================= 
-  * Navbar, Topbar, Footer
-  * ================================= 
-  */
+		* ================================= 
+		* Navbar, Topbar, Footer
+		* ================================= 
+		*/
 
 	.base-top-styles {
 		@apply w-full flex items-center justify-center !important;
@@ -102,10 +112,10 @@
 	}
 
 	/* 
-    * ================================= 
-    * Homepage
-    * ================================= 
-    */
+		* ================================= 
+		* Homepage
+		* ================================= 
+		*/
 
 	.home-section {
 		@apply flex flex-col gap-4 !important;
@@ -129,10 +139,10 @@
 	}
 
 	/* 
-    * ================================= 
-    * Buttons
-    * ================================= 
-    */
+		* ================================= 
+		* Buttons
+		* ================================= 
+		*/
 
 	.button-fill {
 		@apply rounded-full p-5 border-none bg-white text-black w-full !important;
@@ -147,10 +157,14 @@
 	}
 
 	/* 
-    * ================================= 
-    * Forms
-    * ================================= 
-    */
+		* ================================= 
+		* Forms
+		* ================================= 
+		*/
+
+	.forms-max-width {
+		@apply max-w-[550px] !important;
+	}
 
 	.form-title {
 		@apply text-xl font-bold text-center whitespace-nowrap text-white !important;
@@ -164,23 +178,19 @@
 		@apply border border-red-600 !important;
 	}
 
-  .form-message-validation-error {
-    @apply pl-3 mt-3 text-sm !important;
-  }
+	.form-message-validation-error {
+		@apply pl-3 mt-3 text-sm !important;
+	}
 
 	.form-response-error {
 		@apply pl-3 mt-3 text-base text-center font-medium tracking-wide mb-4 !important;
 	}
 
-	.center-forms-lg {
-		@apply max-w-[550px] !important;
-	}
-
 	/* 
-    * ================================= 
-    * Cards
-    * ================================= 
-    */
+		* ================================= 
+		* Cards
+		* ================================= 
+		*/
 
 	.cardContainerStyles {
 		@apply w-[100%] border-none overflow-hidden bg-black rounded-xl !important;
