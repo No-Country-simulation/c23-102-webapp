@@ -9,8 +9,14 @@ import { Button } from "@/components/ui/button";
 import { RegisterRestaurantProfileFormData, registerRestaurantProfileSchema } from "@/schemas/authSchema";
 import { Textarea } from "@/components/ui/textarea";
 import { ImagePlus } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { PLATFORM_ROUTES, WEBSITE_ROUTES } from "@/constants/routes";
+import { useUser } from "@/context/UserContext";
+import Link from "next/link";
 
 const RegisterRestaurantProfileForm = () => {
+	const router = useRouter();
+	const { user } = useUser();
 	const [selectedFile, setSelectedFile] = useState<File | null>(null);
 	const [isPending, startTransition] = useTransition();
 
@@ -34,6 +40,7 @@ const RegisterRestaurantProfileForm = () => {
 				for (const value of formData.values()) {
 					console.log(value);
 				}
+				router.push(PLATFORM_ROUTES.DASHBOARD);
 			} catch (error) {
 				form.setError("root", {
 					type: "manual",
@@ -98,13 +105,13 @@ const RegisterRestaurantProfileForm = () => {
 							</FormItem>
 						)}
 					/>
-					<div className="flex flex-row gap-2 items-center justify-between w-full mt-5">
+					<div className="flex flex-row gap-6 items-center justify-between w-full mt-5">
 						<Button type="submit" className="button-fill-primary" disabled={isPending}>
 							Finalizar
 						</Button>
-						<Button className="button-outline" disabled={isPending}>
-							Omitir
-						</Button>
+						<Link className="w-full" href={user ? PLATFORM_ROUTES.DASHBOARD : WEBSITE_ROUTES.HOME}>
+							<Button className="button-outline">Omitir</Button>
+						</Link>
 					</div>
 					{form.formState.errors.root && (
 						<FormMessage className="form-response-error ">{form.formState.errors.root.message}</FormMessage>
