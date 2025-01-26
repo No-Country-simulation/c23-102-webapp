@@ -156,6 +156,10 @@
 		@apply w-full p-5 bg-[color:--primary-color] border-[color:--primary-color] font-semibold rounded-full !important;
 	}
 
+	.button-input {
+		@apply rounded-full p-5 border-[#353535] bg-[#353535] placeholder:text-gray-400 !important;
+	}
+
 	/* 
 		* ================================= 
 		* Forms

@@ -1,4 +1,6 @@
 import * as z from "zod";
+const MAX_FILE_SIZE = 1024 * 1024 * 5;
+const ACCEPTED_IMAGE_MIME_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
 export const loginSchema = z.object({
 	email: z.string().email({ message: "El email no es válido." }),
@@ -23,17 +25,8 @@ export const registerSchema = z
 		path: ["confirmPassword"],
 	});
 
-
 export const registerRestaurantProfileSchema = z.object({
-	coverImage: z
-		.custom<FileList>()
-		.transform((file) => file.length > 0 && file.item(0))
-		.refine((file) => !file || (!!file && file.size <= 10 * 1024 * 1024), {
-			message: "Maximo 10MB por imagen. Intente nuevamente",
-		})
-		.refine((file) => !file || (!!file && file.type?.startsWith("image")), {
-			message: "Solo archivos de tipo 'image'. Intente nuevamente",
-		}),
+	coverImage: z.any(),
 	description: z.string(),
 });
 
