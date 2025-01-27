@@ -1,6 +1,4 @@
-import { BusinessType } from "@/types/BusinessTypes";
 import { RestaurantShortInfoType } from "@/types/RestaurantShortInfoType";
-import { mocked_business_types } from "./businessTypes";
 
 export const mocked_restaurants: Array<RestaurantShortInfoType> = [
 	{
@@ -55,31 +53,8 @@ export const mocked_restaurants: Array<RestaurantShortInfoType> = [
 	},
 ];
 
-// Función para obtener 1 o 2 elementos aleatorios
-const getRandomBusinessTypes = (types: Array<BusinessType>): Array<BusinessType> => {
-	const shuffled = [...types].sort(() => 0.5 - Math.random()); // Barajar el array
-	return shuffled.slice(0, Math.floor(Math.random() * 2) + 1); // Tomar 1 o 2 elementos
+export const findByBusinessType = (businessTypeId: number) => {
+	return mocked_restaurants.filter((restaurant) =>
+		restaurant.businessTypes.some((businessType) => businessType.id === businessTypeId)
+	);
 };
-
-
-// Asignar 1 o 2 businessTypes aleatorios a cada restaurante
-export const mocked_restaurants_short_info_1 = mocked_restaurants
-	.map((restaurant) => ({
-		...restaurant,
-		businessTypes: getRandomBusinessTypes(mocked_business_types),
-	}))
-	.sort(() => 0.5 - Math.random());
-
-export const mocked_restaurants_short_info_2 = mocked_restaurants
-	.map((restaurant) => ({
-		...restaurant,
-		businessTypes: getRandomBusinessTypes(mocked_business_types),
-	}))
-	.sort(() => 0.5 - Math.random());
-
-
-	export const findByBusinessType = (businessTypeId: number) => {
-		return mocked_restaurants.filter((restaurant) =>
-			restaurant.businessTypes.some((businessType) => businessType.id === businessTypeId)
-		);
-	};
