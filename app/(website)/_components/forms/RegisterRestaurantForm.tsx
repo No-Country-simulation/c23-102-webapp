@@ -88,7 +88,7 @@ const RegisterForm = () => {
 										{...field}
 										placeholder={"Ferniche 1985"}
 										type="text"
-										className="form-input-text"
+										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
 										disabled={isPending}
 									></Input>
 								</FormControl>
@@ -107,7 +107,7 @@ const RegisterForm = () => {
 										{...field}
 										placeholder={"Pizza Hub"}
 										type="text"
-										className="form-input-text"
+										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
 										disabled={isPending}
 									></Input>
 								</FormControl>
@@ -180,7 +180,7 @@ const RegisterForm = () => {
 											{...field}
 											placeholder={"John"}
 											type="text"
-											className="form-input-text"
+											className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
 											disabled={isPending}
 										></Input>
 									</FormControl>
@@ -199,7 +199,7 @@ const RegisterForm = () => {
 											{...field}
 											placeholder={"Doe"}
 											type="text"
-											className="form-input-text"
+											className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
 											disabled={isPending}
 										></Input>
 									</FormControl>
