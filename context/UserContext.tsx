@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import { UserContextType, LoginResponse } from "@/types/authentication";
 import { COOKIE_NAME } from "@/constants/app_constants";
 
-const UserContext = createContext<UserContextType | undefined>(undefined);
+const UserContext = createContext<UserContextType | null>(null);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
 	const [user, setUser] = useState<LoginResponse | null>(null);

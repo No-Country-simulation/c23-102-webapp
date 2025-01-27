@@ -9,4 +9,8 @@ export const WEBSITE_ROUTES = {
 
 export const PLATFORM_ROUTES = {
 	DASHBOARD: "/dashboard",
+	RESTAURANT_PROFILE: "/dashboard/restaurant-profile",
+	RESTAURANT_PEDIDOS: "/dashboard/restaurant-pedidos",
+	RESTAURANT_PLATOS: "/dashboard/restaurant-platos",
+	RESTAURANT_MENUS: "/dashboard/restaurant-menus",
 };
