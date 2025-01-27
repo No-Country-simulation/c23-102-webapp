@@ -1,6 +1,4 @@
 """Almacena funciones puras"""
-
-
 from typing import List
 
 
