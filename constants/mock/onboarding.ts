@@ -7,7 +7,7 @@ export const mocked_user_types = [
 		icon: Utensils,
 		title: "Cliente",
 		subtitle: "Usare la app para comprar",
-		route: WEBSITE_ROUTES.HOME,
+		route: WEBSITE_ROUTES.REGISTER_CLIENT,
 	},
 	{
 		id: 2,
