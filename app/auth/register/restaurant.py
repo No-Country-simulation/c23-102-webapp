@@ -4,12 +4,13 @@ from flask import current_app, request, abort
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 from app.db import get_db
-from app.utils import allowed_file
+from app.utils import allowed_file, create_directory
 from . import register
 
 
 def save_file(file: FileStorage):
     """Guarda archivo en static/ y retorna path."""
+    create_directory("static")
     allowed_extensions = ['jpg', 'png', 'jpeg']
     if not file.filename:
         raise ValueError('Ningún archivo enviado.')
