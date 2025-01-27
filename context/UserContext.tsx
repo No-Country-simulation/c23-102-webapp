@@ -1,8 +1,8 @@
 "use client";
 
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { UserContextType, LoginResponse } from "@/types/authentication";
 import Cookies from "js-cookie";
+import { UserContextType, LoginResponse } from "@/types/authentication";
 import { COOKIE_NAME } from "@/constants/app_constants";
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -21,7 +21,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 				setUser(null);
 			}
 		}
-		setLoading(false); // Finaliza la carga después de intentar leer la cookie
+		setLoading(false);
 	}, []);
 
 	// =========================
@@ -34,14 +34,17 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 				expires: 7,
 				secure: false,
 			});
+			setLoading(false);
 		} else {
 			Cookies.remove(COOKIE_NAME);
+			setLoading(false);
 		}
 	};
 
 	const logoutUser = () => {
 		setUser(null);
 		Cookies.remove(COOKIE_NAME);
+		setLoading(false);
 	};
 
 	return <UserContext.Provider value={{ user, loading, updateUser, logoutUser }}>{children}</UserContext.Provider>;
