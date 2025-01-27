@@ -3,7 +3,7 @@ import Link from "next/link";
 import { House, ReceiptText, User, Plus, UtensilsCrossed } from "lucide-react";
 import { PLATFORM_ROUTES } from "@/constants/routes";
 
-export const Navbar = () => {
+export const RestaurantNavbar = () => {
 	return (
 		<div className="fixed bottom-0 w-full py-6 bg-black text-white shadow-[0_0.1px_0_0.25px_rgba(255,255,255,0.4)] lg:hidden">
 			<div className="flex flex-row justify-between items-center w-[85%] m-auto sm:w-[75%]">

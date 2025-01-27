@@ -31,6 +31,7 @@ const LoginForm = () => {
 				});
 				const response = await loginUser(formData);
 				updateUser(response);
+				// TODO - Redirigir segun el tipo de cuenta (Client o Resraurant)
 				router.push(PLATFORM_ROUTES.DASHBOARD);
 			} catch (error) {
 				form.setError("root", {

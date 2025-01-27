@@ -2,9 +2,8 @@
 
 import React from "react";
 import ProtectedRoute from "@/components/global/ProtectedRoute";
-import { RestaurantNavbar } from "./_components/RestaurantNavbar";
 import { useUser } from "@/context/UserContext";
-import { RestaurantTopbar } from "./_components/RestaurantTopbar";
+import { UserNavbar } from "./_components/UserNavbar";
 
 const PlatformContentLayout = ({ children }: { children: React.ReactNode }) => {
 	const { user } = useUser();
@@ -15,9 +14,10 @@ const PlatformContentLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<ProtectedRoute>
 			<div className="min-h-dvh">
-				<RestaurantTopbar></RestaurantTopbar>
-				<main className="min-h-dvh">{children}</main>
-				<RestaurantNavbar></RestaurantNavbar>
+				<main className="min-h-dvh">
+					{children}
+					<UserNavbar></UserNavbar>
+				</main>
 			</div>
 		</ProtectedRoute>
 	);

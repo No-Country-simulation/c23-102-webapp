@@ -14,3 +14,10 @@ export const PLATFORM_ROUTES = {
 	RESTAURANT_PLATOS: "/dashboard/restaurant-platos",
 	RESTAURANT_MENUS: "/dashboard/restaurant-menus",
 };
+
+export const CLIENT_ROUTES = {
+	CLIENT: "/client",
+	CLIENT_PROFILE: "/client/client-profile",
+	CLIENT_PEDIDOS: "/client/client-pedidos",
+	CLIENT_CART: "/client/client-cart",
+};
