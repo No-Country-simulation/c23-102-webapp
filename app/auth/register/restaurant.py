@@ -8,9 +8,9 @@ from app.utils import allowed_file, create_directory
 from . import register
 
 
-def save_file(file: FileStorage):
+async def save_file(file: FileStorage):
     """Guarda archivo en static/ y retorna path."""
-    create_directory("static")
+    await create_directory("static")
     allowed_extensions = ['jpg', 'png', 'jpeg']
     if not file.filename:
         raise ValueError('Ningún archivo enviado.')
@@ -21,7 +21,7 @@ def save_file(file: FileStorage):
 
 
 @register.post('/restaurant')
-def register_restaurant():
+async def register_restaurant():
     """Registra nuevo restaurant en base de datos."""
     form = request.form
     banner_file = request.files['banner']
@@ -33,7 +33,7 @@ def register_restaurant():
             VALUES (?, ?, ?, ?, ?, ?)
             """,
             (form['brand'], form['location'],
-             form['locationName'], form['category'], form['email'], save_file(
+             form['locationName'], form['category'], form['email'], await save_file(
                  banner_file))
         ).fetchone()
         db.commit()

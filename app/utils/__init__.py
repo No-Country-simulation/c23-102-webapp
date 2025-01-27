@@ -16,7 +16,7 @@ def allowed_file(filename: str, allowed_extensions: List[str]):
     return '.' in filename and file_extension in allowed_extensions
 
 
-def create_directory(directory_relative_path: str):
+async def create_directory(directory_relative_path: str):
     """Crea directorio a partir de la ruta relativa."""
     try:
         makedirs(abspath(directory_relative_path))
