@@ -29,7 +29,7 @@ def register_restaurant():
         return form
 
 
-def save_file(file: FileStorage):
+def save_file(file: FileStorage) -> str | None:
     """Guarda archivo en static/."""
     allowed_extensions = ['jpg', 'png', 'jpeg']
     if file.filename == '':
@@ -37,3 +37,4 @@ def save_file(file: FileStorage):
     if file.filename and allowed_file(file.filename, allowed_extensions):
         filename = secure_filename(file.filename)
         file.save(join(current_app.config['UPLOAD_FOLDER'], filename))
+        return f"static/{filename}"
