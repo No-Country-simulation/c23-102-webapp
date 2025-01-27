@@ -36,10 +36,12 @@ const RegisterRestaurantProfileForm = () => {
 					formData.append("coverImage", selectedFile);
 				}
 				formData.append("description", values.description);
+
 				// Display the values
 				for (const value of formData.values()) {
 					console.log(value);
 				}
+
 				router.push(PLATFORM_ROUTES.DASHBOARD);
 			} catch (error) {
 				form.setError("root", {
