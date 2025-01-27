@@ -10,7 +10,7 @@ import { RegisterRestaurantProfileFormData, registerRestaurantProfileSchema } fr
 import { Textarea } from "@/components/ui/textarea";
 import { ImagePlus } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { PLATFORM_ROUTES, WEBSITE_ROUTES } from "@/constants/routes";
+import { PLATFORM_ROUTES } from "@/constants/routes";
 import Link from "next/link";
 
 const RegisterRestaurantProfileForm = () => {
