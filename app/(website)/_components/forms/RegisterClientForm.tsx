@@ -6,37 +6,32 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { RegisterRestaurantFormData, registerRestaurantSchema } from "@/schemas/authSchema";
-import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
-import { mocked_business_types } from "@/constants/mock/businessTypes";
-import { SelectGroup, SelectValue } from "@radix-ui/react-select";
+import { RegisterClientFormData, registerClientSchema } from "@/schemas/authSchema";
 import { useRouter } from "next/navigation";
-import { registerRestaurant, registerUser } from "@/actions/authActions";
+import { registerClient, registerUser } from "@/actions/authActions";
 import { useUser } from "@/context/UserContext";
-import { WEBSITE_ROUTES } from "@/constants/routes";
+import { PLATFORM_ROUTES } from "@/constants/routes";
 
-const RegisterForm = () => {
+const RegisterClientForm = () => {
 	const [isPending, startTransition] = useTransition();
 	const router = useRouter();
 	const { updateUser } = useUser();
 
-	const form = useForm<RegisterRestaurantFormData>({
-		resolver: zodResolver(registerRestaurantSchema),
+	const form = useForm<RegisterClientFormData>({
+		resolver: zodResolver(registerClientSchema),
 		defaultValues: {
-			location: "",
-			locationName: "",
-			brand: "",
-			category: "",
 			email: "",
 			password: "",
 			confirmPassword: "",
 			name: "",
 			lastName: "",
 			phone: "",
+			location: "",
+			city: "",
 		},
 	});
 
-	const onSubmit = async (values: RegisterRestaurantFormData) => {
+	const onSubmit = async (values: RegisterClientFormData) => {
 		startTransition(async () => {
 			// User Data
 			const userFormData = new FormData();
@@ -47,20 +42,20 @@ const RegisterForm = () => {
 			userFormData.append("phone", values.phone);
 
 			// Restaurant Data
-			const restaurantFormData = new FormData();
-			restaurantFormData.append("location", values.location);
-			restaurantFormData.append("locationName", values.locationName);
-			restaurantFormData.append("brand", values.brand);
-			restaurantFormData.append("category", values.category);
-			restaurantFormData.append("email", values.email);
+			const clientFormData = new FormData();
+			const clientCompleteName = values.name + " " + values.lastName;
+			clientFormData.append("city", values.city);
+			clientFormData.append("location", values.location);
+			clientFormData.append("completeName", clientCompleteName);
+			clientFormData.append("email", values.email);
 
 			registerUser(userFormData)
 				.then((response) => {
 					updateUser(response);
 				})
 				.then(() => {
-					registerRestaurant(restaurantFormData).then(() => {
-						router.push(WEBSITE_ROUTES.REGISTER_RESTAURANT_PROFILE);
+					registerClient(clientFormData).then(() => {
+						router.push(PLATFORM_ROUTES.DASHBOARD);
 					});
 				})
 				.catch((error) => {
@@ -75,14 +70,54 @@ const RegisterForm = () => {
 	return (
 		<Form {...form}>
 			<form className="w-full forms-max-width" onSubmit={form.handleSubmit(onSubmit)}>
-				{/* Direccion del establecimiento */}
+				{/* Nombre y apellido */}
+				<div className="w-full justify-between flex gap-4">
+					<FormField
+						name="name"
+						control={form.control}
+						render={({ field }) => (
+							<FormItem className="w-full">
+								<FormLabel>Nombre</FormLabel>
+								<FormControl>
+									<Input
+										{...field}
+										placeholder={"John"}
+										type="text"
+										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+										disabled={isPending}
+									></Input>
+								</FormControl>
+							</FormItem>
+						)}
+					/>
+					{/* Apellido */}
+					<FormField
+						name="lastName"
+						control={form.control}
+						render={({ field }) => (
+							<FormItem className="w-full">
+								<FormLabel>Apellido</FormLabel>
+								<FormControl>
+									<Input
+										{...field}
+										placeholder={"Doe"}
+										type="text"
+										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+										disabled={isPending}
+									></Input>
+								</FormControl>
+							</FormItem>
+						)}
+					/>
+				</div>
+				{/* Direccion */}
 				<div className="space-x-1 flex flex-col gap-3 items-center">
 					<FormField
 						name="location"
 						control={form.control}
 						render={({ field }) => (
 							<FormItem className="w-full">
-								<FormLabel>Direccion del establecimiento</FormLabel>
+								<FormLabel>Direccion</FormLabel>
 								<FormControl>
 									<Input
 										{...field}
@@ -95,17 +130,17 @@ const RegisterForm = () => {
 							</FormItem>
 						)}
 					/>
-					{/* Nombre del establecimiento */}
+					{/* Ciudad */}
 					<FormField
-						name="locationName"
+						name="city"
 						control={form.control}
 						render={({ field }) => (
 							<FormItem className="w-full">
-								<FormLabel>Nombre del establecimiento</FormLabel>
+								<FormLabel>Ciudad</FormLabel>
 								<FormControl>
 									<Input
 										{...field}
-										placeholder={"Pizza Hub"}
+										placeholder={"Ciudad de Buenos Aires"}
 										type="text"
 										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
 										disabled={isPending}
@@ -114,99 +149,6 @@ const RegisterForm = () => {
 							</FormItem>
 						)}
 					/>
-					{/* Nombre de marca */}
-					<FormField
-						name="brand"
-						control={form.control}
-						render={({ field }) => (
-							<FormItem className="w-full">
-								<FormLabel>Nombre de marca</FormLabel>
-								<FormControl>
-									<Input
-										{...field}
-										placeholder={"Brews"}
-										type="text"
-										className="form-input-text"
-										disabled={isPending}
-									></Input>
-								</FormControl>
-							</FormItem>
-						)}
-					/>
-					{/* Tipo de negocio */}
-					<FormField
-						name="category"
-						control={form.control}
-						render={({ field }) => (
-							<FormItem className="w-full">
-								<FormLabel>Tipo de Negocio</FormLabel>
-								<Select
-									{...field}
-									onValueChange={(value) => field.onChange(value)} // Conectar onValueChange
-									defaultValue={field.value} // Asegurarte de que el valor inicial sea respetado
-									disabled={isPending}
-								>
-									<SelectTrigger
-										className={`form-input-text ${
-											form.formState.errors.category && "form-input-text-validation-error"
-										}`}
-									>
-										<SelectValue placeholder="Tipo de Negocio" />
-									</SelectTrigger>
-									<SelectContent>
-										<SelectGroup>
-											{mocked_business_types.map((business) => (
-												<SelectItem key={business.id} value={String(business.businessType)}>
-													{business.businessType}
-												</SelectItem>
-											))}
-										</SelectGroup>
-									</SelectContent>
-								</Select>
-								<FormMessage className="form-message-validation-error" />
-							</FormItem>
-						)}
-					/>
-					{/* Nombre y apellido */}
-					<div className="w-full justify-between flex gap-4">
-						<FormField
-							name="name"
-							control={form.control}
-							render={({ field }) => (
-								<FormItem className="w-full">
-									<FormLabel>Nombre</FormLabel>
-									<FormControl>
-										<Input
-											{...field}
-											placeholder={"John"}
-											type="text"
-											className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
-											disabled={isPending}
-										></Input>
-									</FormControl>
-								</FormItem>
-							)}
-						/>
-						{/* Apellido */}
-						<FormField
-							name="lastName"
-							control={form.control}
-							render={({ field }) => (
-								<FormItem className="w-full">
-									<FormLabel>Apellido</FormLabel>
-									<FormControl>
-										<Input
-											{...field}
-											placeholder={"Doe"}
-											type="text"
-											className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
-											disabled={isPending}
-										></Input>
-									</FormControl>
-								</FormItem>
-							)}
-						/>
-					</div>
 					{/* Email */}
 					<FormField
 						name="email"
@@ -305,4 +247,4 @@ const RegisterForm = () => {
 	);
 };
 
-export default RegisterForm;
+export default RegisterClientForm;
