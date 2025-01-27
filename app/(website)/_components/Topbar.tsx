@@ -1,3 +1,5 @@
+"use client";
+
 import LinkButton from "@/components/global/LinkButton";
 import LinkWithIcon from "@/components/global/LinkWithIcon";
 import { Logo } from "@/components/global/Logo";
