@@ -17,8 +17,8 @@ def create_app():
     # Carga configuraciones
     app.config.from_mapping(
         DATABASE=join(app.instance_path, 'db.sqlite'),
-        WTF_CSRF_ENABLED=False,
-        SECRET_KEY='posdfjasdhf'
+        SECRET_KEY='posdfjasdhf',
+        UPLOAD_FOLDER=join(app.instance_path, 'static/')
     )
 
     app.teardown_appcontext(close_db)
