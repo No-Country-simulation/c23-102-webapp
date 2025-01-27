@@ -16,7 +16,7 @@ export function ImageCarousel({ slides }: { slides: Array<RestaurantShortInfoTyp
 	useEffect(() => {
 		const myleft = -(width2 * slides.length) + width * 0.71;
 		setConstraints({ left: myleft, right: 0 });
-	}, [width, slides.length, width2]);
+	}, [width, slides, width2]);
 
 	return (
 		<div className="relative w-full overflow-hidden">
@@ -30,9 +30,9 @@ export function ImageCarousel({ slides }: { slides: Array<RestaurantShortInfoTyp
 				dragElastic={0.1}
 				ref={ref}
 			>
-				{slides.map((slide) => (
+				{slides.map((slide, index) => (
 					<motion.div
-						key={slide.id}
+						key={slide.id || index}
 						className="flex-none w-[90%] md:w-[60%] lg:w-[32%] h-[25rem] lg:h-[30rem]"
 						whileTap={{ cursor: "grabbing" }}
 						ref={ref2}
@@ -41,8 +41,8 @@ export function ImageCarousel({ slides }: { slides: Array<RestaurantShortInfoTyp
 						<Card className="h-full relative rounded-xl border-none overflow-hidden">
 							{/* Imagen de fondo */}
 							<Image
-								src={slide.image_url}
-								alt={slide.name}
+								src={slide.image_url || "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"} // Usa un fallback si la URL es inválida
+								alt={slide.name || "Imagen no disponible"}
 								className="h-full rounded-xl pointer-events-none"
 								fill
 								style={{

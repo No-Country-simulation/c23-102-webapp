@@ -104,7 +104,7 @@
 	}
 
 	.escape-navbar {
-		@apply pt-32 lg:pt-36 !important;
+		@apply pt-[84px] lg:pt-[105px] !important;
 	}
 
 	.escape-footer {
@@ -146,6 +146,10 @@
 
 	.button-fill {
 		@apply rounded-full p-5 border-none bg-white text-black w-full !important;
+	}
+
+	.button-fill-dark {
+		@apply rounded-full p-5 border-none bg-[#353535] text-white w-full !important;
 	}
 
 	.button-outline {
