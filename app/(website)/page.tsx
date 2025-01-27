@@ -1,5 +1,6 @@
-import React from "react";
+"use client";
 
+import React from "react";
 import { Topbar } from "./_components/Topbar";
 import Container from "../../components/global/Container";
 import { ImageCarousel } from "../../components/global/ImageCarousel";

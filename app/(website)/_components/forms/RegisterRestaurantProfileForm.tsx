@@ -10,13 +10,11 @@ import { RegisterRestaurantProfileFormData, registerRestaurantProfileSchema } fr
 import { Textarea } from "@/components/ui/textarea";
 import { ImagePlus } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { PLATFORM_ROUTES, WEBSITE_ROUTES } from "@/constants/routes";
-import { useUser } from "@/context/UserContext";
+import { PLATFORM_ROUTES } from "@/constants/routes";
 import Link from "next/link";
 
 const RegisterRestaurantProfileForm = () => {
 	const router = useRouter();
-	const { user } = useUser();
 	const [selectedFile, setSelectedFile] = useState<File | null>(null);
 	const [isPending, startTransition] = useTransition();
 
@@ -36,10 +34,12 @@ const RegisterRestaurantProfileForm = () => {
 					formData.append("coverImage", selectedFile);
 				}
 				formData.append("description", values.description);
+
 				// Display the values
 				for (const value of formData.values()) {
 					console.log(value);
 				}
+
 				router.push(PLATFORM_ROUTES.DASHBOARD);
 			} catch (error) {
 				form.setError("root", {
@@ -109,7 +109,7 @@ const RegisterRestaurantProfileForm = () => {
 						<Button type="submit" className="button-fill-primary" disabled={isPending}>
 							Finalizar
 						</Button>
-						<Link className="w-full" href={user ? PLATFORM_ROUTES.DASHBOARD : WEBSITE_ROUTES.HOME}>
+						<Link className="w-full" href={PLATFORM_ROUTES.DASHBOARD}>
 							<Button className="button-outline">Omitir</Button>
 						</Link>
 					</div>
