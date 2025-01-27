@@ -104,7 +104,7 @@
 	}
 
 	.escape-navbar {
-		@apply pt-[84px] lg:pt-[105px] !important;
+		@apply pt-[84px] lg:pt-[120px] !important;
 	}
 
 	.escape-footer {

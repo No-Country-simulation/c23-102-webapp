@@ -28,7 +28,7 @@ export const Topbar = () => {
 					) : (
 						<>
 							<MediaRendering minWidth="1024" maxWidth={null}>
-								<LinkButton buttonClassName="button-fill-dark" route={WEBSITE_ROUTES.LOGIN}>
+								<LinkButton buttonClassName="button-fill-primary" route={WEBSITE_ROUTES.LOGIN}>
 									Iniciar Sesion
 								</LinkButton>
 							</MediaRendering>
