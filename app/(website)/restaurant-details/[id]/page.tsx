@@ -4,8 +4,8 @@ import Container from "@/components/global/Container";
 import { restaurantDetails } from "@/actions/restaurantsActions";
 
 const RestaurantDetailsPage = async ({ params }: { params: { id: string } }) => {
-	console.log(params.id);
-	const restaurant = await restaurantDetails(params.id);
+	const { id } = await params;
+	const restaurant = await restaurantDetails(id);
 
 	return (
 		<div
