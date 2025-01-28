@@ -24,7 +24,7 @@ export const ClientTopbar = () => {
 								<LinkWithIcon route={WEBSITE_ROUTES.HOME}>
 									<Bell size={"23px"} />
 								</LinkWithIcon>
-								<LinkWithIcon route={WEBSITE_ROUTES.HOME}>
+								<LinkWithIcon route={WEBSITE_ROUTES.CART}>
 									<ShoppingBag size={"23px"} />
 								</LinkWithIcon>
 								<LinkWithIcon route={CLIENT_ROUTES.CLIENT}>
