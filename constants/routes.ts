@@ -5,6 +5,7 @@ export const WEBSITE_ROUTES = {
 	REGISTER_RESTAURANT: "/onboarding/register-restaurant",
 	REGISTER_RESTAURANT_PROFILE: "/onboarding/register-restaurant/profile",
 	REGISTER_CLIENT: "/onboarding/register-client",
+	RESTAURANT_DETAILS: "/restaurant-details",
 };
 
 export const RESTAURANT_ROUTES = {
