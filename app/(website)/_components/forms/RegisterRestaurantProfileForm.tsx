@@ -10,7 +10,7 @@ import { RegisterRestaurantProfileFormData, registerRestaurantProfileSchema } fr
 import { Textarea } from "@/components/ui/textarea";
 import { ImagePlus } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { PLATFORM_ROUTES } from "@/constants/routes";
+import { RESTAURANT_ROUTES } from "@/constants/routes";
 import Link from "next/link";
 
 const RegisterRestaurantProfileForm = () => {
@@ -40,7 +40,7 @@ const RegisterRestaurantProfileForm = () => {
 					console.log(value);
 				}
 
-				router.push(PLATFORM_ROUTES.DASHBOARD);
+				router.push(RESTAURANT_ROUTES.DASHBOARD);
 			} catch (error) {
 				form.setError("root", {
 					type: "manual",
@@ -109,7 +109,7 @@ const RegisterRestaurantProfileForm = () => {
 						<Button type="submit" className="button-fill-primary" disabled={isPending}>
 							Finalizar
 						</Button>
-						<Link className="w-full" href={PLATFORM_ROUTES.DASHBOARD}>
+						<Link className="w-full" href={RESTAURANT_ROUTES.DASHBOARD}>
 							<Button className="button-outline">Omitir</Button>
 						</Link>
 					</div>

@@ -7,7 +7,7 @@ export const WEBSITE_ROUTES = {
 	REGISTER_CLIENT: "/onboarding/register-client",
 };
 
-export const PLATFORM_ROUTES = {
+export const RESTAURANT_ROUTES = {
 	DASHBOARD: "/dashboard",
 	RESTAURANT_PROFILE: "/dashboard/restaurant-profile",
 	RESTAURANT_PEDIDOS: "/dashboard/restaurant-pedidos",

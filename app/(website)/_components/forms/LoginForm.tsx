@@ -10,7 +10,7 @@ import { loginSchema, LoginFormData } from "@/schemas/authSchema";
 import { loginUser } from "@/actions/authActions";
 import { useUser } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
-import { PLATFORM_ROUTES } from "@/constants/routes";
+import { CLIENT_ROUTES, RESTAURANT_ROUTES } from "@/constants/routes";
 
 const LoginForm = () => {
 	const [isPending, startTransition] = useTransition();
@@ -31,8 +31,11 @@ const LoginForm = () => {
 				});
 				const response = await loginUser(formData);
 				updateUser(response);
-				// TODO - Redirigir segun el tipo de cuenta (Client o Resraurant)
-				router.push(PLATFORM_ROUTES.DASHBOARD);
+				if (response.accountType === "Client") {
+					router.push(CLIENT_ROUTES.CLIENT);
+				} else if (response.accountType === "Restaurant") {
+					router.push(RESTAURANT_ROUTES.DASHBOARD);
+				}
 			} catch (error) {
 				form.setError("root", {
 					type: "manual",

@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import ProtectedRoute from "@/components/global/ProtectedRoute";
 import { useUser } from "@/context/UserContext";
 import { UserNavbar } from "./_components/UserNavbar";
+import ClientProtectedRoute from "./_components/ClientProtectedRoute";
 
 const PlatformContentLayout = ({ children }: { children: React.ReactNode }) => {
 	const { user } = useUser();
@@ -12,14 +12,14 @@ const PlatformContentLayout = ({ children }: { children: React.ReactNode }) => {
 		return null;
 	}
 	return (
-		<ProtectedRoute>
+		<ClientProtectedRoute>
 			<div className="min-h-dvh">
 				<main className="min-h-dvh">
 					{children}
 					<UserNavbar></UserNavbar>
 				</main>
 			</div>
-		</ProtectedRoute>
+		</ClientProtectedRoute>
 	);
 };
 

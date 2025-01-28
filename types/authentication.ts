@@ -5,6 +5,7 @@ export interface LoginRequest {
 
 export interface LoginResponse {
 	email: string;
+	accountType: "Client" | "Restaurant";
 	token?: string; // Agrega el JWT si se devuelve en la respuesta
 }
 

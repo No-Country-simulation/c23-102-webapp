@@ -10,7 +10,7 @@ import { RegisterClientFormData, registerClientSchema } from "@/schemas/authSche
 import { useRouter } from "next/navigation";
 import { registerClient, registerUser } from "@/actions/authActions";
 import { useUser } from "@/context/UserContext";
-import { PLATFORM_ROUTES } from "@/constants/routes";
+import { RESTAURANT_ROUTES } from "@/constants/routes";
 
 const RegisterClientForm = () => {
 	const [isPending, startTransition] = useTransition();
@@ -55,7 +55,7 @@ const RegisterClientForm = () => {
 				})
 				.then(() => {
 					registerClient(clientFormData).then(() => {
-						router.push(PLATFORM_ROUTES.DASHBOARD);
+						router.push(RESTAURANT_ROUTES.DASHBOARD);
 					});
 				})
 				.catch((error) => {
