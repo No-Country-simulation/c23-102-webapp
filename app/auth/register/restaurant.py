@@ -26,6 +26,14 @@ async def register_restaurant():
     form = request.form
     banner_file = request.files['banner']
     db = get_db()
+    banner_url = None
+
+    try:
+        banner_url = await save_file(banner_file)
+    except ValueError as error:
+        error_message = str(error)
+        abort(401, error_message)
+
     try:
         db.execute(
             """
@@ -33,14 +41,10 @@ async def register_restaurant():
             VALUES (?, ?, ?, ?, ?, ?)
             """,
             (form['brand'], form['location'],
-             form['locationName'], form['category'], form['email'], await save_file(
-                 banner_file))
+             form['locationName'], form['category'], form['email'], banner_url)
         ).fetchone()
         db.commit()
     except db.IntegrityError:
         abort(401, f"Restaurante ya registrado con {form['email']}.")
-    except ValueError as error:
-        error_message = str(error)
-        abort(401, error_message)
     else:
         return form
