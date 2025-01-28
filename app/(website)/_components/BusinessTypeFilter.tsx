@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Dropdown } from "@/components/global/Dropdown";
-import { BusinessType } from "@/types/BusinessTypes";
+import { BusinessType } from "@/types/RestaurantTypes";
 import { ScrollableCarousel } from "@/components/global/ScrollableCarousel";
 
 const BusinessTypeFilter = ({

@@ -7,7 +7,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { BusinessType } from "@/types/BusinessTypes";
+import { BusinessType } from "@/types/RestaurantTypes";
 import { ListFilter } from "lucide-react";
 
 export function Dropdown({

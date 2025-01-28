@@ -4,7 +4,7 @@ import { restaurantDetails } from "@/actions/restaurantsActions";
 import { Topbar } from "../../_components/Topbar";
 import { Footer } from "../../_components/Footer";
 
-const RestaurantDetailsPage = async ({ params }: { params: { id: string } }) => {
+const RestaurantDetailsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 	const { id } = await params;
 	const restaurant = await restaurantDetails(id);
 
