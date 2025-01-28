@@ -4,7 +4,7 @@ import React from "react";
 import { Logo } from "@/components/global/Logo";
 import Container from "@/components/global/Container";
 import Image from "next/image";
-import RegisterRestaurantProfileForm from "@/app/(website)/_components/forms/RegisterRestaurantProfileForm";
+import RegisterRestaurantProfileForm from "@/app/(authentication)/_components/forms/RegisterRestaurantProfileForm";
 import ProtectedRoute from "@/components/global/ProtectedRoute";
 
 const RegisterRestaurantProfilePage = () => {
