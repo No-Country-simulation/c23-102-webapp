@@ -40,8 +40,11 @@ export function ImageCarousel({ slides }: { slides: Array<RestaurantShortInfoTyp
 						ref={ref2}
 					>
 						{/* La tarjeta completa es draggable */}
-						<Link href={WEBSITE_ROUTES.RESTAURANT_DETAILS + "/" + slide.id}>
-							<Card className="h-full relative rounded-xl border-none overflow-hidden">
+						<Card className="h-full relative rounded-xl border-none overflow-hidden">
+							<Link
+								href={WEBSITE_ROUTES.RESTAURANT_DETAILS + "/" + slide.id}
+								className="absolute top-0 left-0 h-full w-full"
+							>
 								{/* Imagen de fondo */}
 								<Image
 									src={slide.image_url || "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"} // Usa un fallback si la URL es inválida
@@ -72,8 +75,8 @@ export function ImageCarousel({ slides }: { slides: Array<RestaurantShortInfoTyp
 										</div>
 									</div>
 								</div>
-							</Card>
-						</Link>
+							</Link>
+						</Card>
 					</motion.div>
 				))}
 			</motion.div>
