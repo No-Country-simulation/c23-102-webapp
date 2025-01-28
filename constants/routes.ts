@@ -7,6 +7,17 @@ export const WEBSITE_ROUTES = {
 	REGISTER_CLIENT: "/onboarding/register-client",
 };
 
-export const PLATFORM_ROUTES = {
+export const RESTAURANT_ROUTES = {
 	DASHBOARD: "/dashboard",
+	RESTAURANT_PROFILE: "/dashboard/restaurant-profile",
+	RESTAURANT_PEDIDOS: "/dashboard/restaurant-pedidos",
+	RESTAURANT_PLATOS: "/dashboard/restaurant-platos",
+	RESTAURANT_MENUS: "/dashboard/restaurant-menus",
+};
+
+export const CLIENT_ROUTES = {
+	CLIENT: "/client",
+	CLIENT_PROFILE: "/client/client-profile",
+	CLIENT_PEDIDOS: "/client/client-pedidos",
+	CLIENT_CART: "/client/client-cart",
 };

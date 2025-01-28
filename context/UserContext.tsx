@@ -2,10 +2,12 @@
 
 import React, { createContext, useState, useContext, useEffect } from "react";
 import Cookies from "js-cookie";
-import { UserContextType, LoginResponse } from "@/types/authentication";
+import { UserContextType, LoginResponse } from "@/types/Authentication";
 import { COOKIE_NAME } from "@/constants/app_constants";
+import { WEBSITE_ROUTES } from "@/constants/routes";
+import router from "next/router";
 
-const UserContext = createContext<UserContextType | undefined>(undefined);
+const UserContext = createContext<UserContextType | null>(null);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
 	const [user, setUser] = useState<LoginResponse | null>(null);
@@ -34,11 +36,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 				expires: 7,
 				secure: false,
 			});
-			setLoading(false);
 		} else {
 			Cookies.remove(COOKIE_NAME);
-			setLoading(false);
 		}
+		setLoading(false);
 	};
 
 	const logoutUser = () => {
