@@ -59,8 +59,8 @@ CREATE TABLE IF NOT EXISTS "Payment" (
 	"Date"	DATE,
 	"Time"	DATETIME,
 	"Reference"	VARCHAR(50),
-	PRIMARY KEY("Payment_ID" AUTOINCREMENT),
 	FOREIGN KEY("Payment_Status_ID") REFERENCES "Payment_Status"("Payment_Status_ID"),
+	PRIMARY KEY("Payment_ID" AUTOINCREMENT),
 	FOREIGN KEY("Payment_Type_ID") REFERENCES "Payment_Type"("Payment_Type_ID")
 );
 DROP TABLE IF EXISTS "Order";
@@ -78,25 +78,16 @@ CREATE TABLE IF NOT EXISTS "Order" (
 	"Delivery_Address"	VARCHAR(50),
 	FOREIGN KEY("Client_ID") REFERENCES "Client"("Client_ID"),
 	FOREIGN KEY("Delivery_Person_ID") REFERENCES "Delivery_Person"("Delivery_Person_ID"),
-	FOREIGN KEY("Restaurant_ID") REFERENCES "Restaurant"("Restaurant_ID"),
-	PRIMARY KEY("Order_ID" AUTOINCREMENT),
 	FOREIGN KEY("Order_Detail_ID") REFERENCES "Order_Detail"("Order_Detail_ID"),
 	FOREIGN KEY("Order_Status_ID") REFERENCES "Order_Status"("Order_Status_ID"),
+	PRIMARY KEY("Order_ID" AUTOINCREMENT),
+	FOREIGN KEY("Restaurant_ID") REFERENCES "Restaurant"("Restaurant_ID"),
 	FOREIGN KEY("Payment_ID") REFERENCES "Payment"("Payment_ID")
 );
 DROP TABLE IF EXISTS "Category";
 CREATE TABLE IF NOT EXISTS "Category" (
 	"Name"	TEXT NOT NULL,
 	PRIMARY KEY("Name")
-);
-DROP TABLE IF EXISTS "Client";
-CREATE TABLE IF NOT EXISTS "Client" (
-	"Email"	TEXT NOT NULL,
-	"Complete_Name"	TEXT NOT NULL,
-	"Location"	TEXT,
-	"City"	TEXT,
-	FOREIGN KEY("Email") REFERENCES "User"("Email"),
-	PRIMARY KEY("Email")
 );
 DROP TABLE IF EXISTS "Restaurant";
 CREATE TABLE IF NOT EXISTS "Restaurant" (
@@ -128,14 +119,22 @@ CREATE TABLE IF NOT EXISTS "User" (
 	PRIMARY KEY("Email"),
 	FOREIGN KEY("Role_Name") REFERENCES "Role"("Name")
 );
+DROP TABLE IF EXISTS "Client";
+CREATE TABLE IF NOT EXISTS "Client" (
+	"Email"	TEXT NOT NULL,
+	"Location"	TEXT,
+	"City"	TEXT,
+	FOREIGN KEY("Email") REFERENCES "User"("Email"),
+	PRIMARY KEY("Email")
+);
 INSERT INTO "Category" ("Name") VALUES ('Pizzería');
 INSERT INTO "Category" ("Name") VALUES ('Lomitería');
-INSERT INTO "Client" ("Email","Complete_Name","Location","City") VALUES ('bicho@gmail.com','Victor Ayala','Av. Espana','Ciudad del este');
-INSERT INTO "Client" ("Email","Complete_Name","Location","City") VALUES ('biho@gmail.com','Victor Ayala','Av. Espana','Ciudad del este');
 INSERT INTO "Restaurant" ("Opening_Hour","Closing_Hour","Description","Email","Location","Location_Name","Brand","Category_Name","Banner_Url") VALUES (NULL,NULL,NULL,'biho@gmail.com','Av. Perú','nike paraguay','nike','heladería','static/foto_mia_profesional.JPG');
 INSERT INTO "Restaurant" ("Opening_Hour","Closing_Hour","Description","Email","Location","Location_Name","Brand","Category_Name","Banner_Url") VALUES (NULL,NULL,NULL,'messi@gmail.com','Av. Perú','nike paraguay','nike','heladería','static/foto_mia_profesional.JPG');
 INSERT INTO "Restaurant" ("Opening_Hour","Closing_Hour","Description","Email","Location","Location_Name","Brand","Category_Name","Banner_Url") VALUES (NULL,NULL,NULL,'ozuna@gmail.com','Av. Perú','nike paraguay','nike','heladería','static/foto_mia_profesional.JPG');
 INSERT INTO "Restaurant" ("Opening_Hour","Closing_Hour","Description","Email","Location","Location_Name","Brand","Category_Name","Banner_Url") VALUES (NULL,NULL,NULL,'ronaldo@gmail.com','Av. Perú','nike paraguay','nike','heladería','static/foto_mia_profesional.JPG');
 INSERT INTO "Restaurant" ("Opening_Hour","Closing_Hour","Description","Email","Location","Location_Name","Brand","Category_Name","Banner_Url") VALUES (NULL,NULL,NULL,'fenomeno@gmail.com','Av. Perú','nike paraguay','nike','heladería','static/foto_mia_profesional.JPG');
 INSERT INTO "Restaurant" ("Opening_Hour","Closing_Hour","Description","Email","Location","Location_Name","Brand","Category_Name","Banner_Url") VALUES (NULL,NULL,NULL,'messiyronaldo@gmail.com','Av. Perú','nike paraguay','nike','heladería','static/foto_mia_profesional.JPG');
+INSERT INTO "Client" ("Email","Location","City") VALUES ('bicho@gmail.com','Av. Espana','Ciudad del este');
+INSERT INTO "Client" ("Email","Location","City") VALUES ('biho@gmail.com','Av. Espana','Ciudad del este');
 COMMIT;
