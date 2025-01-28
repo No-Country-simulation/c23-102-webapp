@@ -1,16 +1,10 @@
 "use client";
 
 import React from "react";
-import { useUser } from "@/context/UserContext";
 import { UserNavbar } from "./_components/UserNavbar";
 import ClientProtectedRoute from "./_components/ClientProtectedRoute";
 
 const PlatformContentLayout = ({ children }: { children: React.ReactNode }) => {
-	const { user } = useUser();
-
-	if (!user) {
-		return null;
-	}
 	return (
 		<ClientProtectedRoute>
 			<div className="min-h-dvh">
