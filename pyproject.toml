@@ -6,7 +6,7 @@ authors = [
     { name = "Victor", email = "victordanielayalasantacruz@gmail.com" }
 ]
 dependencies = [
-    "Flask[async]>=3.1.0",
+    "Flask>=3.1.0",
     "gunicorn>=22.0"
 ]
 requires-python = ">=3.10"
