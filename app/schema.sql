@@ -14,8 +14,8 @@ CREATE TABLE IF NOT EXISTS "Order_Detail" (
 	"Menu_ID"	INTEGER,
 	"Quantity"	INTEGER,
 	"Subtotal"	DECIMAL(5, 1),
-	PRIMARY KEY("Order_Detail_ID" AUTOINCREMENT),
-	FOREIGN KEY("Menu_ID") REFERENCES "Menu"("Menu_ID")
+	FOREIGN KEY("Menu_ID") REFERENCES "Menu"("Menu_ID"),
+	PRIMARY KEY("Order_Detail_ID" AUTOINCREMENT)
 );
 DROP TABLE IF EXISTS "Order_Status";
 CREATE TABLE IF NOT EXISTS "Order_Status" (
@@ -76,12 +76,12 @@ CREATE TABLE IF NOT EXISTS "Order" (
 	"Time"	DATETIME,
 	"Total"	DECIMAL(5, 1),
 	"Delivery_Address"	VARCHAR(50),
-	FOREIGN KEY("Client_ID") REFERENCES "Client"("Client_ID"),
 	FOREIGN KEY("Delivery_Person_ID") REFERENCES "Delivery_Person"("Delivery_Person_ID"),
-	FOREIGN KEY("Order_Detail_ID") REFERENCES "Order_Detail"("Order_Detail_ID"),
 	FOREIGN KEY("Order_Status_ID") REFERENCES "Order_Status"("Order_Status_ID"),
-	PRIMARY KEY("Order_ID" AUTOINCREMENT),
 	FOREIGN KEY("Restaurant_ID") REFERENCES "Restaurant"("Restaurant_ID"),
+	FOREIGN KEY("Order_Detail_ID") REFERENCES "Order_Detail"("Order_Detail_ID"),
+	PRIMARY KEY("Order_ID" AUTOINCREMENT),
+	FOREIGN KEY("Client_ID") REFERENCES "Client"("Client_ID"),
 	FOREIGN KEY("Payment_ID") REFERENCES "Payment"("Payment_ID")
 );
 DROP TABLE IF EXISTS "Category";
@@ -116,14 +116,14 @@ CREATE TABLE IF NOT EXISTS "User" (
 	"Password"	VARCHAR(50) NOT NULL,
 	"Phone"	VARCHAR(20),
 	"Role_Name"	TEXT NOT NULL,
-	PRIMARY KEY("Email"),
-	FOREIGN KEY("Role_Name") REFERENCES "Role"("Name")
+	FOREIGN KEY("Role_Name") REFERENCES "Role"("Name"),
+	PRIMARY KEY("Email")
 );
 DROP TABLE IF EXISTS "Client";
 CREATE TABLE IF NOT EXISTS "Client" (
 	"Email"	TEXT NOT NULL,
 	"Location"	TEXT,
-	"City"	TEXT,
+	"Postal_Code"	TEXT,
 	FOREIGN KEY("Email") REFERENCES "User"("Email"),
 	PRIMARY KEY("Email")
 );
@@ -135,6 +135,6 @@ INSERT INTO "Restaurant" ("Opening_Hour","Closing_Hour","Description","Email","L
 INSERT INTO "Restaurant" ("Opening_Hour","Closing_Hour","Description","Email","Location","Location_Name","Brand","Category_Name","Banner_Url") VALUES (NULL,NULL,NULL,'ronaldo@gmail.com','Av. Perú','nike paraguay','nike','heladería','static/foto_mia_profesional.JPG');
 INSERT INTO "Restaurant" ("Opening_Hour","Closing_Hour","Description","Email","Location","Location_Name","Brand","Category_Name","Banner_Url") VALUES (NULL,NULL,NULL,'fenomeno@gmail.com','Av. Perú','nike paraguay','nike','heladería','static/foto_mia_profesional.JPG');
 INSERT INTO "Restaurant" ("Opening_Hour","Closing_Hour","Description","Email","Location","Location_Name","Brand","Category_Name","Banner_Url") VALUES (NULL,NULL,NULL,'messiyronaldo@gmail.com','Av. Perú','nike paraguay','nike','heladería','static/foto_mia_profesional.JPG');
-INSERT INTO "Client" ("Email","Location","City") VALUES ('bicho@gmail.com','Av. Espana','Ciudad del este');
-INSERT INTO "Client" ("Email","Location","City") VALUES ('biho@gmail.com','Av. Espana','Ciudad del este');
+INSERT INTO "Client" ("Email","Location","Postal_Code") VALUES ('bicho@gmail.com','Av. Espana','Ciudad del este');
+INSERT INTO "Client" ("Email","Location","Postal_Code") VALUES ('biho@gmail.com','Av. Espana','Ciudad del este');
 COMMIT;
