@@ -2,8 +2,8 @@
 from os import makedirs
 from os.path import abspath, join
 from flask import Flask
-from app import profile
 from app.auth.register import register
+from .profile import profile
 from .auth import auth
 from .restaurant import restaurant_bp
 from .db import close_db
