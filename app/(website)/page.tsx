@@ -10,7 +10,7 @@ import { mocked_restaurants } from "@/constants/mock/restaurant-info";
 const Homepage = () => {
 	return (
 		<div className="escape-navbar escape-footer">
-			<Container size="center-container" className="w-full flex flex-col gap-20 pt-10">
+			<Container size="center-container" className="w-full flex flex-col gap-14 pt-10">
 				<BusinessTypeFilter className="home-section-row" businessTypes={mocked_business_types}></BusinessTypeFilter>
 				<article className="home-section">
 					<h1 className="title">Restaurantes</h1>

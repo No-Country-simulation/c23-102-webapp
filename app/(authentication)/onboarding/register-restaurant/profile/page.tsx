@@ -8,6 +8,7 @@ import RegisterRestaurantProfileForm from "@/app/(authentication)/_components/fo
 import ProtectedRoute from "@/components/global/ProtectedRoute";
 
 const RegisterRestaurantProfilePage = () => {
+	
 	return (
 		<ProtectedRoute>
 			<div className="min-h-dvh flex flex-col items-center justify-around xl:grid xl:grid-cols-2 xl:gap-2 xl:max-h-dvh">

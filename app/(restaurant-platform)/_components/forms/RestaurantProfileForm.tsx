@@ -1,74 +1,37 @@
-"use client";
-
-import React, { useTransition } from "react";
+import React, { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
+import { RestaurantProfileDetailsType } from "@/types/RestaurantTypes";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { RegisterRestaurantFormData, registerRestaurantSchema } from "@/schemas/authSchema";
+import { registerRestaurantSchema, RestaurantEditFormData } from "@/schemas/authSchema";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
 import { mocked_business_types } from "@/constants/mock/businessTypes";
 import { SelectGroup, SelectValue } from "@radix-ui/react-select";
-import { useRouter } from "next/navigation";
-import { registerRestaurant, registerUser } from "@/actions/authActions";
-import { useUser } from "@/context/UserContext";
-import { WEBSITE_ROUTES } from "@/constants/routes";
 
-const RegisterForm = () => {
+const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfileDetailsType }) => {
+	const [formData, setFormData] = useState<RestaurantProfileDetailsType>(initialData);
 	const [isPending, startTransition] = useTransition();
-	const router = useRouter();
-	const { updateUser } = useUser();
-
-	const form = useForm<RegisterRestaurantFormData>({
+	console.log(initialData);
+	const form = useForm<RestaurantEditFormData>({
 		resolver: zodResolver(registerRestaurantSchema),
 		defaultValues: {
 			location: "",
 			locationName: "",
 			brand: "",
 			category: "",
-			email: "",
-			password: "",
-			confirmPassword: "",
+			description: "",
 			name: "",
 			lastName: "",
 			phone: "",
 		},
 	});
 
-	const onSubmit = async (values: RegisterRestaurantFormData) => {
+	const onSubmit = async (values: RestaurantEditFormData) => {
 		startTransition(async () => {
-			// User Data
-			const userFormData = new FormData();
-			userFormData.append("email", values.email);
-			userFormData.append("password", values.password);
-			userFormData.append("name", values.name);
-			userFormData.append("lastname", values.lastName);
-			userFormData.append("phone", values.phone);
-
-			// Restaurant Data
-			const restaurantFormData = new FormData();
-			restaurantFormData.append("location", values.location);
-			restaurantFormData.append("locationName", values.locationName);
-			restaurantFormData.append("brand", values.brand);
-			restaurantFormData.append("category", values.category);
-			restaurantFormData.append("email", values.email);
-
-			registerUser(userFormData)
-				.then((response) => {
-					updateUser(response);
-				})
-				.then(() => {
-					registerRestaurant(restaurantFormData).then(() => {
-						router.push(WEBSITE_ROUTES.REGISTER_RESTAURANT_PROFILE);
-					});
-				})
-				.catch((error) => {
-					form.setError("root", {
-						type: "manual",
-						message: (error as Error).message,
-					});
-				});
+			console.log(values);
+			setFormData(formData);
 		});
 	};
 
@@ -88,8 +51,11 @@ const RegisterForm = () => {
 										{...field}
 										placeholder={"Ferniche 1985"}
 										type="text"
-										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+										className={`form-input-text ${
+											form.formState.errors.location && "form-input-text-validation-error"
+										}`}
 										disabled={isPending}
+										value={formData.location}
 									></Input>
 								</FormControl>
 							</FormItem>
@@ -107,8 +73,11 @@ const RegisterForm = () => {
 										{...field}
 										placeholder={"Pizza Hub"}
 										type="text"
-										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+										className={`form-input-text ${
+											form.formState.errors.locationName && "form-input-text-validation-error"
+										}`}
 										disabled={isPending}
+										value={formData.locationName}
 									></Input>
 								</FormControl>
 							</FormItem>
@@ -128,6 +97,7 @@ const RegisterForm = () => {
 										type="text"
 										className="form-input-text"
 										disabled={isPending}
+										value={formData.brand || ""}
 									></Input>
 								</FormControl>
 							</FormItem>
@@ -142,8 +112,8 @@ const RegisterForm = () => {
 								<FormLabel>Tipo de Negocio</FormLabel>
 								<Select
 									{...field}
+									value={formData.category.category}
 									onValueChange={(value) => field.onChange(value)} // Conectar onValueChange
-									defaultValue={field.value} // Asegurarte de que el valor inicial sea respetado
 									disabled={isPending}
 								>
 									<SelectTrigger
@@ -156,7 +126,7 @@ const RegisterForm = () => {
 									<SelectContent>
 										<SelectGroup>
 											{mocked_business_types.map((category) => (
-												<SelectItem key={category.id} value={String(category.category)}>
+												<SelectItem key={category.id} value={category.category}>
 													{category.category}
 												</SelectItem>
 											))}
@@ -180,8 +150,9 @@ const RegisterForm = () => {
 											{...field}
 											placeholder={"John"}
 											type="text"
-											className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+											className={`form-input-text ${form.formState.errors.name && "form-input-text-validation-error"}`}
 											disabled={isPending}
+											value={formData.name}
 										></Input>
 									</FormControl>
 								</FormItem>
@@ -199,80 +170,17 @@ const RegisterForm = () => {
 											{...field}
 											placeholder={"Doe"}
 											type="text"
-											className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+											className={`form-input-text ${
+												form.formState.errors.lastName && "form-input-text-validation-error"
+											}`}
 											disabled={isPending}
+											value={formData.lastName}
 										></Input>
 									</FormControl>
 								</FormItem>
 							)}
 						/>
 					</div>
-					{/* Email */}
-					<FormField
-						name="email"
-						control={form.control}
-						render={({ field }) => (
-							<FormItem className="w-full">
-								<FormLabel>Email</FormLabel>
-								<FormControl>
-									<Input
-										{...field}
-										placeholder={"johndoe@gmail.com"}
-										type="email"
-										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
-										disabled={isPending}
-									></Input>
-								</FormControl>
-								<FormMessage className="form-message-validation-error" />
-							</FormItem>
-						)}
-					/>
-					{/* Contraseña */}
-					<FormField
-						name="password"
-						control={form.control}
-						render={({ field }) => (
-							<FormItem className="w-full">
-								<FormLabel>Contraseña</FormLabel>
-								<FormControl>
-									<Input
-										{...field}
-										placeholder={"******"}
-										type="password"
-										className={`form-input-text ${
-											form.formState.errors.password && "form-input-text-validation-error"
-										}`}
-										autoComplete="off"
-										disabled={isPending}
-									></Input>
-								</FormControl>
-								<FormMessage className="form-message-validation-error" />
-							</FormItem>
-						)}
-					/>
-					{/* Confirmar contraseña */}
-					<FormField
-						name="confirmPassword"
-						control={form.control}
-						render={({ field }) => (
-							<FormItem className="w-full">
-								<FormLabel>Confirmar contraseña</FormLabel>
-								<FormControl>
-									<Input
-										{...field}
-										placeholder={"******"}
-										type="password"
-										className={`form-input-text ${
-											form.formState.errors.confirmPassword && "form-input-text-validation-error"
-										}`}
-										autoComplete="off"
-										disabled={isPending}
-									></Input>
-								</FormControl>
-								<FormMessage className="form-message-validation-error" />
-							</FormItem>
-						)}
-					/>
 					{/* Numero de telefono movil */}
 					<FormField
 						name="phone"
@@ -287,6 +195,7 @@ const RegisterForm = () => {
 										type="text"
 										className={`form-input-text ${form.formState.errors.phone && "form-input-text-validation-error"}`}
 										disabled={isPending}
+										value={formData.phone}
 									></Input>
 								</FormControl>
 								<FormMessage className="form-message-validation-error" />
@@ -305,4 +214,4 @@ const RegisterForm = () => {
 	);
 };
 
-export default RegisterForm;
+export default RestaurantProfileForm;

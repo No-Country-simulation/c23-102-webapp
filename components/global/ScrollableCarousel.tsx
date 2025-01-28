@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { BusinessType } from "@/types/RestaurantTypes";
+import { CategoryType } from "@/types/RestaurantTypes";
 import { useMeasure } from "react-use";
 
 export const ScrollableCarousel = ({
@@ -12,9 +12,9 @@ export const ScrollableCarousel = ({
 	onSelectItem,
 	selected,
 }: {
-	labels: Array<BusinessType>;
-	onSelectItem: (item: BusinessType) => void;
-	selected: BusinessType | null;
+	labels: Array<CategoryType>;
+	onSelectItem: (item: CategoryType) => void;
+	selected: CategoryType | null;
 }) => {
 	const [ref, { width: width }] = useMeasure<HTMLDivElement>();
 	const [ref2, { width: width2 }] = useMeasure<HTMLDivElement>();
@@ -45,7 +45,7 @@ export const ScrollableCarousel = ({
 								selected?.id === label.id ? "bg-white text-black" : "bg-white bg-opacity-[0.1]"
 							)}
 						>
-							{label.businessType}
+							{label.category}
 						</Button>
 					</div>
 				))}

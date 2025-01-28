@@ -1,5 +1,6 @@
 import * as z from "zod";
 
+// Authentication Schemas
 export const loginSchema = z.object({
 	email: z.string().email({ message: "El email no es válido." }),
 	password: z.string().min(4, { message: "Mínimo 4 caracteres" }),
@@ -44,7 +45,25 @@ export const registerClientSchema = z
 		path: ["confirmPassword"],
 	});
 
+
+// CRUD Schemas
+export const fullRestaurantDetailsSchema = z.object({
+	location: z.string().min(3, { message: "Ingrese una dirección" }),
+	locationName: z.string().min(3, { message: "INgrese un nombre para su etablecimiento" }),
+	brand: z.string(),
+	category: z.string().min(3, { message: "Debes elegir un Tipo de Negocio" }),
+	description: z.string(),
+	coverImage: z.any(),
+	name: z.string().min(3, { message: "Ingrese su nombre" }),
+	lastName: z.string().min(3, { message: "Ingrese su apellido" }),
+	phone: z.string().min(8, { message: "Ingrese un numero de telefono valido" }),
+});
+
+// Authentication Schemas
 export type LoginFormData = z.infer<typeof loginSchema>;
 export type RegisterRestaurantFormData = z.infer<typeof registerRestaurantSchema>;
 export type RegisterRestaurantProfileFormData = z.infer<typeof registerRestaurantProfileSchema>;
 export type RegisterClientFormData = z.infer<typeof registerClientSchema>;
+
+// CRUD Schemas
+export type RestaurantEditFormData = z.infer<typeof fullRestaurantDetailsSchema>;

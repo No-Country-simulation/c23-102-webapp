@@ -3,20 +3,20 @@
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Dropdown } from "@/components/global/Dropdown";
-import { BusinessType } from "@/types/RestaurantTypes";
+import { CategoryType } from "@/types/RestaurantTypes";
 import { ScrollableCarousel } from "@/components/global/ScrollableCarousel";
 
 const BusinessTypeFilter = ({
 	businessTypes,
 	className,
 }: {
-	businessTypes: Array<BusinessType>;
+	businessTypes: Array<CategoryType>;
 	className?: string;
 }) => {
-	const [selectedBusinessType, setSelectedBusinessType] = useState<BusinessType | null>(null);
+	const [selectedBusinessType, setSelectedBusinessType] = useState<CategoryType | null>(null);
 
-	const handleSelectItem = (item: BusinessType): void => {
-		setSelectedBusinessType({ id: item.id, businessType: item.businessType });
+	const handleSelectItem = (item: CategoryType): void => {
+		setSelectedBusinessType({ id: item.id, category: item.category });
 	};
 
 	return (

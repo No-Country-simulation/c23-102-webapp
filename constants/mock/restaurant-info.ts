@@ -6,72 +6,40 @@ export const mocked_restaurants: Array<RestaurantShortInfoType> = [
 		image_url: "https://upload.wikimedia.org/wikipedia/commons/6/62/Barbieri_-_ViaSophia25668.jpg",
 		name: "Kampai",
 		description: "Gastronomia Nikkei",
-		businessTypes: [
-			{
-				id: "1",
-				businessType: "Restaurante",
-			},
-			{
-				id: "3",
-				businessType: "Bar",
-			},
-		],
+		category: {
+			id: "1",
+			category: "Restaurante",
+		},
 	},
 	{
 		id: "2",
 		image_url: "https://images.pexels.com/photos/29913261/pexels-photo-29913261.jpeg",
 		name: "Fast Food",
 		description: "Hamburguesa y papitas",
-		businessTypes: [
-			{
-				id: "1",
-				businessType: "Restaurante",
-			},
-			{
-				id: "4",
-				businessType: "Heladeria",
-			},
-		],
+		category: {
+			id: "1",
+			category: "Restaurante",
+		},
 	},
 	{
 		id: "3",
 		image_url: "https://images.pexels.com/photos/30302240/pexels-photo-30302240/free-photo-of-pizza-nina.jpeg",
 		name: "La Rotonde",
 		description: "Vera cucina italiana",
-		businessTypes: [
-			{
-				id: "1",
-				businessType: "Restaurante",
-			},
-			{
-				id: "4",
-				businessType: "Heladeria",
-			},
-			{
-				id: "3",
-				businessType: "Bar",
-			},
-		],
+		category: {
+			id: "4",
+			category: "Heladeria",
+		},
 	},
 	{
 		id: "4",
 		image_url: "https://images.pexels.com/photos/30238701/pexels-photo-30238701/free-photo-of-plano.jpeg",
 		name: "Oh la la!",
 		description: "Comida francesa",
-		businessTypes: [
-			{
-				id: "1",
-				businessType: "Restaurante",
-			},
-			{
-				id: "3",
-				businessType: "Bar",
-			},
-			{
-				id: "5",
-				businessType: "Tienda",
-			},
-		],
+		category: {
+			id: "3",
+			category: "Bar",
+		},
 	},
 	{
 		id: "5",
@@ -79,48 +47,30 @@ export const mocked_restaurants: Array<RestaurantShortInfoType> = [
 			"https://dirona.com/wp-content/uploads/2018/08/Beverlys-at-The-Coeur-d%E2%80%99Alene-Resort-in-Coeur-d%E2%80%99Alene-ID-Owners-Dining-Room-DiRoNA-Awarded-Restaurant.png",
 		name: "Holy Cow",
 		description: "Las mejores hamburguesas",
-		businessTypes: [
-			{
-				id: "1",
-				businessType: "Restaurante",
-			},
-			{
-				id: "4",
-				businessType: "Heladeria",
-			},
-		],
+		category: {
+			id: "1",
+			category: "Restaurante",
+		},
 	},
 	{
 		id: "6",
 		image_url: "https://www.coastlinenservices.com/wp-content/uploads/2019/07/shutterstock_741884605.jpg",
 		name: "Ninja Burguer",
 		description: "Con de todo",
-		businessTypes: [
-			{
-				id: "1",
-				businessType: "Restaurante",
-			},
-			{
-				id: "4",
-				businessType: "Heladeria",
-			},
-		],
+		category: {
+			id: "1",
+			category: "Restaurante",
+		},
 	},
 	{
 		id: "7",
 		image_url: "https://as1.ftcdn.net/v2/jpg/06/36/04/10/1000_F_636041025_Sih9tNIgxw2madJPj518Z3s0pQaSnSVN.jpg",
 		name: "American Dinner",
 		description: "De lujo para todos",
-		businessTypes: [
-			{
-				id: "1",
-				businessType: "Restaurante",
-			},
-			{
-				id: "3",
-				businessType: "Bar",
-			},
-		],
+		category: {
+			id: "3",
+			category: "Bar",
+		},
 	},
 ];
 
@@ -129,22 +79,16 @@ export const mocked_restaurant_details: Array<RestaurantDetailsType> = [
 		id: "1",
 		locationName: "Kampai",
 		description: "Gastronomia Nikkei",
-		businessTypes: [
-			{
-				id: "1",
-				businessType: "Restaurante",
-			},
-			{
-				id: "3",
-				businessType: "Bar",
-			},
-		],
+		category: {
+			id: "1",
+			category: "Restaurante",
+		},
 		image_url: "https://upload.wikimedia.org/wikipedia/commons/6/62/Barbieri_-_ViaSophia25668.jpg",
 		location: "Avenida 123",
 		phone: "+417994002693",
 		name: "Dueño",
 		lastName: "Apellido",
-		brand: null,
+		brand: "",
 		platos: [
 			{
 				id: "1",
@@ -173,22 +117,16 @@ export const mocked_restaurant_details: Array<RestaurantDetailsType> = [
 		id: "2",
 		locationName: "Fast Food",
 		description: "Hamburguesas y papitas :D",
-		businessTypes: [
-			{
-				id: "1",
-				businessType: "Restaurante",
-			},
-			{
-				id: "4",
-				businessType: "Heladeria",
-			},
-		],
+		category: {
+			id: "1",
+			category: "Restaurante",
+		},
 		image_url: "https://images.pexels.com/photos/29913261/pexels-photo-29913261.jpeg",
 		location: "Avenida 123",
 		phone: "+417994002693",
 		name: "Dueño",
 		lastName: "Apellido",
-		brand: null,
+		brand: "",
 		platos: [
 			{
 				id: "1",
@@ -217,26 +155,16 @@ export const mocked_restaurant_details: Array<RestaurantDetailsType> = [
 		id: "3",
 		locationName: "La Rotonde",
 		description: "Cucina Italiana",
-		businessTypes: [
-			{
-				id: "1",
-				businessType: "Restaurante",
-			},
-			{
-				id: "4",
-				businessType: "Heladeria",
-			},
-			{
-				id: "3",
-				businessType: "Bar",
-			},
-		],
+		category: {
+			id: "4",
+			category: "Heladeria",
+		},
 		image_url: "https://images.pexels.com/photos/30302240/pexels-photo-30302240/free-photo-of-pizza-nina.jpeg",
 		location: "Avenida 123",
 		phone: "+417994002693",
 		name: "Dueño",
 		lastName: "Apellido",
-		brand: null,
+		brand: "",
 		platos: [
 			{
 				id: "1",
@@ -265,26 +193,16 @@ export const mocked_restaurant_details: Array<RestaurantDetailsType> = [
 		id: "4",
 		locationName: "Oh La La!",
 		description: "French Style",
-		businessTypes: [
-			{
-				id: "1",
-				businessType: "Restaurante",
-			},
-			{
-				id: "3",
-				businessType: "Bar",
-			},
-			{
-				id: "5",
-				businessType: "Tienda",
-			},
-		],
+		category: {
+			id: "3",
+			category: "Bar",
+		},
 		image_url: "https://images.pexels.com/photos/30238701/pexels-photo-30238701/free-photo-of-plano.jpeg",
 		location: "Avenida 123",
 		phone: "+417994002693",
 		name: "Dueño",
 		lastName: "Apellido",
-		brand: null,
+		brand: "",
 		platos: [
 			{
 				id: "1",
@@ -313,23 +231,17 @@ export const mocked_restaurant_details: Array<RestaurantDetailsType> = [
 		id: "5",
 		locationName: "Holy Cow!",
 		description: "Las mejores hamburguesas",
-		businessTypes: [
-			{
-				id: "1",
-				businessType: "Restaurante",
-			},
-			{
-				id: "4",
-				businessType: "Heladeria",
-			},
-		],
+		category: {
+			id: "1",
+			category: "Restaurante",
+		},
 		image_url:
 			"https://dirona.com/wp-content/uploads/2018/08/Beverlys-at-The-Coeur-d%E2%80%99Alene-Resort-in-Coeur-d%E2%80%99Alene-ID-Owners-Dining-Room-DiRoNA-Awarded-Restaurant.png",
 		location: "Avenida 123",
 		phone: "+417994002693",
 		name: "Dueño",
 		lastName: "Apellido",
-		brand: null,
+		brand: "",
 		platos: [
 			{
 				id: "1",
@@ -358,22 +270,16 @@ export const mocked_restaurant_details: Array<RestaurantDetailsType> = [
 		id: "6",
 		locationName: "Ninja Burger",
 		description: "Las mejores hamburguesas",
-		businessTypes: [
-			{
-				id: "1",
-				businessType: "Restaurante",
-			},
-			{
-				id: "4",
-				businessType: "Heladeria",
-			},
-		],
+		category: {
+			id: "1",
+			category: "Restaurante",
+		},
 		image_url: "https://www.coastlinenservices.com/wp-content/uploads/2019/07/shutterstock_741884605.jpg",
 		location: "Avenida 123",
 		phone: "+417994002693",
 		name: "Dueño",
 		lastName: "Apellido",
-		brand: null,
+		brand: "",
 		platos: [
 			{
 				id: "1",
@@ -402,22 +308,16 @@ export const mocked_restaurant_details: Array<RestaurantDetailsType> = [
 		id: "7",
 		locationName: "American Dinner",
 		description: "Deluxe",
-		businessTypes: [
-			{
-				id: "1",
-				businessType: "Restaurante",
-			},
-			{
-				id: "3",
-				businessType: "Bar",
-			},
-		],
+		category: {
+			id: "3",
+			category: "Bar",
+		},
 		image_url: "https://as1.ftcdn.net/v2/jpg/06/36/04/10/1000_F_636041025_Sih9tNIgxw2madJPj518Z3s0pQaSnSVN.jpg",
 		location: "Avenida 123",
 		phone: "+417994002693",
 		name: "Dueño",
 		lastName: "Apellido",
-		brand: null,
+		brand: "",
 		platos: [
 			{
 				id: "1",
@@ -443,12 +343,6 @@ export const mocked_restaurant_details: Array<RestaurantDetailsType> = [
 		],
 	},
 ];
-
-export const findByBusinessType = (businessTypeId: string) => {
-	return mocked_restaurants.filter((restaurant) =>
-		restaurant.businessTypes.some((businessType) => businessType.id === businessTypeId)
-	);
-};
 
 export const findRestaurantById = (id: string) => {
 	const foundResto = mocked_restaurant_details.find((i) => i.id === id);

@@ -7,7 +7,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { BusinessType } from "@/types/RestaurantTypes";
+import { CategoryType } from "@/types/RestaurantTypes";
 import { ListFilter } from "lucide-react";
 
 export function Dropdown({
@@ -17,9 +17,9 @@ export function Dropdown({
 	selected,
 }: {
 	className?: string;
-	items: Array<BusinessType>;
-	onSelectItem: (item: BusinessType) => void;
-	selected: BusinessType | null;
+	items: Array<CategoryType>;
+	onSelectItem: (item: CategoryType) => void;
+	selected: CategoryType | null;
 }) {
 	return (
 		<div className={className}>
@@ -38,7 +38,7 @@ export function Dropdown({
 							}}
 							className={cn("font-thin", selected?.id === item.id ? "bg-white text-black" : "bg-black")}
 						>
-							{item.businessType}
+							{item.category}
 						</DropdownMenuItem>
 					))}
 				</DropdownMenuContent>

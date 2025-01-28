@@ -61,17 +61,12 @@ export function ImageCarousel({ slides }: { slides: Array<RestaurantShortInfoTyp
 										<CardTitle className="text-white">{slide.name}</CardTitle>
 										<CardDescription className="text-gray-200">{slide.description}</CardDescription>
 										<div className="flex mt-3 flex-wrap gap-2">
-											{slide.businessTypes.map((businessType) => {
-												return (
-													<Badge
-														variant="secondary"
-														className="bg-gray-500 text-gray-200 font-thin px-3 py-1 text-xs opacity-[0.65]"
-														key={businessType.id}
-													>
-														{businessType.businessType}
-													</Badge>
-												);
-											})}
+											<Badge
+												variant="secondary"
+												className="bg-gray-500 text-gray-200 font-thin px-3 py-1 text-xs opacity-[0.65]"
+											>
+												{slide.category.category}
+											</Badge>
 										</div>
 									</div>
 								</div>
