@@ -2,7 +2,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Button } from "../ui/button";
-import { BusinessType } from "@/types/BusinessTypes";
+import { BusinessType } from "@/types/RestaurantTypes";
 
 export function LabelCarousel({
 	labels,

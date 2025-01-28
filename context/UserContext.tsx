@@ -4,8 +4,6 @@ import React, { createContext, useState, useContext, useEffect } from "react";
 import Cookies from "js-cookie";
 import { UserContextType, LoginResponse } from "@/types/Authentication";
 import { COOKIE_NAME } from "@/constants/app_constants";
-import { WEBSITE_ROUTES } from "@/constants/routes";
-import router from "next/router";
 
 const UserContext = createContext<UserContextType | null>(null);
 
