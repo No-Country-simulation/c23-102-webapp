@@ -5,6 +5,8 @@ from flask import Flask
 from app.auth.register import register
 from .auth import auth
 from .restaurant import restaurant_bp
+from .db import close_db
+from .commands import init_db_command
 
 
 def create_app():
@@ -18,6 +20,9 @@ def create_app():
         SECRET_KEY='posdfjasdhf',
         UPLOAD_FOLDER=abspath("static")
     )
+
+    app.teardown_appcontext(close_db)
+    app.cli.add_command(init_db_command)
 
     # Blueprints
     app.register_blueprint(auth)
