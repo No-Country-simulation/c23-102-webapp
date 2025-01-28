@@ -12,11 +12,10 @@ def register_client():
     try:
         db.execute(
             """
-            INSERT INTO Client (Email, Location, Complete_Name, City)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO Client (Email, Location, Postal_Code)
+            VALUES (?, ?, ?)
             """,
-            (form['email'], form['location'],
-             form['completeName'], form['city'])
+            (form['email'], form['location'], form['postalCode'])
         ).fetchone()
         db.commit()
     except db.IntegrityError:
