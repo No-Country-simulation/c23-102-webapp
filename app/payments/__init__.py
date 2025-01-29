@@ -1,5 +1,5 @@
 """Crea payments Blueprint y create-checkout-session view."""
-from flask import Blueprint, redirect, request
+from flask import Blueprint, abort, redirect, request
 import stripe
 
 payments_bp = Blueprint('payments', __name__, url_prefix='/payments')
@@ -28,6 +28,6 @@ def create_checkout_session(price_id: str):
         )
     except stripe.InvalidRequestError as error:
         error_message = str(error)
-        return str(error_message)
+        abort(400, error_message)
 
     return redirect(checkout_session['url'], code=303)
