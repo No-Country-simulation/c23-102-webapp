@@ -34,13 +34,13 @@ export interface PlatoType {
 }
 
 export interface RestaurantProfileDetailsType {
-	id: string;
+	id?: string;
 	location: string;
 	locationName: string;
 	brand: string;
 	category: string;
 	description: string;
-	image_url: string;
+	image_url?: string;
 	name: string;
 	lastName: string;
 	phone: string;

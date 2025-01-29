@@ -11,6 +11,7 @@ import { mocked_business_types } from "@/constants/mock/businessTypes";
 import { SelectGroup, SelectValue } from "@radix-ui/react-select";
 import { ImagePlus } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
+import Image from "next/image";
 
 const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfileDetailsType }) => {
 	const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -19,6 +20,7 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 	const form = useForm<RestaurantEditFormData>({
 		resolver: zodResolver(fullRestaurantDetailsSchema),
 		defaultValues: {
+			coverImage: initialData.image_url || "",
 			location: initialData.location || "",
 			locationName: initialData.locationName || "",
 			brand: initialData.brand || "",
@@ -75,13 +77,35 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 						control={form.control}
 						render={({}) => {
 							return (
-								<FormItem className="w-full">
+								<FormItem className="w-full my-8">
 									<FormControl>
-										<div className="relative rounded-lg flex flex-col items-center gap-5 p-8 cursor-pointer bg-[#1a1a1a]">
-											<ImagePlus width={50} height={50} />
-											<h3 className="text-center text-gray-500">
-												Añade una foto de tu restaurante desde tu computadora
-											</h3>
+										<div className="flex flex-col justify-center items-center gap-3">
+											{initialData.image_url ? (
+												<div className="w-full relative">
+													<Image
+														src={initialData.image_url}
+														alt="Actual Picture"
+														width={0}
+														height={0}
+														className="w-full"
+													></Image>
+													<Button className="button-input min-w-[35%] absolute bottom-6 left-[50%] translate-x-[-50%]">
+														{selectedFile ? selectedFile.name : "Examinar..."}
+													</Button>
+												</div>
+											) : (
+												<div className="relative rounded-lg flex flex-col items-center gap-5 p-8 cursor-pointer bg-[#1a1a1a]">
+													<>
+														<ImagePlus width={50} height={50} />
+														<h3 className="text-center text-gray-500">
+															Añade una foto de tu restaurante desde tu computadora
+														</h3>
+													</>
+													<Button className="button-input">
+														{selectedFile ? selectedFile.name : "Añadir o Cambiar Imagen"}
+													</Button>
+												</div>
+											)}
 											<Input
 												type="file"
 												className="w-full h-full absolute top-0 left-0 opacity-0 "
@@ -90,9 +114,6 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 												}}
 												disabled={isPending}
 											/>
-											<Button className="button-input w-[75%]">
-												{selectedFile ? selectedFile.name : "Añadir Imagen"}
-											</Button>
 										</div>
 									</FormControl>
 									<FormMessage className="form-message-validation-error" />
@@ -281,7 +302,7 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 						)}
 					/>
 					<Button type="submit" className="button-fill-primary mt-4" disabled={isPending}>
-						Continuar
+						Guardar Cambios
 					</Button>
 					{form.formState.errors.root && (
 						<FormMessage className="form-response-error ">{form.formState.errors.root.message}</FormMessage>
