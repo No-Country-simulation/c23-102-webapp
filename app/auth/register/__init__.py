@@ -14,14 +14,15 @@ def user_register():
     try:
         db.execute(
             """
-            INSERT INTO User (Email, Password, Lastname, Firstname, Phone)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO User (Email, Password, Lastname, Firstname, Phone, Role_Name)
+            VALUES (?, ?, ?, ?, ?, ?)
             """,
             (form['email'], generate_password_hash(form['password']),
-                form['lastname'], form['name'], form['phone']),
+                form['lastname'], form['name'], form['phone'], form['role'])
         )
         db.commit()
-    except db.IntegrityError:
+    except db.IntegrityError as error:
+        print(str(error))
         abort(401, f"Usuario ya registrado con {form['email']}.")
     else:
         return {'email': form['email']}
