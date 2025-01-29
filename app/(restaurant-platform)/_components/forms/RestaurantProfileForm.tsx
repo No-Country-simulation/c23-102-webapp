@@ -84,7 +84,13 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 											{/* Contenedor de la imagen */}
 											<div className="relative w-full h-[25rem] flex items-center justify-center">
 												{imageUrl ? (
-													<Image src={imageUrl} alt="Preview" layout="fill" objectFit="cover" className="rounded-lg" />
+													<Image
+														src={imageUrl}
+														alt="Preview"
+														width={0}
+														height={0}
+														className="rounded-lg object-cover w-full h-full"
+													/>
 												) : (
 													<div className="text-gray-500 flex flex-col items-center">
 														<ImagePlus width={40} height={40} />

@@ -5,7 +5,6 @@ import RestaurantProfileForm from "../../_components/forms/RestaurantProfileForm
 import { useEffect, useState } from "react";
 import { restaurantProfileByEmail } from "@/actions/restaurantsActions";
 import { RestaurantProfileDetailsType } from "@/types/RestaurantTypes";
-import Container from "@/components/global/Container";
 
 const RestaurantProfileEditPage = () => {
 	const { user } = useUser();
