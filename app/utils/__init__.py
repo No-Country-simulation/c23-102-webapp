@@ -24,17 +24,8 @@ def create_directory(directory_relative_path: str):
         print(f"Directorio '{directory_relative_path}' ya existe.")
 
 
-def format_restaurant_info(restaurant_info):
-    """Convierte en un diccionario los registros de la tabla 'Restaurant'."""
-    restaurant_info_formatted = {
-        'category': restaurant_info['category_name'],
-        'openingHour': restaurant_info['opening_hour'],
-        'closingHour': restaurant_info['closing_hour'],
-        'description': restaurant_info['description'],
-        'location': restaurant_info['location'],
-        'brand': restaurant_info['brand'],
-        'locationName': restaurant_info['location_name'],
-        'banner_url': restaurant_info['banner_url']
-    }
+def register_to_dict(register):
+    """Convierte en un diccionario el registro que se le pase."""
+    register_dict = dict(register) if register else {}
 
-    return restaurant_info_formatted
+    return register_dict
