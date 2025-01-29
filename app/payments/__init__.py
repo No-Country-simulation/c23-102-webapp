@@ -4,7 +4,8 @@ import stripe
 
 payments_bp = Blueprint('payments', __name__, url_prefix='/payments')
 
-stripe.api_key = 'sk_test_51QkX9wAnZzuVM90TT8EtJ0KkD1zCjTPvVMgY8vWUgGCws7sMi6OKaHPjzOlQpDBYbspqqWMNAoNdpR2qmNuihF7a00HLswtzWc'
+stripe.api_key = 'sk_test_51QkX9wAnZzuVM90TT8EtJ0KkD1zCjTPvVMgY8vWUgGCws7sMi6OKaHPjzOlQpDBYbsp\
+qqWMNAoNdpR2qmNuihF7a00HLswtzWc'
 
 
 @payments_bp.route('/create-checkout-session/<price_id>')
