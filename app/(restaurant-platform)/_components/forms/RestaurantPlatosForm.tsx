@@ -19,7 +19,7 @@ const RestaurantPlatosForm = () => {
 			name: "",
 			description: "",
 			coverImage: "",
-			price: 0,
+			price: "",
 			disponible: "",
 		},
 	});
@@ -145,8 +145,9 @@ const RestaurantPlatosForm = () => {
 									<Input
 										{...field}
 										placeholder={"15.99"}
-										type="number"
-										className={`form-input-text ${form.formState.errors.name && "form-input-text-validation-error"}`}
+										type="text"
+										pattern="[0-9]+([\.,][0-9]+)?"
+										className={`form-input-text ${form.formState.errors.price && "form-input-text-validation-error"}`}
 										disabled={isPending}
 									></Input>
 								</FormControl>
