@@ -29,3 +29,10 @@ def register_to_dict(register):
     register_dict = dict(register) if register else {}
 
     return register_dict
+
+
+def registers_to_list(registers):
+    """Convierte todos los registros, en una sola lista."""
+    registers_list = list(registers)
+
+    return registers_list
