@@ -71,8 +71,8 @@ CREATE TABLE IF NOT EXISTS "Payment" (
 	"Client_Email"	TEXT NOT NULL,
 	"Price_Id"	TEXT NOT NULL,
 	PRIMARY KEY("Payment_Id" AUTOINCREMENT),
-	FOREIGN KEY("Client_Email") REFERENCES "Client"("Email"),
-	FOREIGN KEY("Restaurante_Email") REFERENCES "Restaurant"("Email")
+	FOREIGN KEY("Restaurante_Email") REFERENCES "Restaurant"("Email"),
+	FOREIGN KEY("Client_Email") REFERENCES "Client"("Email")
 );
 INSERT INTO "Category" ("Name") VALUES ('Restaurante');
 INSERT INTO "Category" ("Name") VALUES ('Cafetería');
