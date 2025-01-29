@@ -27,7 +27,7 @@ def create_directory(directory_relative_path: str):
 def format_restaurant_info(restaurant_info):
     """Convierte en un diccionario los registros de la tabla 'Restaurant'."""
     restaurant_info_formatted = {
-        'category': restaurant_info['category'],
+        'category': restaurant_info['category_name'],
         'openingHour': restaurant_info['opening_hour'],
         'closingHour': restaurant_info['closing_hour'],
         'description': restaurant_info['description'],
