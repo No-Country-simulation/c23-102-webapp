@@ -15,6 +15,7 @@ export const RESTAURANT_ROUTES = {
 	RESTAURANT_PEDIDOS: "/dashboard/restaurant-pedidos",
 	RESTAURANT_PLATOS: "/dashboard/restaurant-platos",
 	RESTAURANT_MENUS: "/dashboard/restaurant-menus",
+	RESTAURANT_PLATOS_CREATE: "/dashboard/restaurant-platos/create",
 };
 
 export const CLIENT_ROUTES = {
