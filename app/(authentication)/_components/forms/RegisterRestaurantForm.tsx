@@ -92,6 +92,7 @@ const RegisterForm = () => {
 										disabled={isPending}
 									></Input>
 								</FormControl>
+								<FormMessage className="form-message-validation-error" />
 							</FormItem>
 						)}
 					/>
@@ -111,6 +112,7 @@ const RegisterForm = () => {
 										disabled={isPending}
 									></Input>
 								</FormControl>
+								<FormMessage className="form-message-validation-error" />
 							</FormItem>
 						)}
 					/>
@@ -130,6 +132,7 @@ const RegisterForm = () => {
 										disabled={isPending}
 									></Input>
 								</FormControl>
+								<FormMessage className="form-message-validation-error" />
 							</FormItem>
 						)}
 					/>
@@ -184,6 +187,7 @@ const RegisterForm = () => {
 											disabled={isPending}
 										></Input>
 									</FormControl>
+									<FormMessage className="form-message-validation-error" />
 								</FormItem>
 							)}
 						/>
@@ -203,6 +207,7 @@ const RegisterForm = () => {
 											disabled={isPending}
 										></Input>
 									</FormControl>
+									<FormMessage className="form-message-validation-error" />
 								</FormItem>
 							)}
 						/>
