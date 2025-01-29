@@ -9,11 +9,14 @@ import { registerRestaurantSchema, RestaurantEditFormData } from "@/schemas/auth
 import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
 import { mocked_business_types } from "@/constants/mock/businessTypes";
 import { SelectGroup, SelectValue } from "@radix-ui/react-select";
+import { ImagePlus } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
 
 const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfileDetailsType }) => {
 	const [formData, setFormData] = useState<RestaurantProfileDetailsType>(initialData);
+	const [selectedFile, setSelectedFile] = useState<File | null>(null);
 	const [isPending, startTransition] = useTransition();
-	console.log(initialData);
+
 	const form = useForm<RestaurantEditFormData>({
 		resolver: zodResolver(registerRestaurantSchema),
 		defaultValues: {
@@ -28,6 +31,10 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 		},
 	});
 
+	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setSelectedFile(event.target.files?.[0] || null);
+	};
+
 	const onSubmit = async (values: RestaurantEditFormData) => {
 		startTransition(async () => {
 			console.log(values);
@@ -40,6 +47,59 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 			<form className="w-full forms-max-width" onSubmit={form.handleSubmit(onSubmit)}>
 				{/* Direccion del establecimiento */}
 				<div className="space-x-1 flex flex-col gap-3 items-center">
+					<FormField
+						name="coverImage"
+						control={form.control}
+						render={({}) => {
+							return (
+								<FormItem className="w-full">
+									<FormControl>
+										<div className="relative rounded-lg flex flex-col items-center gap-5 p-8 cursor-pointer bg-[#1a1a1a]">
+											<ImagePlus width={50} height={50} />
+											<h3 className="text-center text-gray-500">
+												Añade una foto de tu restaurante desde tu computadora
+											</h3>
+											<Input
+												type="file"
+												className="w-full h-full absolute top-0 left-0 opacity-0 "
+												onChange={(e) => {
+													handleFileChange(e);
+												}}
+												disabled={isPending}
+											/>
+											<Button className="button-input w-[75%]">
+												{selectedFile ? selectedFile.name : "Añadir Imagen"}
+											</Button>
+										</div>
+									</FormControl>
+									<FormMessage className="form-message-validation-error" />
+								</FormItem>
+							);
+						}}
+					/>
+					{/* Nombre del establecimiento */}
+					<FormField
+						name="locationName"
+						control={form.control}
+						render={({ field }) => (
+							<FormItem className="w-full">
+								<FormLabel>Nombre del establecimiento</FormLabel>
+								<FormControl>
+									<Input
+										{...field}
+										placeholder={"Pizza Hub"}
+										type="text"
+										className={`form-input-text ${
+											form.formState.errors.locationName && "form-input-text-validation-error"
+										}`}
+										disabled={isPending}
+										value={formData.locationName}
+									></Input>
+								</FormControl>
+							</FormItem>
+						)}
+					/>
+					{/* Address */}
 					<FormField
 						name="location"
 						control={form.control}
@@ -61,25 +121,25 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 							</FormItem>
 						)}
 					/>
-					{/* Nombre del establecimiento */}
+					{/* Description */}
 					<FormField
-						name="locationName"
+						name="description"
 						control={form.control}
 						render={({ field }) => (
 							<FormItem className="w-full">
-								<FormLabel>Nombre del establecimiento</FormLabel>
+								<FormLabel>Descripción</FormLabel>
 								<FormControl>
-									<Input
+									<Textarea
 										{...field}
-										placeholder={"Pizza Hub"}
-										type="text"
-										className={`form-input-text ${
-											form.formState.errors.locationName && "form-input-text-validation-error"
+										placeholder={"Descripcion de tu emprendimiento..."}
+										className={`form-input-textarea ${
+											form.formState.errors.description && "form-input-text-validation-error text-red-600"
 										}`}
+										rows={6}
 										disabled={isPending}
-										value={formData.locationName}
-									></Input>
+									></Textarea>
 								</FormControl>
+								<FormMessage className="form-message-validation-error" />
 							</FormItem>
 						)}
 					/>
@@ -112,8 +172,14 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 								<FormLabel>Tipo de Negocio</FormLabel>
 								<Select
 									{...field}
-									value={formData.category.category}
-									onValueChange={(value) => field.onChange(value)} // Conectar onValueChange
+									onValueChange={(value) => {
+										field.onChange(value);
+										setFormData((prev) => ({
+											...prev,
+											category: mocked_business_types.find((cat) => cat.category === value) || prev.category,
+										}));
+									}}
+									value={form.watch("category") || formData.category.category}
 									disabled={isPending}
 								>
 									<SelectTrigger
