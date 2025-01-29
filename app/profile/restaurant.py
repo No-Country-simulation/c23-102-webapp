@@ -1,7 +1,7 @@
 """Crea vista 'profile'."""
 from flask import jsonify
 from app.db import get_db
-from app.utils import format_restaurant_info
+from app.utils import register_to_dict
 from . import profile
 
 
@@ -14,6 +14,6 @@ def restaurant(email: str):
     restaurant_info = db.execute(
         "SELECT * FROM Restaurant WHERE Email = ?", (email,)).fetchone()
 
-    formatted_restaurant_info = format_restaurant_info(restaurant_info)
+    formatted_restaurant_info = register_to_dict(restaurant_info)
 
     return jsonify(formatted_restaurant_info)
