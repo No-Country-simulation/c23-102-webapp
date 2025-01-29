@@ -21,32 +21,6 @@ CREATE TABLE IF NOT EXISTS "Delivery_Person" (
 	"Vehicle"	VARCHAR(30),
 	PRIMARY KEY("Delivery_Person_ID" AUTOINCREMENT)
 );
-DROP TABLE IF EXISTS "Payment_Type";
-CREATE TABLE IF NOT EXISTS "Payment_Type" (
-	"Payment_Type_ID"	INTEGER NOT NULL,
-	"Name"	VARCHAR(30) NOT NULL,
-	"Description"	VARCHAR(50),
-	PRIMARY KEY("Payment_Type_ID" AUTOINCREMENT)
-);
-DROP TABLE IF EXISTS "Payment_Status";
-CREATE TABLE IF NOT EXISTS "Payment_Status" (
-	"Payment_Status_ID"	INTEGER NOT NULL,
-	"Name"	VARCHAR(30) NOT NULL,
-	"Description"	VARCHAR(50),
-	PRIMARY KEY("Payment_Status_ID" AUTOINCREMENT)
-);
-DROP TABLE IF EXISTS "Payment";
-CREATE TABLE IF NOT EXISTS "Payment" (
-	"Payment_ID"	INTEGER NOT NULL,
-	"Payment_Type_ID"	INTEGER NOT NULL,
-	"Payment_Status_ID"	INTEGER NOT NULL,
-	"Date"	DATE,
-	"Time"	DATETIME,
-	"Reference"	VARCHAR(50),
-	FOREIGN KEY("Payment_Type_ID") REFERENCES "Payment_Type"("Payment_Type_ID"),
-	FOREIGN KEY("Payment_Status_ID") REFERENCES "Payment_Status"("Payment_Status_ID"),
-	PRIMARY KEY("Payment_ID" AUTOINCREMENT)
-);
 DROP TABLE IF EXISTS "Category";
 CREATE TABLE IF NOT EXISTS "Category" (
 	"Name"	TEXT NOT NULL,
@@ -79,16 +53,16 @@ CREATE TABLE IF NOT EXISTS "User" (
 	"Password"	VARCHAR(50) NOT NULL,
 	"Phone"	VARCHAR(20),
 	"Role_Name"	TEXT NOT NULL,
-	PRIMARY KEY("Email"),
-	FOREIGN KEY("Role_Name") REFERENCES "Role"("Name")
+	FOREIGN KEY("Role_Name") REFERENCES "Role"("Name"),
+	PRIMARY KEY("Email")
 );
 DROP TABLE IF EXISTS "Client";
 CREATE TABLE IF NOT EXISTS "Client" (
 	"Email"	TEXT NOT NULL,
 	"Location"	TEXT,
 	"Postal_Code"	TEXT,
-	PRIMARY KEY("Email"),
-	FOREIGN KEY("Email") REFERENCES "User"("Email")
+	FOREIGN KEY("Email") REFERENCES "User"("Email"),
+	PRIMARY KEY("Email")
 );
 INSERT INTO "Category" ("Name") VALUES ('Restaurante');
 INSERT INTO "Category" ("Name") VALUES ('Cafetería');
