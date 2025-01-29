@@ -137,6 +137,7 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 											disabled={isPending}
 										></Input>
 									</FormControl>
+									<FormMessage className="form-message-validation-error" />
 								</FormItem>
 							)}
 						/>
@@ -158,6 +159,7 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 											disabled={isPending}
 										></Input>
 									</FormControl>
+									<FormMessage className="form-message-validation-error" />
 								</FormItem>
 							)}
 						/>
@@ -199,6 +201,7 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 											disabled={isPending}
 										></Input>
 									</FormControl>
+									<FormMessage className="form-message-validation-error" />
 								</FormItem>
 							)}
 						/>
@@ -256,6 +259,7 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 												disabled={isPending}
 											></Input>
 										</FormControl>
+										<FormMessage className="form-message-validation-error" />
 									</FormItem>
 								)}
 							/>
@@ -277,6 +281,7 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 												disabled={isPending}
 											></Input>
 										</FormControl>
+										<FormMessage className="form-message-validation-error" />
 									</FormItem>
 								)}
 							/>

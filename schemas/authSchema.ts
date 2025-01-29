@@ -9,7 +9,7 @@ export const loginSchema = z.object({
 export const registerRestaurantSchema = z
 	.object({
 		location: z.string().min(3, { message: "Ingrese una dirección" }),
-		locationName: z.string().min(3, { message: "INgrese un nombre para su etablecimiento" }),
+		locationName: z.string().min(3, { message: "Ingrese un nombre para su etablecimiento" }),
 		brand: z.string(),
 		category: z.string().min(3, { message: "Debes elegir un Tipo de Negocio" }),
 		name: z.string().min(3, { message: "Ingrese su nombre" }),
@@ -17,7 +17,7 @@ export const registerRestaurantSchema = z
 		email: z.string().email({ message: "El email no es válido" }),
 		password: z.string().min(4, { message: "Mínimo 4 caracteres" }),
 		confirmPassword: z.string(),
-		phone: z.string().min(8, { message: "Ingrese un numero de telefono valido" }),
+		phone: z.string().min(8, { message: "Ingrese un numero de telefono" }),
 	})
 	.refine((data) => data.password === data.confirmPassword, {
 		message: "Las contraseñas no coinciden",
@@ -45,18 +45,17 @@ export const registerClientSchema = z
 		path: ["confirmPassword"],
 	});
 
-
 // CRUD Schemas
 export const fullRestaurantDetailsSchema = z.object({
 	location: z.string().min(3, { message: "Ingrese una dirección" }),
-	locationName: z.string().min(3, { message: "INgrese un nombre para su etablecimiento" }),
+	locationName: z.string().min(3, { message: "Ingrese un nombre para su etablecimiento" }),
 	brand: z.string(),
 	category: z.string().min(3, { message: "Debes elegir un Tipo de Negocio" }),
 	description: z.string(),
 	coverImage: z.any(),
 	name: z.string().min(3, { message: "Ingrese su nombre" }),
 	lastName: z.string().min(3, { message: "Ingrese su apellido" }),
-	phone: z.string().min(8, { message: "Ingrese un numero de telefono valido" }),
+	phone: z.string().min(8, { message: "Ingrese un numero de telefono" }),
 });
 
 // Authentication Schemas

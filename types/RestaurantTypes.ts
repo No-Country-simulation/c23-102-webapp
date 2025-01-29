@@ -1,3 +1,5 @@
+import { PlatoType } from "./PlatoType";
+
 export interface CategoryType {
 	id: string;
 	category: string;
@@ -23,14 +25,6 @@ export interface RestaurantDetailsType {
 	lastName: string;
 	phone: string;
 	platos: Array<PlatoType> | null;
-}
-
-export interface PlatoType {
-	id: string;
-	name: string | null;
-	description: string | null;
-	image_url: string | null;
-	price: string | null;
 }
 
 export interface RestaurantProfileDetailsType {
