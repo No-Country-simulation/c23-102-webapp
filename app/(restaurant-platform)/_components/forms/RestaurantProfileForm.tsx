@@ -69,7 +69,7 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 
 	return (
 		<Form {...form}>
-			<form className="w-full forms-max-width" onSubmit={form.handleSubmit(onSubmit)}>
+			<form className="w-full" onSubmit={form.handleSubmit(onSubmit)}>
 				{/* Direccion del establecimiento */}
 				<div className="space-x-1 flex flex-col gap-3 items-center">
 					<FormField
@@ -78,37 +78,33 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 						render={({}) => {
 							const imageUrl = selectedFile ? URL.createObjectURL(selectedFile) : initialData.image_url;
 							return (
-								<FormItem className="w-full my-8 relative">
+								<FormItem className="w-full">
 									<FormControl>
-										<div className="flex flex-col justify-center items-center gap-3">
-											{imageUrl ? (
-												<div className="w-full relative">
-													<Image src={imageUrl} alt="Actual Picture" width={0} height={0} className="w-full"></Image>
-													<Button className="button-input min-w-[35%] absolute bottom-6 left-[50%] translate-x-[-50%]">
-														{selectedFile ? selectedFile.name : "Examinar..."}
-													</Button>
-												</div>
-											) : (
-												<div className="relative rounded-lg flex flex-col items-center gap-5 p-8 cursor-pointer bg-[#1a1a1a]">
-													<>
-														<ImagePlus width={50} height={50} />
-														<h3 className="text-center text-gray-500">
-															Añade una foto de tu restaurante desde tu computadora
-														</h3>
-													</>
-													<Button className="button-input">
-														{selectedFile ? selectedFile.name : "Añadir o Cambiar Imagen"}
-													</Button>
-												</div>
-											)}
-											<Input
-												type="file"
-												className="w-full h-full absolute top-0 left-0 opacity-0 "
-												onChange={(e) => {
-													handleFileChange(e);
-												}}
-												disabled={isPending}
-											/>
+										<div className="flex flex-col gap-3 w-full mb-10">
+											{/* Contenedor de la imagen */}
+											<div className="relative w-full h-[25rem] flex items-center justify-center">
+												{imageUrl ? (
+													<Image src={imageUrl} alt="Preview" layout="fill" objectFit="cover" className="rounded-lg" />
+												) : (
+													<div className="text-gray-500 flex flex-col items-center">
+														<ImagePlus width={40} height={40} />
+														<span className="text-sm">Añade una imagen</span>
+													</div>
+												)}
+											</div>
+
+											{/* Botón e Input Oculto */}
+											<div className="relative lg:w-[500px] md:w-[400px] md:m-auto">
+												<Button className="w-full button-outline">
+													{selectedFile ? selectedFile.name : "Seleccionar Imagen"}
+												</Button>
+												<Input
+													type="file"
+													className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+													onChange={handleFileChange}
+													disabled={isPending}
+												/>
+											</div>
 										</div>
 									</FormControl>
 									<FormMessage className="form-message-validation-error" />
@@ -116,158 +112,21 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 							);
 						}}
 					/>
-					{/* Nombre del establecimiento */}
-					<FormField
-						name="locationName"
-						control={form.control}
-						render={({ field }) => (
-							<FormItem className="w-full">
-								<FormLabel>Nombre del establecimiento</FormLabel>
-								<FormControl>
-									<Input
-										{...field}
-										placeholder={"Pizza Hub"}
-										type="text"
-										className={`form-input-text ${
-											form.formState.errors.locationName && "form-input-text-validation-error"
-										}`}
-										disabled={isPending}
-									></Input>
-								</FormControl>
-							</FormItem>
-						)}
-					/>
-					{/* Address */}
-					<FormField
-						name="location"
-						control={form.control}
-						render={({ field }) => (
-							<FormItem className="w-full">
-								<FormLabel>Direccion del establecimiento</FormLabel>
-								<FormControl>
-									<Input
-										{...field}
-										placeholder={"Ferniche 1985"}
-										type="text"
-										className={`form-input-text ${
-											form.formState.errors.location && "form-input-text-validation-error"
-										}`}
-										disabled={isPending}
-									></Input>
-								</FormControl>
-							</FormItem>
-						)}
-					/>
-					{/* Description */}
-					<FormField
-						name="description"
-						control={form.control}
-						render={({ field }) => (
-							<FormItem className="w-full">
-								<FormLabel>Descripción</FormLabel>
-								<FormControl>
-									<Textarea
-										{...field}
-										placeholder={"Descripcion de tu emprendimiento..."}
-										className={`form-input-textarea ${
-											form.formState.errors.description && "form-input-text-validation-error text-red-600"
-										}`}
-										rows={6}
-										disabled={isPending}
-									></Textarea>
-								</FormControl>
-								<FormMessage className="form-message-validation-error" />
-							</FormItem>
-						)}
-					/>
-					{/* Nombre de marca */}
-					<FormField
-						name="brand"
-						control={form.control}
-						render={({ field }) => (
-							<FormItem className="w-full">
-								<FormLabel>Nombre de marca</FormLabel>
-								<FormControl>
-									<Input
-										{...field}
-										placeholder={"Brews"}
-										type="text"
-										className="form-input-text"
-										disabled={isPending}
-									></Input>
-								</FormControl>
-							</FormItem>
-						)}
-					/>
-					{/* Tipo de negocio */}
-					<FormField
-						name="category"
-						control={form.control}
-						render={({ field }) => (
-							<FormItem className="w-full">
-								<FormLabel>Tipo de Negocio</FormLabel>
-								<Select
-									{...field}
-									onValueChange={(value) => {
-										field.onChange(value);
-									}}
-									disabled={isPending}
-								>
-									<SelectTrigger
-										className={`form-input-text ${
-											form.formState.errors.category && "form-input-text-validation-error"
-										}`}
-									>
-										<SelectValue placeholder="Tipo de Negocio" />
-									</SelectTrigger>
-									<SelectContent>
-										<SelectGroup>
-											{mocked_business_types.map((category) => (
-												<SelectItem key={category.id} value={category.category}>
-													{category.category}
-												</SelectItem>
-											))}
-										</SelectGroup>
-									</SelectContent>
-								</Select>
-								<FormMessage className="form-message-validation-error" />
-							</FormItem>
-						)}
-					/>
-					{/* Nombre y apellido */}
-					<div className="w-full justify-between flex gap-4">
+					<div className="flex flex-col items-center lg:w-[700px] md:w-[550px]">
+						{/* Nombre del establecimiento */}
 						<FormField
-							name="name"
+							name="locationName"
 							control={form.control}
 							render={({ field }) => (
 								<FormItem className="w-full">
-									<FormLabel>Nombre</FormLabel>
+									<FormLabel>Nombre del establecimiento</FormLabel>
 									<FormControl>
 										<Input
 											{...field}
-											placeholder={"John"}
-											type="text"
-											className={`form-input-text ${form.formState.errors.name && "form-input-text-validation-error"}`}
-											disabled={isPending}
-										></Input>
-									</FormControl>
-								</FormItem>
-							)}
-						/>
-						{/* Apellido */}
-						<FormField
-							name="lastName"
-							control={form.control}
-							render={({ field }) => (
-								<FormItem className="w-full">
-									<FormLabel>Apellido</FormLabel>
-									<FormControl>
-										<Input
-											{...field}
-											placeholder={"Doe"}
+											placeholder={"Pizza Hub"}
 											type="text"
 											className={`form-input-text ${
-												form.formState.errors.lastName && "form-input-text-validation-error"
+												form.formState.errors.locationName && "form-input-text-validation-error"
 											}`}
 											disabled={isPending}
 										></Input>
@@ -275,33 +134,174 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 								</FormItem>
 							)}
 						/>
-					</div>
-					{/* Numero de telefono movil */}
-					<FormField
-						name="phone"
-						control={form.control}
-						render={({ field }) => (
-							<FormItem className="w-full">
-								<FormLabel>Teléfono</FormLabel>
-								<FormControl>
-									<Input
+						{/* Address */}
+						<FormField
+							name="location"
+							control={form.control}
+							render={({ field }) => (
+								<FormItem className="w-full">
+									<FormLabel>Direccion del establecimiento</FormLabel>
+									<FormControl>
+										<Input
+											{...field}
+											placeholder={"Ferniche 1985"}
+											type="text"
+											className={`form-input-text ${
+												form.formState.errors.location && "form-input-text-validation-error"
+											}`}
+											disabled={isPending}
+										></Input>
+									</FormControl>
+								</FormItem>
+							)}
+						/>
+						{/* Description */}
+						<FormField
+							name="description"
+							control={form.control}
+							render={({ field }) => (
+								<FormItem className="w-full">
+									<FormLabel>Descripción</FormLabel>
+									<FormControl>
+										<Textarea
+											{...field}
+											placeholder={"Descripcion de tu emprendimiento..."}
+											className={`form-input-textarea ${
+												form.formState.errors.description && "form-input-text-validation-error text-red-600"
+											}`}
+											rows={6}
+											disabled={isPending}
+										></Textarea>
+									</FormControl>
+									<FormMessage className="form-message-validation-error" />
+								</FormItem>
+							)}
+						/>
+						{/* Nombre de marca */}
+						<FormField
+							name="brand"
+							control={form.control}
+							render={({ field }) => (
+								<FormItem className="w-full">
+									<FormLabel>Nombre de marca</FormLabel>
+									<FormControl>
+										<Input
+											{...field}
+											placeholder={"Brews"}
+											type="text"
+											className="form-input-text"
+											disabled={isPending}
+										></Input>
+									</FormControl>
+								</FormItem>
+							)}
+						/>
+						{/* Tipo de negocio */}
+						<FormField
+							name="category"
+							control={form.control}
+							render={({ field }) => (
+								<FormItem className="w-full">
+									<FormLabel>Tipo de Negocio</FormLabel>
+									<Select
 										{...field}
-										placeholder={"+54110000000"}
-										type="text"
-										className={`form-input-text ${form.formState.errors.phone && "form-input-text-validation-error"}`}
+										onValueChange={(value) => {
+											field.onChange(value);
+										}}
 										disabled={isPending}
-									></Input>
-								</FormControl>
-								<FormMessage className="form-message-validation-error" />
-							</FormItem>
+									>
+										<SelectTrigger
+											className={`form-input-text ${
+												form.formState.errors.category && "form-input-text-validation-error"
+											}`}
+										>
+											<SelectValue placeholder="Tipo de Negocio" />
+										</SelectTrigger>
+										<SelectContent>
+											<SelectGroup>
+												{mocked_business_types.map((category) => (
+													<SelectItem key={category.id} value={category.category}>
+														{category.category}
+													</SelectItem>
+												))}
+											</SelectGroup>
+										</SelectContent>
+									</Select>
+									<FormMessage className="form-message-validation-error" />
+								</FormItem>
+							)}
+						/>
+						{/* Nombre y apellido */}
+						<div className="w-full justify-between flex gap-4">
+							<FormField
+								name="name"
+								control={form.control}
+								render={({ field }) => (
+									<FormItem className="w-full">
+										<FormLabel>Nombre</FormLabel>
+										<FormControl>
+											<Input
+												{...field}
+												placeholder={"John"}
+												type="text"
+												className={`form-input-text ${
+													form.formState.errors.name && "form-input-text-validation-error"
+												}`}
+												disabled={isPending}
+											></Input>
+										</FormControl>
+									</FormItem>
+								)}
+							/>
+							{/* Apellido */}
+							<FormField
+								name="lastName"
+								control={form.control}
+								render={({ field }) => (
+									<FormItem className="w-full">
+										<FormLabel>Apellido</FormLabel>
+										<FormControl>
+											<Input
+												{...field}
+												placeholder={"Doe"}
+												type="text"
+												className={`form-input-text ${
+													form.formState.errors.lastName && "form-input-text-validation-error"
+												}`}
+												disabled={isPending}
+											></Input>
+										</FormControl>
+									</FormItem>
+								)}
+							/>
+						</div>
+						{/* Numero de telefono movil */}
+						<FormField
+							name="phone"
+							control={form.control}
+							render={({ field }) => (
+								<FormItem className="w-full">
+									<FormLabel>Teléfono</FormLabel>
+									<FormControl>
+										<Input
+											{...field}
+											placeholder={"+54110000000"}
+											type="text"
+											className={`form-input-text ${form.formState.errors.phone && "form-input-text-validation-error"}`}
+											disabled={isPending}
+										></Input>
+									</FormControl>
+									<FormMessage className="form-message-validation-error" />
+								</FormItem>
+							)}
+						/>
+						<Button type="submit" className="button-fill-primary mt-4" disabled={isPending}>
+							Guardar Cambios
+						</Button>
+						{form.formState.errors.root && (
+							<FormMessage className="form-response-error ">{form.formState.errors.root.message}</FormMessage>
 						)}
-					/>
-					<Button type="submit" className="button-fill-primary mt-4" disabled={isPending}>
-						Guardar Cambios
-					</Button>
-					{form.formState.errors.root && (
-						<FormMessage className="form-response-error ">{form.formState.errors.root.message}</FormMessage>
-					)}
+					</div>
 				</div>
 			</form>
 		</Form>
