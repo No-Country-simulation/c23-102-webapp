@@ -1,3 +1,4 @@
+"""Crea create_checkout_session endpoint."""
 import stripe
 from flask import request, abort, redirect
 from . import payments_bp
