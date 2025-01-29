@@ -3,7 +3,7 @@ from os import makedirs
 from os.path import abspath, join
 from flask import Flask
 from app.auth.register import register
-from .categorys import categorys
+from app.categorys import categorys_bp
 from .profile import profile
 from .auth import auth
 from .restaurant import restaurant_bp
@@ -28,7 +28,7 @@ def create_app():
 
     # Blueprints
     app.register_blueprint(auth)
-    app.register_blueprint(categorys)
+    app.register_blueprint(categorys_bp)
     app.register_blueprint(restaurant_bp)
     app.register_blueprint(register)
     app.register_blueprint(profile)
