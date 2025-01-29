@@ -76,19 +76,14 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 						name="coverImage"
 						control={form.control}
 						render={({}) => {
+							const imageUrl = selectedFile ? URL.createObjectURL(selectedFile) : initialData.image_url;
 							return (
-								<FormItem className="w-full my-8">
+								<FormItem className="w-full my-8 relative">
 									<FormControl>
 										<div className="flex flex-col justify-center items-center gap-3">
-											{initialData.image_url ? (
+											{imageUrl ? (
 												<div className="w-full relative">
-													<Image
-														src={initialData.image_url}
-														alt="Actual Picture"
-														width={0}
-														height={0}
-														className="w-full"
-													></Image>
+													<Image src={imageUrl} alt="Actual Picture" width={0} height={0} className="w-full"></Image>
 													<Button className="button-input min-w-[35%] absolute bottom-6 left-[50%] translate-x-[-50%]">
 														{selectedFile ? selectedFile.name : "Examinar..."}
 													</Button>
