@@ -9,6 +9,7 @@ from .auth import auth
 from .restaurant import restaurant_bp
 from .db import close_db
 from .commands import init_db_command
+from .payments import payments_bp
 
 
 def create_app():
@@ -32,6 +33,7 @@ def create_app():
     app.register_blueprint(restaurant_bp)
     app.register_blueprint(register)
     app.register_blueprint(profile)
+    app.register_blueprint(payments_bp)
 
     try:
         makedirs(app.instance_path)
