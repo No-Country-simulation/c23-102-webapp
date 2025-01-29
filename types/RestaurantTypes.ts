@@ -1,6 +1,6 @@
-export interface BusinessType {
+export interface CategoryType {
 	id: string;
-	businessType: string | null;
+	category: string;
 }
 
 export interface RestaurantShortInfoType {
@@ -8,20 +8,20 @@ export interface RestaurantShortInfoType {
 	image_url: string;
 	name: string;
 	description: string;
-	businessTypes: Array<BusinessType>;
+	category: CategoryType;
 }
 
 export interface RestaurantDetailsType {
 	id: string;
-	locationName: string | null;
-	description: string | null;
-	businessTypes: Array<BusinessType> | null;
-	image_url: string | null;
-	location: string | null;
-	phone: string | null;
-	name: string | null;
-	lastName: string | null;
-	brand: string | null;
+	location: string;
+	locationName: string;
+	brand: string;
+	category: string;
+	description: string;
+	image_url: string;
+	name: string;
+	lastName: string;
+	phone: string;
 	platos: Array<PlatoType> | null;
 }
 
@@ -31,4 +31,17 @@ export interface PlatoType {
 	description: string | null;
 	image_url: string | null;
 	price: string | null;
+}
+
+export interface RestaurantProfileDetailsType {
+	id?: string;
+	location: string;
+	locationName: string;
+	brand: string;
+	category: string;
+	description: string;
+	image_url?: string;
+	name: string;
+	lastName: string;
+	phone: string;
 }

@@ -21,6 +21,7 @@ const RegisterRestaurantProfileForm = () => {
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSelectedFile(event.target.files?.[0] || null);
 	};
+
 	const form = useForm<RegisterRestaurantProfileFormData>({
 		resolver: zodResolver(registerRestaurantProfileSchema),
 		defaultValues: { coverImage: null, description: "" },
@@ -34,12 +35,6 @@ const RegisterRestaurantProfileForm = () => {
 					formData.append("coverImage", selectedFile);
 				}
 				formData.append("description", values.description);
-
-				// Display the values
-				for (const value of formData.values()) {
-					console.log(value);
-				}
-
 				router.push(RESTAURANT_ROUTES.DASHBOARD);
 			} catch (error) {
 				form.setError("root", {

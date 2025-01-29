@@ -155,9 +155,9 @@ const RegisterForm = () => {
 									</SelectTrigger>
 									<SelectContent>
 										<SelectGroup>
-											{mocked_business_types.map((business) => (
-												<SelectItem key={business.id} value={String(business.businessType)}>
-													{business.businessType}
+											{mocked_business_types.map((category) => (
+												<SelectItem key={category.id} value={String(category.category)}>
+													{category.category}
 												</SelectItem>
 											))}
 										</SelectGroup>

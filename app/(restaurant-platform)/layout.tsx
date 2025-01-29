@@ -10,7 +10,7 @@ const PlatformContentLayout = ({ children }: { children: React.ReactNode }) => {
 		<RestaurantProtectedRoute>
 			<div className="min-h-dvh">
 				<RestaurantTopbar></RestaurantTopbar>
-				<main className="min-h-dvh">{children}</main>
+				<main className="min-h-dvh escape-navbar escape-footer">{children}</main>
 				<RestaurantNavbar></RestaurantNavbar>
 			</div>
 		</RestaurantProtectedRoute>

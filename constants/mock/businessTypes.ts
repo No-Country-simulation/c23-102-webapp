@@ -1,24 +1,24 @@
-import { BusinessType } from "@/types/RestaurantTypes";
+import { CategoryType } from "@/types/RestaurantTypes";
 
-export const mocked_business_types: Array<BusinessType> = [
+export const mocked_business_types: Array<CategoryType> = [
 	{
 		id: "1",
-		businessType: "Restaurante",
+		category: "Restaurante",
 	},
 	{
 		id: "2",
-		businessType: "Cafeteria",
+		category: "Cafeteria",
 	},
 	{
 		id: "3",
-		businessType: "Bar",
+		category: "Bar",
 	},
 	{
 		id: "4",
-		businessType: "Heladeria",
+		category: "Heladeria",
 	},
 	{
 		id: "5",
-		businessType: "Tienda",
+		category: "Tienda",
 	},
 ];
