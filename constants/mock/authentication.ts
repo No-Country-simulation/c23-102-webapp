@@ -15,10 +15,7 @@ export const loggedRestaurantDetails: RestaurantDetailsType = {
 	id: "7",
 	locationName: "American Dinner",
 	description: "Deluxe",
-	category: {
-		id: "3",
-		category: "Bar",
-	},
+	category: "Bar",
 	image_url: "https://as1.ftcdn.net/v2/jpg/06/36/04/10/1000_F_636041025_Sih9tNIgxw2madJPj518Z3s0pQaSnSVN.jpg",
 	location: "Avenida 123",
 	phone: "+417994002693",

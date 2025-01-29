@@ -16,7 +16,7 @@ export interface RestaurantDetailsType {
 	location: string;
 	locationName: string;
 	brand: string;
-	category: CategoryType;
+	category: string;
 	description: string;
 	image_url: string;
 	name: string;
@@ -38,7 +38,7 @@ export interface RestaurantProfileDetailsType {
 	location: string;
 	locationName: string;
 	brand: string;
-	category: CategoryType;
+	category: string;
 	description: string;
 	image_url: string;
 	name: string;

@@ -5,7 +5,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { registerRestaurantSchema, RestaurantEditFormData } from "@/schemas/authSchema";
+import { fullRestaurantDetailsSchema, RestaurantEditFormData } from "@/schemas/authSchema";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
 import { mocked_business_types } from "@/constants/mock/businessTypes";
 import { SelectGroup, SelectValue } from "@radix-ui/react-select";
@@ -13,21 +13,20 @@ import { ImagePlus } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 
 const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfileDetailsType }) => {
-	const [formData, setFormData] = useState<RestaurantProfileDetailsType>(initialData);
 	const [selectedFile, setSelectedFile] = useState<File | null>(null);
 	const [isPending, startTransition] = useTransition();
 
 	const form = useForm<RestaurantEditFormData>({
-		resolver: zodResolver(registerRestaurantSchema),
+		resolver: zodResolver(fullRestaurantDetailsSchema),
 		defaultValues: {
-			location: "",
-			locationName: "",
-			brand: "",
-			category: "",
-			description: "",
-			name: "",
-			lastName: "",
-			phone: "",
+			location: initialData.location || "",
+			locationName: initialData.locationName || "",
+			brand: initialData.brand || "",
+			category: initialData.category || "",
+			description: initialData.description || "",
+			name: initialData.name || "",
+			lastName: initialData.lastName || "",
+			phone: initialData.phone || "",
 		},
 	});
 
@@ -35,10 +34,34 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 		setSelectedFile(event.target.files?.[0] || null);
 	};
 
-	const onSubmit = async (values: RestaurantEditFormData) => {
+	const onSubmit = (values: RestaurantProfileDetailsType) => {
 		startTransition(async () => {
-			console.log(values);
-			setFormData(formData);
+			try {
+				const formData = new FormData();
+
+				if (selectedFile) {
+					formData.append("coverImage", selectedFile);
+				}
+				// User Data
+				formData.append("name", values.name);
+				formData.append("lastname", values.lastName);
+				formData.append("phone", values.phone);
+				// Restaurant Data
+				formData.append("location", values.location);
+				formData.append("locationName", values.locationName);
+				formData.append("brand", values.brand);
+				formData.append("category", values.category);
+
+				// Display the values
+				for (const value of formData.values()) {
+					console.log(value);
+				}
+			} catch (error) {
+				form.setError("root", {
+					type: "manual",
+					message: (error as Error).message,
+				});
+			}
 		});
 	};
 
@@ -93,7 +116,6 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 											form.formState.errors.locationName && "form-input-text-validation-error"
 										}`}
 										disabled={isPending}
-										value={formData.locationName}
 									></Input>
 								</FormControl>
 							</FormItem>
@@ -115,7 +137,6 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 											form.formState.errors.location && "form-input-text-validation-error"
 										}`}
 										disabled={isPending}
-										value={formData.location}
 									></Input>
 								</FormControl>
 							</FormItem>
@@ -157,7 +178,6 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 										type="text"
 										className="form-input-text"
 										disabled={isPending}
-										value={formData.brand || ""}
 									></Input>
 								</FormControl>
 							</FormItem>
@@ -174,12 +194,7 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 									{...field}
 									onValueChange={(value) => {
 										field.onChange(value);
-										setFormData((prev) => ({
-											...prev,
-											category: mocked_business_types.find((cat) => cat.category === value) || prev.category,
-										}));
 									}}
-									value={form.watch("category") || formData.category.category}
 									disabled={isPending}
 								>
 									<SelectTrigger
@@ -218,7 +233,6 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 											type="text"
 											className={`form-input-text ${form.formState.errors.name && "form-input-text-validation-error"}`}
 											disabled={isPending}
-											value={formData.name}
 										></Input>
 									</FormControl>
 								</FormItem>
@@ -240,7 +254,6 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 												form.formState.errors.lastName && "form-input-text-validation-error"
 											}`}
 											disabled={isPending}
-											value={formData.lastName}
 										></Input>
 									</FormControl>
 								</FormItem>
@@ -261,7 +274,6 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 										type="text"
 										className={`form-input-text ${form.formState.errors.phone && "form-input-text-validation-error"}`}
 										disabled={isPending}
-										value={formData.phone}
 									></Input>
 								</FormControl>
 								<FormMessage className="form-message-validation-error" />
