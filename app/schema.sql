@@ -64,6 +64,16 @@ CREATE TABLE IF NOT EXISTS "Client" (
 	FOREIGN KEY("Email") REFERENCES "User"("Email"),
 	PRIMARY KEY("Email")
 );
+DROP TABLE IF EXISTS "Payment";
+CREATE TABLE IF NOT EXISTS "Payment" (
+	"Payment_Id"	INTEGER NOT NULL,
+	"Restaurante_Email"	TEXT NOT NULL,
+	"Client_Email"	TEXT NOT NULL,
+	"Price_Id"	TEXT NOT NULL,
+	PRIMARY KEY("Payment_Id" AUTOINCREMENT),
+	FOREIGN KEY("Client_Email") REFERENCES "Client"("Email"),
+	FOREIGN KEY("Restaurante_Email") REFERENCES "Restaurant"("Email")
+);
 INSERT INTO "Category" ("Name") VALUES ('Restaurante');
 INSERT INTO "Category" ("Name") VALUES ('Cafetería');
 INSERT INTO "Category" ("Name") VALUES ('Bar');
