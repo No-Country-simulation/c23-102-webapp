@@ -11,7 +11,6 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import Image from "next/image";
 
 const RestaurantPlatosForm = () => {
-	const [preview, setPreview] = useState<string | null>(null);
 	const [selectedFile, setSelectedFile] = useState<File | null>(null);
 	const [isPending, startTransition] = useTransition();
 
@@ -27,14 +26,7 @@ const RestaurantPlatosForm = () => {
 	});
 
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const file = event.target.files?.[0] || null;
-		setSelectedFile(file);
-		if (file) {
-			const imageUrl = URL.createObjectURL(file);
-			setPreview(imageUrl);
-		} else {
-			setPreview(null);
-		}
+		setSelectedFile(event.target.files?.[0] || null);
 	};
 
 	const onSubmit = (values: CreatePlatosFormData) => {
