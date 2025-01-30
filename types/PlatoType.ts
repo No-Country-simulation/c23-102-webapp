@@ -1,13 +1,20 @@
 export interface PlatoType {
 	id: string;
-	name: string | null;
-	description: string | null;
+	name: string;
+	description: string;
 	image_url: string | null;
-	price: string | null;
-	disponible: boolean;
+	price: string;
+	disponible: "disponible" | "borrador";
+	cartaId: string | null;
 }
 
 export interface PlatoResponse {
-	message: string;
+	id: string;
+	name: string;
+	description: string;
+	image_url: string | null;
+	price: string;
+	disponible: "disponible" | "borrador";
+	cartaId: string | null;
 }
 

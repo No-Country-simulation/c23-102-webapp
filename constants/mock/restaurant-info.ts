@@ -325,8 +325,6 @@ export const mocked_restaurant_details: Array<RestaurantDetailsType> = [
 ];
 
 export const findRestaurantByEmail = (email: string) => {
-	console.log(email);
 	const foundResto = mocked_restaurant_details.find((i) => i.email == email);
-	console.log(mocked_restaurant_details[0].email);
 	return foundResto ? foundResto : mocked_restaurant_details[0];
 };

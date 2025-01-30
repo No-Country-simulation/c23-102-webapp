@@ -24,3 +24,10 @@ export const mocked_base_cartas: Array<CartaType> = [
 		status: "disponible",
 	},
 ];
+
+
+export const findCartaById = (id: string) => {
+	const found = mocked_base_cartas.find((i) => i.id === id);
+	return found ? found : mocked_base_cartas[0];
+};
+

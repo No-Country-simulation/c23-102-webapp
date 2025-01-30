@@ -9,12 +9,14 @@ function ItemListCard({
 	image_url,
 	route,
 	status,
+	price,
 }: {
 	title: string;
 	description: string;
 	image_url: string | null;
 	status?: string;
 	route: string;
+	price?: string;
 }) {
 	return (
 		<Link className="w-full h-[8.3rem] flex flex-row gap-4 items-center rounded-lg overflow-hidden pr-4" href={route}>
@@ -28,9 +30,10 @@ function ItemListCard({
 					</span>
 				)}
 			</div>
-			<div className="grow flex flex-col gap-2">
-				<h2 className="text-lg font-semibold">{title}</h2>
+			<div className="grow flex flex-col">
+				<h2 className="text-sm font-bold">{title}</h2>
 				<p className="text-sm font-thin">{description}</p>
+				{price && <span className="text-[color:--primary-color] text-md font-bold">{price + " $"}</span>}
 				<span className="text-xs font-semibold text-green-600 capitalize">{status}</span>
 			</div>
 			<ChevronRight className=""></ChevronRight>
