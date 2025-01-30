@@ -9,7 +9,7 @@ const PlatformContentLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<ClientProtectedRoute>
 			<div className="min-h-dvh">
-				<main className="min-h-dvh">
+				<main className="min-h-dvh escape-navbar escape-footer">
 					<ClientTopbar></ClientTopbar>
 					{children}
 					<ClientNavbar></ClientNavbar>

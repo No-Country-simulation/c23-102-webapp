@@ -22,7 +22,7 @@ export async function loginUser(body: FormData): Promise<LoginResponse> {
 		// );
 		// return response.data;
 
-		return loggedRestaurant;
+		return loggedClient;
 	} catch (error) {
 		if (axios.isAxiosError(error) && error.response && error.response.status !== 500) {
 			throw new Error(LOGIN_ERROR_MSG);
