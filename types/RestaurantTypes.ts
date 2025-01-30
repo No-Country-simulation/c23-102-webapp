@@ -1,20 +1,15 @@
 import { PlatoType } from "./PlatoType";
 
-export interface CategoryType {
-	id: string;
-	category: string;
-}
-
 export interface RestaurantShortInfoType {
-	id: string;
+	email: string;
 	image_url: string;
 	name: string;
 	description: string;
-	category: CategoryType;
+	category: string;
 }
 
 export interface RestaurantDetailsType {
-	id: string;
+	email: string;
 	location: string;
 	locationName: string;
 	brand: string;
@@ -24,11 +19,11 @@ export interface RestaurantDetailsType {
 	name: string;
 	lastName: string;
 	phone: string;
-	platos: Array<PlatoType> | null;
+	platos: Array<PlatoType> | null; // Otro Endpoint
 }
 
 export interface RestaurantProfileDetailsType {
-	id?: string;
+	email?: string;
 	location: string;
 	locationName: string;
 	brand: string;

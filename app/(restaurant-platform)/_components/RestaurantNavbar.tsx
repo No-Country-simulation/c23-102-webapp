@@ -23,7 +23,7 @@ export const RestaurantNavbar = () => {
 				</Link>
 				<Link href={RESTAURANT_ROUTES.RESTAURANT_MENUS} className="flex flex-col items-center justify-center">
 					<UtensilsCrossed />
-					<h3 className="font-thin text-sm">Menus</h3>
+					<h3 className="font-thin text-sm">Carta</h3>
 				</Link>
 				<Drawer>
 					<DrawerTrigger asChild>
@@ -33,16 +33,16 @@ export const RestaurantNavbar = () => {
 						</span>
 					</DrawerTrigger>
 					<DrawerContent className="bg-black pb-8">
-						<div className="mx-auto w-full max-w-sm text-white bg-black">
+						<div className="mx-auto w-full max-w-sm text-white bg-black items-center">
 							<DrawerHeader>
-								<DrawerTitle className="font-thin text-sm">Que quieres crear?</DrawerTitle>
+								<DrawerTitle className="font-thin text-sm text-center">Que quieres crear?</DrawerTitle>
 								<VisuallyHidden>
 									<DrawerDescription></DrawerDescription>
 								</VisuallyHidden>
 							</DrawerHeader>
 							<div className="flex flex-col gap-2 w-[80%] m-auto items-center">
 								<DrawerClose asChild className="bg-gray-900 w-full text-center py-2 rounded-full">
-									<Link href={RESTAURANT_ROUTES.RESTAURANT_MENUS}>Menu</Link>
+									<Link href={RESTAURANT_ROUTES.RESTAURANT_MENUS}>Carta</Link>
 								</DrawerClose>
 								<DrawerClose asChild className="bg-gray-900 w-full text-center py-2 rounded-full">
 									<Link href={RESTAURANT_ROUTES.RESTAURANT_PLATOS_CREATE}>Producto</Link>

@@ -12,7 +12,7 @@ export const loggedRestaurant: LoginResponse = {
 };
 
 export const loggedRestaurantDetails: RestaurantDetailsType = {
-	id: "7",
+	email: "american@email.com",
 	locationName: "American Dinner",
 	description: "Deluxe",
 	category: "Bar",

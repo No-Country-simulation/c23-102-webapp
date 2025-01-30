@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { CategoryType } from "@/types/RestaurantTypes";
 import { useMeasure } from "react-use";
 
 export const ScrollableCarousel = ({
@@ -12,9 +11,9 @@ export const ScrollableCarousel = ({
 	onSelectItem,
 	selected,
 }: {
-	labels: Array<CategoryType>;
-	onSelectItem: (item: CategoryType) => void;
-	selected: CategoryType | null;
+	labels: Array<string>;
+	onSelectItem: (item: string) => void;
+	selected: string | null;
 }) => {
 	const [ref, { width: width }] = useMeasure<HTMLDivElement>();
 	const [ref2, { width: width2 }] = useMeasure<HTMLDivElement>();
@@ -34,18 +33,17 @@ export const ScrollableCarousel = ({
 				dragConstraints={constraints}
 				dragElastic={0.1}
 			>
-				{labels.map((label) => (
-					<div key={label.id} ref={ref2}>
+				{labels.map((label, index) => (
+					<div key={index} ref={ref2}>
 						<Button
-							key={label.id}
 							variant="outline"
 							onClick={() => onSelectItem(label)}
 							className={cn(
 								"border-1 rounded-md",
-								selected?.id === label.id ? "bg-white text-black" : "bg-white bg-opacity-[0.1]"
+								selected === label ? "bg-white text-black" : "bg-white bg-opacity-[0.1]"
 							)}
 						>
-							{label.category}
+							{label}
 						</Button>
 					</div>
 				))}

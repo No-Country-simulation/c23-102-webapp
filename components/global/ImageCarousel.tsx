@@ -34,7 +34,7 @@ export function ImageCarousel({ slides }: { slides: Array<RestaurantShortInfoTyp
 			>
 				{slides.map((slide, index) => (
 					<motion.div
-						key={slide.id || index}
+						key={index}
 						className="flex-none w-[90%] md:w-[60%] lg:w-[32%] h-[25rem] lg:h-[30rem]"
 						whileTap={{ cursor: "grabbing" }}
 						ref={ref2}
@@ -42,7 +42,7 @@ export function ImageCarousel({ slides }: { slides: Array<RestaurantShortInfoTyp
 						{/* La tarjeta completa es draggable */}
 						<Card className="h-full relative rounded-xl border-none overflow-hidden">
 							<Link
-								href={WEBSITE_ROUTES.RESTAURANT_DETAILS + "/" + slide.id}
+								href={WEBSITE_ROUTES.RESTAURANT_DETAILS + "/" + slide.email}
 								className="absolute top-0 left-0 h-full w-full"
 							>
 								{/* Imagen de fondo */}
@@ -65,7 +65,7 @@ export function ImageCarousel({ slides }: { slides: Array<RestaurantShortInfoTyp
 												variant="secondary"
 												className="bg-gray-500 text-gray-200 font-thin px-3 py-1 text-xs opacity-[0.65]"
 											>
-												{slide.category.category}
+												{slide.category}
 											</Badge>
 										</div>
 									</div>
