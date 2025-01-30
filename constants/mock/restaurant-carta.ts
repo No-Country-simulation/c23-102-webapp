@@ -12,7 +12,8 @@ export const mocked_base_cartas: Array<CartaType> = [
 		id: "2",
 		title: "Bebidas",
 		description: "Carta de bebidas",
-		image_url: null,
+		image_url:
+			"https://www.allrecipes.com/thmb/uzxCGTc-5WCUZnZ7BUcYcmWKxjo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/AR-48974-vanilla-milkshake-hero-4x3-c815295c714f41f6b17b104e7403a53b.jpg",
 		status: "disponible",
 	},
 	{
