@@ -6,7 +6,7 @@ import { Card, CardHeader, CardDescription, CardTitle } from "@/components/ui/ca
 
 const CardWithIcon = ({ route, icon, title, subtitle }: cardWithIconProps) => {
 	return (
-		<Link href={route} className=" w-full">
+		<Link href={route} className="w-full">
 			<Card className="cardContainerStyles">
 				<CardHeader className="cardStyles">
 					{icon}
