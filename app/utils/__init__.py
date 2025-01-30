@@ -1,7 +1,11 @@
 """Almacena funciones puras"""
 from os import makedirs
-from os.path import abspath
+from os.path import abspath, join
 from typing import List
+
+from flask import current_app
+from werkzeug.datastructures import FileStorage
+from werkzeug.utils import secure_filename
 
 
 def allowed_file(filename: str, allowed_extensions: List[str]):
@@ -14,6 +18,18 @@ def allowed_file(filename: str, allowed_extensions: List[str]):
     """
     file_extension = filename.rsplit('.', 1)[1].lower()
     return '.' in filename and file_extension in allowed_extensions
+
+
+def save_image(image: FileStorage):
+    """Guarda archivo en static/ y retorna path."""
+    create_directory("static")
+    allowed_extensions = ['jpg', 'png', 'jpeg']
+    if not image.filename:
+        raise ValueError('Ningún archivo enviado.')
+    if image.filename and allowed_file(image.filename, allowed_extensions):
+        filename = secure_filename(image.filename)
+        image.save(join(current_app.config['UPLOAD_FOLDER'], filename))
+        return f"static/{filename}"
 
 
 def create_directory(directory_relative_path: str):

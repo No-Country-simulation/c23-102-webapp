@@ -1,23 +1,8 @@
 """Crea vista 'register_restaurant'."""
-from os.path import join
-from flask import current_app, request, abort
-from werkzeug.datastructures import FileStorage
-from werkzeug.utils import secure_filename
+from flask import request, abort
 from app.db import get_db
-from app.utils import allowed_file, create_directory
+from app.utils import save_image
 from . import register
-
-
-def save_file(file: FileStorage):
-    """Guarda archivo en static/ y retorna path."""
-    create_directory("static")
-    allowed_extensions = ['jpg', 'png', 'jpeg']
-    if not file.filename:
-        raise ValueError('Ningún archivo enviado.')
-    if file.filename and allowed_file(file.filename, allowed_extensions):
-        filename = secure_filename(file.filename)
-        file.save(join(current_app.config['UPLOAD_FOLDER'], filename))
-        return f"static/{filename}"
 
 
 @register.post('/restaurant')
@@ -33,7 +18,7 @@ def register_restaurant():
             VALUES (?, ?, ?, ?, ?, ?)
             """,
             (form['brand'], form['location'],
-             form['locationName'], form['category'], form['email'], save_file(
+             form['locationName'], form['category'], form['email'], save_image(
                  banner_file))
         ).fetchone()
         db.commit()
