@@ -7,14 +7,11 @@ import {
 	DrawerClose,
 	DrawerContent,
 	DrawerDescription,
-	DrawerFooter,
 	DrawerHeader,
 	DrawerTitle,
 	DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import LinkButton from "@/components/global/LinkButton";
 
 export const RestaurantNavbar = () => {
 	return (
