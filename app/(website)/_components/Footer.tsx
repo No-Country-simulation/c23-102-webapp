@@ -1,6 +1,6 @@
 import React from "react";
 import { Logo } from "@/components/global/Logo";
-import { take_away_socials, take_away_footer_routes, take_away_footer_legal } from "@/constants/mock/takeAway-info";
+import { take_away_socials, take_away_footer_routes, take_away_footer_legal } from "@/constants/takeAway-info";
 import LinkWithIcon from "@/components/global/LinkWithIcon";
 import Link from "next/link";
 import NewsletterBanner from "@/components/global/NewsletterBanner";

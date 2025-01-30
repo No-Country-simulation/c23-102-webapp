@@ -1,4 +1,4 @@
-import { WEBSITE_ROUTES } from "../routes";
+import { WEBSITE_ROUTES } from "./routes";
 import { SiFacebook, SiInstagram, SiX } from "@icons-pack/react-simple-icons";
 
 export const take_away_socials = [

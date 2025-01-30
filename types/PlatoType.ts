@@ -6,3 +6,7 @@ export interface PlatoType {
 	price: string | null;
 	disponible: boolean;
 }
+
+export interface PlatoResponse {
+	message: string;
+}

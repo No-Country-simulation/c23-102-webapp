@@ -9,10 +9,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { CreatePlatosFormData, platosCreateSchema } from "@/schemas/platosSchema";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Image from "next/image";
+import { createPlato } from "@/actions/platosActions";
+import { useModal } from "@/context/ModalContext";
+import { SUCCESS_CREATE_PLATO } from "@/constants/app_constants";
 
 const RestaurantPlatosForm = () => {
 	const [selectedFile, setSelectedFile] = useState<File | null>(null);
 	const [isPending, startTransition] = useTransition();
+	const { openModal } = useModal();
 
 	const form = useForm<CreatePlatosFormData>({
 		resolver: zodResolver(platosCreateSchema),
@@ -31,30 +35,34 @@ const RestaurantPlatosForm = () => {
 
 	const onSubmit = (values: CreatePlatosFormData) => {
 		startTransition(async () => {
-			try {
-				const formData = new FormData();
+			const formData = new FormData();
 
-				if (selectedFile) {
-					formData.append("coverImage", selectedFile);
-				}
-
-				// Convertir disponible (string) a booleano
-				const isDisponible = values.disponible === "disponible";
-
-				formData.append("name", values.name);
-				formData.append("description", values.description);
-				formData.append("price", String(values.price));
-				formData.append("disponible", String(isDisponible));
-
-				for (const value of formData.values()) {
-					console.log(value);
-				}
-			} catch (error) {
-				form.setError("root", {
-					type: "manual",
-					message: (error as Error).message,
-				});
+			if (selectedFile) {
+				formData.append("coverImage", selectedFile);
 			}
+
+			// Convertir disponible (string) a booleano
+			const isDisponible = values.disponible === "disponible";
+
+			formData.append("name", values.name);
+			formData.append("description", values.description);
+			formData.append("price", String(values.price));
+			formData.append("disponible", String(isDisponible));
+
+			// for (const value of formData.values()) {
+			// 	console.log(value);
+			// }
+
+			createPlato(formData)
+				.then(() => {
+					openModal(SUCCESS_CREATE_PLATO.title, SUCCESS_CREATE_PLATO.message, SUCCESS_CREATE_PLATO.redirect_url);
+				})
+				.catch((error) => {
+					form.setError("root", {
+						type: "manual",
+						message: (error as Error).message,
+					});
+				});
 		});
 	};
 
