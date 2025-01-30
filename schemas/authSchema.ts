@@ -58,6 +58,14 @@ export const fullRestaurantDetailsSchema = z.object({
 	phone: z.string().min(8, { message: "Ingrese un numero de telefono" }),
 });
 
+export const fullCLientDetailsSchema = z.object({
+	name: z.string().min(3, { message: "Ingrese su nombre" }),
+	lastName: z.string().min(3, { message: "Ingrese su apellido" }),
+	phone: z.string().min(8, { message: "Ingrese un numero de telefono" }),
+	location: z.string().min(3, { message: "Ingrese una dirección" }),
+	city: z.string().min(3, { message: "Ingrese una Ciudad" }),
+});
+
 // Authentication Schemas
 export type LoginFormData = z.infer<typeof loginSchema>;
 export type RegisterRestaurantFormData = z.infer<typeof registerRestaurantSchema>;
@@ -66,3 +74,4 @@ export type RegisterClientFormData = z.infer<typeof registerClientSchema>;
 
 // CRUD Schemas
 export type RestaurantEditFormData = z.infer<typeof fullRestaurantDetailsSchema>;
+export type ClientEditFormData = z.infer<typeof fullCLientDetailsSchema>;
