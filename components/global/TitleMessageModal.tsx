@@ -11,7 +11,7 @@ export function TitleMessageModal() {
 			<DialogContent className="w-[90%] max-w-[425px] rounded-lg border border-white bg-black text-center h-[25rem] flex flex-col justify-center gap-8">
 				<VisuallyHidden>
 					<DialogTitle></DialogTitle>
-					<DialogDescription></DialogDescription>
+					<DialogDescription>Fixed warning</DialogDescription>
 				</VisuallyHidden>
 				<span className="text-[color:--primary-color] font-bold text-3xl">{title}</span>
 				<p>{message}</p>
