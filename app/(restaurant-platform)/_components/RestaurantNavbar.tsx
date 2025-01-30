@@ -2,6 +2,19 @@ import React from "react";
 import Link from "next/link";
 import { House, ReceiptText, User, Plus, UtensilsCrossed } from "lucide-react";
 import { RESTAURANT_ROUTES } from "@/constants/routes";
+import {
+	Drawer,
+	DrawerClose,
+	DrawerContent,
+	DrawerDescription,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerTitle,
+	DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import LinkButton from "@/components/global/LinkButton";
 
 export const RestaurantNavbar = () => {
 	return (
@@ -15,10 +28,32 @@ export const RestaurantNavbar = () => {
 					<UtensilsCrossed />
 					<h3 className="font-thin text-sm">Menus</h3>
 				</Link>
-				<Link href={RESTAURANT_ROUTES.RESTAURANT_PLATOS} className="flex flex-col items-center justify-center">
-					<Plus />
-					<h3 className="font-thin text-sm">Crear</h3>
-				</Link>
+				<Drawer>
+					<DrawerTrigger asChild>
+						<span className="flex flex-col items-center justify-center">
+							<Plus />
+							<h3 className="font-thin text-sm">Crear</h3>
+						</span>
+					</DrawerTrigger>
+					<DrawerContent className="bg-black pb-8">
+						<div className="mx-auto w-full max-w-sm text-white bg-black">
+							<DrawerHeader>
+								<DrawerTitle className="font-thin text-sm">Que quieres crear?</DrawerTitle>
+								<VisuallyHidden>
+									<DrawerDescription></DrawerDescription>
+								</VisuallyHidden>
+							</DrawerHeader>
+							<div className="flex flex-col gap-2 w-[80%] m-auto items-center">
+								<DrawerClose asChild className="bg-gray-900 w-full text-center py-2 rounded-full">
+									<Link href={RESTAURANT_ROUTES.RESTAURANT_MENUS}>Menu</Link>
+								</DrawerClose>
+								<DrawerClose asChild className="bg-gray-900 w-full text-center py-2 rounded-full">
+									<Link href={RESTAURANT_ROUTES.RESTAURANT_PLATOS_CREATE}>Producto</Link>
+								</DrawerClose>
+							</div>
+						</div>
+					</DrawerContent>
+				</Drawer>
 				<Link href={RESTAURANT_ROUTES.RESTAURANT_PEDIDOS} className="flex flex-col items-center justify-center">
 					<ReceiptText />
 					<h3 className="font-thin text-sm">Pedidos</h3>
