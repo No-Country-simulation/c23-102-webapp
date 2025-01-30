@@ -1,4 +1,6 @@
-import React, { useState, useTransition } from "react";
+"use client";
+
+import React, { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,11 +11,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { CreatePlatosFormData, platosCreateSchema } from "@/schemas/platosSchema";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Image from "next/image";
-import { createPlato } from "@/actions/platosActions";
+import { createPlato, updatePlato } from "@/actions/platosActions";
 import { useModal } from "@/context/ModalContext";
-import { SUCCESS_CREATE_PLATO } from "@/constants/app_constants";
+import {
+	STATUS_BORRADOR,
+	STATUS_DISPONIBLE,
+	SUCCESS_CREATE_PLATO,
+	SUCCESS_UPDATE_PLATO,
+} from "@/constants/app_constants";
+import { PlatoResponse } from "@/types/PlatoType";
 
-const RestaurantPlatosForm = () => {
+const RestaurantPlatosForm = ({ editProduct }: { editProduct?: PlatoResponse }) => {
 	const [selectedFile, setSelectedFile] = useState<File | null>(null);
 	const [isPending, startTransition] = useTransition();
 	const { openModal } = useModal();
@@ -25,9 +33,22 @@ const RestaurantPlatosForm = () => {
 			description: "",
 			coverImage: "",
 			price: "",
-			disponible: "",
+			disponible: STATUS_DISPONIBLE,
 		},
 	});
+
+	// Si editProduct existe, llenar el formulario con sus valores
+	useEffect(() => {
+		if (editProduct) {
+			form.reset({
+				name: editProduct.name,
+				description: editProduct.description,
+				coverImage: editProduct.image_url || "",
+				price: String(editProduct.price),
+				disponible: editProduct.disponible ? STATUS_DISPONIBLE : STATUS_BORRADOR,
+			});
+		}
+	}, [editProduct, form]);
 
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSelectedFile(event.target.files?.[0] || null);
@@ -41,28 +62,30 @@ const RestaurantPlatosForm = () => {
 				formData.append("coverImage", selectedFile);
 			}
 
-			// Convertir disponible (string) a booleano
-			const isDisponible = values.disponible === "disponible";
-
 			formData.append("name", values.name);
 			formData.append("description", values.description);
 			formData.append("price", String(values.price));
-			formData.append("disponible", String(isDisponible));
+			formData.append("disponible", values.disponible);
 
 			// for (const value of formData.values()) {
 			// 	console.log(value);
 			// }
 
-			createPlato(formData)
-				.then(() => {
+			try {
+				if (editProduct) {
+					// Editar un plato existente
+					await updatePlato(editProduct.id, formData);
+					openModal(SUCCESS_UPDATE_PLATO.title, SUCCESS_UPDATE_PLATO.message, SUCCESS_UPDATE_PLATO.redirect_url);
+				} else {
+					await createPlato(formData);
 					openModal(SUCCESS_CREATE_PLATO.title, SUCCESS_CREATE_PLATO.message, SUCCESS_CREATE_PLATO.redirect_url);
-				})
-				.catch((error) => {
-					form.setError("root", {
-						type: "manual",
-						message: (error as Error).message,
-					});
+				}
+			} catch (error) {
+				form.setError("root", {
+					type: "manual",
+					message: (error as Error).message,
 				});
+			}
 		});
 	};
 
@@ -75,7 +98,7 @@ const RestaurantPlatosForm = () => {
 						name="coverImage"
 						control={form.control}
 						render={({}) => {
-							const imageUrl = selectedFile && URL.createObjectURL(selectedFile);
+							const imageUrl = selectedFile ? URL.createObjectURL(selectedFile) : editProduct?.image_url || "";
 							return (
 								<FormItem className="w-full">
 									<FormControl>
@@ -183,7 +206,7 @@ const RestaurantPlatosForm = () => {
 					{/* Status */}
 					{/* Tipo de negocio */}
 					<FormField
-						name="disponible"
+						name={STATUS_DISPONIBLE}
 						control={form.control}
 						render={({ field }) => (
 							<FormItem className="w-full">
@@ -202,8 +225,8 @@ const RestaurantPlatosForm = () => {
 									</SelectTrigger>
 									<SelectContent>
 										<SelectGroup>
-											<SelectItem value={"disponible"}>Disponible</SelectItem>
-											<SelectItem value={"borrador"}>Borrador</SelectItem>
+											<SelectItem value={STATUS_DISPONIBLE}>{STATUS_DISPONIBLE}</SelectItem>
+											<SelectItem value={STATUS_BORRADOR}>{STATUS_BORRADOR}</SelectItem>
 										</SelectGroup>
 									</SelectContent>
 								</Select>

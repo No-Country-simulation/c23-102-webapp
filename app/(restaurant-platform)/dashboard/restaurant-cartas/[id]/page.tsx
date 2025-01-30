@@ -2,6 +2,7 @@ import React from "react";
 import { findCartaById } from "@/constants/mock/restaurant-carta";
 import { fetchPlatosByCartaId } from "@/actions/platosActions";
 import ItemListCard from "@/components/global/ItemListCard";
+import { RESTAURANT_ROUTES } from "@/constants/routes";
 
 const RestaurantCartasDetailsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 	const { id } = await params;
@@ -19,7 +20,7 @@ const RestaurantCartasDetailsPage = async ({ params }: { params: Promise<{ id: s
 							title={name}
 							description={description}
 							image_url={image_url}
-							route={"/"}
+							route={RESTAURANT_ROUTES.RESTAURANT_PLATOS + "/" + id}
 							status={disponible}
 							price={price}
 						></ItemListCard>
