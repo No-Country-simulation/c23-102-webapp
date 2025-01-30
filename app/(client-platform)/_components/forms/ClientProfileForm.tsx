@@ -6,13 +6,11 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ClientEditFormData, fullCLientDetailsSchema, RegisterClientFormData } from "@/schemas/authSchema";
-import { useUser } from "@/context/UserContext";
-import { ClientProfileDetailsResponse } from "@/types/ClientTypes";
+import { ClientEditFormData, fullCLientDetailsSchema } from "@/schemas/authSchema";
+import { ClientProfileDetailsType } from "@/types/ClientTypes";
 
-const ClientProfileForm = ({ initialData }: { initialData: ClientProfileDetailsResponse }) => {
+const ClientProfileForm = ({ initialData }: { initialData: ClientProfileDetailsType }) => {
 	const [isPending, startTransition] = useTransition();
-	const { updateUser } = useUser();
 
 	const splitName = initialData.fullName.split(" ");
 	const form = useForm<ClientEditFormData>({
@@ -26,7 +24,7 @@ const ClientProfileForm = ({ initialData }: { initialData: ClientProfileDetailsR
 		},
 	});
 
-	const onSubmit = async (values: RegisterClientFormData) => {
+	const onSubmit = async (values: ClientEditFormData) => {
 		startTransition(async () => {
 			try {
 				// User Data
@@ -34,6 +32,7 @@ const ClientProfileForm = ({ initialData }: { initialData: ClientProfileDetailsR
 				userFormData.append("name", values.name);
 				userFormData.append("lastname", values.lastName);
 				userFormData.append("phone", values.phone);
+				userFormData.append("email", initialData.email);
 
 				// Restaurant Data
 				const clientFormData = new FormData();
@@ -75,7 +74,7 @@ const ClientProfileForm = ({ initialData }: { initialData: ClientProfileDetailsR
 										{...field}
 										placeholder={"John"}
 										type="text"
-										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+										className={`form-input-text ${form.formState.errors.name && "form-input-text-validation-error"}`}
 										disabled={isPending}
 									></Input>
 								</FormControl>
@@ -94,7 +93,9 @@ const ClientProfileForm = ({ initialData }: { initialData: ClientProfileDetailsR
 										{...field}
 										placeholder={"Doe"}
 										type="text"
-										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+										className={`form-input-text ${
+											form.formState.errors.lastName && "form-input-text-validation-error"
+										}`}
 										disabled={isPending}
 									></Input>
 								</FormControl>
@@ -115,7 +116,9 @@ const ClientProfileForm = ({ initialData }: { initialData: ClientProfileDetailsR
 										{...field}
 										placeholder={"Ferniche 1985"}
 										type="text"
-										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+										className={`form-input-text ${
+											form.formState.errors.location && "form-input-text-validation-error"
+										}`}
 										disabled={isPending}
 									></Input>
 								</FormControl>
@@ -134,7 +137,7 @@ const ClientProfileForm = ({ initialData }: { initialData: ClientProfileDetailsR
 										{...field}
 										placeholder={"Ciudad de Buenos Aires"}
 										type="text"
-										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+										className={`form-input-text ${form.formState.errors.city && "form-input-text-validation-error"}`}
 										disabled={isPending}
 									></Input>
 								</FormControl>

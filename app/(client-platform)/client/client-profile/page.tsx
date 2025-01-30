@@ -3,12 +3,12 @@
 import { useUser } from "@/context/UserContext";
 import { useEffect, useState } from "react";
 import ClientProfileForm from "../../_components/forms/ClientProfileForm";
-import { ClientProfileDetailsResponse } from "@/types/ClientTypes";
+import { ClientProfileDetailsType } from "@/types/ClientTypes";
 import { clientProfileByEmail } from "@/actions/clientActions";
 
 const ClientEditProfilePage = () => {
 	const { user } = useUser();
-	const [clientDetails, setClientDetails] = useState<ClientProfileDetailsResponse | null>(null);
+	const [clientDetails, setClientDetails] = useState<ClientProfileDetailsType | null>(null);
 
 	useEffect(() => {
 		if (user?.email) {
