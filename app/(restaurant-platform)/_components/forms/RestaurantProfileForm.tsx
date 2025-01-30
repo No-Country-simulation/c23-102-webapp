@@ -82,7 +82,7 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 									<FormControl>
 										<div className="flex flex-col gap-3 w-full mb-10">
 											{/* Contenedor de la imagen */}
-											<div className="relative w-full h-[25rem] flex items-center justify-center">
+											<div className="relative w-full h-[25rem] flex items-center justify-center bg-gray-900">
 												{imageUrl ? (
 													<Image
 														src={imageUrl}
@@ -92,7 +92,7 @@ const RestaurantProfileForm = ({ initialData }: { initialData: RestaurantProfile
 														className="rounded-lg object-cover w-full h-full"
 													/>
 												) : (
-													<div className="text-gray-500 flex flex-col items-center">
+													<div className="text-gray-400 flex flex-col items-center">
 														<ImagePlus width={40} height={40} />
 														<span className="text-sm">Añade una imagen</span>
 													</div>
