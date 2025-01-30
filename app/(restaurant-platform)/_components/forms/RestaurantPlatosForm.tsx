@@ -225,8 +225,8 @@ const RestaurantPlatosForm = ({ editProduct }: { editProduct?: PlatoResponse }) 
 									</SelectTrigger>
 									<SelectContent>
 										<SelectGroup>
-											<SelectItem value={STATUS_DISPONIBLE}>{STATUS_DISPONIBLE}</SelectItem>
-											<SelectItem value={STATUS_BORRADOR}>{STATUS_BORRADOR}</SelectItem>
+											<SelectItem value={STATUS_DISPONIBLE}>{"Disponible"}</SelectItem>
+											<SelectItem value={STATUS_BORRADOR}>{"Borrador"}</SelectItem>
 										</SelectGroup>
 									</SelectContent>
 								</Select>

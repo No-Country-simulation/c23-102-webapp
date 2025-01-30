@@ -10,10 +10,10 @@ const RestaurantCartasDetailsPage = async ({ params }: { params: Promise<{ id: s
 	const platos = await fetchPlatosByCartaId(id);
 
 	return (
-		<div className="w-[85%] m-auto text-white flex flex-col">
-			<div className="flex gap-8 flex-col pt-8">
+		<div className=" bg-black text-white flex items-center justify-center flex-col pt-12">
+			<div className="flex items-center justify-around flex-col w-[93%] m-auto gap-10">
 				<h2 className="text-2xl font-semibold">{carta.title}</h2>
-				{platos.map(({ id, name, description, image_url, price, disponible, cartaId }) => {
+				{platos.map(({ id, name, description, image_url, price, disponible }) => {
 					return (
 						<ItemListCard
 							key={id}
@@ -28,6 +28,11 @@ const RestaurantCartasDetailsPage = async ({ params }: { params: Promise<{ id: s
 				})}
 			</div>
 		</div>
+		// <div className="w-[85%] m-auto text-white flex flex-col">
+		// 	<div className="flex gap-8 flex-col pt-8">
+
+		// 	</div>
+		// </div>
 	);
 };
 

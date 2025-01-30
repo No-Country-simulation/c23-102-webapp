@@ -7,7 +7,7 @@ export interface PlatoType {
 	image_url: string | null;
 	price: string;
 	disponible: typeof STATUS_DISPONIBLE | typeof STATUS_BORRADOR;
-	cartaId: string | null;
+	cartaId?: string | null;
 }
 
 export interface PlatoResponse {
@@ -17,5 +17,5 @@ export interface PlatoResponse {
 	image_url: string | null;
 	price: string;
 	disponible: typeof STATUS_DISPONIBLE | typeof STATUS_BORRADOR;
-	cartaId: string | null;
+	cartaId?: string | null;
 }
