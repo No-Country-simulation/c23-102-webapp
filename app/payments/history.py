@@ -10,7 +10,7 @@ def history(email: str):
     db = get_db()
     query = """SELECT * FROM Payment WHERE Restaurante_Email = ? OR Client_Email = ?"""
 
-    data = db.execute(query, (email,)).fetchall()
+    data = db.execute(query, (email, email)).fetchall()
     data_formatted = registers_to_list(data)
 
     return data_formatted
