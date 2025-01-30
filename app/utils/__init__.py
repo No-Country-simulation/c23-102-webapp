@@ -34,6 +34,6 @@ def register_to_dict(register):
 def registers_to_list(registers):
     """Convierte todos los registros, en una sola lista."""
     # Recorre todos los registros, todos sus valores y los ingresa en una lista
-    registers_list = [value for register in registers for value in register]
+    registers_list = [dict(register) for register in list(registers)]
 
     return registers_list
