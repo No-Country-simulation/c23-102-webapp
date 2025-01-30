@@ -12,5 +12,6 @@ def history(email: str):
 
     data = db.execute(query, (email, email)).fetchall()
     data_formatted = registers_to_list(data)
+    print(data_formatted)
 
     return data_formatted
