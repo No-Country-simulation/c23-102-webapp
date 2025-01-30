@@ -235,7 +235,7 @@ const RestaurantPlatosForm = ({ editProduct }: { editProduct?: PlatoResponse }) 
 						)}
 					/>
 					<Button type="submit" className="button-fill-primary mt-4" disabled={isPending}>
-						Crear
+						{editProduct ? "Guardar Cambios" : "Crear"}
 					</Button>
 					{form.formState.errors.root && (
 						<FormMessage className="form-response-error ">{form.formState.errors.root.message}</FormMessage>
