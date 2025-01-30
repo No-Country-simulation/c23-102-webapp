@@ -10,3 +10,4 @@ export interface PlatoType {
 export interface PlatoResponse {
 	message: string;
 }
+

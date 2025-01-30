@@ -21,7 +21,7 @@ export const RestaurantNavbar = () => {
 					<House />
 					<h3 className="font-thin text-sm">Inicio</h3>
 				</Link>
-				<Link href={RESTAURANT_ROUTES.RESTAURANT_MENUS} className="flex flex-col items-center justify-center">
+				<Link href={RESTAURANT_ROUTES.RESTAURANT_CARTAS} className="flex flex-col items-center justify-center">
 					<UtensilsCrossed />
 					<h3 className="font-thin text-sm">Carta</h3>
 				</Link>
@@ -42,7 +42,7 @@ export const RestaurantNavbar = () => {
 							</DrawerHeader>
 							<div className="flex flex-col gap-2 w-[80%] m-auto items-center">
 								<DrawerClose asChild className="bg-gray-900 w-full text-center py-2 rounded-full">
-									<Link href={RESTAURANT_ROUTES.RESTAURANT_MENUS}>Carta</Link>
+									<Link href={RESTAURANT_ROUTES.RESTAURANT_CARTAS}>Carta</Link>
 								</DrawerClose>
 								<DrawerClose asChild className="bg-gray-900 w-full text-center py-2 rounded-full">
 									<Link href={RESTAURANT_ROUTES.RESTAURANT_PLATOS_CREATE}>Producto</Link>
