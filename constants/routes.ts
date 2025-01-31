@@ -7,6 +7,7 @@ export const WEBSITE_ROUTES = {
 	REGISTER_RESTAURANT_PROFILE: "/onboarding/register-restaurant/profile",
 	REGISTER_CLIENT: "/onboarding/register-client",
 	RESTAURANT_DETAILS: "/restaurant-details",
+	RESTAURANT_PRODUCT_DETAILS: "/restaurant-details/product",
 };
 
 export const RESTAURANT_ROUTES = {
