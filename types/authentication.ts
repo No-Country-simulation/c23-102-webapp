@@ -1,3 +1,5 @@
+import { USER_TYPES } from "@/constants/app_constants";
+
 export interface LoginRequest {
 	email: string;
 	password: string;
@@ -5,8 +7,7 @@ export interface LoginRequest {
 
 export interface LoginResponse {
 	email: string;
-	accountType: "Client" | "Restaurant";
-	token?: string; // Agrega el JWT si se devuelve en la respuesta
+	accountType: typeof USER_TYPES.CLIENT | typeof USER_TYPES.RESTAURANT;
 }
 
 export interface UserContextType {
