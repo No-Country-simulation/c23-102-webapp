@@ -3,11 +3,13 @@
 import LinkWithIcon from "@/components/global/LinkWithIcon";
 import { Logo } from "@/components/global/Logo";
 import { CLIENT_ROUTES, WEBSITE_ROUTES } from "@/constants/routes";
+import { useCart } from "@/context/CartContext";
 import { useUser } from "@/context/UserContext";
 import { Bell, Search, ShoppingBag } from "lucide-react";
 
 export const ClientTopbar = () => {
 	const { user } = useUser();
+	const { totalItems } = useCart();
 
 	if (user)
 		return (
@@ -22,9 +24,14 @@ export const ClientTopbar = () => {
 									<LinkWithIcon route={WEBSITE_ROUTES.HOME}>
 										<Bell size={"23px"} />
 									</LinkWithIcon>
-									<LinkWithIcon route={WEBSITE_ROUTES.CART}>
-										<ShoppingBag size={"23px"} />
-									</LinkWithIcon>
+									<div className="flex flex-row relative justify-center items-center">
+										<LinkWithIcon route={WEBSITE_ROUTES.CART}>
+											<ShoppingBag size={"23px"} />
+										</LinkWithIcon>
+										<span className="absolute -top-2 -right-2 bg-[color:--primary-color] text-black font-bold text-sm rounded-full h-5 w-5 flex items-center justify-center">
+											{totalItems}
+										</span>
+									</div>
 								</div>
 								<h2 className="text-xs font-thin text-[color:--primary-color]">Bienvenido, {user.email}</h2>
 							</div>

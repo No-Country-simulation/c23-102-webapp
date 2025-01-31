@@ -20,6 +20,7 @@ export const SUCCESS_UPDATE_PLATO = {
 // App Constants
 // ==================================
 export const COOKIE_NAME = "TakeAway-User";
+export const CART_LOCAL_STORAGE = "TakeAway-Cart";
 export const USER_TYPES = {
 	CLIENT: "Client",
 	RESTAURANT: "Restaurant",

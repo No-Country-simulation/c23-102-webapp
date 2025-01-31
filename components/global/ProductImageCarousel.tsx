@@ -7,8 +7,10 @@ import Image from "next/image";
 import { Card, CardTitle, CardDescription } from "@/components/ui/card";
 import { PlatoType } from "@/types/PlatoType";
 import { Button } from "../ui/button";
+import { useCart } from "@/context/CartContext";
 
-export function ProductImageCarousel({ slides }: { slides: Array<PlatoType> }) {
+export function ProductImageCarousel({ slides, locationName }: { slides: Array<PlatoType>; locationName: string }) {
+	const { addToCart } = useCart();
 	const [ref, { width: width }] = useMeasure<HTMLDivElement>();
 	const [ref2, { width: width2 }] = useMeasure<HTMLDivElement>();
 	const [constraints, setConstraints] = useState({ left: 0, right: 0 });
@@ -64,7 +66,12 @@ export function ProductImageCarousel({ slides }: { slides: Array<PlatoType> }) {
 									className="font-semibold"
 									onClick={(e) => {
 										e.stopPropagation(); // Evita propagación al Link
-										console.log("Clicked");
+										addToCart({
+											id: slide.id,
+											product: slide,
+											quantity: 1,
+											locationName: locationName,
+										});
 									}}
 								>
 									Añadir

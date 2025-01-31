@@ -60,7 +60,7 @@ const RestaurantDetailsPage = async ({ params }: { params: Promise<{ id: string 
 					businessTypes={cartas.map((i) => i.title)}
 				></BusinessTypeFilter>
 				{platosPorCarta.map((i, index) => {
-					return <ProductShortDetailsCarousel key={index} products={i}></ProductShortDetailsCarousel>;
+					return <ProductShortDetailsCarousel key={index} products={i} locationName={locationName}></ProductShortDetailsCarousel>;
 				})}
 			</Container>
 		</div>
