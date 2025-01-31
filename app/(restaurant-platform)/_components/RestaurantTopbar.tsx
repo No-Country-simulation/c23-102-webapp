@@ -33,8 +33,8 @@ export const RestaurantTopbar = () => {
 					</div>
 				</div>
 				{/* Desktop */}
-				<div className="hidden lg:block">
-					<div className="absolute top-0 bg-black shadow-[0_0.1px_1px_rgba(255,255,255,0.4)] py-3 pt-6 base-top-styles base-top-styles-lg">
+				<div className="hidden lg:block z-50">
+					<div className="absolute top-0 bg-black shadow-[0_0.1px_1px_rgba(255,255,255,0.4)] py-3 pt-6 base-top-styles base-top-styles-lg z-50">
 						<div className="flex justify-between items-center w-10/12 xl:w-[85%]">
 							<Logo width={80} className={"lg:w-24"}></Logo>
 							<div className="flex flex-row items-center justify-center gap-8">
