@@ -1,10 +1,8 @@
 """Crea edit endponit."""
-from logging import error
-from flask import abort, jsonify, request
+from flask import request
 
 from app.db import get_db
-from app.utils import save_image
-from app.utils.get_restaurant_data import get_restaurant_data
+from app.utils.get_data_from import get_data_from
 from app.utils.get_user_data import get_user_data
 from . import profile
 
@@ -12,8 +10,9 @@ from . import profile
 def update_restaurant(email, data):
     """Actualiza y retorna datos de restaurante en base de datos."""
     db = get_db()
+    role = 'Restaurante'
 
-    restaurant_data = get_restaurant_data(email)
+    restaurant_data = get_data_from(email, role)
     query = """
     UPDATE Restaurant
     SET Opening_Hour = ?,
@@ -43,7 +42,7 @@ def update_restaurant(email, data):
         error_message = str(e)
         print(error_message)
     else:
-        update_data = get_restaurant_data(email)
+        update_data = get_data_from(email, role)
         return update_data
 
 
