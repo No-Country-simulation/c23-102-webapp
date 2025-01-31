@@ -1,7 +1,8 @@
 """Crea vista 'register_restaurant'."""
 from flask import request, abort
 from app.db import get_db
-from app.utils import save_image
+from app.utils import register_to_dict, save_image
+from app.utils.get_restaurant_data import get_restaurant_data
 from . import register
 
 
@@ -28,4 +29,6 @@ def register_restaurant():
         error_message = str(error)
         abort(401, error_message)
     else:
-        return form
+        register = get_restaurant_data(form['email'])
+        data_formatted = register_to_dict(register)
+        return data_formatted
