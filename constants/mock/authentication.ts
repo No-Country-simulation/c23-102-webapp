@@ -1,15 +1,15 @@
 import { LoginResponse } from "@/types/Authentication";
 import { RestaurantDetailsType } from "@/types/RestaurantTypes";
-import { STATUS_DISPONIBLE } from "../app_constants";
+import { STATUS_DISPONIBLE, USER_TYPES } from "../app_constants";
 
 export const loggedClient: LoginResponse = {
 	email: "fake@client.com",
-	accountType: "Client",
+	accountType: USER_TYPES.CLIENT,
 };
 
 export const loggedRestaurant: LoginResponse = {
 	email: "fake@restaurant.com",
-	accountType: "Restaurant",
+	accountType: USER_TYPES.RESTAURANT,
 };
 
 export const loggedRestaurantDetails: RestaurantDetailsType = {
