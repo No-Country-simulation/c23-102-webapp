@@ -46,6 +46,32 @@ def update_restaurant(email, data):
         return update_data
 
 
+def update_client(email, data):
+    """Actualiza y retorna datos de restaurante en base de datos."""
+    db = get_db()
+    role = 'Cliente'
+
+    client_data = get_data_from(email, role)
+    query = """
+    UPDATE Client
+    SET Location = ?,
+    Postal_Code = ?
+    WHERE Email = ?
+    """
+
+    location = data.get('location', client_data['Location'])
+    postal_code = data.get('postalCode', client_data['Postal_Code'])
+
+    try:
+        db.execute(query, (location, postal_code, email))
+    except Exception as e:
+        error_message = str(e)
+        print(error_message)
+    else:
+        update_data = get_data_from(email, role)
+        return update_data
+
+
 @profile.put('/edit/<email>')
 def edit(email: str):
     """Edita datos del cliente, o restaurante, en base de datos."""
@@ -57,4 +83,6 @@ def edit(email: str):
 
         return updated_data
 
-    return 400
+    update_data = update_client(email, data)
+    print(update_data)
+    return update_data
