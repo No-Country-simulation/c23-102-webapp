@@ -15,12 +15,12 @@ def register_restaurant():
     try:
         db.execute(
             """
-            INSERT INTO Restaurant (Brand, Location, Location_Name, Category_Name, Email, Banner_Url)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO Restaurant (Brand, Location, Location_Name, Category_Name, Email, Banner_Url, Description)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
             """,
             (form['brand'], form['location'],
              form['locationName'], form['category'], form['email'], save_image(
-                 banner_file))
+                 banner_file), form['description'])
         ).fetchone()
         db.commit()
     except db.IntegrityError:
