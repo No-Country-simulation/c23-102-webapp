@@ -27,10 +27,10 @@ export const ClientTopbar = () => {
 									<div className="flex flex-row relative justify-center items-center">
 										<LinkWithIcon route={WEBSITE_ROUTES.CART}>
 											<ShoppingBag size={"23px"} />
+											<span className="absolute -top-2 -right-2 bg-[color:--primary-color] text-black font-bold text-sm rounded-full h-5 w-5 flex items-center justify-center">
+												{totalItems}
+											</span>
 										</LinkWithIcon>
-										<span className="absolute -top-2 -right-2 bg-[color:--primary-color] text-black font-bold text-sm rounded-full h-5 w-5 flex items-center justify-center">
-											{totalItems}
-										</span>
 									</div>
 								</div>
 								<h2 className="text-xs font-thin text-[color:--primary-color]">Bienvenido, {user.email}</h2>
@@ -56,9 +56,14 @@ export const ClientTopbar = () => {
 									<LinkWithIcon route={WEBSITE_ROUTES.HOME}>
 										<Bell size={"23px"} />
 									</LinkWithIcon>
-									<LinkWithIcon route={WEBSITE_ROUTES.CART}>
-										<ShoppingBag size={"23px"} />
-									</LinkWithIcon>
+									<div className="flex flex-row relative justify-center items-center">
+										<LinkWithIcon route={WEBSITE_ROUTES.CART}>
+											<ShoppingBag size={"23px"} />
+											<span className="absolute -top-2 -right-2 bg-[color:--primary-color] text-black font-bold text-sm rounded-full h-5 w-5 flex items-center justify-center">
+												{totalItems}
+											</span>
+										</LinkWithIcon>
+									</div>
 								</div>
 								<h2 className="text-sm font-thin text-[color:--primary-color]">Bienvenido, {user.email}</h2>
 							</div>

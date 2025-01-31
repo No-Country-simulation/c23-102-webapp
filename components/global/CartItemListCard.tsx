@@ -2,13 +2,12 @@ import React from "react";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { PlatoType } from "@/types/PlatoType";
-import { Button } from "../ui/button";
 
 function CartItemListCard({ id, product, quantity }: { id: string; product: PlatoType; quantity: number }) {
 	const { removeFromCart } = useCart();
 	const { name, description, price, image_url } = product;
 	return (
-		<article className="w-full h-[8.3rem] flex flex-row gap-4 items-center rounded-lg overflow-hidden pr-4">
+		<article className="w-full h-[8.3rem] flex flex-row gap-4 items-center rounded-lg overflow-hidden">
 			{/* Contenedor de la imagen o el fallback (30% del ancho) */}
 			<div className="w-[38%] h-full flex items-center justify-center rounded-xl overflow-hidden">
 				{image_url ? (
@@ -22,8 +21,11 @@ function CartItemListCard({ id, product, quantity }: { id: string; product: Plat
 			<div className="grow flex flex-col">
 				<h2 className="text-sm font-bold">{name}</h2>
 				<p className="text-sm font-thin">{description}</p>
-				{price && <span className="text-[color:--primary-color] text-md font-bold">{price + " $"}</span>}
-				<p className="max-w-[3.8rem] text-xs font-semibold text-red-600 cursor-pointer" onClick={() => removeFromCart(id)}>
+				{price && <span className="text-[color:--primary-color] text-md font-bold">{"$ " + price}</span>}
+				<p
+					className="max-w-[3.8rem] text-xs font-semibold text-red-600 cursor-pointer mt-1"
+					onClick={() => removeFromCart(id)}
+				>
 					Remover
 				</p>
 			</div>

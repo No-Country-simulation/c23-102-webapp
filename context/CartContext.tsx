@@ -63,8 +63,20 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 	// Calculate the total number of items in the cart
 	const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
 
+	// Calculate subtotals for each locationName
+	const getRestaurantSubtotals = (): { [location: string]: number } => {
+		const subtotals: Record<string, number> = {};
+		cart.forEach(({ locationName, product, quantity }) => {
+			if (!subtotals[locationName]) {
+				subtotals[locationName] = 0;
+			}
+			subtotals[locationName] += Number(product.price) * quantity;
+		});
+		return subtotals;
+	};
+
 	// Calculate the total price of the cart
-	const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+	const totalPrice = cart.reduce((total, item) => total + Number(item.product.price) * item.quantity, 0);
 
 	// Provide the cart state and functions to the app
 	return (
@@ -75,6 +87,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 				removeFromCart,
 				updateQuantity,
 				clearCart,
+				getRestaurantSubtotals,
 				totalItems,
 				totalPrice,
 			}}
