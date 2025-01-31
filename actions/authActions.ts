@@ -1,7 +1,6 @@
 "use server";
 
 import axios from "axios";
-import { LoginResponse } from "@/types/Authentication";
 import {
 	LOGIN_ERROR_MSG,
 	LOGIN_URL,
@@ -10,6 +9,7 @@ import {
 	SERVER_ERROR,
 } from "@/constants/app_constants";
 import { loggedClient, loggedRestaurant } from "@/constants/mock/authentication";
+import { LoginResponse } from "@/types/Authentication";
 
 export async function loginUser(body: FormData): Promise<LoginResponse> {
 	try {
