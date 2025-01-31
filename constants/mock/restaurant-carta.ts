@@ -1,8 +1,9 @@
-import { CartaType } from "@/types/CartaType";
+import { CartaResponse, CartaType } from "@/types/CartaType";
 
 export const mocked_base_cartas: Array<CartaType> = [
 	{
 		id: "1",
+		restaurantEmail: "fastfood@gmail.com",
 		title: "Carta",
 		description: "Menu principal",
 		image_url: null,
@@ -10,6 +11,7 @@ export const mocked_base_cartas: Array<CartaType> = [
 	},
 	{
 		id: "2",
+		restaurantEmail: "fastfood@gmail.com",
 		title: "Bebidas",
 		description: "Carta de bebidas",
 		image_url:
@@ -18,6 +20,7 @@ export const mocked_base_cartas: Array<CartaType> = [
 	},
 	{
 		id: "3",
+		restaurantEmail: "fastfood@gmail.com",
 		title: "Postres",
 		description: "Carta de postres",
 		image_url: null,
@@ -25,9 +28,12 @@ export const mocked_base_cartas: Array<CartaType> = [
 	},
 ];
 
-
 export const findCartaById = (id: string) => {
 	const found = mocked_base_cartas.find((i) => i.id === id);
 	return found ? found : mocked_base_cartas[0];
 };
 
+export const findCartasByRestaurantEmail = (email: string): Array<CartaResponse> => {
+	const found = mocked_base_cartas.filter((i) => i.restaurantEmail !== email);
+	return found ? found : mocked_base_cartas;
+};
