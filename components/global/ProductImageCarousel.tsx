@@ -5,8 +5,6 @@ import { useMeasure } from "react-use";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Card, CardTitle, CardDescription } from "@/components/ui/card";
-import Link from "next/link";
-import { WEBSITE_ROUTES } from "@/constants/routes";
 import { PlatoType } from "@/types/PlatoType";
 import { Button } from "../ui/button";
 
@@ -41,29 +39,24 @@ export function ProductImageCarousel({ slides }: { slides: Array<PlatoType> }) {
 					>
 						{/* La tarjeta completa es draggable */}
 						<Card className="h-full relative rounded-xl border-none overflow-hidden">
-							<Link
-								href={WEBSITE_ROUTES.RESTAURANT_PRODUCT_DETAILS + "/" + slide.id}
-								className="absolute top-0 left-0 h-full w-full"
-							>
-								{/* Imagen de fondo */}
-								<Image
-									src={slide.image_url || "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"} // Usa un fallback si la URL es inválida
-									alt={slide.name || "Imagen no disponible"}
-									className="h-full rounded-xl pointer-events-none"
-									fill
-									style={{
-										objectFit: "cover",
-									}}
-								/>
-								{/* Overlay */}
-								<div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-[82%] h-[35%] flex items-center">
-									<div className="inline-block px-4 w-full text-white">
-										<CardTitle className="self-start">{slide.name}</CardTitle>
-										<CardDescription className="text-gray-200">{slide.description}</CardDescription>
-										<span className="block h-[3rem] w-full"></span>
-									</div>
+							{/* Imagen de fondo */}
+							<Image
+								src={slide.image_url || "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"} // Usa un fallback si la URL es inválida
+								alt={slide.name || "Imagen no disponible"}
+								className="h-full rounded-xl pointer-events-none"
+								fill
+								style={{
+									objectFit: "cover",
+								}}
+							/>
+							{/* Overlay */}
+							<div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-[82%] h-[35%] flex items-center">
+								<div className="inline-block px-4 w-full text-white">
+									<CardTitle className="self-start">{slide.name}</CardTitle>
+									<CardDescription className="text-gray-200">{slide.description}</CardDescription>
+									<span className="block h-[3rem] w-full"></span>
 								</div>
-							</Link>
+							</div>
 							{/* Contenedor para precio y botón (fuera del Link) */}
 							<div className="w-[60%] absolute bottom-5 left-[50%] translate-x-[-50%] flex justify-between items-center">
 								<span className="font-semibold text-white">{slide.price}$</span>
