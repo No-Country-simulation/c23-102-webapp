@@ -2,14 +2,16 @@
 from flask import session, request, abort
 from werkzeug.security import check_password_hash
 from app.db import get_db
+from app.utils.get_user_data import get_user_data
 from . import auth
 
 
 @auth.post('/login')
 def login():
     """Verifica datos enviados y redirije, si todo está bien."""
-    email = request.form['email']
-    password: str = request.form['password']
+    form = request.form
+    email = form['email']
+    password: str = form['password']
     db = get_db()
     error = None
     user = db.execute(
@@ -25,6 +27,5 @@ def login():
     if error is not None:
         abort(401, error)
 
-    session.clear()
-    session['user_id'] = user['email']
-    return {'email': email}
+    user_data = get_user_data(form['email'])
+    return user_data
