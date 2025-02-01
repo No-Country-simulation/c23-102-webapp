@@ -4,7 +4,7 @@ import LinkWithIcon from "@/components/global/LinkWithIcon";
 import { Logo } from "@/components/global/Logo";
 import { RESTAURANT_ROUTES, WEBSITE_ROUTES } from "@/constants/routes";
 import { useUser } from "@/context/UserContext";
-import { Bell, Search, User } from "lucide-react";
+import { Bell, User } from "lucide-react";
 
 export const RestaurantTopbar = () => {
 	const { user } = useUser();

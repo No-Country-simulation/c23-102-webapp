@@ -32,6 +32,7 @@
 
 		/* Custom Variables */
 		--primary-color: #ecb500;
+		--page-content-max-w: "1600px";
 	}
 
 	.dark {
@@ -83,6 +84,10 @@
 
 	.center-container-sm {
 		@apply w-[80%] m-auto lg:w-[87%] !important;
+	}
+
+	.container-max-w-1700 {
+		@apply max-w-[1700px] m-auto !important;
 	}
 
 	/* 

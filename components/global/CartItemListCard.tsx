@@ -7,7 +7,7 @@ function CartItemListCard({ id, product, quantity }: { id: string; product: Plat
 	const { removeFromCart } = useCart();
 	const { name, description, price, image_url } = product;
 	return (
-		<article className="w-full h-[8.3rem] flex flex-row gap-4 items-center rounded-lg overflow-hidden">
+		<article className="w-full md:w-[28rem] md:h-[11rem] h-[8.3rem] flex flex-row gap-4 items-center rounded-lg overflow-hidden">
 			{/* Contenedor de la imagen o el fallback (30% del ancho) */}
 			<div className="w-[38%] h-full flex items-center justify-center rounded-xl overflow-hidden">
 				{image_url ? (
