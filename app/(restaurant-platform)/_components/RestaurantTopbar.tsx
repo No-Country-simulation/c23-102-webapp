@@ -4,7 +4,7 @@ import LinkWithIcon from "@/components/global/LinkWithIcon";
 import { Logo } from "@/components/global/Logo";
 import { RESTAURANT_ROUTES, WEBSITE_ROUTES } from "@/constants/routes";
 import { useUser } from "@/context/UserContext";
-import { Bell, Search, User } from "lucide-react";
+import { Bell, User } from "lucide-react";
 
 export const RestaurantTopbar = () => {
 	const { user } = useUser();
@@ -18,9 +18,9 @@ export const RestaurantTopbar = () => {
 						<Logo width={85} className={"lg:w-28"}></Logo>
 						<div className="w-full flex flex-col gap-1 items-end">
 							<div className="flex flex-row gap-4 items-center">
-								<LinkWithIcon route={WEBSITE_ROUTES.HOME}>
+								{/* <LinkWithIcon route={WEBSITE_ROUTES.HOME}>
 									<Search size={"23px"} />
-								</LinkWithIcon>
+								</LinkWithIcon> */}
 								<LinkWithIcon route={WEBSITE_ROUTES.HOME}>
 									<Bell size={"23px"} />
 								</LinkWithIcon>
@@ -46,9 +46,9 @@ export const RestaurantTopbar = () => {
 							</div>
 							<div className="flex flex-col justify-between items-end gap-1">
 								<div className="flex flex-row gap-4">
-									<LinkWithIcon route={WEBSITE_ROUTES.HOME}>
+									{/* <LinkWithIcon route={WEBSITE_ROUTES.HOME}>
 										<Search size={"23px"} />
-									</LinkWithIcon>
+									</LinkWithIcon> */}
 									<LinkWithIcon route={WEBSITE_ROUTES.HOME}>
 										<Bell size={"23px"} />
 									</LinkWithIcon>

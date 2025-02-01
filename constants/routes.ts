@@ -3,6 +3,7 @@ export const WEBSITE_ROUTES = {
 	LOGIN: "/login",
 	CART: "/cart",
 	ONBOARDING: "/onboarding",
+	PAYMENT: "/payment",
 	REGISTER_RESTAURANT: "/onboarding/register-restaurant",
 	REGISTER_RESTAURANT_PROFILE: "/onboarding/register-restaurant/profile",
 	REGISTER_CLIENT: "/onboarding/register-client",

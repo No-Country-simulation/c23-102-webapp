@@ -8,11 +8,13 @@ import { Logo } from "@/components/global/Logo";
 import MediaRendering from "@/components/global/MediaRendering";
 import { USER_TYPES } from "@/constants/app_constants";
 import { WEBSITE_ROUTES } from "@/constants/routes";
+import { useCart } from "@/context/CartContext";
 import { useUser } from "@/context/UserContext";
-import { Search, User } from "lucide-react";
+import { ShoppingBag, User } from "lucide-react";
 
 export const Topbar = () => {
 	const { user } = useUser();
+	const { totalItems } = useCart();
 
 	if (user && user.accountType == USER_TYPES.CLIENT) {
 		return <ClientTopbar></ClientTopbar>;
@@ -34,12 +36,22 @@ export const Topbar = () => {
 									Iniciar Sesion
 								</LinkButton>
 							</MediaRendering>
-							<LinkWithIcon route={WEBSITE_ROUTES.HOME}>
+							{/* <LinkWithIcon route={WEBSITE_ROUTES.HOME}>
 								<Search size={"25px"} />
-							</LinkWithIcon>
-							<LinkWithIcon route={WEBSITE_ROUTES.LOGIN}>
-								<User size={"25px"} />
-							</LinkWithIcon>
+							</LinkWithIcon> */}
+							<div className="flex flex-row relative justify-center items-center">
+								<LinkWithIcon route={WEBSITE_ROUTES.CART}>
+									<ShoppingBag size={"23px"} />
+									<span className="absolute -top-2 -right-2 bg-[color:--primary-color] text-black font-bold text-sm rounded-full h-5 w-5 flex items-center justify-center">
+										{totalItems}
+									</span>
+								</LinkWithIcon>
+							</div>
+							<MediaRendering minWidth={null} maxWidth="1024">
+								<LinkWithIcon route={WEBSITE_ROUTES.LOGIN}>
+									<User size={"25px"} />
+								</LinkWithIcon>
+							</MediaRendering>
 						</div>
 					)}
 				</div>

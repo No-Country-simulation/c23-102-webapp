@@ -10,7 +10,13 @@ import { RestaurantShortInfoType } from "@/types/RestaurantTypes";
 import Link from "next/link";
 import { WEBSITE_ROUTES } from "@/constants/routes";
 
-export function ImageCarousel({ slides }: { slides: Array<RestaurantShortInfoType> }) {
+export function ImageCarousel({
+	slides,
+	filterBy,
+}: {
+	slides: Array<RestaurantShortInfoType>;
+	filterBy?: string | null;
+}) {
 	const [ref, { width: width }] = useMeasure<HTMLDivElement>();
 	const [ref2, { width: width2 }] = useMeasure<HTMLDivElement>();
 	const [constraints, setConstraints] = useState({ left: 0, right: 0 });
@@ -20,6 +26,9 @@ export function ImageCarousel({ slides }: { slides: Array<RestaurantShortInfoTyp
 		setConstraints({ left: myleft, right: 0 });
 	}, [width, slides, width2]);
 
+	if (slides.length === 0 && filterBy) {
+		return <h2 className="text-thin pl-5">No encontramos Restaurantes de tipo: {filterBy}.</h2>;
+	}
 	return (
 		<div className="relative w-full overflow-hidden">
 			{/* Contenedor de Framer Motion para el carrusel */}
