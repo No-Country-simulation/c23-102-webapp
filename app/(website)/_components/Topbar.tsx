@@ -10,7 +10,7 @@ import { USER_TYPES } from "@/constants/app_constants";
 import { WEBSITE_ROUTES } from "@/constants/routes";
 import { useCart } from "@/context/CartContext";
 import { useUser } from "@/context/UserContext";
-import { Search, ShoppingBag, User } from "lucide-react";
+import { ShoppingBag, User } from "lucide-react";
 
 export const Topbar = () => {
 	const { user } = useUser();
