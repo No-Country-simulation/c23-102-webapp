@@ -32,6 +32,16 @@ export const mocked_platos: Array<PlatoType> = [
 		disponible: STATUS_DISPONIBLE,
 		cartaId: "1",
 	},
+	{
+		id: "4",
+		restaurantEmail: "fastfood@email.com",
+		name: "Hamburguesa 3",
+		description: "Con de todo 3",
+		image_url: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/27/ea/5b/a0/combo-de-hamburguesa.jpg",
+		price: "22",
+		disponible: STATUS_DISPONIBLE,
+		cartaId: "1",
+	},
 ];
 
 export const mocked_single_plato = {
