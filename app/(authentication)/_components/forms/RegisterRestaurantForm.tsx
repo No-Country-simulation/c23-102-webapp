@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { registerRestaurant, registerUser } from "@/actions/authActions";
 import { useUser } from "@/context/UserContext";
 import { WEBSITE_ROUTES } from "@/constants/routes";
+import { USER_TYPES } from "@/constants/app_constants";
 
 const RegisterForm = () => {
 	const [isPending, startTransition] = useTransition();
@@ -40,6 +41,7 @@ const RegisterForm = () => {
 		startTransition(async () => {
 			// User Data
 			const userFormData = new FormData();
+			userFormData.append("role", USER_TYPES.RESTAURANT);
 			userFormData.append("email", values.email);
 			userFormData.append("password", values.password);
 			userFormData.append("name", values.name);

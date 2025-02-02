@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { registerClient, registerUser } from "@/actions/authActions";
 import { useUser } from "@/context/UserContext";
 import { RESTAURANT_ROUTES } from "@/constants/routes";
+import { USER_TYPES } from "@/constants/app_constants";
 
 const RegisterClientForm = () => {
 	const [isPending, startTransition] = useTransition();
@@ -35,6 +36,7 @@ const RegisterClientForm = () => {
 		startTransition(async () => {
 			// User Data
 			const userFormData = new FormData();
+			userFormData.append("role", USER_TYPES.CLIENT)
 			userFormData.append("email", values.email);
 			userFormData.append("password", values.password);
 			userFormData.append("name", values.name);
@@ -83,7 +85,7 @@ const RegisterClientForm = () => {
 										{...field}
 										placeholder={"John"}
 										type="text"
-										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+										className={`form-input-text ${form.formState.errors.name && "form-input-text-validation-error"}`}
 										disabled={isPending}
 									></Input>
 								</FormControl>
@@ -102,7 +104,7 @@ const RegisterClientForm = () => {
 										{...field}
 										placeholder={"Doe"}
 										type="text"
-										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+										className={`form-input-text ${form.formState.errors.lastName && "form-input-text-validation-error"}`}
 										disabled={isPending}
 									></Input>
 								</FormControl>
@@ -123,7 +125,7 @@ const RegisterClientForm = () => {
 										{...field}
 										placeholder={"Ferniche 1985"}
 										type="text"
-										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+										className={`form-input-text ${form.formState.errors.location && "form-input-text-validation-error"}`}
 										disabled={isPending}
 									></Input>
 								</FormControl>
@@ -142,7 +144,7 @@ const RegisterClientForm = () => {
 										{...field}
 										placeholder={"Ciudad de Buenos Aires"}
 										type="text"
-										className={`form-input-text ${form.formState.errors.email && "form-input-text-validation-error"}`}
+										className={`form-input-text ${form.formState.errors.city && "form-input-text-validation-error"}`}
 										disabled={isPending}
 									></Input>
 								</FormControl>
