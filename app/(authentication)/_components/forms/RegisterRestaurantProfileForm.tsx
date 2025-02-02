@@ -12,6 +12,7 @@ import { ImagePlus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { RESTAURANT_ROUTES } from "@/constants/routes";
 import Link from "next/link";
+import Image from "next/image";
 
 const RegisterRestaurantProfileForm = () => {
 	const router = useRouter();
@@ -53,25 +54,41 @@ const RegisterRestaurantProfileForm = () => {
 						name="coverImage"
 						control={form.control}
 						render={({}) => {
+							const imageUrl = selectedFile && URL.createObjectURL(selectedFile);
 							return (
 								<FormItem className="w-full">
 									<FormControl>
-										<div className="relative rounded-lg flex flex-col items-center gap-5 p-8 cursor-pointer bg-[#1a1a1a]">
-											<ImagePlus width={50} height={50} />
-											<h3 className="text-center text-gray-500">
-												Añade una foto de tu restaurante desde tu computadora
-											</h3>
-											<Input
-												type="file"
-												className="w-full h-full absolute top-0 left-0 opacity-0 "
-												onChange={(e) => {
-													handleFileChange(e);
-												}}
-												disabled={isPending}
-											/>
-											<Button className="button-input w-[75%]">
-												{selectedFile ? selectedFile.name : "Añadir Imagen"}
-											</Button>
+										<div className="flex flex-col gap-3 w-full mb-10">
+											{/* Contenedor de la imagen */}
+											<div className="relative w-full h-[25rem] flex items-center justify-center bg-gray-900">
+												{imageUrl ? (
+													<Image
+														src={imageUrl}
+														alt="Preview"
+														width={0}
+														height={0}
+														className="rounded-lg object-cover w-full h-full"
+													/>
+												) : (
+													<div className="text-gray-400 flex flex-col items-center">
+														<ImagePlus width={40} height={40} />
+														<span className="text-sm">Añade una imagen</span>
+													</div>
+												)}
+											</div>
+
+											{/* Botón e Input Oculto */}
+											<div className="relative lg:w-[500px] md:w-[400px] md:m-auto">
+												<Button className="w-full button-outline">
+													{selectedFile ? selectedFile.name : "Seleccionar Imagen"}
+												</Button>
+												<Input
+													type="file"
+													className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+													onChange={handleFileChange}
+													disabled={isPending}
+												/>
+											</div>
 										</div>
 									</FormControl>
 									<FormMessage className="form-message-validation-error" />
