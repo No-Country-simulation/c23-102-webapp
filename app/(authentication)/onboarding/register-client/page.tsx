@@ -6,14 +6,14 @@ import RegisterClientForm from "../../_components/forms/RegisterClientForm";
 
 const RegisterClientPage = () => {
 	return (
-		<div className="min-h-dvh flex flex-col items-center justify-around xl:grid xl:grid-cols-2 xl:gap-2 xl:max-h-dvh">
-			<div className="hidden xl:block xl:w-full xl:h-full xl:max-h-dvh">
+		<div className="min-h-dvh flex flex-col items-center justify-around xl:grid xl:grid-cols-2 xl:gap-2 xl:max-h-dvh py-6">
+			<div className="hidden xl:block w-full h-full">
 				<Image
 					src="https://images.pexels.com/photos/12325004/pexels-photo-12325004.jpeg"
 					alt="Register Restaurant"
 					width={0}
 					height={0}
-					className="w-full h-full object-cover xl:h-full"
+					className="w-full h-full object-cover"
 				/>
 			</div>
 			<Container size="center-container-sm" className="flex flex-col items-center gap-8 py-14 xl:py-0">

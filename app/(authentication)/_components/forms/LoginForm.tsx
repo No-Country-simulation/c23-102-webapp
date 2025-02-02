@@ -11,6 +11,7 @@ import { loginUser } from "@/actions/authActions";
 import { useUser } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
 import { CLIENT_ROUTES, RESTAURANT_ROUTES } from "@/constants/routes";
+import { USER_TYPES } from "@/constants/app_constants";
 
 const LoginForm = () => {
 	const [isPending, startTransition] = useTransition();
@@ -31,9 +32,9 @@ const LoginForm = () => {
 				});
 				const response = await loginUser(formData);
 				updateUser(response);
-				if (response.accountType === "Client") {
+				if (response.accountType === USER_TYPES.CLIENT) {
 					router.push(CLIENT_ROUTES.CLIENT);
-				} else if (response.accountType === "Restaurant") {
+				} else if (response.accountType === USER_TYPES.RESTAURANT) {
 					router.push(RESTAURANT_ROUTES.DASHBOARD);
 				}
 			} catch (error) {

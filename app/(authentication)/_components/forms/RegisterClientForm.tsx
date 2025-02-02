@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useTransition } from "react";
+import React, { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,15 +12,19 @@ import { registerClient, registerUser } from "@/actions/authActions";
 import { useUser } from "@/context/UserContext";
 import { RESTAURANT_ROUTES } from "@/constants/routes";
 import { USER_TYPES } from "@/constants/app_constants";
+import { ImageUp } from "lucide-react";
+import Image from "next/image";
 
 const RegisterClientForm = () => {
-	const [isPending, startTransition] = useTransition();
 	const router = useRouter();
 	const { updateUser } = useUser();
+	const [isPending, startTransition] = useTransition();
+	const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
 	const form = useForm<RegisterClientFormData>({
 		resolver: zodResolver(registerClientSchema),
 		defaultValues: {
+			photo: null,
 			email: "",
 			password: "",
 			confirmPassword: "",
@@ -29,14 +33,19 @@ const RegisterClientForm = () => {
 			phone: "",
 			location: "",
 			city: "",
+			postalCode: "",
 		},
 	});
+
+	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setSelectedFile(event.target.files?.[0] || null);
+	};
 
 	const onSubmit = async (values: RegisterClientFormData) => {
 		startTransition(async () => {
 			// User Data
 			const userFormData = new FormData();
-			userFormData.append("role", USER_TYPES.CLIENT)
+			userFormData.append("role", USER_TYPES.CLIENT);
 			userFormData.append("email", values.email);
 			userFormData.append("password", values.password);
 			userFormData.append("name", values.name);
@@ -46,6 +55,9 @@ const RegisterClientForm = () => {
 			// Restaurant Data
 			const clientFormData = new FormData();
 			const clientCompleteName = values.name + " " + values.lastName;
+			if (selectedFile) {
+				clientFormData.append("photo", selectedFile);
+			}
 			clientFormData.append("city", values.city);
 			clientFormData.append("location", values.location);
 			clientFormData.append("completeName", clientCompleteName);
@@ -72,6 +84,51 @@ const RegisterClientForm = () => {
 	return (
 		<Form {...form}>
 			<form className="w-full forms-max-width" onSubmit={form.handleSubmit(onSubmit)}>
+				{/* Cover Image */}
+				<FormField
+					name="photo"
+					control={form.control}
+					render={({}) => {
+						const imageUrl = selectedFile && URL.createObjectURL(selectedFile);
+						return (
+							<FormItem className="w-full">
+								<FormControl>
+									<div className="relative rounded-full w-24 h-24 bg-[#fffffff1] m-auto mb-8">
+										{imageUrl ? (
+											<>
+												<Image
+													src={imageUrl}
+													alt="Preview"
+													width={0}
+													height={0}
+													className="object-cover w-full h-full rounded-full"
+												/>
+												<span className="absolute -bottom-1 -right-1 bg-[color:--primary-color] text-black rounded-full h-8 w-8 flex items-center justify-center cursor-pointer">
+													<ImageUp></ImageUp>
+												</span>
+											</>
+										) : (
+											<>
+												<span className="absolute -bottom-1 -right-1 bg-[color:--primary-color] text-black rounded-full h-8 w-8 flex items-center justify-center cursor-pointer">
+													<ImageUp></ImageUp>
+												</span>
+											</>
+										)}
+										<Input
+											type="file"
+											className="w-full h-full absolute top-0 left-0 opacity-0 cursor-pointer"
+											onChange={(e) => {
+												handleFileChange(e);
+											}}
+											disabled={isPending}
+										/>
+									</div>
+								</FormControl>
+								<FormMessage className="form-message-validation-error" />
+							</FormItem>
+						);
+					}}
+				/>
 				{/* Nombre y apellido */}
 				<div className="w-full justify-between flex gap-4">
 					<FormField
@@ -89,6 +146,7 @@ const RegisterClientForm = () => {
 										disabled={isPending}
 									></Input>
 								</FormControl>
+								<FormMessage className="form-message-validation-error" />
 							</FormItem>
 						)}
 					/>
@@ -104,10 +162,13 @@ const RegisterClientForm = () => {
 										{...field}
 										placeholder={"Doe"}
 										type="text"
-										className={`form-input-text ${form.formState.errors.lastName && "form-input-text-validation-error"}`}
+										className={`form-input-text ${
+											form.formState.errors.lastName && "form-input-text-validation-error"
+										}`}
 										disabled={isPending}
 									></Input>
 								</FormControl>
+								<FormMessage className="form-message-validation-error" />
 							</FormItem>
 						)}
 					/>
@@ -125,10 +186,13 @@ const RegisterClientForm = () => {
 										{...field}
 										placeholder={"Ferniche 1985"}
 										type="text"
-										className={`form-input-text ${form.formState.errors.location && "form-input-text-validation-error"}`}
+										className={`form-input-text ${
+											form.formState.errors.location && "form-input-text-validation-error"
+										}`}
 										disabled={isPending}
 									></Input>
 								</FormControl>
+								<FormMessage className="form-message-validation-error" />
 							</FormItem>
 						)}
 					/>
@@ -148,6 +212,29 @@ const RegisterClientForm = () => {
 										disabled={isPending}
 									></Input>
 								</FormControl>
+								<FormMessage className="form-message-validation-error" />
+							</FormItem>
+						)}
+					/>
+					{/* Postal Code */}
+					<FormField
+						name="postalCode"
+						control={form.control}
+						render={({ field }) => (
+							<FormItem className="w-full">
+								<FormLabel>Código Postal</FormLabel>
+								<FormControl>
+									<Input
+										{...field}
+										placeholder={"1636"}
+										type="text"
+										className={`form-input-text ${
+											form.formState.errors.postalCode && "form-input-text-validation-error"
+										}`}
+										disabled={isPending}
+									></Input>
+								</FormControl>
+								<FormMessage className="form-message-validation-error" />
 							</FormItem>
 						)}
 					/>

@@ -31,6 +31,7 @@ export const registerRestaurantProfileSchema = z.object({
 
 export const registerClientSchema = z
 	.object({
+		photo: z.any(),
 		name: z.string().min(3, { message: "Ingrese su nombre" }),
 		lastName: z.string().min(3, { message: "Ingrese su apellido" }),
 		email: z.string().email({ message: "El email no es válido" }),
@@ -39,6 +40,7 @@ export const registerClientSchema = z
 		phone: z.string().min(8, { message: "Ingrese un numero de telefono valido" }),
 		city: z.string().min(3, { message: "Ingrese una Ciudad" }),
 		location: z.string().min(3, { message: "Ingrese una dirección" }),
+		postalCode: z.string().min(3, { message: "Ingrese un código postal" }),
 	})
 	.refine((data) => data.password === data.confirmPassword, {
 		message: "Las contraseñas no coinciden",
@@ -59,11 +61,13 @@ export const fullRestaurantDetailsSchema = z.object({
 });
 
 export const fullCLientDetailsSchema = z.object({
+	photo: z.any(),
 	name: z.string().min(3, { message: "Ingrese su nombre" }),
 	lastName: z.string().min(3, { message: "Ingrese su apellido" }),
 	phone: z.string().min(8, { message: "Ingrese un numero de telefono" }),
 	location: z.string().min(3, { message: "Ingrese una dirección" }),
 	city: z.string().min(3, { message: "Ingrese una Ciudad" }),
+	postalCode: z.string().min(3, { message: "Ingrese un código postal" }),
 });
 
 // Authentication Schemas
