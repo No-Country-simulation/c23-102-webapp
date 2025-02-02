@@ -11,10 +11,6 @@ import { useCart } from "@/context/CartContext";
 
 export function ProductImageCarousel({ slides, locationName }: { slides: Array<PlatoType>; locationName: string }) {
 	const [constraints, setConstraints] = useState({ left: 0, right: 0 });
-	const [startX, setStartX] = useState(0);
-	const [startY, setStartY] = useState(0);
-	const [startTime, setStartTime] = useState(0);
-	const [isClick, setIsClick] = useState(false);
 	const { addToCart } = useCart();
 	const [ref, { width: width }] = useMeasure<HTMLDivElement>();
 	const [ref2, { width: width2 }] = useMeasure<HTMLDivElement>();
@@ -28,27 +24,6 @@ export function ProductImageCarousel({ slides, locationName }: { slides: Array<P
 			setConstraints({ left: 0, right: 0 });
 		}
 	}, [width, slides, width2]);
-
-	// Captura la posición inicial para determinar si fue un click o drag
-	const handlePointerDown = (event: React.PointerEvent) => {
-		setIsClick(true);
-		setStartX(event.clientX);
-		setStartY(event.clientY);
-		setStartTime(event.timeStamp);
-	};
-
-	// Detecta si el usuario hizo click o scroll
-	const handlePointerUp = (event: React.PointerEvent) => {
-		const endX = event.clientX;
-		const endY = event.clientY;
-		const elapsedTime = event.timeStamp - startTime;
-		const movedEnough = Math.abs(startX - endX) > 5 || Math.abs(startY - endY) > 5;
-
-		if (movedEnough || elapsedTime > 300) {
-			setIsClick(false);
-			return;
-		}
-	};
 
 	return (
 		<div className="relative w-full overflow-hidden">
@@ -69,8 +44,6 @@ export function ProductImageCarousel({ slides, locationName }: { slides: Array<P
 						className="flex-none w-[90%] md:w-[60%] lg:w-[32%] h-[25rem] lg:h-[30rem]"
 						whileTap={{ cursor: "grabbing" }}
 						ref={ref2}
-						onPointerDown={handlePointerDown}
-						onPointerUp={(event) => handlePointerUp(event)}
 					>
 						{/* La tarjeta completa es draggable */}
 						<Card className="h-full relative rounded-xl border-none overflow-hidden">
