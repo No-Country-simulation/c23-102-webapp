@@ -20,8 +20,9 @@ import {
 	SUCCESS_UPDATE_PLATO,
 } from "@/constants/app_constants";
 import { PlatoResponse } from "@/types/PlatoType";
+import { CartaType } from "@/types/CartaType";
 
-const RestaurantPlatosForm = ({ editProduct }: { editProduct?: PlatoResponse }) => {
+const RestaurantPlatosForm = ({ editProduct, cartas }: { editProduct?: PlatoResponse; cartas?: Array<CartaType> }) => {
 	const [selectedFile, setSelectedFile] = useState<File | null>(null);
 	const [isPending, startTransition] = useTransition();
 	const { openModal } = useModal();
@@ -33,6 +34,7 @@ const RestaurantPlatosForm = ({ editProduct }: { editProduct?: PlatoResponse }) 
 			description: "",
 			coverImage: "",
 			price: "",
+			carta: " - ",
 			disponible: STATUS_DISPONIBLE,
 		},
 	});
@@ -45,6 +47,7 @@ const RestaurantPlatosForm = ({ editProduct }: { editProduct?: PlatoResponse }) 
 				description: editProduct.description,
 				coverImage: editProduct.image_url || "",
 				price: String(editProduct.price),
+				carta: editProduct.cartaId ? editProduct.cartaId : "Sin Carta",
 				disponible: editProduct.disponible ? STATUS_DISPONIBLE : STATUS_BORRADOR,
 			});
 		}
@@ -203,8 +206,44 @@ const RestaurantPlatosForm = ({ editProduct }: { editProduct?: PlatoResponse }) 
 							</FormItem>
 						)}
 					/>
+					{/* Añadir a Carta */}
+					<FormField
+						name={STATUS_DISPONIBLE}
+						control={form.control}
+						render={({ field }) => (
+							<FormItem className="w-full">
+								<FormLabel>Añadir a Carta</FormLabel>
+								<Select
+									value={field.value} // Asegura que el valor sea manejado correctamente
+									onValueChange={(value) => field.onChange(value)} // Guarda el string directamente
+									disabled={isPending}
+								>
+									<SelectTrigger
+										className={`form-input-text ${
+											form.formState.errors.disponible && "form-input-text-validation-error"
+										}`}
+									>
+										{form.getValues("carta")}
+									</SelectTrigger>
+									<SelectContent>
+										<SelectGroup>
+											<SelectItem value="null">{" - "}</SelectItem>
+											{/* {cartas &&
+												cartas.map((c) => {
+													return (
+														<SelectItem key={c.id} value={c.id}>
+															{c.title}
+														</SelectItem>
+													);
+												})} */}
+										</SelectGroup>
+									</SelectContent>
+								</Select>
+								<FormMessage className="form-message-validation-error" />
+							</FormItem>
+						)}
+					/>
 					{/* Status */}
-					{/* Tipo de negocio */}
 					<FormField
 						name={STATUS_DISPONIBLE}
 						control={form.control}
