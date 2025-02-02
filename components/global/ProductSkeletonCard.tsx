@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export function ProductSkeletonCard() {
 	return (
-		<div className="flex-none w-[90%] md:w-[60%] lg:w-[32%] h-[25rem] lg:h-[30rem] animate-pulse">
+		<div className="flex-none w-[270px] h-[20rem] md:w-[340px] md:h-[26rem] lg:h-[30rem] animate-pulse">
 			<Card className="h-full relative rounded-xl border-none overflow-hidden bg-gray-200">
 				{/* Imagen de fondo simulada */}
 				<div className="absolute inset-0 bg-gray-300"></div>

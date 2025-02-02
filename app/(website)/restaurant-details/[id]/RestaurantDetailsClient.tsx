@@ -36,18 +36,21 @@ const RestaurantDetailsClient: React.FC<RestaurantDetailsClientProps> = ({
 
 	return (
 		<div className="min-h-dvh escape-navbar escape-footer relative">
-			<Image
-				src={imageUrl}
-				alt="Selected Restaurant"
-				width={0}
-				height={0}
-				className="w-full h-[68vh] object-cover pt-2"
-			/>
-			<Container size="center-container" className="flex flex-col items-center gap-8 pt-4 text-center">
-				<div className="flex flex-col">
-					<h2 className="font-semibold text-lg">{locationName}</h2>
-					<p className="font-thin text-sm">{description}</p>
-					<div className="flex flex-row gap-1 items-center justify-center text-sm mt-3">
+			<div className="w-full -h-full relative">
+				<Image
+					src={imageUrl}
+					alt="Selected Restaurant"
+					width={0}
+					height={0}
+					className="w-full h-[68vh] object-cover pt-2"
+				/>
+				<div className="w-full h-full absolute top-0 left-0 bg-black opacity-10"></div>
+			</div>
+			<Container size="center-container" className="flex flex-col items-center gap-8 pt-4 text-center lg:gap-16">
+				<div className="flex flex-col lg:gap-2 lg:mt-3">
+					<h2 className="font-semibold text-lg lg:text-3xl">{locationName}</h2>
+					<p className="font-thin text-sm lg:text-normal">{description}</p>
+					<div className="flex flex-row gap-1 items-center justify-center text-sm mt-3 lg:text-normal lg:mt-1">
 						<MapPin size={"18px"} />
 						{location}
 					</div>

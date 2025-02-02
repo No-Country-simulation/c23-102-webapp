@@ -29,7 +29,7 @@ export function ProductImageCarousel({ slides, locationName }: { slides: Array<P
 		<div className="relative w-full overflow-hidden">
 			{/* Contenedor de Framer Motion para el carrusel */}
 			<motion.div
-				className="flex gap-4 lg:gap-5 cursor-grab"
+				className="flex gap-4 lg:gap-6 cursor-grab"
 				initial={{ x: 0 }}
 				animate={{ x: 0 }}
 				drag={slides.length > 1 ? "x" : false} // Deshabilita drag si solo hay 1 elemento
@@ -41,7 +41,7 @@ export function ProductImageCarousel({ slides, locationName }: { slides: Array<P
 				{slides.map((slide, index) => (
 					<motion.div
 						key={index}
-						className="flex-none w-[90%] md:w-[60%] lg:w-[32%] h-[25rem] lg:h-[30rem]"
+						className="flex-none w-[270px] h-[20rem] md:w-[340px] md:h-[26rem] lg:h-[30rem]"
 						whileTap={{ cursor: "grabbing" }}
 						ref={ref2}
 					>
@@ -56,22 +56,25 @@ export function ProductImageCarousel({ slides, locationName }: { slides: Array<P
 								style={{
 									objectFit: "cover",
 								}}
+								priority={index === 0} // Cargar la primera imagen primero
+								loading={index !== 0 ? "lazy" : "eager"} // Lazy load para mejorar rendimiento
+								quality={75} // Reducir tamaño de imagen
 							/>
 							{/* Overlay */}
 							<div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-[82%] h-[35%] flex items-center">
-								<div className="inline-block px-4 w-full text-white">
-									<CardTitle className="self-start">{slide.name}</CardTitle>
-									<CardDescription className="text-gray-200">{slide.description}</CardDescription>
-									<span className="block h-[3rem] w-full"></span>
+								<div className="px-4 w-full text-white flex flex-col items-start gap-1">
+									<CardTitle>{slide.name}</CardTitle>
+									<CardDescription className="text-gray-200 font-thin">{slide.description}</CardDescription>
+									<span className="block h-[2.5rem] w-full"></span>
 								</div>
 							</div>
 							{/* Contenedor para precio y botón (fuera del Link) */}
-							<div className="w-[60%] absolute bottom-5 left-[50%] translate-x-[-50%] flex justify-between items-center">
+							<div className="px-4 absolute bottom-3 w-full flex justify-between items-center">
 								<span className="font-semibold text-white">{slide.price}$</span>
 								<Button
-									className="font-semibold"
-									onClick={(e) => {
-										e.stopPropagation(); // Evita propagación al Link
+									className="font-medium"
+									variant="secondary"
+									onClick={() => {
 										addToCart({
 											id: slide.id,
 											product: slide,
