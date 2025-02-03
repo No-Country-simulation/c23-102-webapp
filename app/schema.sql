@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS "Restaurant" (
 	"Brand"	TEXT NOT NULL,
 	"Category_Name"	TEXT NOT NULL,
 	"Banner_Url"	TEXT,
-	FOREIGN KEY("Category_Name") REFERENCES "Category"("Name"),
-	PRIMARY KEY("Email")
+	PRIMARY KEY("Email"),
+	FOREIGN KEY("Category_Name") REFERENCES "Category"("Name")
 );
 DROP TABLE IF EXISTS "Role";
 CREATE TABLE IF NOT EXISTS "Role" (
@@ -31,8 +31,8 @@ CREATE TABLE IF NOT EXISTS "User" (
 	"Password"	VARCHAR(50) NOT NULL,
 	"Phone"	VARCHAR(20),
 	"Role_Name"	TEXT NOT NULL,
-	FOREIGN KEY("Role_Name") REFERENCES "Role"("Name"),
-	PRIMARY KEY("Email")
+	PRIMARY KEY("Email"),
+	FOREIGN KEY("Role_Name") REFERENCES "Role"("Name")
 );
 DROP TABLE IF EXISTS "Payment";
 CREATE TABLE IF NOT EXISTS "Payment" (
@@ -40,9 +40,9 @@ CREATE TABLE IF NOT EXISTS "Payment" (
 	"Restaurante_Email"	TEXT NOT NULL,
 	"Client_Email"	TEXT NOT NULL,
 	"Price_Id"	TEXT NOT NULL,
-	PRIMARY KEY("Payment_Id" AUTOINCREMENT),
+	FOREIGN KEY("Client_Email") REFERENCES "Client"("Email"),
 	FOREIGN KEY("Restaurante_Email") REFERENCES "Restaurant"("Email"),
-	FOREIGN KEY("Client_Email") REFERENCES "Client"("Email")
+	PRIMARY KEY("Payment_Id" AUTOINCREMENT)
 );
 DROP TABLE IF EXISTS "Client";
 CREATE TABLE IF NOT EXISTS "Client" (
@@ -50,8 +50,21 @@ CREATE TABLE IF NOT EXISTS "Client" (
 	"Location"	TEXT,
 	"Postal_Code"	TEXT,
 	"Photo_Path"	TEXT,
-	PRIMARY KEY("Email"),
-	FOREIGN KEY("Email") REFERENCES "User"("Email")
+	FOREIGN KEY("Email") REFERENCES "User"("Email"),
+	PRIMARY KEY("Email")
+);
+DROP TABLE IF EXISTS "Dish";
+CREATE TABLE IF NOT EXISTS "Dish" (
+	"Price_ID"	TEXT,
+	"Image_Path"	TEXT,
+	"Name"	TEXT NOT NULL,
+	"Description"	TEXT,
+	"Price"	REAL NOT NULL,
+	"Quantity"	INTEGER NOT NULL,
+	"Menu_ID"	INTEGER NOT NULL,
+	"Is_Active"	INTEGER,
+	FOREIGN KEY("Menu_ID") REFERENCES "Menu"("Menu_ID"),
+	PRIMARY KEY("Price_ID")
 );
 DROP TABLE IF EXISTS "Menu";
 CREATE TABLE IF NOT EXISTS "Menu" (
@@ -60,9 +73,9 @@ CREATE TABLE IF NOT EXISTS "Menu" (
 	"Description"	TEXT,
 	"Restaurant_Email"	TEXT NOT NULL,
 	"Image_Path"	TEXT,
-	"Is_Active"	NUMERIC,
-	PRIMARY KEY("Menu_ID" AUTOINCREMENT),
-	FOREIGN KEY("Restaurant_Email") REFERENCES "Restaurant"("Email")
+	"Is_Active"	INTEGER,
+	FOREIGN KEY("Restaurant_Email") REFERENCES "Restaurant"("Email"),
+	PRIMARY KEY("Menu_ID" AUTOINCREMENT)
 );
 INSERT INTO "Category" ("Name") VALUES ('Restaurante');
 INSERT INTO "Category" ("Name") VALUES ('Cafetería');
