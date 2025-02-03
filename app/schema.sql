@@ -40,9 +40,9 @@ CREATE TABLE IF NOT EXISTS "Payment" (
 	"Restaurante_Email"	TEXT NOT NULL,
 	"Client_Email"	TEXT NOT NULL,
 	"Price_Id"	TEXT NOT NULL,
+	PRIMARY KEY("Payment_Id" AUTOINCREMENT),
 	FOREIGN KEY("Client_Email") REFERENCES "Client"("Email"),
-	FOREIGN KEY("Restaurante_Email") REFERENCES "Restaurant"("Email"),
-	PRIMARY KEY("Payment_Id" AUTOINCREMENT)
+	FOREIGN KEY("Restaurante_Email") REFERENCES "Restaurant"("Email")
 );
 DROP TABLE IF EXISTS "Client";
 CREATE TABLE IF NOT EXISTS "Client" (
@@ -74,15 +74,14 @@ CREATE TABLE IF NOT EXISTS "Menu" (
 	"Restaurant_Email"	TEXT NOT NULL,
 	"Image_Path"	TEXT,
 	"Is_Active"	INTEGER,
-	FOREIGN KEY("Restaurant_Email") REFERENCES "Restaurant"("Email"),
-	PRIMARY KEY("Menu_ID" AUTOINCREMENT)
+	PRIMARY KEY("Menu_ID" AUTOINCREMENT),
+	FOREIGN KEY("Restaurant_Email") REFERENCES "Restaurant"("Email")
 );
 INSERT INTO "Category" ("Name") VALUES ('Restaurante');
 INSERT INTO "Category" ("Name") VALUES ('Cafetería');
 INSERT INTO "Category" ("Name") VALUES ('Bar');
 INSERT INTO "Category" ("Name") VALUES ('Heladería');
 INSERT INTO "Category" ("Name") VALUES ('Tienda de abarrotes');
-INSERT INTO "Restaurant" ("Opening_Hour","Closing_Hour","Description","Email","Location","Location_Name","Brand","Category_Name","Banner_Url") VALUES (NULL,NULL,NULL,'victorpadilal@gmail.com','Av. Perú','Asados Padilla Paraguay','Asados Padilla','Restaurante','static/bd.png');
 INSERT INTO "Restaurant" ("Opening_Hour","Closing_Hour","Description","Email","Location","Location_Name","Brand","Category_Name","Banner_Url") VALUES (NULL,NULL,NULL,'victorpadilla@gmail.com','Av. Perú','Asados Padilla Paraguay','Asados Padilla','Restaurante','static/bd.png');
 INSERT INTO "Role" ("Name") VALUES ('Cliente');
 INSERT INTO "Role" ("Name") VALUES ('Restaurante');
