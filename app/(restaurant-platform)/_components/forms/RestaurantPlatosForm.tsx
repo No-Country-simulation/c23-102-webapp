@@ -236,7 +236,7 @@ const RestaurantPlatosForm = ({ editProduct }: { editProduct?: PlatoResponse }) 
 					<FormField
 						name={STATUS_DISPONIBLE}
 						control={form.control}
-						render={({ field }) => {
+						render={() => {
 							return (
 								<FormItem className="w-full">
 									<FormLabel>Añadir a Carta</FormLabel>
