@@ -3,7 +3,6 @@
 import { useUser } from "@/context/UserContext";
 import RestaurantCartasPanel from "./_components/RestaurantCartasPanel";
 import RestaurantPlatosPanel from "./_components/RestaurantPlatosPanel";
-import Container from "@/components/global/Container";
 import { useState } from "react";
 import MagicButton from "../../_components/MagicButton";
 
