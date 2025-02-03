@@ -8,18 +8,18 @@ export interface LoginRequest {
 export interface ClientLoginResponse {
 	email: string;
 	accountType: typeof USER_TYPES.CLIENT | typeof USER_TYPES.RESTAURANT;
-	fullName: string;
+	fullName?: string;
 }
 
 export interface RestaurantLoginResponse {
 	email: string;
 	accountType: typeof USER_TYPES.CLIENT | typeof USER_TYPES.RESTAURANT;
-	locationName: string;
+	locationName?: string;
 }
 
 export interface UserContextType {
 	user: (ClientLoginResponse & RestaurantLoginResponse) | null;
 	loading: boolean;
-	updateUser: (user: (ClientLoginResponse & RestaurantLoginResponse) | null) => void;
+	updateUser: (user: (ClientLoginResponse | RestaurantLoginResponse) | null) => void;
 	logoutUser: () => void;
 }
