@@ -21,8 +21,9 @@ def register_client():
             (form['email'], form['location'],
              form['postalCode'], save_image(photo))
         ).fetchone()
-        db.commit()
     except db.IntegrityError:
+        db.rollback()
         abort(401, f"Cliente ya registrado con {form['email']}.")
     else:
+        db.commit()
         return form
