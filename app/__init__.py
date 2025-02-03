@@ -4,6 +4,7 @@ from os.path import abspath, join
 from flask import Flask
 from app.auth.register import register
 from app.categorys import categorys_bp
+from .menu import menu
 from .profile import profile
 from .auth import auth
 from .restaurant import restaurant_bp
@@ -34,6 +35,7 @@ def create_app():
     app.register_blueprint(register)
     app.register_blueprint(profile)
     app.register_blueprint(payments_bp)
+    app.register_blueprint(menu)
 
     try:
         makedirs(app.instance_path)
