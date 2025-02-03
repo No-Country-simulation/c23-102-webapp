@@ -4,6 +4,7 @@ from os.path import abspath, join
 from flask import Flask
 from app.auth.register import register
 from app.categorys import categorys_bp
+from .dish import dish
 from .menu import menu
 from .profile import profile
 from .auth import auth
@@ -29,13 +30,10 @@ def create_app():
     app.cli.add_command(init_db_command)
 
     # Blueprints
-    app.register_blueprint(auth)
-    app.register_blueprint(categorys_bp)
-    app.register_blueprint(restaurant_bp)
-    app.register_blueprint(register)
-    app.register_blueprint(profile)
-    app.register_blueprint(payments_bp)
-    app.register_blueprint(menu)
+    blueprints = [auth, categorys_bp, restaurant_bp,
+                  register, profile, payments_bp, menu, dish]
+    for blueprint in blueprints:
+        app.register_blueprint(blueprint)
 
     try:
         makedirs(app.instance_path)
