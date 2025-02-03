@@ -12,7 +12,6 @@ const RestaurantMenuPage = () => {
 
 	const handleSelection = (item) => {
 		if (item.target.innerText == "Cartas" || item.target.innerText == "Platos") setSelectedMenu(item.target.innerText);
-		console.log(selectedMenu);
 	};
 
 	if (user)

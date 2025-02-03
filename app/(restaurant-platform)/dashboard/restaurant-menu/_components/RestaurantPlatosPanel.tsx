@@ -8,7 +8,7 @@ import { useUser } from "@/context/UserContext";
 import { PlatoType } from "@/types/PlatoType";
 import { useEffect, useState } from "react";
 
-const RestaurantPlatosPanel = ({ className }: { className?: string }) => {
+const RestaurantPlatosPanel = ({}: { className?: string }) => {
 	const { user } = useUser();
 	const [platos, setPlatos] = useState<Array<PlatoType>>([]);
 
