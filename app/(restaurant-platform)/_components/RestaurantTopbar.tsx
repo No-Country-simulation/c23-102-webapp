@@ -28,7 +28,6 @@ export const RestaurantTopbar = () => {
 									<User size={"23px"} />
 								</LinkWithIcon>
 							</div>
-							<h2 className="text-xs font-thin text-[color:--primary-color]">Bienvenido, {user.email}</h2>
 						</div>
 					</div>
 				</div>

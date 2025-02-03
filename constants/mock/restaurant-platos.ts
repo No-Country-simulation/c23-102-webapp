@@ -44,17 +44,6 @@ export const mocked_platos: Array<PlatoType> = [
 	},
 ];
 
-export const mocked_single_plato = {
-	id: "1",
-	restaurantEmail: "fastfood@email.com",
-	name: "Hamburguesa 1",
-	description: "Con de todo",
-	image_url: "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/cf29c385555335.5d7fb3c164383.jpg",
-	price: "15.50",
-	disponible: STATUS_DISPONIBLE,
-	cartaId: "3",
-};
-
 export const mocked_plato_response: PlatoResponse = {
 	id: "1",
 	restaurantEmail: "fastfood@email.com",

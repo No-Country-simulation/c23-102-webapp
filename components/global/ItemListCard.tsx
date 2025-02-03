@@ -10,6 +10,7 @@ function ItemListCard({
 	route,
 	status,
 	price,
+	isScrollable,
 }: {
 	title: string;
 	description: string;
@@ -17,11 +18,16 @@ function ItemListCard({
 	status?: string;
 	route: string;
 	price?: string;
+	isScrollable?: boolean;
 }) {
 	return (
 		<Link className="w-full h-[8.3rem] flex flex-row gap-4 items-center rounded-lg overflow-hidden pr-4" href={route}>
 			{/* Contenedor de la imagen o el fallback (30% del ancho) */}
-			<div className="w-[38%] h-full flex items-center justify-center rounded-xl overflow-hidden">
+			<div
+				className={`${
+					isScrollable ? "w-[7.3rem]" : "w-[38%]"
+				} h-full flex items-center justify-center rounded-xl overflow-hidden"`}
+			>
 				{image_url ? (
 					<Image src={image_url} alt={title} width={0} height={0} className="w-full h-full object-cover" />
 				) : (
