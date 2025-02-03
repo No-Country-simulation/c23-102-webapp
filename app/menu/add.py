@@ -1,7 +1,7 @@
 """Crea add_menu endpoint."""
 from flask import request
 from app.db import get_db
-from app.utils import register_to_dict, save_image
+from app.utils import save_image
 from . import menu
 
 
@@ -19,9 +19,7 @@ def add_menu(restaurant_email: str):
         VALUES  (?, ?, ?, ?, ?)
     """
 
-    data = db.execute(query, (form['title'], form['description'], restaurant_email,
-                              image_path, is_active)).fetchone()
+    db.execute(query, (form['title'], form['description'], restaurant_email,
+                       image_path, is_active))
 
-    formatted_data = register_to_dict(data)
-
-    return formatted_data
+    return "Datos guardados."
