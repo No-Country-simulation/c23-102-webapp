@@ -1,17 +1,4 @@
 BEGIN TRANSACTION;
-DROP TABLE IF EXISTS "Delivery_Person";
-CREATE TABLE IF NOT EXISTS "Delivery_Person" (
-	"Delivery_Person_ID"	INTEGER NOT NULL,
-	"FirstName"	VARCHAR(30) NOT NULL,
-	"LastName"	VARCHAR(30),
-	"Email"	VARCHAR(30),
-	"Password"	VARCHAR(30),
-	"Phone"	VARCHAR(30),
-	"Address"	VARCHAR(50),
-	"Status"	BOOLEAN,
-	"Vehicle"	VARCHAR(30),
-	PRIMARY KEY("Delivery_Person_ID" AUTOINCREMENT)
-);
 DROP TABLE IF EXISTS "Category";
 CREATE TABLE IF NOT EXISTS "Category" (
 	"Name"	TEXT NOT NULL,
@@ -53,9 +40,9 @@ CREATE TABLE IF NOT EXISTS "Payment" (
 	"Restaurante_Email"	TEXT NOT NULL,
 	"Client_Email"	TEXT NOT NULL,
 	"Price_Id"	TEXT NOT NULL,
-	FOREIGN KEY("Client_Email") REFERENCES "Client"("Email"),
 	PRIMARY KEY("Payment_Id" AUTOINCREMENT),
-	FOREIGN KEY("Restaurante_Email") REFERENCES "Restaurant"("Email")
+	FOREIGN KEY("Restaurante_Email") REFERENCES "Restaurant"("Email"),
+	FOREIGN KEY("Client_Email") REFERENCES "Client"("Email")
 );
 DROP TABLE IF EXISTS "Client";
 CREATE TABLE IF NOT EXISTS "Client" (
