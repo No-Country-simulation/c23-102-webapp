@@ -2,6 +2,7 @@
 
 import LinkWithIcon from "@/components/global/LinkWithIcon";
 import { Logo } from "@/components/global/Logo";
+import LogoutButton from "@/components/global/LogoutButton";
 import { CLIENT_ROUTES, WEBSITE_ROUTES } from "@/constants/routes";
 import { useCart } from "@/context/CartContext";
 import { useUser } from "@/context/UserContext";
@@ -32,8 +33,8 @@ export const ClientTopbar = () => {
 											</span>
 										</LinkWithIcon>
 									</div>
+									<LogoutButton></LogoutButton>
 								</div>
-								<h2 className="text-xs font-thin text-[color:--primary-color]">Bienvenido, {user.email}</h2>
 							</div>
 						</div>
 					</div>
@@ -45,27 +46,27 @@ export const ClientTopbar = () => {
 							<Logo width={80} className={"lg:w-24"}></Logo>
 							<div className="flex flex-row items-center justify-center gap-8">
 								<LinkWithIcon route={CLIENT_ROUTES.CLIENT}>Inicio</LinkWithIcon>
+								<LinkWithIcon route={WEBSITE_ROUTES.HOME}>Buscar</LinkWithIcon>
 								<LinkWithIcon route={CLIENT_ROUTES.CLIENT_PEDIDOS}>Pedidos</LinkWithIcon>
 								<LinkWithIcon route={CLIENT_ROUTES.CLIENT_PROFILE}>Perfil</LinkWithIcon>
 							</div>
-							<div className="flex flex-col justify-between items-end gap-2">
-								<div className="flex flex-row gap-4">
-									<LinkWithIcon route={WEBSITE_ROUTES.HOME}>
-										<Search size={"23px"} />
-									</LinkWithIcon>
-									<LinkWithIcon route={WEBSITE_ROUTES.HOME}>
-										<Bell size={"23px"} />
-									</LinkWithIcon>
-									<div className="flex flex-row relative justify-center items-center">
-										<LinkWithIcon route={WEBSITE_ROUTES.CART}>
-											<ShoppingBag size={"23px"} />
-											<span className="absolute -top-2 -right-2 bg-[color:--primary-color] text-black font-bold text-sm rounded-full h-5 w-5 flex items-center justify-center">
-												{totalItems}
-											</span>
-										</LinkWithIcon>
-									</div>
-								</div>
+							<div className="flex flex-row items-center gap-4">
 								<h2 className="text-sm font-thin text-[color:--primary-color]">Bienvenido, {user.email}</h2>
+								<LinkWithIcon route={WEBSITE_ROUTES.HOME}>
+									<Search size={"23px"} />
+								</LinkWithIcon>
+								<LinkWithIcon route={WEBSITE_ROUTES.HOME}>
+									<Bell size={"23px"} />
+								</LinkWithIcon>
+								<div className="flex flex-row relative justify-center items-center">
+									<LinkWithIcon route={WEBSITE_ROUTES.CART}>
+										<ShoppingBag size={"23px"} />
+										<span className="absolute -top-2 -right-2 bg-[color:--primary-color] text-black font-bold text-sm rounded-full h-5 w-5 flex items-center justify-center">
+											{totalItems}
+										</span>
+									</LinkWithIcon>
+								</div>
+								<LogoutButton></LogoutButton>
 							</div>
 						</div>
 					</div>
