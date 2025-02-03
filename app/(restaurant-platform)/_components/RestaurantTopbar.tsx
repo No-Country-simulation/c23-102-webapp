@@ -42,7 +42,7 @@ export const RestaurantTopbar = () => {
 								<LinkWithIcon route={RESTAURANT_ROUTES.RESTAURANT_PROFILE}>Perfil</LinkWithIcon>
 							</div>
 							<div className="flex flex-row justify-between items-center gap-4">
-								<h2 className="text-sm font-thin text-[color:--primary-color]">Bienvenido, {user.email}</h2>
+								<h2 className="text-sm font-thin text-[color:--primary-color]">Bienvenido, {user.locationName}</h2>
 								<LinkWithIcon route={WEBSITE_ROUTES.HOME}>
 									<Bell size={"23px"} />
 								</LinkWithIcon>

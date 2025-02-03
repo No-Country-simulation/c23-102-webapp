@@ -15,8 +15,8 @@ const DashboardPage = () => {
 		return (
 			<Container size={"center-container"} className="pt-2 flex flex-col gap-10">
 				<div className="flex flex-col gap-2">
-					<h1 className="text-3xl text-[color:--primary-color]">Bienvenido</h1>
-					<h2 className="text-xl">{user.email}</h2>
+					<h1 className="text-3xl text-[color:--primary-color]">Bienvenido,</h1>
+					<h2 className="text-xl">{user.locationName}</h2>
 				</div>
 				<div className="flex flex-col gap-2">
 					<Link

@@ -5,14 +5,21 @@ export interface LoginRequest {
 	password: string;
 }
 
-export interface LoginResponse {
+export interface ClientLoginResponse {
 	email: string;
 	accountType: typeof USER_TYPES.CLIENT | typeof USER_TYPES.RESTAURANT;
+	fullName: string;
+}
+
+export interface RestaurantLoginResponse {
+	email: string;
+	accountType: typeof USER_TYPES.CLIENT | typeof USER_TYPES.RESTAURANT;
+	locationName: string;
 }
 
 export interface UserContextType {
-	user: LoginResponse | null;
+	user: (ClientLoginResponse & RestaurantLoginResponse) | null;
 	loading: boolean;
-	updateUser: (user: LoginResponse | null) => void;
+	updateUser: (user: ClientLoginResponse | RestaurantLoginResponse | null) => void;
 	logoutUser: () => void;
 }

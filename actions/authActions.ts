@@ -1,17 +1,11 @@
 "use server";
 
 import axios from "axios";
-import {
-	LOGIN_ERROR_MSG,
-	LOGIN_URL,
-	REGISTER_RESTAURANT_URL,
-	REGISTER_URL,
-	SERVER_ERROR,
-} from "@/constants/app_constants";
+import { LOGIN_ERROR_MSG, REGISTER_RESTAURANT_URL, SERVER_ERROR } from "@/constants/app_constants";
 import { loggedClient, loggedRestaurant } from "@/constants/mock/authentication";
-import { LoginResponse } from "@/types/Authentication";
+import { ClientLoginResponse, RestaurantLoginResponse } from "@/types/Authentication";
 
-export async function loginUser(body: FormData): Promise<LoginResponse> {
+export async function loginUser(body: FormData): Promise<ClientLoginResponse | RestaurantLoginResponse> {
 	try {
 		// ================================
 		//	Backend Call
@@ -22,8 +16,13 @@ export async function loginUser(body: FormData): Promise<LoginResponse> {
 		// );
 		// return response.data;
 
-
-		return body.get("email") == "client@test.com" ? loggedClient : loggedRestaurant;
+		if (body.get("email") == "client@takeaway.com") {
+			return loggedClient;
+		}
+		if (body.get("email") == "resto@takeaway.com") {
+			return loggedRestaurant;
+		}
+		return loggedRestaurant;
 	} catch (error) {
 		if (axios.isAxiosError(error) && error.response && error.response.status !== 500) {
 			throw new Error(LOGIN_ERROR_MSG);
@@ -32,7 +31,7 @@ export async function loginUser(body: FormData): Promise<LoginResponse> {
 	}
 }
 
-export async function registerUser(body: FormData): Promise<LoginResponse> {
+export async function registerUser(body: FormData): Promise<ClientLoginResponse | RestaurantLoginResponse> {
 	try {
 		// ================================
 		//	Backend Call
@@ -51,7 +50,7 @@ export async function registerUser(body: FormData): Promise<LoginResponse> {
 	}
 }
 
-export async function registerRestaurant(body: FormData): Promise<LoginResponse> {
+export async function registerRestaurant(body: FormData): Promise<RestaurantLoginResponse> {
 	try {
 		// ================================
 		//	Backend Call
@@ -70,9 +69,9 @@ export async function registerRestaurant(body: FormData): Promise<LoginResponse>
 	}
 }
 
-export async function registerClient(body: FormData): Promise<LoginResponse> {
+export async function registerClient(body: FormData): Promise<ClientLoginResponse> {
 	try {
-		const response = await axios.post<LoginResponse>(
+		const response = await axios.post<ClientLoginResponse>(
 			`${process.env.NEXT_PUBLIC_REMOTE_BASE_API_URL}${REGISTER_RESTAURANT_URL}`,
 			body
 		);

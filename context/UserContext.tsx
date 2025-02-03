@@ -2,13 +2,13 @@
 
 import React, { createContext, useState, useContext, useEffect } from "react";
 import Cookies from "js-cookie";
-import { UserContextType, LoginResponse } from "@/types/Authentication";
+import { UserContextType, ClientLoginResponse, RestaurantLoginResponse } from "@/types/Authentication";
 import { COOKIE_NAME } from "@/constants/app_constants";
 
 const UserContext = createContext<UserContextType | null>(null);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-	const [user, setUser] = useState<LoginResponse | null>(null);
+	const [user, setUser] = useState<ClientLoginResponse | RestaurantLoginResponse | null>(null);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
@@ -27,7 +27,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 	// =========================
 	//  Functions
 	// =========================
-	const updateUser = (newUser: LoginResponse | null) => {
+	const updateUser = (newUser: ClientLoginResponse | RestaurantLoginResponse | null) => {
 		setUser(newUser);
 		if (newUser) {
 			Cookies.set(COOKIE_NAME, encodeURIComponent(JSON.stringify(newUser)), {

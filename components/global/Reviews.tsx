@@ -4,7 +4,7 @@ import { ReviewType } from "@/types/ReviewType";
 
 const Reviews = ({ review }: { review: ReviewType }) => {
 	return (
-		<article className="bg-gray-700 flex flex-col gap-3 w-full py-4 rounded-lg">
+		<article className="bg-gray-700 flex flex-col gap-3 w-full py-4 rounded-lg p-4">
 			<div className="w-[16rem] flex flex-row gap-2">
 				<h2>
 					<Avatar>

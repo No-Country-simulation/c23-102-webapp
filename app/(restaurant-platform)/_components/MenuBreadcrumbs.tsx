@@ -13,7 +13,7 @@ import { RESTAURANT_ROUTES } from "@/constants/routes";
 export function MenuBreadcrumbs({ current }: { current: string }) {
 	console.log(current);
 	return (
-		<Breadcrumb>
+		<Breadcrumb className="px-5 pt-3">
 			<BreadcrumbList>
 				<BreadcrumbItem>
 					<BreadcrumbLink href={RESTAURANT_ROUTES.RESTAURANT_MENU}>Carta</BreadcrumbLink>

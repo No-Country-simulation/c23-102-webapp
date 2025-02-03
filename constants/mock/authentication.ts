@@ -1,19 +1,21 @@
-import { LoginResponse } from "@/types/Authentication";
+import { ClientLoginResponse, RestaurantLoginResponse } from "@/types/Authentication";
 import { RestaurantDetailsType } from "@/types/RestaurantTypes";
 import { USER_TYPES } from "../app_constants";
 
-export const loggedClient: LoginResponse = {
-	email: "fake@client.com",
+export const loggedClient: ClientLoginResponse = {
+	email: "client@takeaway.com",
 	accountType: USER_TYPES.CLIENT,
+	fullName: "Fake Client",
 };
 
-export const loggedRestaurant: LoginResponse = {
-	email: "fake@restaurant.com",
+export const loggedRestaurant: RestaurantLoginResponse = {
+	email: "resto@takeaway.com",
 	accountType: USER_TYPES.RESTAURANT,
+	locationName: "Fast Food!",
 };
 
 export const loggedRestaurantDetails: RestaurantDetailsType = {
-	email: "american@email.com",
+	email: "resto@takeaway.com",
 	locationName: "American Dinner",
 	description: "Deluxe",
 	category: "Bar",

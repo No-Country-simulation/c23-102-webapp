@@ -51,7 +51,7 @@ export const ClientTopbar = () => {
 								<LinkWithIcon route={CLIENT_ROUTES.CLIENT_PROFILE}>Perfil</LinkWithIcon>
 							</div>
 							<div className="flex flex-row items-center gap-4">
-								<h2 className="text-sm font-thin text-[color:--primary-color]">Bienvenido, {user.email}</h2>
+								<h2 className="text-sm font-thin text-[color:--primary-color]">Bienvenido, {user.fullName}</h2>
 								<LinkWithIcon route={WEBSITE_ROUTES.HOME}>
 									<Search size={"23px"} />
 								</LinkWithIcon>
