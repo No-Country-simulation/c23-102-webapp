@@ -5,6 +5,7 @@ import RestaurantCartasPanel from "./_components/RestaurantCartasPanel";
 import RestaurantPlatosPanel from "./_components/RestaurantPlatosPanel";
 import Container from "@/components/global/Container";
 import { useState } from "react";
+import MagicButton from "../../_components/MagicButton";
 
 const RestaurantMenuPage = () => {
 	const { user } = useUser();
@@ -20,6 +21,7 @@ const RestaurantMenuPage = () => {
 	if (user)
 		return (
 			<div>
+				<MagicButton window={selectedMenu}></MagicButton>
 				<Container size={"center-container"} className="flex gap-4 pt-4">
 					<div className="flex flex-col cursor-pointer" onClick={handleSelection}>
 						<h2 className="font-semibold text-xl">Cartas</h2>

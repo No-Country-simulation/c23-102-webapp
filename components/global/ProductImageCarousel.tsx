@@ -9,7 +9,15 @@ import { PlatoType } from "@/types/PlatoType";
 import { Button } from "../ui/button";
 import { useCart } from "@/context/CartContext";
 
-export function ProductImageCarousel({ slides, locationName }: { slides: Array<PlatoType>; locationName: string }) {
+export function ProductImageCarousel({
+	slides,
+	locationName,
+	isAddToCarta,
+}: {
+	slides: Array<PlatoType>;
+	locationName: string;
+	isAddToCarta?: boolean;
+}) {
 	const [constraints, setConstraints] = useState({ left: 0, right: 0 });
 	const { addToCart } = useCart();
 	const [ref, { width: width }] = useMeasure<HTMLDivElement>();
@@ -71,20 +79,32 @@ export function ProductImageCarousel({ slides, locationName }: { slides: Array<P
 							{/* Contenedor para precio y botón (fuera del Link) */}
 							<div className="px-4 absolute bottom-3 w-full flex justify-between items-center">
 								<span className="font-semibold text-white">{slide.price}$</span>
-								<Button
-									className="font-medium"
-									variant="secondary"
-									onClick={() => {
-										addToCart({
-											id: slide.id,
-											product: slide,
-											quantity: 1,
-											locationName: locationName,
-										});
-									}}
-								>
-									Añadir
-								</Button>
+								{!isAddToCarta ? (
+									<Button
+										className="font-medium"
+										variant="secondary"
+										onClick={() => {
+											addToCart({
+												id: slide.id,
+												product: slide,
+												quantity: 1,
+												locationName: locationName,
+											});
+										}}
+									>
+										Añadir
+									</Button>
+								) : (
+									<Button
+										className="font-medium"
+										variant="secondary"
+										onClick={() => {
+											console.log(slide.name);
+										}}
+									>
+										Añadir a Carta
+									</Button>
+								)}
 							</div>
 						</Card>
 					</motion.div>
