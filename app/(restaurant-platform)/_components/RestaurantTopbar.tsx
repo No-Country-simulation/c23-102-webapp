@@ -5,7 +5,7 @@ import { Logo } from "@/components/global/Logo";
 import LogoutButton from "@/components/global/LogoutButton";
 import { RESTAURANT_ROUTES, WEBSITE_ROUTES } from "@/constants/routes";
 import { useUser } from "@/context/UserContext";
-import { Bell, User } from "lucide-react";
+import { Bell } from "lucide-react";
 
 export const RestaurantTopbar = () => {
 	const { user } = useUser();
