@@ -21,7 +21,7 @@ const LogoutButton = ({ className }: { className?: string }) => {
 
 	return (
 		<Button onClick={handleLogout} className={cn("", className)}>
-			Logout
+			Salir
 		</Button>
 	);
 };
