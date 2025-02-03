@@ -6,6 +6,7 @@ import { USER_TYPES } from "@/constants/app_constants";
 import { ClientNavbar } from "../(client-platform)/_components/ClientNavbar";
 import { Footer } from "./_components/Footer";
 import { useUser } from "@/context/UserContext";
+import { RestaurantNavbar } from "../(restaurant-platform)/_components/RestaurantNavbar";
 
 const LandingLayout = ({ children }: { children: React.ReactNode }) => {
 	const { user } = useUser();
@@ -15,6 +16,7 @@ const LandingLayout = ({ children }: { children: React.ReactNode }) => {
 				<Topbar></Topbar>
 				{children}
 				{user && user.accountType === USER_TYPES.CLIENT && <ClientNavbar></ClientNavbar>}
+				{user && user.accountType === USER_TYPES.RESTAURANT && <RestaurantNavbar></RestaurantNavbar>}
 				<Footer></Footer>
 			</main>
 		</div>
