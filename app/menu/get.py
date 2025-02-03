@@ -9,11 +9,11 @@ from . import menu
 def get_menu(menu_id: int):
     """Obtiene todos los datos del menú vinculado con el id pasado."""
     db = get_db()
-    query = "SELECT * From Menu WHERE Menu_ID = ?"
+    query = "SELECT * FROM Menu WHERE Menu_ID = ?"
 
     data = db.execute(query, (menu_id,)).fetchone()
 
-    if data:
+    if not data:
         abort(400, "No se encontró un menú con ese id.")
 
     formatted_data = register_to_dict(data)
