@@ -8,10 +8,13 @@ import { useState } from "react";
 
 const RestaurantMenuPage = () => {
 	const { user } = useUser();
-	const [selectedMenu, setSelectedMenu] = useState("Cartas");
+	const [selectedMenu, setSelectedMenu] = useState<"Cartas" | "Platos">("Cartas");
 
-	const handleSelection = (item) => {
-		if (item.target.innerText == "Cartas" || item.target.innerText == "Platos") setSelectedMenu(item.target.innerText);
+	const handleSelection = (event: React.MouseEvent<HTMLDivElement>) => {
+		const selectedText = event.currentTarget.innerText;
+		if (selectedText === "Cartas" || selectedText === "Platos") {
+			setSelectedMenu(selectedText);
+		}
 	};
 
 	if (user)
