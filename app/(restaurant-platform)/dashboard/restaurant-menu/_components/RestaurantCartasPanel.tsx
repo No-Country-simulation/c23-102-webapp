@@ -1,27 +1,41 @@
 "use client";
 
+import { fetchCartasByRestaurantEmail } from "@/actions/cartasAction";
 import FilterCarouselWithDropdown from "@/components/global/FilterCarouselWithDropdown";
 import ItemListCard from "@/components/global/ItemListCard";
 import ItemListSkeletonCard from "@/components/global/ItemListSkeletonCard";
 import { mocked_base_cartas } from "@/constants/mock/restaurant-carta";
 import { RESTAURANT_ROUTES } from "@/constants/routes";
 import { useUser } from "@/context/UserContext";
-import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { CartaType } from "@/types/CartaType";
+import { useEffect, useState } from "react";
 
-const RestaurantCartasPage = () => {
+const RestaurantCartasPanel = ({ className }: { className?: string }) => {
+	const { user } = useUser();
 	const [filterKeyword, setFilterKeyword] = useState<string | null>(null);
 	const [filterLoading, setFilterLoading] = useState<boolean>(false);
+	const [cartas, setCartas] = useState<Array<CartaType>>([]);
 
-	const { user } = useUser();
+	useEffect(() => {
+		if (user?.email) {
+			(async () => {
+				try {
+					const restaurantCartas = await fetchCartasByRestaurantEmail(user.email);
+					setCartas(restaurantCartas);
+				} catch (error) {
+					console.error("Error fetching restaurant profile:", error);
+				}
+			})();
+		}
+	}, [user?.email]);
 
 	// Filtrar restaurantes por businessType seleccionado
-	const filteredRestaurants = filterKeyword
-		? mocked_base_cartas.filter((carta) => carta.title === filterKeyword)
-		: mocked_base_cartas;
+	const filteredCartas = filterKeyword ? cartas.filter((carta) => carta.title === filterKeyword) : mocked_base_cartas;
 
 	if (user)
 		return (
-			<div className="bg-black text-white flex flex-col items-center">
+			<div className={cn(className, "bg-black text-white flex flex-col items-center")}>
 				<div className="flex items-center gap-8 flex-col pt-8">
 					<FilterCarouselWithDropdown
 						className="home-section-row"
@@ -34,7 +48,7 @@ const RestaurantCartasPage = () => {
 						{filterLoading ? (
 							<ItemListSkeletonCard></ItemListSkeletonCard>
 						) : (
-							filteredRestaurants.map(({ id, title, description, image_url, status }) => {
+							filteredCartas.map(({ id, title, description, image_url, status }) => {
 								return (
 									<ItemListCard
 										key={id}
@@ -53,4 +67,4 @@ const RestaurantCartasPage = () => {
 		);
 };
 
-export default RestaurantCartasPage;
+export default RestaurantCartasPanel;
