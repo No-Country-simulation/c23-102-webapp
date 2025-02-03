@@ -31,8 +31,8 @@ CREATE TABLE IF NOT EXISTS "User" (
 	"Password"	VARCHAR(50) NOT NULL,
 	"Phone"	VARCHAR(20),
 	"Role_Name"	TEXT NOT NULL,
-	PRIMARY KEY("Email"),
-	FOREIGN KEY("Role_Name") REFERENCES "Role"("Name")
+	FOREIGN KEY("Role_Name") REFERENCES "Role"("Name"),
+	PRIMARY KEY("Email")
 );
 DROP TABLE IF EXISTS "Payment";
 CREATE TABLE IF NOT EXISTS "Payment" (
@@ -40,9 +40,9 @@ CREATE TABLE IF NOT EXISTS "Payment" (
 	"Restaurante_Email"	TEXT NOT NULL,
 	"Client_Email"	TEXT NOT NULL,
 	"Price_Id"	TEXT NOT NULL,
-	PRIMARY KEY("Payment_Id" AUTOINCREMENT),
 	FOREIGN KEY("Client_Email") REFERENCES "Client"("Email"),
-	FOREIGN KEY("Restaurante_Email") REFERENCES "Restaurant"("Email")
+	FOREIGN KEY("Restaurante_Email") REFERENCES "Restaurant"("Email"),
+	PRIMARY KEY("Payment_Id" AUTOINCREMENT)
 );
 DROP TABLE IF EXISTS "Client";
 CREATE TABLE IF NOT EXISTS "Client" (
@@ -52,19 +52,6 @@ CREATE TABLE IF NOT EXISTS "Client" (
 	"Photo_Path"	TEXT,
 	FOREIGN KEY("Email") REFERENCES "User"("Email"),
 	PRIMARY KEY("Email")
-);
-DROP TABLE IF EXISTS "Dish";
-CREATE TABLE IF NOT EXISTS "Dish" (
-	"Price_ID"	TEXT,
-	"Image_Path"	TEXT,
-	"Name"	TEXT NOT NULL,
-	"Description"	TEXT,
-	"Price"	REAL NOT NULL,
-	"Quantity"	INTEGER NOT NULL,
-	"Menu_ID"	INTEGER NOT NULL,
-	"Is_Active"	INTEGER,
-	FOREIGN KEY("Menu_ID") REFERENCES "Menu"("Menu_ID"),
-	PRIMARY KEY("Price_ID")
 );
 DROP TABLE IF EXISTS "Menu";
 CREATE TABLE IF NOT EXISTS "Menu" (
@@ -76,6 +63,19 @@ CREATE TABLE IF NOT EXISTS "Menu" (
 	"Is_Active"	INTEGER,
 	PRIMARY KEY("Menu_ID" AUTOINCREMENT),
 	FOREIGN KEY("Restaurant_Email") REFERENCES "Restaurant"("Email")
+);
+DROP TABLE IF EXISTS "Dish";
+CREATE TABLE IF NOT EXISTS "Dish" (
+	"Price_ID"	TEXT,
+	"Image_Path"	TEXT,
+	"Name"	TEXT NOT NULL,
+	"Description"	TEXT,
+	"Price"	REAL NOT NULL,
+	"Quantity"	INTEGER,
+	"Menu_ID"	INTEGER NOT NULL,
+	"Is_Active"	INTEGER,
+	FOREIGN KEY("Menu_ID") REFERENCES "Menu"("Menu_ID"),
+	PRIMARY KEY("Price_ID")
 );
 INSERT INTO "Category" ("Name") VALUES ('Restaurante');
 INSERT INTO "Category" ("Name") VALUES ('Cafetería');
@@ -89,4 +89,5 @@ INSERT INTO "User" ("Firstname","Lastname","Email","Password","Phone","Role_Name
 INSERT INTO "User" ("Firstname","Lastname","Email","Password","Phone","Role_Name") VALUES ('Tomás','Ayala','tomasayala@gmail.com','scrypt:32768:8:1$IWR7NBKayU8EwfqQ$3b4f4561a5fe415472bf901a02a3868335b67e61622140b0b435b19a4b9b214c04c7ad382371e970b4b5452ccdf21929b1ad6a03dbe32a85910a39245a2f4bf1','432142','Cliente');
 INSERT INTO "Payment" ("Payment_Id","Restaurante_Email","Client_Email","Price_Id") VALUES (1,'victorpadilla@gmail.com','tomasayala@gmail.com','242f23fsd');
 INSERT INTO "Client" ("Email","Location","Postal_Code","Photo_Path") VALUES ('tomasayala@gmail.com','Av. 5 de septiembre','f432',NULL);
+INSERT INTO "Menu" ("Menu_ID","Title","Description","Restaurant_Email","Image_Path","Is_Active") VALUES (1,'Vacuno','Nuestros mejores platillos con carne vacuna.','victorpadilla@gmail.com',NULL,1);
 COMMIT;
