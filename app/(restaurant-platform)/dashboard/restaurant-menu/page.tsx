@@ -19,7 +19,7 @@ const RestaurantMenuPage = () => {
 			<div>
 				<Container size={"center-container"} className="flex gap-4 pt-4">
 					<div className="flex flex-col cursor-pointer" onClick={handleSelection}>
-						<h2 className="font-semibold">Cartas</h2>
+						<h2 className="font-semibold text-xl">Cartas</h2>
 						<span
 							className={`${
 								selectedMenu == "Cartas" ? "border-b-[color:--primary-color]" : "border-b-black"
@@ -27,7 +27,7 @@ const RestaurantMenuPage = () => {
 						></span>
 					</div>
 					<div className="flex flex-col cursor-pointer" onClick={handleSelection}>
-						<h2 className="font-semibold">Platos</h2>
+						<h2 className="font-semibold  text-xl">Platos</h2>
 						<span
 							className={`${
 								selectedMenu == "Platos" ? "border-b-[color:--primary-color]" : "border-b-black"

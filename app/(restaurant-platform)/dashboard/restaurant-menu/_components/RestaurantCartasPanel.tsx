@@ -35,8 +35,8 @@ const RestaurantCartasPanel = ({ className }: { className?: string }) => {
 
 	if (user)
 		return (
-			<div className={cn(className, "bg-black text-white flex flex-col items-center")}>
-				<div className="flex items-center gap-8 flex-col pt-8">
+			<div className={cn(className, "w-[90%] m-auto flex flex-col")}>
+				<div className="w-full flex items-center gap-8 flex-col pt-8">
 					<FilterCarouselWithDropdown
 						className="home-section-row"
 						filterKeyword={filterKeyword}
@@ -44,7 +44,7 @@ const RestaurantCartasPanel = ({ className }: { className?: string }) => {
 						setIsLoading={setFilterLoading}
 						items={mocked_base_cartas.map((i) => i.title)}
 					></FilterCarouselWithDropdown>
-					<div className="w-[92%] flex flex-col gap-6 items-start">
+					<div className="flex flex-col gap-6 items-start">
 						{filterLoading ? (
 							<ItemListSkeletonCard></ItemListSkeletonCard>
 						) : (
