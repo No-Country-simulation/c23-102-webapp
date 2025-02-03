@@ -11,7 +11,6 @@ import {
 import { RESTAURANT_ROUTES } from "@/constants/routes";
 
 export function MenuBreadcrumbs({ current }: { current: string }) {
-	console.log(current);
 	return (
 		<Breadcrumb className="px-5 pt-3">
 			<BreadcrumbList>

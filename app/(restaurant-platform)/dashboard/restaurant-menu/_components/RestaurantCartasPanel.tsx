@@ -4,7 +4,6 @@ import { fetchCartasByRestaurantEmail } from "@/actions/cartasAction";
 import FilterCarouselWithDropdown from "@/components/global/FilterCarouselWithDropdown";
 import ItemListCard from "@/components/global/ItemListCard";
 import ItemListSkeletonCard from "@/components/global/ItemListSkeletonCard";
-import { mocked_base_cartas } from "@/constants/mock/restaurant-carta";
 import { RESTAURANT_ROUTES } from "@/constants/routes";
 import { useUser } from "@/context/UserContext";
 import { cn } from "@/lib/utils";
@@ -31,7 +30,11 @@ const RestaurantCartasPanel = ({ className }: { className?: string }) => {
 	}, [user?.email]);
 
 	// Filtrar restaurantes por businessType seleccionado
-	const filteredCartas = filterKeyword ? cartas.filter((carta) => carta.title === filterKeyword) : mocked_base_cartas;
+	const filteredCartas = filterKeyword
+		? cartas.filter((carta) => {
+				return carta.title == filterKeyword;
+		  })
+		: cartas;
 
 	if (user)
 		return (
@@ -42,7 +45,7 @@ const RestaurantCartasPanel = ({ className }: { className?: string }) => {
 						filterKeyword={filterKeyword}
 						setFilterKeyword={setFilterKeyword}
 						setIsLoading={setFilterLoading}
-						items={mocked_base_cartas.map((i) => i.title)}
+						items={cartas.map((i) => i.title)}
 					></FilterCarouselWithDropdown>
 					<div className="w-full flex flex-col gap-6 items-start">
 						{filterLoading ? (

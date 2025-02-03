@@ -48,7 +48,7 @@ export async function updatePlato(id: string, body: FormData): Promise<PlatoResp
 	}
 }
 
-export async function fetchPlatosByCartaId(id: string): Promise<Array<PlatoResponse>> {
+export async function fetchPlatosByCartaId(id: string, email: string): Promise<Array<PlatoResponse>> {
 	try {
 		// ================================
 		//	Backend Call
@@ -59,7 +59,7 @@ export async function fetchPlatosByCartaId(id: string): Promise<Array<PlatoRespo
 		// );
 		// return response.data;
 
-		return findPlatosByCartaId(id);
+		return findPlatosByCartaId(id, email);
 	} catch (error) {
 		if (axios.isAxiosError(error) && error.response && error.response.status !== 500) {
 			throw new Error(LOGIN_ERROR_MSG);
@@ -78,8 +78,7 @@ export async function fetchPlatosByRestaurantEmail(email: string): Promise<Array
 		// 	body
 		// );
 		// return response.data;
-
-		return findPlatosByRestaurantEmail(email);
+		return findPlatosByRestaurantEmail(decodeURIComponent(email));
 	} catch (error) {
 		if (axios.isAxiosError(error) && error.response && error.response.status !== 500) {
 			throw new Error(LOGIN_ERROR_MSG);

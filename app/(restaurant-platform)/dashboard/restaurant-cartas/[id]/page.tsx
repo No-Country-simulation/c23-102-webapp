@@ -9,7 +9,7 @@ import { MenuBreadcrumbs } from "@/app/(restaurant-platform)/_components/MenuBre
 const RestaurantCartasDetailsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 	const { id } = await params;
 	const carta = await findCartaById(id);
-	const platos = await fetchPlatosByCartaId(id);
+	const platos = await fetchPlatosByCartaId(id, carta.restaurantEmail);
 
 	return (
 		<>

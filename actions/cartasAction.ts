@@ -34,7 +34,7 @@ export async function fetchCartasByRestaurantEmail(email: string): Promise<Array
 		// );
 		// return response.data;
 
-		return findCartasByRestaurantEmail(email);
+		return findCartasByRestaurantEmail(decodeURIComponent(email));
 	} catch (error) {
 		if (axios.isAxiosError(error) && error.response && error.response.status !== 500) {
 			throw new Error(LOGIN_ERROR_MSG);

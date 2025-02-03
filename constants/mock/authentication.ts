@@ -9,13 +9,13 @@ export const loggedClient: ClientLoginResponse = {
 };
 
 export const loggedRestaurant: RestaurantLoginResponse = {
-	email: "resto@takeaway.com",
+	email: "bistroparisien@email.com",
 	accountType: USER_TYPES.RESTAURANT,
 	locationName: "Fast Food!",
 };
 
 export const loggedRestaurantDetails: RestaurantDetailsType = {
-	email: "resto@takeaway.com",
+	email: "bistroparisien@email.com",
 	locationName: "American Dinner",
 	description: "Deluxe",
 	category: "Bar",
