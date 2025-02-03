@@ -24,7 +24,7 @@ const RestaurantProfileEditPage = () => {
 	}, [user?.email]);
 
 	if (!restaurantDetails) {
-		return <p>Error. Intenta neuvamente.</p>;
+		return <p className="h-[70vh] w-full grid place-items-center text-[color:--primary-color]">Cargando...</p>;
 	}
 
 	if (user)
