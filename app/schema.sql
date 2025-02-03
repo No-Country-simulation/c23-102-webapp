@@ -61,8 +61,8 @@ CREATE TABLE IF NOT EXISTS "Menu" (
 	"Restaurant_Email"	TEXT NOT NULL,
 	"Image_Path"	TEXT,
 	"Is_Active"	INTEGER,
-	PRIMARY KEY("Menu_ID" AUTOINCREMENT),
-	FOREIGN KEY("Restaurant_Email") REFERENCES "Restaurant"("Email")
+	FOREIGN KEY("Restaurant_Email") REFERENCES "Restaurant"("Email"),
+	PRIMARY KEY("Menu_ID" AUTOINCREMENT)
 );
 DROP TABLE IF EXISTS "Dish";
 CREATE TABLE IF NOT EXISTS "Dish" (
@@ -74,8 +74,8 @@ CREATE TABLE IF NOT EXISTS "Dish" (
 	"Quantity"	INTEGER,
 	"Menu_ID"	INTEGER NOT NULL,
 	"Is_Active"	INTEGER,
-	FOREIGN KEY("Menu_ID") REFERENCES "Menu"("Menu_ID"),
-	PRIMARY KEY("Price_ID")
+	PRIMARY KEY("Price_ID"),
+	FOREIGN KEY("Menu_ID") REFERENCES "Menu"("Menu_ID")
 );
 INSERT INTO "Category" ("Name") VALUES ('Restaurante');
 INSERT INTO "Category" ("Name") VALUES ('Cafetería');
@@ -90,4 +90,10 @@ INSERT INTO "User" ("Firstname","Lastname","Email","Password","Phone","Role_Name
 INSERT INTO "Payment" ("Payment_Id","Restaurante_Email","Client_Email","Price_Id") VALUES (1,'victorpadilla@gmail.com','tomasayala@gmail.com','242f23fsd');
 INSERT INTO "Client" ("Email","Location","Postal_Code","Photo_Path") VALUES ('tomasayala@gmail.com','Av. 5 de septiembre','f432',NULL);
 INSERT INTO "Menu" ("Menu_ID","Title","Description","Restaurant_Email","Image_Path","Is_Active") VALUES (1,'Vacuno','Nuestros mejores platillos con carne vacuna.','victorpadilla@gmail.com',NULL,1);
+INSERT INTO "Dish" ("Price_ID","Image_Path","Name","Description","Price","Quantity","Menu_ID","Is_Active") VALUES ('price_1QoTFvAnZzuVM90TZEjGBi64',NULL,'Asado Clásico','Costillar de res a la parrilla con chimichurri y papas rústicas.',18.0,NULL,1,1);
+INSERT INTO "Dish" ("Price_ID","Image_Path","Name","Description","Price","Quantity","Menu_ID","Is_Active") VALUES ('price_1QoTFRAnZzuVM90TQ45ydaiq',NULL,'Picaña Ahumada',NULL,25.0,NULL,1,1);
+INSERT INTO "Dish" ("Price_ID","Image_Path","Name","Description","Price","Quantity","Menu_ID","Is_Active") VALUES ('price_1QoTEiAnZzuVM90TZnCVH7mZ',NULL,'Vacío al fuego lento',NULL,20.0,NULL,1,1);
+INSERT INTO "Dish" ("Price_ID","Image_Path","Name","Description","Price","Quantity","Menu_ID","Is_Active") VALUES ('price_1QoTD3AnZzuVM90TImibv8rl',NULL,'Tomahawk a la Brasa',NULL,45.0,NULL,1,1);
+INSERT INTO "Dish" ("Price_ID","Image_Path","Name","Description","Price","Quantity","Menu_ID","Is_Active") VALUES ('price_1QoTCZAnZzuVM90TnzqyE8WC',NULL,'Bife de chorizo',NULL,22.0,NULL,1,1);
+INSERT INTO "Dish" ("Price_ID","Image_Path","Name","Description","Price","Quantity","Menu_ID","Is_Active") VALUES ('price_1QoTAmAnZzuVM90THU0I926P',NULL,'Asado Clásico',NULL,18.0,NULL,1,1);
 COMMIT;
