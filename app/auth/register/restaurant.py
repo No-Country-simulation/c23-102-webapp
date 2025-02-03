@@ -29,6 +29,6 @@ def register_restaurant():
         error_message = str(error)
         abort(401, error_message)
     else:
-        register = get_data_from(form['email'], 'Restaurante')
-        data_formatted = register_to_dict(register)
+        data = get_data_from(form['email'], 'Restaurante')
+        data_formatted = register_to_dict(data)
         return data_formatted
