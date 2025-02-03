@@ -8,12 +8,12 @@ export const LOGIN_ERROR_MSG = "Error al iniciar sesión. Verifica tus credencia
 export const SUCCESS_CREATE_PLATO = {
 	title: "Felicitaciones!",
 	message: "Tu producto ha sido añadido exitosamente.",
-	redirect_url: RESTAURANT_ROUTES.RESTAURANT_PLATOS,
+	redirect_url: RESTAURANT_ROUTES.RESTAURANT_MENU,
 };
 export const SUCCESS_UPDATE_PLATO = {
 	title: "Felicitaciones!",
 	message: "Tu producto ha sido modificado exitosamente.",
-	redirect_url: RESTAURANT_ROUTES.RESTAURANT_PLATOS,
+	redirect_url: RESTAURANT_ROUTES.RESTAURANT_MENU,
 };
 
 // ==================================

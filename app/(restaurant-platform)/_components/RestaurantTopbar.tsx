@@ -39,8 +39,7 @@ export const RestaurantTopbar = () => {
 							<Logo width={80} className={"lg:w-24"}></Logo>
 							<div className="flex flex-row items-center justify-center gap-8">
 								<LinkWithIcon route={RESTAURANT_ROUTES.DASHBOARD}>Inicio</LinkWithIcon>
-								<LinkWithIcon route={RESTAURANT_ROUTES.RESTAURANT_PLATOS}>Crear</LinkWithIcon>
-								<LinkWithIcon route={RESTAURANT_ROUTES.RESTAURANT_CARTAS}>Cartas</LinkWithIcon>
+								<LinkWithIcon route={RESTAURANT_ROUTES.RESTAURANT_MENU}>Menu</LinkWithIcon>
 								<LinkWithIcon route={RESTAURANT_ROUTES.RESTAURANT_PEDIDOS}>Pedidos</LinkWithIcon>
 								<LinkWithIcon route={RESTAURANT_ROUTES.RESTAURANT_PROFILE}>Perfil</LinkWithIcon>
 							</div>

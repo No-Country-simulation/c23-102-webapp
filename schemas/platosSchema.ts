@@ -7,6 +7,7 @@ export const platosCreateSchema = z.object({
 	price: z.string().min(1, {
 		message: "Debe ingresar un precio",
 	}),
+	carta: z.string(),
 	disponible: z.string().min(1, { message: "Debe elegir un estado: Disponible, Borrador" }),
 });
 

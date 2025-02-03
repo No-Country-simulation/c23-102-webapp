@@ -20,9 +20,14 @@ import {
 	SUCCESS_UPDATE_PLATO,
 } from "@/constants/app_constants";
 import { PlatoResponse } from "@/types/PlatoType";
+import { CartaType } from "@/types/CartaType";
+import { fetchCartasByRestaurantEmail } from "@/actions/cartasAction";
 
 const RestaurantPlatosForm = ({ editProduct }: { editProduct?: PlatoResponse }) => {
 	const [selectedFile, setSelectedFile] = useState<File | null>(null);
+	const [selectedCartaId, setSelectedCartaId] = useState<string>("");
+	const [selectedCartaTitle, setSelectedCartaTitle] = useState<string>(" - ");
+	const [cartas, setCartas] = useState<Array<CartaType>>([]);
 	const [isPending, startTransition] = useTransition();
 	const { openModal } = useModal();
 
@@ -33,9 +38,24 @@ const RestaurantPlatosForm = ({ editProduct }: { editProduct?: PlatoResponse }) 
 			description: "",
 			coverImage: "",
 			price: "",
+			carta: "",
 			disponible: STATUS_DISPONIBLE,
 		},
 	});
+
+	// Fetch Cartas
+	useEffect(() => {
+		if (editProduct?.restaurantEmail) {
+			(async () => {
+				try {
+					const restaurantCartas = await fetchCartasByRestaurantEmail(editProduct.restaurantEmail);
+					setCartas(restaurantCartas);
+				} catch (error) {
+					console.error("Error fetching restaurant profile:", error);
+				}
+			})();
+		}
+	}, [editProduct]);
 
 	// Si editProduct existe, llenar el formulario con sus valores
 	useEffect(() => {
@@ -45,10 +65,18 @@ const RestaurantPlatosForm = ({ editProduct }: { editProduct?: PlatoResponse }) 
 				description: editProduct.description,
 				coverImage: editProduct.image_url || "",
 				price: String(editProduct.price),
+				carta: editProduct.cartaId || "",
 				disponible: editProduct.disponible ? STATUS_DISPONIBLE : STATUS_BORRADOR,
 			});
+			setSelectedCartaId(editProduct.cartaId || "");
 		}
-	}, [editProduct, form]);
+	}, [editProduct, form, cartas]);
+
+	// 🔹 Actualiza el título de la carta cuando cambia el ID seleccionado
+	useEffect(() => {
+		const foundCarta = cartas.find((carta) => carta.id === selectedCartaId);
+		setSelectedCartaTitle(foundCarta ? foundCarta.title : " - ");
+	}, [selectedCartaId, cartas]);
 
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSelectedFile(event.target.files?.[0] || null);
@@ -65,6 +93,7 @@ const RestaurantPlatosForm = ({ editProduct }: { editProduct?: PlatoResponse }) 
 			formData.append("name", values.name);
 			formData.append("description", values.description);
 			formData.append("price", String(values.price));
+			formData.append("carta", selectedCartaId);
 			formData.append("disponible", values.disponible);
 
 			// for (const value of formData.values()) {
@@ -203,8 +232,49 @@ const RestaurantPlatosForm = ({ editProduct }: { editProduct?: PlatoResponse }) 
 							</FormItem>
 						)}
 					/>
+					{/* Añadir a Carta */}
+					<FormField
+						name={STATUS_DISPONIBLE}
+						control={form.control}
+						render={() => {
+							return (
+								<FormItem className="w-full">
+									<FormLabel>Añadir a Carta</FormLabel>
+									<Select
+										value={selectedCartaId} // Asegura que el valor sea manejado correctamente
+										onValueChange={(value) => {
+											setSelectedCartaId(value);
+											form.setValue("carta", value);
+										}} // Guarda el string directamente
+										disabled={isPending}
+									>
+										<SelectTrigger
+											className={`form-input-text ${
+												form.formState.errors.disponible && "form-input-text-validation-error"
+											}`}
+										>
+											<SelectValue>{selectedCartaTitle}</SelectValue>
+										</SelectTrigger>
+										<SelectContent>
+											<SelectGroup>
+												<SelectItem value=" ">{" - "}</SelectItem>
+												{cartas &&
+													cartas.map((c) => {
+														return (
+															<SelectItem key={c.id} value={c.id}>
+																{c.title}
+															</SelectItem>
+														);
+													})}
+											</SelectGroup>
+										</SelectContent>
+									</Select>
+									<FormMessage className="form-message-validation-error" />
+								</FormItem>
+							);
+						}}
+					/>
 					{/* Status */}
-					{/* Tipo de negocio */}
 					<FormField
 						name={STATUS_DISPONIBLE}
 						control={form.control}
