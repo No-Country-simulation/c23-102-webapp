@@ -20,9 +20,9 @@ const RestaurantMenuPage = () => {
 
 	if (user)
 		return (
-			<div>
+			<>
 				<MagicButton window={selectedMenu}></MagicButton>
-				<Container size={"center-container"} className="flex gap-4 pt-4">
+				<div className="center-container flex gap-4 pt-4">
 					<div className="flex flex-col cursor-pointer z-50" onClick={handleSelection}>
 						<h2 className="font-semibold text-xl">Cartas</h2>
 						<span
@@ -39,13 +39,13 @@ const RestaurantMenuPage = () => {
 							}    border-b-2 w-[8rem]`}
 						></span>
 					</div>
-				</Container>
+				</div>
 				{selectedMenu == "Cartas" ? (
 					<RestaurantCartasPanel></RestaurantCartasPanel>
 				) : (
 					<RestaurantPlatosPanel></RestaurantPlatosPanel>
 				)}
-			</div>
+			</>
 		);
 };
 
