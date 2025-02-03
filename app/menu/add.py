@@ -13,13 +13,10 @@ def add_menu(restaurant_email: str):
     image = request.files['image']
     image_path = save_image(image)
     is_active = 1
-    query = """
-        INSERT INTO Menu 
-        (Title, Description, Restaurant_Email, Image_Path, Is_Active)
-        VALUES  (?, ?, ?, ?, ?)
-    """
 
-    db.execute(query, (form['title'], form['description'], restaurant_email,
-                       image_path, is_active))
+    db.execute("""INSERT INTO Menu 
+        (Title, Description, Restaurant_Email, Image_Path, Is_Active)
+        VALUES  (?, ?, ?, ?, ?)""", (form['title'], form['description'], restaurant_email, image_path, is_active))
+    db.commit()
 
     return "Datos guardados."
