@@ -24,7 +24,7 @@ def add_dish(menu_id: str):
                            form['description'], form['price'], menu_id, 1))
     except db.IntegrityError:
         db.rollback()
-        abort(401, f"Platillo ya guardado bajoe el id '{form['priceId']}'.")
+        abort(400, f"Platillo ya guardado bajo el id '{form['priceId']}'.")
     else:
         db.commit()
         return "Datos guardados."
