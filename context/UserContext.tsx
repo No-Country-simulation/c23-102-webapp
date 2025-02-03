@@ -8,7 +8,7 @@ import { COOKIE_NAME } from "@/constants/app_constants";
 const UserContext = createContext<UserContextType | null>(null);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-	const [user, setUser] = useState<ClientLoginResponse | RestaurantLoginResponse | null>(null);
+	const [user, setUser] = useState<(ClientLoginResponse & RestaurantLoginResponse) | null>(null);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
@@ -27,7 +27,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 	// =========================
 	//  Functions
 	// =========================
-	const updateUser = (newUser: ClientLoginResponse | RestaurantLoginResponse | null) => {
+	const updateUser = (newUser: (ClientLoginResponse & RestaurantLoginResponse) | null) => {
 		setUser(newUser);
 		if (newUser) {
 			Cookies.set(COOKIE_NAME, encodeURIComponent(JSON.stringify(newUser)), {

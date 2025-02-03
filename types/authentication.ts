@@ -20,6 +20,6 @@ export interface RestaurantLoginResponse {
 export interface UserContextType {
 	user: (ClientLoginResponse & RestaurantLoginResponse) | null;
 	loading: boolean;
-	updateUser: (user: ClientLoginResponse | RestaurantLoginResponse | null) => void;
+	updateUser: (user: (ClientLoginResponse & RestaurantLoginResponse) | null) => void;
 	logoutUser: () => void;
 }
