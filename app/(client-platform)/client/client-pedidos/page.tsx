@@ -10,7 +10,7 @@ const ClientPedidosPage = () => {
 
 	if (user)
 		return (
-			<Container size="center-container" className="min-h-dvh flex flex-col pt-4">
+			<Container size="center-container" className="flex flex-col pt-4">
 				<div className="flex flex-col">
 					<h2 className="font-semibold">En Proceso</h2>
 					<span className=" border-b-[color:--primary-color] border-b-2 w-[8rem]"></span>
