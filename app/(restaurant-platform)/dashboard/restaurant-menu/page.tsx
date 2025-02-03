@@ -23,7 +23,7 @@ const RestaurantMenuPage = () => {
 			<div>
 				<MagicButton window={selectedMenu}></MagicButton>
 				<Container size={"center-container"} className="flex gap-4 pt-4">
-					<div className="flex flex-col cursor-pointer" onClick={handleSelection}>
+					<div className="flex flex-col cursor-pointer z-50" onClick={handleSelection}>
 						<h2 className="font-semibold text-xl">Cartas</h2>
 						<span
 							className={`${
@@ -31,7 +31,7 @@ const RestaurantMenuPage = () => {
 							}    border-b-2 w-[8rem]`}
 						></span>
 					</div>
-					<div className="flex flex-col cursor-pointer" onClick={handleSelection}>
+					<div className="flex flex-col cursor-pointer z-50" onClick={handleSelection}>
 						<h2 className="font-semibold  text-xl">Platos</h2>
 						<span
 							className={`${

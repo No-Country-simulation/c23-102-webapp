@@ -45,7 +45,7 @@ const RestaurantPlatosPanel = ({ className }: { className?: string }) => {
 					setIsLoading={setFilterLoading}
 					items={platosStatuses.map((i) => i)}
 				></FilterCarouselWithDropdown>
-				<div className="flex flex-col gap-6 items-start">
+				<div className="w-full flex flex-col gap-6 items-start">
 					{filterLoading ? (
 						<ItemListSkeletonCard></ItemListSkeletonCard>
 					) : filteredPlatos.length > 0 ? (

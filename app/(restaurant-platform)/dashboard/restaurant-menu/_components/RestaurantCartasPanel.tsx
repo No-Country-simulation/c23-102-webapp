@@ -44,7 +44,7 @@ const RestaurantCartasPanel = ({ className }: { className?: string }) => {
 						setIsLoading={setFilterLoading}
 						items={mocked_base_cartas.map((i) => i.title)}
 					></FilterCarouselWithDropdown>
-					<div className="flex flex-col gap-6 items-start">
+					<div className="w-full flex flex-col gap-6 items-start">
 						{filterLoading ? (
 							<ItemListSkeletonCard></ItemListSkeletonCard>
 						) : (
