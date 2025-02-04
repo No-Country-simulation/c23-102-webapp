@@ -26,10 +26,13 @@ const RestaurantDetailsPage = async ({ params }: { params: Promise<{ id: string 
 	}, {});
 
 	// Transformarlo en un array con la estructura deseada
-	const platosPorCarta = Object.keys(groupedPlatos).map((cartaId) => ({
-		cartaName: cartaId === "null" ? "Sin carta" : cartasDict[cartaId] || "Sin carta",
-		platos: groupedPlatos[cartaId],
-	}));
+	const platosPorCarta = Object.keys(groupedPlatos).map((cartaId) => {
+		const formattedCartaId = `${decodeURIComponent(id)}-${cartaId}`;
+		return {
+			cartaName: cartaId === "null" ? "Sin carta" : cartasDict[formattedCartaId] || "Sin carta",
+			platos: groupedPlatos[cartaId],
+		};
+	});
 
 	return (
 		<RestaurantDetailsClient

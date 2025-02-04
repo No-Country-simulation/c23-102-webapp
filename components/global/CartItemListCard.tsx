@@ -20,7 +20,7 @@ function CartItemListCard({ id, product, quantity }: { id: string; product: Plat
 			</div>
 			<div className="grow flex flex-col">
 				<h2 className="text-sm font-bold">{name}</h2>
-				<p className="text-sm font-thin">{description}</p>
+				<p className="text-xs font-thin">{description}</p>
 				{price && <span className="text-[color:--primary-color] text-md font-bold">{"$ " + price}</span>}
 				<p
 					className="max-w-[3.8rem] text-xs font-semibold text-red-600 cursor-pointer mt-1"
@@ -29,7 +29,7 @@ function CartItemListCard({ id, product, quantity }: { id: string; product: Plat
 					Remover
 				</p>
 			</div>
-			<aside className="font-semibold">x {quantity}</aside>
+			<aside className="font-semibold text-nowrap">x {quantity}</aside>
 		</article>
 	);
 }

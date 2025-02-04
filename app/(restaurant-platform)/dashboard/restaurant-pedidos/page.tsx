@@ -1,8 +1,8 @@
 "use client";
 
 import Container from "@/components/global/Container";
-import PedidosListCard from "@/components/global/PedidosListCard";
-import { client_pedidos } from "@/constants/mock/client-pedidos";
+import RestaurantPedidosListCard from "@/components/global/RestaurantPedidosListCard";
+import { restaurant_pedidos } from "@/constants/mock/restaurant-pedidos";
 import { useUser } from "@/context/UserContext";
 
 const RestaurantPedidosPage = () => {
@@ -16,8 +16,8 @@ const RestaurantPedidosPage = () => {
 					<span className=" border-b-[color:--primary-color] border-b-2 w-[8rem]"></span>
 				</div>
 				<div className="w-full flex flex-col gap-6 mt-8">
-					{client_pedidos.map((pedido) => {
-						return <PedidosListCard key={pedido.id} pedido={pedido}></PedidosListCard>;
+					{restaurant_pedidos.map((pedido) => {
+						return <RestaurantPedidosListCard key={pedido.id} pedido={pedido}></RestaurantPedidosListCard>;
 					})}
 				</div>
 			</Container>

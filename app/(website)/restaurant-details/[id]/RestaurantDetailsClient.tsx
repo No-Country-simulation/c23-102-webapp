@@ -33,7 +33,7 @@ const RestaurantDetailsClient: React.FC<RestaurantDetailsClientProps> = ({
 	const filteredPlatosPorCarta = filterKeyword
 		? platosPorCarta.filter((carta) => carta.cartaName.toLowerCase().includes(filterKeyword.toLowerCase()))
 		: platosPorCarta;
-
+console.log(cartas);
 	return (
 		<div className="min-h-dvh escape-navbar escape-footer relative">
 			<div className="w-full -h-full relative">
