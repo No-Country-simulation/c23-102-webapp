@@ -1,5 +1,6 @@
 "use client";
 
+import { Logo } from "@/components/global/Logo";
 import { useUser } from "@/context/UserContext";
 
 const PaymentsPage = () => {
@@ -8,9 +9,9 @@ const PaymentsPage = () => {
 	if (user)
 		return (
 			<div className="min-h-dvh bg-black text-white flex items-center justify-around flex-col">
-				<div className="flex items-center justify-around flex-col">
-					<h1 className="text-3xl"> Realizar Pago </h1>
-					<h2 className="text-xl"> {user.email}</h2>
+				<div className="flex items-center flex-col justify-center text-center gap-8">
+					<h1 className="text-lg"> Muchas gracias por su participacion! </h1>
+					<Logo width={150}></Logo>
 				</div>
 			</div>
 		);
