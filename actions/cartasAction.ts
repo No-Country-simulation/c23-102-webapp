@@ -14,7 +14,7 @@ export async function cartaDetails(id: string): Promise<CartaResponse> {
 		// );
 		// return response.data;
 
-		return findCartaById(id);
+		return findCartaById(decodeURIComponent(id));
 	} catch (error) {
 		if (axios.isAxiosError(error) && error.response && error.response.status !== 500) {
 			throw new Error(LOGIN_ERROR_MSG);

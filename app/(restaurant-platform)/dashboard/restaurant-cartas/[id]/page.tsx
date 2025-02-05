@@ -1,14 +1,14 @@
 import React from "react";
-import { findCartaById } from "@/constants/mock/restaurant-carta";
 import { fetchPlatosByCartaId } from "@/actions/platosActions";
 import ItemListCard from "@/components/global/ItemListCard";
 import { RESTAURANT_ROUTES } from "@/constants/routes";
 import MagicButton from "@/app/(restaurant-platform)/_components/MagicButton";
 import { MenuBreadcrumbs } from "@/app/(restaurant-platform)/_components/MenuBreadcrumbs";
+import { cartaDetails } from "@/actions/cartasAction";
 
 const RestaurantCartasDetailsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 	const { id } = await params;
-	const carta = await findCartaById(id);
+	const carta = await cartaDetails(id);
 	const platos = await fetchPlatosByCartaId(id, carta.restaurantEmail);
 
 	return (

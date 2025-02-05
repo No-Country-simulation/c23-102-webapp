@@ -1,4 +1,4 @@
-import { CartaType } from "@/types/CartaType";
+import { CartaResponse, CartaType } from "@/types/CartaType";
 import { mocked_restaurants } from "./restaurant-info";
 import { STATUS_DISPONIBLE } from "../app_constants";
 
@@ -36,7 +36,7 @@ export const findCartaById = (id: string) => {
 	const found = mocked_base_cartas.find((i) => {
 		return i.id == id;
 	});
-	return found ? found : mocked_base_cartas[0];
+	return found as CartaResponse;
 };
 
 export const findCartasByRestaurantEmail = (email: string): Array<CartaType> => {
