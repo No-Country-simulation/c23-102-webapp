@@ -2,7 +2,7 @@ import { CartaResponse, CartaType } from "@/types/CartaType";
 import { mocked_restaurants } from "./restaurant-info";
 import { STATUS_DISPONIBLE } from "../app_constants";
 
-export const mocked_base_cartas: Array<CartaType> = mocked_restaurants.flatMap((restaurant, index) => {
+export const mocked_base_cartas: Array<CartaType> = mocked_restaurants.flatMap((restaurant) => {
 	return [
 		{
 			id: `${restaurant.email}-1`,
