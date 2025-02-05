@@ -19,7 +19,7 @@ export const loggedRestaurantDetails: RestaurantDetailsType = {
 	locationName: "American Dinner",
 	description: "Deluxe",
 	category: "Bar",
-	image_url: "https://as1.ftcdn.net/v2/jpg/06/36/04/10/1000_F_636041025_Sih9tNIgxw2madJPj518Z3s0pQaSnSVN.jpg",
+	image_url: "https://media-cdn.tripadvisor.com/media/photo-m/1280/16/c0/ed/a7/restaurant-entrance-reception.jpg",
 	location: "Avenida 123",
 	phone: "+417994002693",
 	name: "Dueño",
