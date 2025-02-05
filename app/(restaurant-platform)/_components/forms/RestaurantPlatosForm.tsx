@@ -22,6 +22,7 @@ import {
 import { PlatoResponse } from "@/types/PlatoType";
 import { CartaType } from "@/types/CartaType";
 import { fetchCartasByRestaurantEmail } from "@/actions/cartasAction";
+import { useUser } from "@/context/UserContext";
 
 const RestaurantPlatosForm = ({ editProduct }: { editProduct?: PlatoResponse }) => {
 	const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -29,6 +30,7 @@ const RestaurantPlatosForm = ({ editProduct }: { editProduct?: PlatoResponse }) 
 	const [selectedCartaTitle, setSelectedCartaTitle] = useState<string>(" - ");
 	const [cartas, setCartas] = useState<Array<CartaType>>([]);
 	const [isPending, startTransition] = useTransition();
+	const { user } = useUser();
 	const { openModal } = useModal();
 
 	const form = useForm<CreatePlatosFormData>({
@@ -55,7 +57,17 @@ const RestaurantPlatosForm = ({ editProduct }: { editProduct?: PlatoResponse }) 
 				}
 			})();
 		}
-	}, [editProduct]);
+		if (user) {
+			(async () => {
+				try {
+					const restaurantCartas = await fetchCartasByRestaurantEmail(user.email);
+					setCartas(restaurantCartas);
+				} catch (error) {
+					console.error("Error fetching restaurant profile:", error);
+				}
+			})();
+		}
+	}, [user, editProduct]);
 
 	// Si editProduct existe, llenar el formulario con sus valores
 	useEffect(() => {
@@ -69,6 +81,8 @@ const RestaurantPlatosForm = ({ editProduct }: { editProduct?: PlatoResponse }) 
 				disponible: editProduct.disponible ? STATUS_DISPONIBLE : STATUS_BORRADOR,
 			});
 			setSelectedCartaId(editProduct.cartaId || "");
+		} else {
+			setSelectedCartaId(" - ");
 		}
 	}, [editProduct, form, cartas]);
 
@@ -241,7 +255,7 @@ const RestaurantPlatosForm = ({ editProduct }: { editProduct?: PlatoResponse }) 
 								<FormItem className="w-full">
 									<FormLabel>Añadir a Carta</FormLabel>
 									<Select
-										value={selectedCartaId} // Asegura que el valor sea manejado correctamente
+										value={selectedCartaId ? selectedCartaId : " - "} // Asegura que el valor sea manejado correctamente
 										onValueChange={(value) => {
 											setSelectedCartaId(value);
 											form.setValue("carta", value);
